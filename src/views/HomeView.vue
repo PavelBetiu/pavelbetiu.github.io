@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="hero is-dark">
+    <section class="hero is-dark" v-bind:style="{ 'background-image': 'url(' + require('@/assets/images/bg6.png') + ')' }">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">Welcome to ReaderBench</h1>
@@ -30,7 +30,6 @@
 <style lang="scss" scoped>
   .hero {
     text-align: center;
-    background-image: url('https://readerbench.com/bg6.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
