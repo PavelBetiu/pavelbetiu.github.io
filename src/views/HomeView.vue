@@ -7,11 +7,6 @@
           <h2 class="subtitle">
             Natural Language Processing Tools
           </h2>
-          <div class="button-block">
-            <button class="button is-xl is-dark">
-              Sign Up to Access our Resources
-            </button>
-          </div>
         </div>
       </div>
     </section>

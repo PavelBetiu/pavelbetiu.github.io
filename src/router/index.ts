@@ -1,5 +1,7 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { isNil, first } from 'lodash';
+import { createRouter, createWebHistory, RouteLocationRaw, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import auth from '../services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,15 +18,40 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login.vue')
+  },
+  {
     path: '/experiment/:id',
     name: 'experimentSingle',
     component: () => import('../views/ExperimentSingle.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const route: RouteRecordNormalized = first(to.matched);
+
+  if (!isNil(route)) {
+    if (route.meta.requiresAuth && !auth.isAuthenticated()) {
+      const location: RouteLocationRaw = {
+        name: 'login',
+        query: {
+          redirect: encodeURIComponent(to.fullPath),
+        }
+      };
+      return next(location);
+    }
+  }
+  return next();
+});
+
+export default router;

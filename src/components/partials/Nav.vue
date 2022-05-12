@@ -24,8 +24,11 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-dark">
+            <a v-if="!isAuthenticated" class="button is-dark">
               <strong>Sign In</strong>
+            </a>
+            <a v-if="isAuthenticated" class="button" @click="logout()">
+              <strong>Sign Out</strong>
             </a>
           </div>
         </div>
@@ -34,20 +37,31 @@
   </nav>
 </template>
 <script>
-  export default {
-    name: 'Nav',
-  };
+import auth from "../../services/auth";
+export default {
+  name: "Nav",
+  computed: {
+    isAuthenticated() {
+      return auth.isAuthenticated();
+    },
+  },
+  methods: {
+    logout() {
+      auth.logout();
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
-  nav {
-    margin-top: 25px;
-    margin-bottom: 30px;
-    a {
-      font-weight: bold;
-      color: #2c3e50;
-      &.router-link-exact-active {
-        color: #d88d00;
-      }
+nav {
+  margin-top: 25px;
+  margin-bottom: 30px;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+    &.router-link-exact-active {
+      color: #d88d00;
     }
   }
+}
 </style>
