@@ -1,37 +1,45 @@
 <template>
-  <nav class="navbar container" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <strong class="is-size-4">ReaderBench</strong>
+  <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+    <div class="container-fluid px-0">
+      <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="ReaderBench" data-placement="bottom" target="_blank">
+        ReaderBench
       </a>
-      <a
-        role="button"
-        class="navbar-burger burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div id="navbar" class="navbar-menu">
-      <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Home</router-link>
-        <router-link to="/about" class="navbar-item">About</router-link>
-      </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a v-if="!isAuthenticated" class="button is-dark">
-              <strong>Sign In</strong>
+      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </span>
+      </button>
+      <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
+
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">Home</p>
             </a>
-            <a v-if="isAuthenticated" class="button" @click="logout()">
-              <strong>Sign Out</strong>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/about">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="About Us">About Us</p>
             </a>
-          </div>
-        </div>
+          </li>
+
+          <li class="nav-item ms-lg-auto">
+            <a class="nav-link nav-link-icon me-2" href="https://github.com/readerbench" target="_blank">
+              <i class="fa fa-github me-1"></i>
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">Github</p>
+            </a>
+          </li>
+
+          <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
+            <a href="/login" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0">Log In</a>
+          </li>
+          <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
+            <a @click="logout()" class="btn btn-sm  bg-gradient-primary  btn-round mb-0 me-1 mt-2 mt-md-0">Sign Out</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
