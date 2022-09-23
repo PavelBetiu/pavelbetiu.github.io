@@ -28,7 +28,8 @@
 
           <li class="nav-item ms-lg-auto">
             <a class="nav-link nav-link-icon me-2" href="https://github.com/readerbench" target="_blank">
-              <i class="fa fa-github me-1"></i>
+              <font-awesome-icon icon="fa-brands fa-github" />
+              <!-- <i class="fa fa-github me-1"></i> -->
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">Github</p>
             </a>
           </li>
