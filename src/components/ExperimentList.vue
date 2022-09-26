@@ -1,18 +1,12 @@
 <template>
-  <div class="experiments container">
-    <h2 class="subtitle is-3">Check out our cool experiments</h2>
-    <div class="columns is-multiline">
-      <div
-        v-for="experiment in experiments"
-        :experiment="experiment"
-        :key="experiment.id"
-        class="column is-one-quarter"
-      >
-        <router-link :to="'/experiment/' + experiment.id">
+  <div class="col-md-4 mt-md-0"
+    v-for="experiment in experiments"
+    :experiment="experiment"
+    :key="experiment.id"
+    >
+      <router-link :to="'/experiment/' + experiment.id">
           <ExperimentCard :experiment="experiment" />
         </router-link>
-      </div>
-    </div>
   </div>
 </template>
 <script>

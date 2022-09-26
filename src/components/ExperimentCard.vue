@@ -1,11 +1,14 @@
 <template>
-  <div class="experiment-card">
-    <div class="card" v-bind:style="{ 'background-image': 'url(' + experiment.featuredImage + ')' }">
-      <div class="card-content">
-        <h2 class="is-size-4 has-text-weight-bold">{{ experiment.name }}</h2>
-      </div>
-    </div>
+
+<a href="./sections/page-sections/hero-sections.html">
+  <div class="card shadow-lg move-on-hover min-height-160 min-height-160">
+    <img class="w-100 my-auto" :src="experiment.featuredImage" alt="">
   </div>
+  <div class="mt-2 ms-2">
+    <h6 class="mb-0">{{ experiment.name }}</h6>
+    <p class="text-secondary text-sm">10 Examples</p>
+  </div>
+</a>
 </template>
 <script>
   export default {

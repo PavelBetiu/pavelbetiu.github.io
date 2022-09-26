@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <Nav />
+    <div class="container position-sticky z-index-sticky top-0">
+      <div class="row">
+        <div class="col-12">
+          <Nav />
+        </div>
+      </div>
+    </div>
     <router-view />
   </div>
 </template>

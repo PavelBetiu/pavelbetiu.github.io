@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
     <div class="container-fluid px-0">
       <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="ReaderBench" data-placement="bottom" target="_blank">
-        ReaderBench
+        <img :src="require('@/assets/images/readerbench.png')" alt="" style="width: 35px; heght: 35px; " />
       </a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -27,6 +27,14 @@
           </li>
 
           <li class="nav-item ms-lg-auto">
+            <a class="nav-link nav-link-icon me-2" href="https://huggingface.co/readerbench" target="_blank">
+              <font-awesome-icon icon="fa-brands fa-github" />
+              <!-- <i class="fa fa-github me-1"></i> -->
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">HuggingFace</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="https://github.com/readerbench" target="_blank">
               <font-awesome-icon icon="fa-brands fa-github" />
               <!-- <i class="fa fa-github me-1"></i> -->
