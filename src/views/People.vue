@@ -114,32 +114,6 @@
           <a href="javascript:;">
             <div class="position-relative">
               <div class="blur-shadow-image">
-                <img class="w-100 rounded-3 " src="../assets/images/avatar_dragos.png">
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-7 ps-0 my-auto">
-          <div class="card-body text-left">
-            <div class="p-md-0 pt-3">
-              <h5 class="font-weight-bolder mb-0">Pavel Betiu</h5>
-            </div>
-            <p class="mb-4">Handicap, but not disabled</p>
-            <a href="https://revolut.me/dumitrbu7v" class="mr-4">
-              <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="none"/><circle cx="95.9" cy="40" r="20" opacity="0.2"/><circle cx="95.9" cy="40" r="20" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="95.9 60 95.9 132 183.9 132 215.9 196 239.9 188" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M167.8,164a64,64,0,1,1-63.9-68h56" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card card-profile card-plain">
-      <div class="row">
-        <div class="col-lg-5">
-          <a href="javascript:;">
-            <div class="position-relative">
-              <div class="blur-shadow-image">
                 <img class="w-100 rounded-3 " src="../assets/images/avatar_irina.png">
               </div>
             </div>
