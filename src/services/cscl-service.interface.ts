@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue';
-import { CsclResult } from '../data-objects/cscl-result';
+import { CsclResult } from '@/data-objects/cscl-result';
 
 export interface ProcessOptions {
   language: string;

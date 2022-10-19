@@ -89,7 +89,7 @@
   </section>
 </template>
 <script>
-import ExperimentList from "../components/ExperimentList";
+import ExperimentList from "@/components/ExperimentList";
 export default {
   name: "home",
   components: {

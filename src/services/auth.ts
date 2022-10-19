@@ -1,5 +1,5 @@
 import { isNil } from 'lodash';
-import router from '../router';
+import router from '@/router';
 
 export default {
   isAuthenticated() {

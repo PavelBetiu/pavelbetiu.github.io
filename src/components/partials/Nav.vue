@@ -52,7 +52,7 @@
   </nav>
 </template>
 <script>
-import auth from "../../services/auth";
+import auth from "@/services/auth";
 export default {
   name: "Nav",
   computed: {

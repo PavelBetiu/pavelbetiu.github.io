@@ -44,7 +44,7 @@
 </template>
 <script>
 import { inject } from 'vue';
-import { CSCL_SERVICE } from '../../../services/cscl-service.interface';
+import { CSCL_SERVICE } from '@/services/cscl-service.interface';
 
 export default {
   data() {

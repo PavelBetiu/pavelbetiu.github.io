@@ -1,7 +1,7 @@
 import { isNil, first } from 'lodash';
 import { createRouter, createWebHistory, RouteLocationRaw, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import auth from '../services/auth';
+import HomeView from '@/views/HomeView.vue';
+import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,12 +20,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/Login.vue')
+    component: () => import('@/views/Login.vue')
   },
   {
     path: '/experiment/cscl',
     name: 'experimentCscl',
-    component: () => import('../components/experiments/cscl/Cscl.vue'),
+    component: () => import('@/components/experiments/cscl/Cscl.vue'),
     meta: {
       requiresAuth: true,
     },
