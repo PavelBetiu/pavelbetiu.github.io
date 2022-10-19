@@ -41,30 +41,43 @@
   </div>
 </div>
 
-
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        language: 'fr',
-      };
+import { inject } from 'vue';
+import { CSCL_SERVICE } from '../../../services/cscl-service.interface';
+
+export default {
+  data() {
+    return {
+      language: "fr",
+    };
+  },
+  setup() {
+    return {
+      csclService: inject(CSCL_SERVICE),
+    };
+  },
+  methods: {
+    updateFile(event) {
+      if (event.target.files.length > 0) {
+        this.file = event.target.files[0];
+      }
     },
-    methods: {
-      updateFile(event) {
-        if (event.target.files.length > 0) {
-          this.file = event.target.files[0];
-        }
-      },
-      process() {
-        if (!this.file || !this.language) {
-          return;
-        }
-        // TODO
-      },
+    async process() {
+      if (!this.file || !this.language) {
+        // TODO: use toaster service to display alert message
+        return;
+      }
+      // TODO: use loading indicator
+
+      const result = await this.csclService.process({
+        file: this.file,
+        language: this.language
+      });
+      // TODO: display result in output components
     },
-  };
+  },
+};
 </script>
 <style lang="scss" scoped>
-  
 </style>

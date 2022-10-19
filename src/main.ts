@@ -20,7 +20,7 @@ library.add(faTwitter);
 library.add(faGithub);
 
 createApp(App)
-    .component('font-awesome-icon', FontAwesomeIcon)
-    .use(store)
-    .use(router)
-    .mount('#app');
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .use(store)
+  .use(router)
+  .mount('#app');
