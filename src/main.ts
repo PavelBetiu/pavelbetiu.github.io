@@ -3,6 +3,7 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+import { httpInterceptor } from './services/http-interceptor';
 import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
 import './assets/css/nucleo-svg.css';
@@ -19,8 +20,10 @@ library.add(faInstagram);
 library.add(faTwitter);
 library.add(faGithub);
 
+httpInterceptor();
+
 createApp(App)
-    .component('font-awesome-icon', FontAwesomeIcon)
-    .use(store)
-    .use(router)
-    .mount('#app');
+  .component('font-awesome-icon', FontAwesomeIcon)
+  .use(store)
+  .use(router)
+  .mount('#app');
