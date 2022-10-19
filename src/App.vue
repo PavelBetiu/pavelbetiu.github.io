@@ -12,7 +12,6 @@
   </div>
 </template>
 <script>
-
 import { provide } from "vue";
 import Nav from "./components/partials/Nav.vue";
 import Footer from "./components/partials/Footer.vue";

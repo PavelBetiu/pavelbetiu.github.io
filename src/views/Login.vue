@@ -48,9 +48,8 @@
     </div>
   </section>
 </template>
- 
-<script>
 
+<script>
 import auth from "../services/auth";
 
 export default {
@@ -60,7 +59,7 @@ export default {
   },
   methods: {
     login() {
-      let redirect = '/';
+      let redirect = "/";
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
