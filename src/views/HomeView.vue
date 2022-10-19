@@ -95,6 +95,15 @@
     components: {
       ExperimentList,
     },
+    data() {
+      return {
+        body: [
+          {
+            
+          }
+        ]
+      }
+    }
   };
 </script>
 <style lang="scss" scoped>

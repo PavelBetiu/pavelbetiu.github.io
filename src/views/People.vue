@@ -738,6 +738,19 @@
       </div>
     </section>
   </template>
+  <script>
+    export default {
+      props: {
+        listdata: {
+          type: Array,
+          required: true,
+          validator: (value) => {
+            return value.length <= 5;
+          }
+        }
+      }
+    }
+  </script>
   <style lang="scss" scoped>
   
   </style>
