@@ -22,13 +22,19 @@
 
           <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="/projects">
-              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="About Us">Projects</p>
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Projects">Projects</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/projects">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">Services</p>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="/people">
-              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="About Us">People</p>
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="People">People</p>
             </a>
           </li>
 
