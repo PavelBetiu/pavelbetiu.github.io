@@ -27,7 +27,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link nav-link-icon me-2" href="/projects">
+            <a class="nav-link nav-link-icon me-2" href="/services">
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">Services</p>
             </a>
           </li>
