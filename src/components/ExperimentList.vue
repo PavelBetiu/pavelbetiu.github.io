@@ -2,9 +2,9 @@
   <div class="col-md-4 mt-md-0"
     v-for="experiment in experiments"
     :experiment="experiment"
-    :key="experiment.id"
+    :key="experiment.key"
     >
-      <router-link :to="'/experiment/' + experiment.id">
+      <router-link :to="'/experiment/' + experiment.key">
           <ExperimentCard :experiment="experiment" />
         </router-link>
   </div>
@@ -21,8 +21,8 @@
         experiment: {},
         experiments: [
           {
-            id: 1,
-            name: 'Multi-Document CNA',
+            key: 'cscl',
+            name: 'CSCL',
             category: 'NLP',
             description:
               'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quia aperiam eligendi dolorum reprehenderit ea amet, aliquid dolorem beatae, iste aliquam ullam. Sequi ab eligendi consectetur neque laudantium, libero asperiores.',
@@ -30,15 +30,6 @@
             images: [
               require('@/assets/images/demo-cna.png'),
             ],
-          },
-          {
-            id: 2,
-            name: 'Textual Complexity',
-            category: 'NLP',
-            description:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quia aperiam eligendi dolorum reprehenderit ea amet, aliquid dolorem beatae, iste aliquam ullam. Sequi ab eligendi consectetur neque laudantium, libero asperiores.',
-            featuredImage: require('@/assets/images/demo-complexity.png'),
-            images: [require('@/assets/images/demo-complexity.png')],
           },
         ],
       };

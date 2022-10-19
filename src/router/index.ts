@@ -23,9 +23,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Login.vue')
   },
   {
-    path: '/experiment/:id',
-    name: 'experimentSingle',
-    component: () => import('../views/ExperimentSingle.vue'),
+    path: '/experiment/cscl',
+    name: 'experimentCscl',
+    component: () => import('../components/experiments/cscl/Cscl.vue'),
     meta: {
       requiresAuth: true,
     },

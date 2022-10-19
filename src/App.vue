@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <router-view />
+    <router-view style="padding-top: 40px;" />
     <Footer />
   </div>
 </template>
