@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="col-6 border border-primary">
-                        <img :src="require(`../assets/images/${img}`)" alt="ates" class="shadow-xl rounded zoom" />
+                        <img :src="require(`../assets/images/ates.jpeg`)" alt="ates" class="shadow-xl rounded logo" />
                     </div>
                 </div>
             </div>
@@ -160,8 +160,8 @@ export default {
 }
 
 .logo {
-    width: 450px;
-    height: 300px;
+    width: 250px;
+    height: 200px;
     margin: 0 auto;
     object-position: center;
 }
