@@ -39,17 +39,28 @@
     </div>
     <div class="col-lg-2"></div>
   </div>
+  <div class="row">
+    <div class="col-lg-12 d-flex justify-content-center flex-column">
+      <CsclResult :data="data" v-if="data" />
+    </div>
+  </div>
 </div>
 
 </template>
 <script>
 import { inject } from 'vue';
 import { CSCL_SERVICE } from '@/services/cscl-service.interface';
+import CsclResult from './CsclResult';
 
 export default {
+  name: 'Cscl',
+  components: {
+    CsclResult,
+  },
   data() {
     return {
       language: "fr",
+      data: undefined,
     };
   },
   setup() {
@@ -69,12 +80,10 @@ export default {
         return;
       }
       // TODO: use loading indicator
-
-      const result = await this.csclService.process({
+      this.data = await this.csclService.process({
         file: this.file,
         language: this.language
       });
-      // TODO: display result in output components
     },
   },
 };
