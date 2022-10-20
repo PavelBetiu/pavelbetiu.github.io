@@ -1527,7 +1527,7 @@ export class MockCsclService implements ICsclService {
   };
 
   public process(options: ProcessOptions): Promise<CsclResult> {
-    return Promise.resolve(this.result);
+    return new Promise(resolve => setTimeout(() => resolve(this.result), 1000));
   }
 
 }
