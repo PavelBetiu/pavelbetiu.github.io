@@ -1,5 +1,6 @@
 <template>
 <v-chart class="chart" :option="option" />
+{{debugPrint(option.legend[0].data)}}
 </template>
 
 <script>
@@ -66,32 +67,39 @@ export default defineComponent({
                     rotateLabel: true
                 },
                 data: [{
-                    name: 'Marius',
                     category: 0,
                     id: 'Marius',
-                    symbolSize: 20,
+                    label: {
+                        show: true
+                    },
+                    name: 'Marius',
+                    symbolSize: 240,
                     value: 10,
                 }, {
-                    name: 'Laureline',
                     category: 1,
                     id: 'Laureline',
-                    symbolSize: 20,
+                    label: {
+                        show: true
+                    },
+                    name: 'Laureline',
+                    symbolSize: 240,
                     value: 10,
                 }, {
-                    name: 'Cruchot',
                     category: 1,
                     id: 'Cruchot',
-                    symbolSize: 20,
+                    label: {
+                        show: true
+                    },
+                    name: 'Cruchot',
+                    symbolSize: 240,
                     value: 10,
                 }],
                 links: [{
                     source: 'Marius',
-                    target: 'Laureline',
-                    value: 5
+                    target: 'Laureline'
                 }, {
                     source: 'Marius',
-                    target: 'Cruchot',
-                    value: 5
+                    target: 'Cruchot'
                 }],
                 categories: [{
                     name: 'a'
@@ -121,3 +129,9 @@ export default defineComponent({
     }
 });
 </script>
+
+<style scoped>
+.chart {
+    height: 100vh;
+}
+</style>
