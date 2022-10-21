@@ -1,10 +1,11 @@
 <template>
   <h1>CSCL Results Component (TODO)</h1>
-  <CircularGraph :data="data" />
+  <CircularGraph :data="circularGraphInput" />
 </template>
 
 <script>
 import CircularGraph from '@/components/widgets/circular-graph.vue';
+import {convertToCircularGraphInput} from './cscl-converters'
 export default {
   props: ["data"],
   components: {
@@ -12,6 +13,9 @@ export default {
   },
   data() {
     return {};
+  },
+  created() {
+    this.circularGraphInput = convertToCircularGraphInput(this.data);
   },
 };
 </script>

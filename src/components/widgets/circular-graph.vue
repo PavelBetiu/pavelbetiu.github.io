@@ -26,6 +26,8 @@ import {
     defineComponent
 } from 'vue';
 
+import CircularGraphInput from './circular-graph-input';
+
 use([
     TitleComponent,
     TooltipComponent,
@@ -37,7 +39,7 @@ use([
 export default defineComponent({
     name: 'CircularGraph',
     props: {
-        data: undefined
+        data: CircularGraphInput
     },
     components: {
         VChart,
@@ -48,64 +50,27 @@ export default defineComponent({
     setup(props) {
         const option = ref({
             title: {
-                text: 'Les Miserables',
+                text: 'CSCL Circular Graph',
                 subtext: 'Circular layout',
                 top: 'bottom',
                 left: 'right'
             },
             tooltip: {},
             legend: [{
-                data: ['a', 'b']
+                data: props.data.legendData
             }],
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series: [{
-                name: 'Les Miserables',
+                name: 'CSCL Circular Graph',
                 type: 'graph',
                 layout: 'circular',
                 circular: {
                     rotateLabel: true
                 },
-                data: [{
-                    category: 0,
-                    id: 'Marius',
-                    label: {
-                        show: true
-                    },
-                    name: 'Marius',
-                    symbolSize: 240,
-                    value: 10,
-                }, {
-                    category: 1,
-                    id: 'Laureline',
-                    label: {
-                        show: true
-                    },
-                    name: 'Laureline',
-                    symbolSize: 240,
-                    value: 10,
-                }, {
-                    category: 1,
-                    id: 'Cruchot',
-                    label: {
-                        show: true
-                    },
-                    name: 'Cruchot',
-                    symbolSize: 240,
-                    value: 10,
-                }],
-                links: [{
-                    source: 'Marius',
-                    target: 'Laureline'
-                }, {
-                    source: 'Marius',
-                    target: 'Cruchot'
-                }],
-                categories: [{
-                    name: 'a'
-                }, {
-                    name: 'b'
-                }],
+                data: props.data.nodes,
+                links: props.data.links,
+                categories: props.data.categories,
                 roam: true,
                 label: {
                     position: 'right',
