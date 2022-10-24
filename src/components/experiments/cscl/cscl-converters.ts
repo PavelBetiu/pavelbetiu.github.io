@@ -12,10 +12,10 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
                 category: categories.findIndex(x => x.name === participant),
                 id: participant,
                 name: participant,
-                symbolSize: 40,
+                symbolSize: (score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]) / 30,
                 value: Number((score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]).toFixed(2))
             }
-
+            
             nodes.push(node)
         }
 
