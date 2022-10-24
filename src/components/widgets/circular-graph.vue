@@ -66,7 +66,7 @@ export default defineComponent({
                 type: 'graph',
                 layout: 'circular',
                 circular: {
-                    rotateLabel: true
+                    rotateLabel: true,
                 },
                 data: props.data.nodes,
                 links: props.data.links,
@@ -82,7 +82,8 @@ export default defineComponent({
                 emphasis: {
                     focus: 'adjacency',
                     disabled: false
-                }
+                },
+                edgeSymbol: "arrow"
                 // autoCurveness: [0],
             }],
         });

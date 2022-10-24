@@ -12,7 +12,6 @@ export function convertToCircularGraphInput(data: CsclResult): CircularGraphInpu
         const category: CircularGraphCategory = {
             name: participant
         }
-
         return category
     });
     circularGraphInput.links = data.graph.edges.map((edge: CsclEdge) => {
@@ -21,10 +20,9 @@ export function convertToCircularGraphInput(data: CsclResult): CircularGraphInpu
             target: edge.target,
             value: Number(edge.weight.toFixed(2)),
             lineStyle: {
-                curveness: 1/edge.weight
+                curveness: 0.3
             }
         }
-
         return link
     });
     circularGraphInput.legendData = data.graph.participants;
