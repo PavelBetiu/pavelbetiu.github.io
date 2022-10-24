@@ -1,5 +1,5 @@
 <template>
-    <v-chart class="chart" :option="option" />
+<v-chart class="chart" :option="option" />
 </template>
 
 <script>
@@ -54,20 +54,19 @@ export default defineComponent({
     setup(props) {
         const option = ref({
             title: {
-                text: 'Les Miserables',
+                text: 'CSCL Results',
                 subtext: 'Default layout',
                 top: 'bottom',
                 left: 'right'
             },
             tooltip: {},
             legend: [{
-                // selectedMode: 'single',
                 data: props.data.categories.map(function (category) {
                     return category.name;
                 }),
             }],
             series: [{
-                name: 'Les Miserables',
+                name: '',
                 type: 'graph',
                 layout: 'force',
                 data: props.data.nodes,
@@ -78,7 +77,33 @@ export default defineComponent({
                     position: 'left'
                 },
                 force: {
-                    repulsion: 100
+                    // Edge length is equal to the edge weight
+                    edgeLength: props.data.links.map(function (link) {
+                        return link.value;
+                    }),
+                    // The greater the repulsion, the farther apart the nodes
+                    repulsion: props.data.links.map(function (link) {
+                        return 1 / link.value * 100; // Repulsion is inversely proportional to the edge weight (similarity coefficient)
+                    }),
+                    gravity: 0.1
+                },
+                zoom: 2,
+                edgeSymbol: ['none', 'arrow'],
+                // Enable node dragging
+                draggable: true,
+                // Some settings regarding emphasis of nodes and edges
+                emphasis: {
+                    disabled: false,
+                    // On mouse hover, the node and adjacent edges will be highlighted
+                    focus: 'adjacency',
+                    edgeLabel: {
+                        show: true,
+                        formatter: '{b}: {c}'
+                    },
+                    lineStyle: {
+                        color: "rgba(144, 0, 255, 1)",
+                        width: 2
+                    }
                 }
             }]
         });

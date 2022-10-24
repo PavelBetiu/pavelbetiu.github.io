@@ -4,16 +4,16 @@ import { CsclEdge, CsclResult, CsclScores } from "@/data-objects/cscl-result";
 export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
     function getNodes(participants: Record<string, CsclScores>, categories: ForceGraphCategory[]): ForceGraphNode[] {
         const nodes: ForceGraphNode[] = []
-        
-        for(const participant in participants) {
+
+        for (const participant in participants) {
             const score: CsclScores = participants[participant]
 
             const node: ForceGraphNode = {
                 category: categories.findIndex(x => x.name === participant),
                 id: participant,
                 name: participant,
-                symbolSize: 10,
-                value: score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]
+                symbolSize: 40,
+                value: Number((score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]).toFixed(2))
             }
 
             nodes.push(node)
@@ -21,7 +21,7 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
 
         return nodes
     }
-    
+
     const forceGraphInput: ForceGraphInput = {
         categories: data.graph.participants.map((participant: string) => {
             const category: ForceGraphCategory = {
@@ -34,6 +34,11 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
             const link: ForceGraphLink = {
                 source: edge.source,
                 target: edge.target,
+                value: Number((edge.weight).toFixed(2)),
+                lineStyle: {
+                    width: 1,
+                    curveness: 0.05
+                },
             }
 
             return link

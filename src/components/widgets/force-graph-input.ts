@@ -4,7 +4,12 @@ export interface ForceGraphCategory {
 
 export interface ForceGraphLink {
     source: string,
-    target: string
+    target: string,
+    value: number,
+    lineStyle: {
+        width: number,
+        curveness: number
+    }
 }
 
 export interface ForceGraphNode {
