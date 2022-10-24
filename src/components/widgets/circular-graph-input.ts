@@ -14,6 +14,10 @@ export interface CircularGraphLabel {
 export interface CircularGraphLink {
     source: string,
     target: string,
+    value: number,
+    lineStyle: {
+        curveness: number
+    }
 }
 export interface CircularGraphCategory {
     name: string,

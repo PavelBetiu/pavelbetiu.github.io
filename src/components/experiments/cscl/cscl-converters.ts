@@ -19,6 +19,10 @@ export function convertToCircularGraphInput(data: CsclResult): CircularGraphInpu
         const link: CircularGraphLink = {
             source: edge.source,
             target: edge.target,
+            value: Number(edge.weight.toFixed(2)),
+            lineStyle: {
+                curveness: 1/edge.weight
+            }
         }
 
         return link

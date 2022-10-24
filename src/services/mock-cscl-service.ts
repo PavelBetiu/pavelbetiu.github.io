@@ -69,11 +69,7 @@ export class MockCsclService implements ICsclService {
           "target": "Animateur",
           "weight": 115.24028835543315
         },
-        {
-          "source": "Fanny",
-          "target": "Annie",
-          "weight": 202.76119656021868
-        },
+        
         {
           "source": "Fanny",
           "target": "Mireille",
@@ -128,6 +124,11 @@ export class MockCsclService implements ICsclService {
           "source": "Annie",
           "target": "Fanny",
           "weight": 177.0946837653243
+        },
+        {
+          "source": "Fanny",
+          "target": "Annie",
+          "weight": 202.76119656021868
         },
         {
           "source": "Annie",

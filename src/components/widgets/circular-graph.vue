@@ -78,8 +78,12 @@ export default defineComponent({
                 },
                 lineStyle: {
                     color: 'source',
-                    curveness: 0.3
+                },
+                emphasis: {
+                    focus: 'adjacency',
+                    disabled: false
                 }
+                // autoCurveness: [0],
             }],
         });
 
