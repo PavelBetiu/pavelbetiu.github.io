@@ -21,6 +21,12 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/services">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Demo">Services</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="/about">
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="About Us">About Us</p>
             </a>
