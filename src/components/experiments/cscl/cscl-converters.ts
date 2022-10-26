@@ -1,5 +1,7 @@
 import { ForceGraphInput, ForceGraphCategory, ForceGraphLink, ForceGraphNode } from "@/components/widgets/force-graph-input";
 import { CsclEdge, CsclResult, CsclScores } from "@/data-objects/cscl-result";
+import { map } from 'lodash';
+import { TableInput } from '@/components/widgets/table-input';
 
 export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
     function getNodes(participants: Record<string, CsclScores>, categories: ForceGraphCategory[]): ForceGraphNode[] {
@@ -15,7 +17,7 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
                 symbolSize: (score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]) / 30,
                 value: Number((score["CNAIndices.INDEGREE"] + score["CNAIndices.OUTDEGREE"]).toFixed(2))
             }
-            
+
             nodes.push(node)
         }
 
@@ -49,4 +51,28 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
     forceGraphInput.nodes = getNodes(data.participants, forceGraphInput.categories)
 
     return forceGraphInput;
+}
+
+export function convertToContributionsTable(result: CsclResult): TableInput {
+  const input: TableInput = {
+    columns: [
+      {
+        key: 'id',
+        displayName: 'Identifier',
+      },
+      {
+        key: 'text',
+        displayName: 'Text',
+      },
+      {
+        key: 'importance',
+        displayName: 'Importance',
+      },
+    ],
+    rows: [],
+  };
+  input.rows = map(result.contributions, c => {
+    return c as Record<string, unknown>;
+  });
+  return input;
 }
