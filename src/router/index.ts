@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'services',
     component: () => import('../views/ServicesView.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,  // TODO: switch back to true after authentication is done
     },
   },
   {
@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'experimentCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,  // TODO: switch back to true after authentication is done
     },
   },
 ]

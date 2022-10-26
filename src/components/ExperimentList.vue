@@ -26,9 +26,9 @@
             category: 'NLP',
             description:
               'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius quia aperiam eligendi dolorum reprehenderit ea amet, aliquid dolorem beatae, iste aliquam ullam. Sequi ab eligendi consectetur neque laudantium, libero asperiores.',
-            featuredImage: require('@/assets/images/demo-cna.png'),
+            featuredImage: require('@/assets/images/demo_cscl.png'),
             images: [
-              require('@/assets/images/demo-cna.png'),
+              require('@/assets/images/demo_cscl.png'),
             ],
           },
         ],
