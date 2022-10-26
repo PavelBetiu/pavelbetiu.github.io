@@ -18,6 +18,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/services',
+    name: 'services',
+    component: () => import('../views/ServicesView.vue'),
+    meta: {
+      requiresAuth: false,  // TODO: switch back to true after authentication is done
+    },
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue')
@@ -27,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'experimentCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,  // TODO: switch back to true after authentication is done
     },
   },
 ]
