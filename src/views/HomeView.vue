@@ -328,7 +328,7 @@
               <hr class="vertical dark">
             </div>
           </div>
-        </div>s
+        </div>
       </div>
     </div>
   </section>
