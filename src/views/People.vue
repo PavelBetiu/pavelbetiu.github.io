@@ -45,7 +45,7 @@
       <div class="row">
         <div class="col-lg-12 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
           <div class="row mt-6">
-            <div class="col-md-6 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <Spinner name="ball-spin-fade-loader" color="#000" :scale="0.5" />
                 <img src="../assets/images/mihaidascalu.jpg" />
@@ -67,7 +67,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-6 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Stefan Ruseti</h4>
@@ -88,7 +88,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/stefantrausan.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Stefan Trausan-Matu</h4>
@@ -109,7 +109,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/traianrebedea.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Traian Rebedea</h4>
@@ -130,7 +130,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/irinatoma.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Irina Toma</h4>
@@ -151,7 +151,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/mariadorineladascalu.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Maria-Dorinela Dascalu</h4>
@@ -172,7 +172,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/ionutcristianparaschiv.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Ionut Cristian Paraschiv</h4>
@@ -187,7 +187,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/laurneagu.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Laurentiu Neagu</h4>
@@ -205,7 +205,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/dragoscorlatescu.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Dragos Corlatescu</h4>
@@ -226,7 +226,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="" />
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
@@ -248,7 +248,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Mihai Masala</h4>
@@ -266,7 +266,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Razvan Paroiu</h4>
@@ -287,7 +287,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Vlad Dumitru</h4>
@@ -308,7 +308,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/alexdima.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Alexandru Dima</h4>
@@ -323,7 +323,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/emanueltertes.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Emanuel Tertes</h4>
@@ -335,7 +335,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/pavelbetiu.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Pavel Betiu</h4>
@@ -347,7 +347,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/anonymous.jpg" width="200" height="200"/>
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Teodor Neacsu</h4>
@@ -359,7 +359,7 @@
               <hr class="vertical dark">
             </div>
 
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <img src="../assets/images/andreeadutulescu.jpg" />
                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Andreea Dutulescu</h4>
