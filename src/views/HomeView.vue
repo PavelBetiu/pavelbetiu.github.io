@@ -386,7 +386,7 @@
                 <h3 class="text-gradient text-primary">30+ joint papers</h3>
                 <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
                   <a href="javascript:;" class="d-flex justify-content-center">
-                    <img src="../assets/images/LMU.jpg" class="img-fluid border-radius-lg">
+                    <img src="../assets/images/LMU.jpg" class="img-fluid border-radius-lg" width="256" height="256">
                   </a>
                 </div>
               </div>
