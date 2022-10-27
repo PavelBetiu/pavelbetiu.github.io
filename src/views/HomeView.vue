@@ -246,56 +246,56 @@
       <div class="row">
         <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
           <div class="row mt-6">
-            <div class="col-md-3 position-relative">
+            <div class="col-md-12 position-relative">
               <div class="p-3 text-center">
                 <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span></h1>
                 <h5 class="mt-3">PTI OPTIMIZE</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">POC Cloud Precis</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">PN3 Odin112</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">PCE ARCAN</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">TE ATES, FAKEROM</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">PTE Yggdrasil</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">PC ROBIN, INTELLIT, Lib2Life</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">POD G NETIO (subsidiary contracts PIAM & Semantic)</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <a href="">
                 <h5 class="mt-3">POC D Hub-TECH, IAV-PLN</h5>
@@ -303,32 +303,32 @@
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">POC ReadME</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">PN III PTE Text2NeuralQL</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">H2020 RAGE</h5>
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-3 position-relative">
+            <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
                 <h5 class="mt-3">ERASMUS+ ENeA-SEA</h5>
               </div>
               <hr class="vertical dark">
             </div>
           </div>
-        </div>
+        </div>s
       </div>
     </div>
   </section>
@@ -381,7 +381,7 @@
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-4 position-relative">
+            <div class="col-md-6 position-relative">
               <div class="p-3 text-center">
                 <h3 class="text-gradient text-primary">30+ joint papers</h3>
                 <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
@@ -392,7 +392,7 @@
               </div>
               <hr class="vertical dark">
             </div>
-            <div class="col-md-4 position-relative">
+            <div class="col-md-6 position-relative">
               <div class="p-3 text-center">
                 <h3 class="text-gradient text-primary">10+ joint papers</h3>
                 <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
