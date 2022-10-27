@@ -519,7 +519,7 @@
             return value.length <= 5;
           }
         }
-      }
+      },
     }
   </script>
   <style lang="scss" scoped>
