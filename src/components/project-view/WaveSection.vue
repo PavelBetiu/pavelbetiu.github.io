@@ -15,24 +15,24 @@
     <div class="container min-vh-65">
         <div class="row pt-8">
             <div class="col-md-8 text-start mb-5 mt-5">
-                <h3 class="text-white z-index-1 position-relative">{{title}}</h3>
+                <h3 class="text-white z-index-1 position-relative">{{data.title}}</h3>
             </div>
         </div>
 
         <!-- If Description section -->
-        <div v-if="type === DESCRIPTION" class="row pb-8">
+        <div v-if="data.type === DESCRIPTION" class="row pb-8">
             <div class="col-lg-6">
                 <p class="text-light h5">
-                    {{content.description}}
+                    {{data.content.description}}
                 </p>
             </div>
         </div>
 
         <!-- If Project phases section -->
-        <div v-if="type === PROJECT_PHASES" class="row pb-8">
-            <div v-for="(phase, i) in content.phases" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-content-start">
+        <div v-if="data.type === PROJECT_PHASES" class="row pb-8">
+            <div v-for="(phase, i) in data.content.phases" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
                 <div class="col">
-                    <h4 class="text-light z-index-1 position-relative">{{phase.title}}</h4>
+                    <h4 class="text-light z-index-1 position-relative">{{phase.phase}}</h4>
                 </div>
                 <div class="col">
                     <h5 class="text-light pt-1">
@@ -43,20 +43,20 @@
         </div>
 
         <!-- If Publications section -->
-        <div v-if="type === PUBLICATIONS" class="row pb-8">
+        <div v-if="data.type === PUBLICATIONS" class="row pb-8">
             <!-- Render Journals -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Journals</h4>
-                <div v-for="(journal,i) in content.journals" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-content-start">
-                    <p class="text-light">{{journal}}</p>
+                <div v-for="(journal,i) in data.content.journals" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
+                    <p class="text-light">{{journal.title}}</p>
                 </div>
             </div>
 
             <!-- Render Conferences -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Conferences</h4>
-                <div v-for="(conference,i) in content.conferences" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-content-start">
-                    <p class="text-light">{{conference}}</p>
+                <div v-for="(conference,i) in data.content.conferences" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
+                    <p class="text-light">{{conference.title}}</p>
                 </div>
             </div>
         </div>
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import { WaveSectionInput } from '@/components/project-view/wave-section-input';
 import {
     PROJECT_PHASES,
     DESCRIPTION,
@@ -85,19 +86,14 @@ import {
 
 export default {
     name: "WaveSection",
-    props: ["type", "title", "content"],
+    props: {
+        data: WaveSectionInput,
+    },
     data() {
         return {
             PROJECT_PHASES,
             DESCRIPTION,
             PUBLICATIONS
-        }
-    },
-    methods: {
-        debugPrint: function () {
-            console.log(this.type);
-            console.log(this.title);
-            console.log(this.content);
         }
     }
 };

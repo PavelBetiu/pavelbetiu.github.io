@@ -3,9 +3,9 @@
     <div class="col d-flex justify-content-end pr-5">
 
         <div class="image">
-            <img :src="require(`../assets/images/${img}`)" alt="ates" class="shadow-xl rounded zoom" />
+            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" class="shadow-xl rounded zoom" />
             <div class="image-overlay rounded bg-gradient-primary">
-                <div class="image-description">{{imageDesc}}</div>
+                <div class="image-description">{{data.imageDescription}}</div>
             </div>
         </div>
     </div>
@@ -13,23 +13,22 @@
         <div class="row">
             <div class="col">
                 <h6 class="card-title d-block text-darker pt-5 px-0">
-                    {{title}}
+                    {{data.title}}
                 </h6>
             </div>
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <a v-if="isExternalURL" :href="link">
+                <a :href="'projects/' + data.link">
                     <button type="button" class="btn btn-outline-primary btn-lg m-3 shadow-pop">VIEW</button>
                 </a>
-                <button v-else type="button" class="btn btn-outline-primary btn-lg m-3 shadow-pop" v-on:click="goto(link)">VIEW</button>
             </div>
         </div>
     </div>
     <div class="col ">
         <div class="project-description">
             <p class="h6 text-center ">
-                {{desc}}
+                {{data.description}}
             </p>
         </div>
     </div>
@@ -37,39 +36,13 @@
 </template>
 
 <script>
-export default {
-    name: 'ProjectSingle',
-    components: {},
-    props: ['title', 'link', 'isExternalURL', 'img', 'desc', 'imageDesc', 'pageInfo'],
-    data() {
-        return {
+import { ProjectDTOShort } from "@/data-objects/project-dto";
 
-        }
-    },
-    methods: {
-        goto(link) {
-            this.$router.push({
-                name: 'projectView',
-                params: {
-                    link: link,
-                    title: this.pageInfo['title'],
-                    acronym: this.pageInfo['acronym'],
-                    projectNumber: this.pageInfo['projectNumber'],
-                    contractNumber: this.pageInfo['contractNumber'],
-                    fundingAgency: this.pageInfo['fundingAgency'],
-                    fundingAgencyLogo: this.pageInfo['fundingAgencyLogo'],
-                    description: this.pageInfo['description'],
-                    objectives: this.pageInfo['objectives'],
-                    team: this.pageInfo['team'],
-                    projectPhases: this.pageInfo['projectPhases'],
-                    projectActivities: this.pageInfo['projectActivities'],
-                    notableResults: this.pageInfo['notableResults'],
-                    publications: this.pageInfo['publications'],
-                },
-                props: true
-            })
-        }
-    },
+export default {
+    name: 'ProjectCard',
+    props: {
+        data: ProjectDTOShort,
+    }
 }
 </script>
 
