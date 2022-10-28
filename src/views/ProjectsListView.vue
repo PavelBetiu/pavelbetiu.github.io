@@ -38,7 +38,7 @@
 import ProjectSingle from "../components/ProjectSingle.vue"
 
 export default {
-    name: 'ProjectsView',
+    name: 'ProjectsListView',
     components: {
         ProjectSingle,
     },
