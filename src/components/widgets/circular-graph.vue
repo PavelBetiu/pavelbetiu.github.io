@@ -1,6 +1,5 @@
 <template>
 <v-chart class="chart" :option="option" />
-{{debugPrint(option.legend[0].data)}}
 </template>
 
 <script>
@@ -72,10 +71,6 @@ export default defineComponent({
                 links: props.data.links,
                 categories: props.data.categories,
                 roam: true,
-                label: {
-                    position: 'right',
-                    formatter: '{b}'
-                },
                 lineStyle: {
                     color: 'source',
                 },
@@ -83,8 +78,6 @@ export default defineComponent({
                     focus: 'adjacency',
                     disabled: false
                 },
-                edgeSymbol: "arrow"
-                // autoCurveness: [0],
             }],
         });
 

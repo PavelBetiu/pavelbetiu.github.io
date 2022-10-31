@@ -5,6 +5,10 @@ export interface CircularGraphNode {
     name: string,
     symbolSize: number,
     value: number,
+    tooltip: {
+        trigger: string,
+        formatter: string
+    }
 }
 
 export interface CircularGraphLabel {
@@ -16,8 +20,20 @@ export interface CircularGraphLink {
     target: string,
     value: number,
     lineStyle: {
-        curveness: number
+        curveness: number,
+        color: string
+    },
+    tooltip: {
+        trigger: string,
+        formatter: string
+    },
+    emphasis: {
+        lineStyle: {
+            width: number,
+            opacity: number
+        }
     }
+    symbol: string[]
 }
 export interface CircularGraphCategory {
     name: string,
