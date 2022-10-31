@@ -493,7 +493,7 @@
           </div>
           </div>
         </div>
-        </section>
+        </section>      
     <section class="pt-sm-8 pb-5 position-relative bg-gradient-dark">
       <div class="position-absolute w-100 z-inde-1 top-0 mt-n3">
         <svg width="100%" viewBox="0 -2 1920 157" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -511,6 +511,8 @@
   </template>
   <script>
     export default {
+      components: {
+      },
       props: {
         listdata: {
           type: Array,
@@ -519,7 +521,7 @@
             return value.length <= 5;
           }
         }
-      },
+      }
     }
   </script>
   <style lang="scss" scoped>
