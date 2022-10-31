@@ -22,7 +22,7 @@
         <!-- If Description section -->
         <div v-if="data.type === DESCRIPTION" class="row pb-8">
             <div class="col-lg-6">
-                <p class="text-light h5">
+                <p class="text-light h6">
                     {{data.content.description}}
                 </p>
             </div>
@@ -32,12 +32,12 @@
         <div v-if="data.type === PROJECT_PHASES" class="row pb-8">
             <div v-for="(phase, i) in data.content.phases" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
                 <div class="col">
-                    <h4 class="text-light z-index-1 position-relative">{{phase.phase}}</h4>
+                    <h5 class="text-light z-index-1 position-relative">{{phase.phase}}</h5>
                 </div>
                 <div class="col">
-                    <h5 class="text-light pt-1">
+                    <p class="text-light pt-1">
                         {{phase.description}} 
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>

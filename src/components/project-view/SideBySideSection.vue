@@ -36,19 +36,19 @@
 
                 <!-- If Objectives section -->
                 <div v-if="data.leftSection.type === OBJECTIVES" class="content-section-left">
-                    <p v-for="(objective,i) in data.leftSection.content.objectives" :key="i" class="text-darker p-3 h5">{{objective}}</p>
+                    <p v-for="(objective,i) in data.leftSection.content.objectives" :key="i" class="text-darker p-3 h6">{{objective}}</p>
                 </div>
             </div>
         </div>
 
         <!-- Content If Project Activities section -->
         <div v-if="data.leftSection.type === PROJECT_ACTIVITIES" class="container p-5">
-            <div v-for="(activity, i) in data.leftSection.content.activities" :key="i" class="row p-4 highlight rounded-2 d-flex justify-content-center">
+            <div v-for="(activity, i) in data.leftSection.content.activities" :key="i" class="row p-2 highlight rounded-2 d-flex justify-content-center">
                 <div class="col-6 d-flex justify-content-center">
                     <h5 class="text-dark z-index-1 position-relative">{{activity.status}}</h5>
                 </div>
                 <div class="col">
-                    <h5 class="text-dark z-index-1 position-relative">{{activity.description}}</h5>
+                    <p class="text-dark z-index-1 position-relative">{{activity.description}}</p>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
 
                         <!-- Member's name -->
                         <div class="col-4  d-flex justify-content-start">
-                            <h5 class="pt-2 text-darker">{{member.name}}</h5>
+                            <h6 class="pt-2 text-darker">{{member.name}}</h6>
                         </div>
 
                         <!-- Member's social links -->
