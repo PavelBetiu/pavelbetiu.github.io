@@ -1,7 +1,7 @@
 import { isNil, first } from 'lodash';
 import { createRouter, createWebHistory, RouteLocationRaw, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import auth from '../services/auth';
+import HomeView from '@/views/HomeView.vue';
+import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,9 +18,17 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/services',
+    name: 'services',
+    component: () => import('../views/ServicesView.vue'),
+    meta: {
+      requiresAuth: false,  // TODO: switch back to true after authentication is done
+    },
+  },
+  {
     path: '/login',
     name: 'login',
-    component: () => import('../views/Login.vue')
+    component: () => import('@/views/Login.vue')
   },
   {
     path: '/contact',
@@ -38,12 +46,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Projects.vue')
   },
   {
-    path: '/experiment/:id',
-    name: 'experimentSingle',
-    component: () => import('../views/ExperimentSingle.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+    path: '/experiment/cscl',
+    name: 'experimentCscl',
+    component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
 ]
 
