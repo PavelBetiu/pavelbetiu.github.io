@@ -1,8 +1,9 @@
-import { CsclResult, CsclEdge, CsclScores} from "@/data-objects/cscl-result";
+import { CsclResult, CsclEdge, CsclScores, CsclContribution} from "@/data-objects/cscl-result";
 import { CircularGraphInput, CircularGraphCategory, CircularGraphLink, CircularGraphNode} from "@/components/widgets/circular-graph-input";
 import { ForceGraphInput, ForceGraphCategory, ForceGraphLink, ForceGraphNode } from "@/components/widgets/force-graph-input";
 import { map } from 'lodash';
 import { TableInput } from '@/components/widgets/table-input';
+import { StackedLineGradientGraphInput } from '@/components/widgets/stacked-line-gradient-graph-input';
 
 export function convertToCircularGraphInput(data: CsclResult): CircularGraphInput {
     const circularGraphInput : CircularGraphInput = {
@@ -173,3 +174,30 @@ export function convertToContributionsTable(result: CsclResult): TableInput {
   });
   return input;
 }
+
+export function convertToStackedLineGradientGraphInput(result: CsclResult): StackedLineGradientGraphInput {
+    const input: StackedLineGradientGraphInput = {
+        importance: [],
+        social_kb: [],
+        in_degree: [],
+        out_degree: []
+    };
+
+    input.importance = result.contributions.map((contribution: CsclContribution) => {
+        return [contribution.id, Number(contribution.importance.toFixed(2))]
+    });
+
+    input.social_kb = result.contributions.map((contribution: CsclContribution) => {
+        return [contribution.id, Number(contribution.social_kb.toFixed(2))]
+    });
+
+    input.in_degree = result.contributions.map((contribution: CsclContribution) => {
+        return [contribution.id, Number(contribution.in_degree.toFixed(2))]
+    });
+
+    input.out_degree = result.contributions.map((contribution: CsclContribution) => {
+        return [contribution.id, Number(contribution.out_degree.toFixed(2))]
+    });
+
+    return input;
+  }

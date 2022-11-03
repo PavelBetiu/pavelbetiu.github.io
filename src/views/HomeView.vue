@@ -164,7 +164,7 @@
             </div>
             <div class="col-md-4 position-relative">
               <div class="p-3 text-center">
-                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">7900+</span></h1>
+                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">8000+</span></h1>
                 <h5 class="mt-3">Citations of top 3 members</h5>
               </div>
               <hr class="vertical dark">
