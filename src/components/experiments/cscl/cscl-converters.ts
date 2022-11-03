@@ -1,4 +1,5 @@
 import { ForceGraphInput, ForceGraphCategory, ForceGraphLink, ForceGraphNode } from "@/components/widgets/force-graph-input";
+import { StackedLineChartInput } from "@/components/widgets/stacked-line-chart-input";
 import { CsclEdge, CsclResult, CsclScores } from "@/data-objects/cscl-result";
 import { map } from 'lodash';
 import { TableInput } from '@/components/widgets/table-input';
@@ -75,4 +76,43 @@ export function convertToContributionsTable(result: CsclResult): TableInput {
     return c as Record<string, unknown>;
   });
   return input;
+}
+
+export function convertToStackedLineChartInput(result: CsclResult): StackedLineChartInput {
+  const stackedLineChartInput: StackedLineChartInput = {
+    series: []
+  }
+  // For each participant in the cscl result create a series for the stacked line chart
+  for (const participant of result.graph.participants) {
+    console.log(participant)
+    // Initialize the data array for the series and the series
+    const series_data: number[][]  = []
+    const series = {
+      name: participant,
+      type: "line",
+      step: "end",
+      data: series_data,
+      showSymbol: false
+    }
+
+    // Grab the correponding contributions for the participant
+    const contributions = result.contributions.filter(contribution => contribution.participant === participant)
+
+    // Sort the contributions by id
+    contributions.sort((a, b) => a.id - b.id)
+
+    // Cumulative sum of the importance of the contributions
+    let cumulativeImportance = 0
+
+    // For each contribution add the cumulative importance to the series
+    for (const contribution of contributions) {
+      const data = [contribution.id, Number((cumulativeImportance + contribution.importance).toFixed(2))]
+
+      cumulativeImportance += contribution.importance
+      series.data.push(data)
+    }
+    stackedLineChartInput.series.push(series)
+  }
+
+  return stackedLineChartInput
 }
