@@ -1,9 +1,9 @@
 <template>
-<div class="row pb-6">
+<div class="row p-3 my-6 shadow rounded-3">
     <div class="col d-flex justify-content-end pr-5">
 
         <div class="image">
-            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" class="shadow-xl rounded zoom" />
+            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" class="rounded zoom" />
             <div class="image-overlay rounded bg-gradient-primary">
                 <div class="image-description">{{data.imageDescription}}</div>
             </div>

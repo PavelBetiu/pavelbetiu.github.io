@@ -21,17 +21,19 @@
                     <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,215,0,0.5)" />
                     <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(180, 9, 254, 0.5)" />
                     <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
-                    <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,1)" />
+                    <use xlink:href="#gentle-wave" x="48" y="16" :fill="bg_color" />
                 </g>
             </svg>
         </div>
     </div>
 </header>
-<section class="p-5 m-5 position-relative">
+<div class="body">
+<section class="p-5 position-relative">
     <div class="container">
         <ProjectCard v-for="(project, i) in projects" :key="i" :data="project"/>
     </div>
 </section>
+</div>
 </template>
 
 <script>
@@ -46,6 +48,7 @@ export default {
     data() {
         return {
             projects: undefined,
+            bg_color: '#f8f9fa'
         }
     },
     created() {
@@ -54,6 +57,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.body {
+    background-color: v-bind(bg_color);
+}
 </style>

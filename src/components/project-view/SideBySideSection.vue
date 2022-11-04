@@ -1,18 +1,18 @@
 <template>
-<section class="p-4 m-5 position-relative">
-    <div class="row ">
+<section class="p-5 position-relative">
+    <div class="row p-3">
 
         <!-- Left side of the section -->
         <!-- Title and icon -->
         <div class="row">
-            <div class="col  d-flex justify-content-end pt-3 ">
+            <div class="col d-flex justify-content-end pt-1">
                 <div class="title-section-right">
                     <h3>{{data.leftSection.title}}</h3>
                 </div>
             </div>
-            <div class="col ">
+            <div class="col">
                 <div class="overlap-icon-right">
-                    <img :src="require(`@/assets/images/${data.leftSection.image}`)" style="width: 70px; height: 70px">
+                    <img :src="require(`@/assets/images/${data.leftSection.image}`)" style="width: 50px; height: 50px">
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
 
                 <!-- If Objectives section -->
-                <div v-if="data.leftSection.type === OBJECTIVES" class="content-section-left">
+                <div v-if="data.leftSection.type === OBJECTIVES" class="content-section-left card w-80 p-4">
                     <p v-for="(objective,i) in data.leftSection.content.objectives" :key="i" class="text-darker p-3 h6">{{objective}}</p>
                 </div>
             </div>
@@ -59,10 +59,10 @@
         <div v-if="data.leftSection.type !== PROJECT_ACTIVITIES" class="row">
             <div class="col  d-flex justify-content-end">
                 <div class="overlap-icon-left">
-                    <img :src="require(`@/assets/images/${data.rightSection.image}`)" style="width: 70px; height: 70px">
+                    <img :src="require(`@/assets/images/${data.rightSection.image}`)" style="width: 50px; height: 50px">
                 </div>
             </div>
-            <div class="col  d-flex justify-content-start pt-3">
+            <div class="col  d-flex justify-content-start pt-1">
                 <div class="title-section-left">
                     <h3>{{data.rightSection.title}}</h3>
                 </div>
@@ -88,35 +88,35 @@
                 </div>
 
                 <!-- If Team section -->
-                <div v-if="data.rightSection.type === TEAM" class="row m-5">
+                <div v-if="data.rightSection.type === TEAM" class="row w-60 m-5 py-4 pl-4 card">
                     <!-- For each team member render a line that will contain
                     the name and the social links of the person -->
-                    <div v-for="(member, i) in data.rightSection.content.team" :key="i" class="row ">
+                    <div v-for="(member, i) in data.rightSection.content.team" :key="i" class="row">
 
                         <!-- Member's name -->
-                        <div class="col-4  d-flex justify-content-start">
+                        <div class="col d-flex justify-content-start">
                             <h6 class="pt-2 text-darker">{{member.name}}</h6>
                         </div>
 
                         <!-- Member's social links -->
-                        <div class="col-8 ">
-                            <a v-if="member.links['dblp']" :href="member.links['dblp']" class="px-1 shadow">
-                                <button type="button" class="btn btn-tumblr btn-icon-only">
+                        <div class="col d-flex justify-content-end">
+                            <a v-if="member.links['dblp']" :href="member.links['dblp']" class="px-1">
+                                <button type="button" class="btn btn-tumblr btn-icon-only shadow">
                                     <span class="btn-inner--icon"><img :src="require(`@/assets/images/dblp.svg`)" /></span>
                                 </button>
                             </a>
-                            <a v-if="member.links['gscholar']" :href="member.links['gscholar']" class="px-1 shadow">
-                                <button type="button" class="btn btn-facebook btn-icon-only">
+                            <a v-if="member.links['gscholar']" :href="member.links['gscholar']" class="px-1">
+                                <button type="button" class="btn btn-facebook btn-icon-only shadow">
                                     <span class="btn-inner--icon"><img :src="require(`@/assets/images/google-scholar-white.svg`)" /></span>
                                 </button>
                             </a>
-                            <a v-if="member.links['linkedin']" :href="member.links['linkedin']" class="px-1 shadow">
-                                <button type="button" class="btn btn-linkedin btn-icon-only">
+                            <a v-if="member.links['linkedin']" :href="member.links['linkedin']" class="px-1">
+                                <button type="button" class="btn btn-linkedin btn-icon-only shadow">
                                     <span class="btn-inner--icon"><img :src="require(`@/assets/images/linkedin.svg`)" /></span>
                                 </button>
                             </a>
-                            <a v-if="member.links['rgate']" :href="member.links['rgate']" class="px-1 shadow">
-                                <button type="button" class="btn btn-github btn-icon-only">
+                            <a v-if="member.links['rgate']" :href="member.links['rgate']" class="px-1">
+                                <button type="button" class="btn btn-github btn-icon-only shadow">
                                     <span class="btn-inner--icon"><img :src="require(`@/assets/images/researchgate.svg`)" /></span>
                                 </button>
                             </a>
@@ -161,7 +161,7 @@ export default {
 <style scoped>
 .overlap-icon-right {
     position: relative;
-    right: 45px;
+    right: 35px;
     z-index: 0;
 }
 
@@ -178,7 +178,7 @@ export default {
 
 .overlap-icon-left {
     position: relative;
-    left: 52px;
+    left: 37px;
     z-index: 0;
 }
 
