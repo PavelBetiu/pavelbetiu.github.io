@@ -31,12 +31,24 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Login.vue')
   },
   {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/Contact.vue')
+  },
+  {
+    path: '/services',
+    name: 'services',
+    component: () => import('../views/Services.vue')
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: () => import('../views/Projects.vue')
+  },
+  {
     path: '/experiment/cscl',
     name: 'experimentCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
-    meta: {
-      requiresAuth: false,  // TODO: switch back to true after authentication is done
-    },
   },
 ]
 
