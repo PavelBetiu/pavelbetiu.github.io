@@ -60,7 +60,7 @@ export default {
                 cscl: {
 					title: "CSCL",
                     languages: ['English', 'French', 'Romanian'],
-                    link: '/experiment/cscl',
+                    link: '/services/cscl',
                     image: 'demo_cscl.png',
                 },
                 tcomp: {
