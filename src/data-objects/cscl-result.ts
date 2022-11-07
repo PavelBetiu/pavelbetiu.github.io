@@ -1,4 +1,3 @@
-
 export interface CsclEdge {
   source: string;
   target: string;

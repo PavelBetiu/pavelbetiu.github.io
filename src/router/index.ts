@@ -31,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Login.vue')
   },
   {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/Contact.vue')
+  },
+  {
     path: '/services/cscl',
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
