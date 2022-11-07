@@ -15,6 +15,9 @@
     <div class="col-md-12">
       <CircularGraph :data="circularGraphInput" />
     </div>
+    <div class="col-md-12 card">
+      <StackedLineGradientGraph :data="stackedLineGradientGraphInput" />
+    </div>
   </div>
 </template>
 
@@ -23,13 +26,14 @@ import Table from "@/components/widgets/Table";
 import CircularGraph from '@/components/widgets/circular-graph.vue';
 import ForceGraph from "@/components/widgets/force-graph";
 import { CsclResult } from "@/data-objects/cscl-result";
-import { convertToContributionsTable, convertToForceGraphInput, convertToCircularGraphInput } from "./cscl-converters";
-
+import { convertToContributionsTable, convertToForceGraphInput, convertToCircularGraphInput, convertToStackedLineGradientGraphInput } from "./cscl-converters";
+import StackedLineGradientGraph from "@/components/widgets/stacked-line-gradient-graph";
 export default {
   components: {
     Table,
     ForceGraph,
     CircularGraph,
+    StackedLineGradientGraph
   },
   props: {
     data: CsclResult,
@@ -41,6 +45,7 @@ export default {
     this.tableInput = convertToContributionsTable(this.data);
     this.forceGraphInput = convertToForceGraphInput(this.data);
     this.circularGraphInput = convertToCircularGraphInput(this.data);
+    this.stackedLineGradientGraphInput = convertToStackedLineGradientGraphInput(this.data);
   },
 };
 </script>
