@@ -19,7 +19,7 @@
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <a :href="'projects/' + data.link">
+                <a :href="data.link">
                     <button type="button" class="btn btn-outline-primary btn-lg m-3 shadow-pop">VIEW</button>
                 </a>
             </div>
