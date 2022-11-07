@@ -772,8 +772,8 @@
         </div>
     </div>
 </section>
-<section>
-    <AsyncWorldMap :mapData="mapData" :points="points" />
+<section class="pt-sm-8 pb-5 d-flex justify-content-center">
+    <AsyncWorldMap />
 </section>
 <section class="pt-sm-8 pb-5 position-relative bg-gradient-dark">
     <div class="position-absolute w-100 z-inde-1 top-0 mt-n3">
@@ -797,51 +797,9 @@ export default {
     components: {
         AsyncWorldMap
     },
-    data() {
-        return {
-            mapData: {
-                AUS: 760,
-                BRA: 900,
-                CAN: 120,
-                DEU: 1300,
-                FRA: 540,
-                GBR: 690,
-                GEO: 200,
-                IND: 200,
-                ROU: 600,
-                RUS: 757,
-                USA: 1800
-            },
-            points: [{
-                    name: 'Brazil',
-                    centered: 'BRA',
-                },
-                {
-                    name: 'France',
-                    centered: 'FRA',
-                },
-                {
-                    name: 'Italy',
-                    centered: 'ITA',
-                },
-                {
-                    name: 'Oman',
-                    centered: 'OMN',
-                },
-                {
-                    name: 'Indonesia',
-                    centered: 'IDN',
-                },
-                {
-                    name: 'Romania',
-                    centered: 'ROU',
-                }
-            ]
-        };
-    }
 };
 </script>
 
 <style lang="scss" scoped>
-
-  </style>
+    
+</style>
