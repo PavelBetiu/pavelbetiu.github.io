@@ -2,7 +2,6 @@ import { CsclResult, CsclEdge, CsclScores, CsclContribution} from "@/data-object
 import { CircularGraphInput, CircularGraphCategory, CircularGraphLink, CircularGraphNode} from "@/components/widgets/circular-graph-input";
 import { ForceGraphInput, ForceGraphCategory, ForceGraphLink, ForceGraphNode } from "@/components/widgets/force-graph-input";
 import { StackedLineChartInput } from "@/components/widgets/stacked-line-chart-input";
-import { CsclEdge, CsclResult, CsclScores } from "@/data-objects/cscl-result";
 import { map } from 'lodash';
 import { TableInput } from '@/components/widgets/table-input';
 import { StackedLineGradientGraphInput } from '@/components/widgets/stacked-line-gradient-graph-input';

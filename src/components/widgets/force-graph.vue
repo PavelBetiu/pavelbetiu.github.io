@@ -54,10 +54,10 @@ export default defineComponent({
     setup(props) {
         const option = ref({
             title: {
-                text: 'CSCL Results',
-                subtext: 'Default layout',
-                top: 'bottom',
-                left: 'right'
+                text: 'CSCL Forced Graph',
+                subtext: '',
+                top: 'top',
+                left: 'left'
             },
             tooltip: {},
             legend: [{
@@ -122,6 +122,6 @@ export default defineComponent({
 
 <style scoped>
 .chart {
-    height: 100vh;
+    height: 75vh;
 }
 </style>

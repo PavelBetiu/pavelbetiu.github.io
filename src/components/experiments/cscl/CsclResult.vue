@@ -1,19 +1,21 @@
 <template>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 card">
       <Table :data="tableInput" />
     </div>
     <div class="form-group col-md-12">
       <hr>
    </div>
-    <div class="col-md-12">
+    <div class="col-md-12 card">
       <ForceGraph :data='forceGraphInput'/>
     </div>
     <div class="form-group col-md-12">
       <hr>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 card">
       <StackedLineChart :data="stackedLineChartInput" />
+    </div>
+    <div class="col-md-12 card">
       <CircularGraph :data="circularGraphInput" />
     </div>
     <div class="col-md-12 card">

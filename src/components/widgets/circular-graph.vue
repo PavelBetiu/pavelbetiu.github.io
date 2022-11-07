@@ -50,9 +50,9 @@ export default defineComponent({
         const option = ref({
             title: {
                 text: 'CSCL Circular Graph',
-                subtext: 'Circular layout',
-                top: 'bottom',
-                left: 'right'
+                subtext: '',
+                top: 'top',
+                left: 'left'
             },
             tooltip: {},
             legend: [{
@@ -95,6 +95,6 @@ export default defineComponent({
 
 <style scoped>
 .chart {
-    height: 100vh;
+    height: 75vh;
 }
 </style>

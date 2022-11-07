@@ -60,7 +60,7 @@ export default defineComponent({
         const option = ref({
            
             title: {
-                text: 'Stacked Line'
+                text: 'Contributions importance',
             },
             tooltip: {
                 trigger: 'axis'
