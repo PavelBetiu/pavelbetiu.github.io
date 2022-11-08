@@ -54,14 +54,7 @@
 
         <!-- Content If Project Activities section -->
         <div v-if="data.leftSection.type === PROJECT_ACTIVITIES" class="container p-5">
-            <div v-for="(activity, i) in data.leftSection.content.activities" :key="i" class="row p-2 highlight rounded-2 d-flex justify-content-center">
-                <div class="col-6 d-flex justify-content-center">
-                    <h5 class="text-dark z-index-1 position-relative">{{activity.status}}</h5>
-                </div>
-                <div class="col">
-                    <p class="text-dark z-index-1 position-relative">{{activity.description}}</p>
-                </div>
-            </div>
+            <GanttChart />
         </div>
 
         <!-- Right side of the section -->
@@ -131,6 +124,7 @@
 import {
     SideBySideInput
 } from "./side-by-side-input";
+import GanttChart from "../widgets/GanttChart";
 
 import {
     ABOUT,
@@ -142,7 +136,9 @@ import {
 
 export default {
     name: 'SideBySideSection',
-    components: {},
+    components: {
+        GanttChart,
+    },
     props: {
         data: SideBySideInput
     },
@@ -153,6 +149,11 @@ export default {
             OBJECTIVES,
             TEAM,
             PROJECT_ACTIVITIES,
+        }
+    },
+    methods: {
+        print(sth) {
+            console.log(sth);
         }
     }
 }
