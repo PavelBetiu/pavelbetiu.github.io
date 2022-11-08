@@ -772,8 +772,21 @@
         </div>
     </div>
 </section>
-<section class="pt-sm-8 pb-5 d-flex justify-content-center">
-    <AsyncWorldMap />
+<div _ngcontent-c1="" class="header">
+    <div _ngcontent-c1="" class="sign-picture-wrapper">
+        <div _ngcontent-c1="" class="sign-picture text-center">
+            <h2 _ngcontent-c1="" class="d-flex justify-content-center mt-12 mb-9">Collaboration map</h2>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container mt-7 mb-3">
+        <div class="row">
+            <div class="col-md-12">
+                <AsyncWorldMap />
+            </div>
+        </div>
+    </div>
 </section>
 <section class="pt-sm-8 pb-5 position-relative bg-gradient-dark">
     <div class="position-absolute w-100 z-inde-1 top-0 mt-n3">
