@@ -31,11 +31,11 @@ export default {
         // Configure series
         var polygonTemplate = polygonSeries.mapPolygons.template;
         polygonTemplate.tooltipText = "{name}";
-        polygonTemplate.fill = am4core.color("#74B266");
+        polygonTemplate.fill = am4core.color("#6B728E");
 
         // Create hover state and set alternative fill color
         var hs = polygonTemplate.states.create("hover");
-        hs.properties.fill = am4core.color("#367B25");
+        hs.properties.fill = am4core.color("#404258");
 
         // Remove Antarctica
         polygonSeries.exclude = ["AQ"];
@@ -45,30 +45,30 @@ export default {
             "id": "US",
             "name": "United States",
             "value": 100,
-            "fill": am4core.color("#F05C5C")
+            "fill": am4core.color("#80489C")
         }, {
             "id": "FR",
             "name": "France",
             "value": 50,
-            "fill": am4core.color("purple")
+            "fill": am4core.color("#80489C")
         },
         {
             "id": "DE",
             "name": "Germany",
             "value": 50,
-            "fill": am4core.color("black")
+            "fill": am4core.color("#80489C")
         },
         {
             "id": "IT",
             "name": "Italy",
             "value": 50,
-            "fill": am4core.color("red")
+            "fill": am4core.color("#80489C")
         },
         {
             "id": "RO",
             "name": "Romania",
             "value": 50,
-            "fill": am4core.color("yellow")
+            "fill": am4core.color("#80489C")
         }];
 
         // Bind "fill" property to "fill" key in data
