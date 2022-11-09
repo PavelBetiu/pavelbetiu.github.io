@@ -4,11 +4,12 @@ import { ICsclService, ProcessOptions } from "./cscl-service.interface";
 
 export class CsclService implements ICsclService {
 
-  public process(options: ProcessOptions): Promise<CsclResult> {
+  public async process(options: ProcessOptions): Promise<CsclResult> {
     const data = new FormData();
     data.append('lang', options.language);
     data.append('file', options.file);
-    return axios.post('/services/cscl', data);
+    const result = await axios.post('/services/cscl', data);
+    return result.data;
   }
 
 }

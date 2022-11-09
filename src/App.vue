@@ -18,6 +18,7 @@ import Footer from "./components/partials/Footer.vue";
 
 import { CSCL_SERVICE } from "./services/cscl-service.interface";
 import { MockCsclService } from "./services/mock-cscl-service";
+import { CsclService } from "./services/cscl-service";
 
 export default {
   name: "app",
@@ -29,7 +30,8 @@ export default {
     /**
      * Services injected via DI.
      */
-    provide(CSCL_SERVICE, new MockCsclService());
+    provide(CSCL_SERVICE, new CsclService());
+    // provide(CSCL_SERVICE, new MockCsclService());
   },
 };
 </script>

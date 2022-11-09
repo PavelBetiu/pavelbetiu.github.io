@@ -30,8 +30,16 @@ export interface CsclContributionEdge {
 }
 
 export interface CsclResult {
+  /**
+   * Participants' Graph is Directed.
+   */
   graph: CsclGraph;
+
   contributions: CsclContribution[];
   participants: Record<string, CsclScores>;
+
+  /**
+   * Contributions' Graph is undirected.
+   */
   contribution_edges: CsclContributionEdge[];
 }

@@ -156,21 +156,41 @@ export function convertToContributionsTable(result: CsclResult): TableInput {
   const input: TableInput = {
     columns: [
       {
-        key: 'id',
-        displayName: 'Identifier',
+        key: 'ref',
+        displayName: 'Reference Identifier',
+      },
+      {
+        key: 'participant',
+        displayName: 'Participant',
       },
       {
         key: 'text',
         displayName: 'Text',
       },
       {
+        key: 'time',
+        displayName: 'Time',
+      },
+      {
         key: 'importance',
         displayName: 'Importance',
+      },
+      {
+        key: 'social_kb',
+        displayName: 'Social KB',
+      },
+      {
+        key: 'degree',
+        displayName: 'In Degree / Out Degree',
       },
     ],
     rows: [],
   };
   input.rows = map(result.contributions, c => {
+    c.ref = c.ref || c.id;
+    c.importance = Math.round(c.importance * 100) / 100;
+    c.social_kb = Math.round(c.social_kb * 100) / 100;
+    c.degree = `${Math.round(c.in_degree * 100) / 100} / ${Math.round(c.out_degree * 100) / 100}`;
     return c as Record<string, unknown>;
   });
   return input;
