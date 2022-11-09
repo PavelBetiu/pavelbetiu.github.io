@@ -1,15 +1,15 @@
 <template>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link" :class="{active: isActiveContributions}" id="contributions-tab" data-toggle="tab" href="#contributions" role="tab" aria-controls="contributions" :aria-selected="!isActiveContributions" @click="selectTab(0)">Contributions</a>
+        <a class="nav-link" :class="{active: isActiveContributions}" id="contributions-tab" data-toggle="tab" role="tab" aria-controls="contributions" :aria-selected="!isActiveContributions" @click="selectTab(0)">Contributions</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" :class="{active: !isActiveContributions}" id="participants-tab" data-toggle="tab" href="#participants" role="tab" aria-controls="participants" :aria-selected="isActiveContributions" @click="selectTab(1)">Participants</a>
+        <a class="nav-link" :class="{active: !isActiveContributions}" id="participants-tab" data-toggle="tab" role="tab" aria-controls="participants" :aria-selected="isActiveContributions" @click="selectTab(1)">Participants</a>
     </li>
 </ul>
 <div class="tab-content" id="myTabContent">
     <!-- Contributions related graphs and charts -->
-    <div class="tab-pane fade" :class="isActiveContributions ? 'show active' : ''" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
+    <div v-if="isActiveContributions" class="tab-pane fade" :class="isActiveContributions ? 'show active' : ''" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
         <div class="row p-4">
             <div class="col-md-12 card">
                 <Table :data="tableInput" />
@@ -24,7 +24,7 @@
     </div>
 
     <!-- Participants related graphs and charts -->
-    <div class="tab-pane fade" :class="!isActiveContributions ? 'show active' : ''" id="participants" role="tabpanel" aria-labelledby="participants-tab">
+    <div v-else class="tab-pane fade" :class="!isActiveContributions ? 'show active' : ''" id="participants" role="tabpanel" aria-labelledby="participants-tab">
         <div class="row p-4">
             <div class="col-md-12 card">
                 <ForceGraph :data='forceGraphInput' />
@@ -78,7 +78,6 @@ export default {
     data() {
         return {
             isActiveContributions: true,
-
         };
     },
     created() {
