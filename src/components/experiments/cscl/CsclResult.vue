@@ -6,6 +6,12 @@
     <div class="form-group col-md-12">
       <hr>
    </div>
+   <div class="col-md-12 card">
+      <Table :data="participantsTableInput" :isScrollable="false" />
+    </div>
+    <div class="form-group col-md-12">
+      <hr>
+   </div>
     <div class="col-md-12 card">
       <ForceGraph :data='forceGraphInput'/>
     </div>
@@ -30,7 +36,7 @@ import CircularGraph from '@/components/widgets/circular-graph.vue';
 import ForceGraph from "@/components/widgets/force-graph";
 import StackedLineChart from "@/components/widgets/StackedLineChart";
 import { CsclResult } from "@/data-objects/cscl-result";
-import { convertToContributionsTable, convertToForceGraphInput, convertToCircularGraphInput, convertToStackedLineChartInput, convertToStackedLineGradientGraphInput } from "./cscl-converters";
+import { convertToContributionsTable, convertToParticipantsTable, convertToForceGraphInput, convertToCircularGraphInput, convertToStackedLineChartInput, convertToStackedLineGradientGraphInput } from "./cscl-converters";
 import StackedLineGradientGraph from "@/components/widgets/stacked-line-gradient-graph";
 
 export default {
@@ -53,6 +59,7 @@ export default {
     this.stackedLineChartInput = convertToStackedLineChartInput(this.data);
     this.circularGraphInput = convertToCircularGraphInput(this.data);
     this.stackedLineGradientGraphInput = convertToStackedLineGradientGraphInput(this.data);
+    this.participantsTableInput = convertToParticipantsTable(this.data);
   },
 };
 </script>

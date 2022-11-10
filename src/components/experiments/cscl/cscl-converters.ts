@@ -1,5 +1,5 @@
-import { CsclResult, CsclEdge, CsclScores, CsclContribution} from "@/data-objects/cscl-result";
-import { CircularGraphInput, CircularGraphCategory, CircularGraphLink, CircularGraphNode} from "@/components/widgets/circular-graph-input";
+import { CsclResult, CsclEdge, CsclScores, CsclContribution } from "@/data-objects/cscl-result";
+import { CircularGraphInput, CircularGraphCategory, CircularGraphLink, CircularGraphNode } from "@/components/widgets/circular-graph-input";
 import { ForceGraphInput, ForceGraphCategory, ForceGraphLink, ForceGraphNode } from "@/components/widgets/force-graph-input";
 import { StackedLineChartInput } from "@/components/widgets/stacked-line-chart-input";
 import { map } from 'lodash';
@@ -7,7 +7,7 @@ import { TableInput } from '@/components/widgets/table-input';
 import { StackedLineGradientGraphInput } from '@/components/widgets/stacked-line-gradient-graph-input';
 
 export function convertToCircularGraphInput(data: CsclResult): CircularGraphInput {
-    const circularGraphInput : CircularGraphInput = {
+    const circularGraphInput: CircularGraphInput = {
         nodes: [],
         links: [],
         categories: [],
@@ -153,7 +153,7 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
 }
 
 export function convertToContributionsTable(result: CsclResult): TableInput {
-  const input: TableInput = {
+     const input: TableInput = {
     columns: [
       {
         key: 'ref',
@@ -196,43 +196,99 @@ export function convertToContributionsTable(result: CsclResult): TableInput {
   return input;
 }
 
+export function convertToParticipantsTable(result: CsclResult): TableInput {
+    const input: TableInput = {
+        columns: [
+            {
+                key: 'name',
+                displayName: 'Name',
+            },
+            {
+                key: 'contributions',
+                displayName: 'Contributions Score',
+            },
+            {
+                key: 'skb',
+                displayName: 'Social KB'
+            },
+            {
+                key: 'outdegree',
+                displayName: 'Outdegree',
+            },
+            {
+                key: 'indegree',
+                displayName: 'Indegree'
+            },
+            {
+                key: 'betweenness',
+                displayName: 'Betweenness'
+            },
+            {
+                key: 'closeness',
+                displayName: 'Closeness'
+            },
+            {
+                key: 'eigenvector',
+                displayName: 'Eigenvector'
+            },
+        ],
+        rows: [],
+    };
+    
+    for (const key in result.participants) {
+        const participant_row = {};
+        participant_row["name"] = key;
+        participant_row["contributions"] = Number(result.participants[key]["CNAIndices.CONTRIBUTIONS_SCORE"].toFixed(2));
+        participant_row["skb"] = Number(result.participants[key]["CNAIndices.SOCIAL_KB"].toFixed(2));
+        participant_row["outdegree"] = Number(result.participants[key]["CNAIndices.OUTDEGREE"].toFixed(2));
+        participant_row["indegree"] = Number(result.participants[key]["CNAIndices.INDEGREE"].toFixed(2));
+        participant_row["betweenness"] = Number(result.participants[key]["CNAIndices.BETWEENNESS"].toFixed(2));
+        participant_row["closeness"] = Number(result.participants[key]["CNAIndices.CLOSENESS"].toFixed(2));
+        participant_row["eigenvector"] = Number(result.participants[key]["CNAIndices.EIGENVECTOR"].toFixed(2));
+
+        input.rows.push(participant_row as Record<string, unknown>);
+    }
+
+    return input;
+}
+
 export function convertToStackedLineChartInput(result: CsclResult): StackedLineChartInput {
-  const stackedLineChartInput: StackedLineChartInput = {
-    series: []
-  }
-  // For each participant in the cscl result create a series for the stacked line chart
-  for (const participant of result.graph.participants) {
-    console.log(participant)
-    // Initialize the data array for the series and the series
-    const series_data: number[][]  = []
-    const series = {
-      name: participant,
-      type: "line",
-      step: "end",
-      data: series_data,
-      showSymbol: false
+    const stackedLineChartInput: StackedLineChartInput = {
+        series: []
+    }
+    // For each participant in the cscl result create a series for the stacked line chart
+    for (const participant of result.graph.participants) {
+        console.log(participant)
+        // Initialize the data array for the series and the series
+        const series_data: number[][] = []
+        const series = {
+            name: participant,
+            type: "line",
+            step: "end",
+            data: series_data,
+            showSymbol: false
+        }
+
+        // Grab the correponding contributions for the participant
+        const contributions = result.contributions.filter(contribution => contribution.participant === participant)
+
+        // Sort the contributions by id
+        contributions.sort((a, b) => a.id - b.id)
+
+        // Cumulative sum of the importance of the contributions
+        let cumulativeImportance = 0
+
+        // For each contribution add the cumulative importance to the series
+        for (const contribution of contributions) {
+            const data = [contribution.id, Number((cumulativeImportance + contribution.importance).toFixed(2))]
+
+            cumulativeImportance += contribution.importance
+            series.data.push(data)
+        }
+        stackedLineChartInput.series.push(series)
     }
 
-    // Grab the correponding contributions for the participant
-    const contributions = result.contributions.filter(contribution => contribution.participant === participant)
-
-    // Sort the contributions by id
-    contributions.sort((a, b) => a.id - b.id)
-
-    // Cumulative sum of the importance of the contributions
-    let cumulativeImportance = 0
-
-    // For each contribution add the cumulative importance to the series
-    for (const contribution of contributions) {
-      const data = [contribution.id, Number((cumulativeImportance + contribution.importance).toFixed(2))]
-
-      cumulativeImportance += contribution.importance
-      series.data.push(data)
-    }
-    stackedLineChartInput.series.push(series)
-  }
-
-  return stackedLineChartInput
+    return stackedLineChartInput
 }
 
 export function convertToStackedLineGradientGraphInput(result: CsclResult): StackedLineGradientGraphInput {
@@ -260,5 +316,5 @@ export function convertToStackedLineGradientGraphInput(result: CsclResult): Stac
     });
 
     return input;
-  }
+}
 
