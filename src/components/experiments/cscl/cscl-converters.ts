@@ -153,31 +153,47 @@ export function convertToForceGraphInput(data: CsclResult): ForceGraphInput {
 }
 
 export function convertToContributionsTable(result: CsclResult): TableInput {
-    const input: TableInput = {
-        columns: [
-            {
-                key: 'id',
-                displayName: 'Identifier',
-            },
-            {
-                key: 'text',
-                displayName: 'Text',
-            },
-            {
-                key: 'importance',
-                displayName: 'Importance',
-            },
-        ],
-        rows: [],
-    };
-    input.rows = map(result.contributions, c => {
-        //console.log(c);
-        return c as Record<string, unknown>;
-    });
-
-    console.log("Contributions table:", input.rows[0])
-
-    return input;
+     const input: TableInput = {
+    columns: [
+      {
+        key: 'ref',
+        displayName: 'Reference Identifier',
+      },
+      {
+        key: 'participant',
+        displayName: 'Participant',
+      },
+      {
+        key: 'text',
+        displayName: 'Text',
+      },
+      {
+        key: 'time',
+        displayName: 'Time',
+      },
+      {
+        key: 'importance',
+        displayName: 'Importance',
+      },
+      {
+        key: 'social_kb',
+        displayName: 'Social KB',
+      },
+      {
+        key: 'degree',
+        displayName: 'In Degree / Out Degree',
+      },
+    ],
+    rows: [],
+  };
+  input.rows = map(result.contributions, c => {
+    c.ref = c.ref || c.id;
+    c.importance = Math.round(c.importance * 100) / 100;
+    c.social_kb = Math.round(c.social_kb * 100) / 100;
+    c.degree = `${Math.round(c.in_degree * 100) / 100} / ${Math.round(c.out_degree * 100) / 100}`;
+    return c as Record<string, unknown>;
+  });
+  return input;
 }
 
 export function convertToParticipantsTable(result: CsclResult): TableInput {
@@ -232,9 +248,6 @@ export function convertToParticipantsTable(result: CsclResult): TableInput {
 
         input.rows.push(participant_row as Record<string, unknown>);
     }
-
-
-    console.log("participants table input: ", input.rows[0])
 
     return input;
 }
