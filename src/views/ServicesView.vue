@@ -21,13 +21,14 @@
                     <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255, 125, 0, 0.8)" />
                     <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(180, 9, 254, 0.8)" />
                     <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
-                    <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,1)" />
+                    <use xlink:href="#gentle-wave" x="48" y="16" fill="#f8f9fa" />
                 </g>
             </svg>
         </div>
     </div>
 </header>
-<section class="p-5 m-5 position-relative">
+<div class="body">
+<section class="p-5 position-relative">
     <div class="container">
 		<div v-for="i in Math.floor(servicesKeys.length / 3)" :set="idx1 = i - 1" :key="i - 1">
 			<div class="row">
@@ -39,6 +40,7 @@
 		</div>
     </div>
 </section>
+</div>
 </template>
 
 <script>
@@ -107,5 +109,7 @@ export default {
 </script>
 
 <style>
-
+.body {
+    background-color: #f8f9fa;
+}
 </style>
