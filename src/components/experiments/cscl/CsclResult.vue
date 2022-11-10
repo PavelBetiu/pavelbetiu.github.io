@@ -7,7 +7,7 @@
       <hr>
    </div>
    <div class="col-md-12 card">
-      <Table :data="participantsTableInput" />
+      <Table :data="participantsTableInput" :isScrollable="false" />
     </div>
     <div class="form-group col-md-12">
       <hr>
