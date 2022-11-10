@@ -27,19 +27,25 @@
     <div v-else class="tab-pane fade" :class="!isActiveContributions ? 'show active' : ''" id="participants" role="tabpanel" aria-labelledby="participants-tab">
         <div class="row p-4">
             <div class="col-md-12 card">
+                <Table :data='participantsTableInput' :isScrollable="false"/>
+            </div>
+            <div class="form-group col-md-12 p-3">
+                <hr>
+            </div>
+            <div class="col-md-12 card">
                 <ForceGraph :data='forceGraphInput' />
             </div>
             <div class="form-group col-md-12 p-3">
                 <hr>
             </div>
             <div class="col-md-12 card">
-                <StackedLineChart :data="stackedLineChartInput" />
+                <CircularGraph :data="circularGraphInput" />
             </div>
             <div class="form-group col-md-12 p-3">
                 <hr>
             </div>
             <div class="col-md-12 card">
-                <CircularGraph :data="circularGraphInput" />
+                <StackedLineChart :data="stackedLineChartInput" />
             </div>
         </div>
     </div>
@@ -86,6 +92,7 @@ export default {
         this.stackedLineChartInput = convertToStackedLineChartInput(this.data);
         this.circularGraphInput = convertToCircularGraphInput(this.data);
         this.stackedLineGradientGraphInput = convertToStackedLineGradientGraphInput(this.data);
+        this.participantsTableInput = convertToParticipantsTable(this.data);
     },
 };
 </script>
