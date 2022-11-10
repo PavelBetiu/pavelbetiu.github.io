@@ -1,4 +1,7 @@
 <template>
+    <div class="body">
+
+    
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
@@ -47,6 +50,7 @@
             <CsclResult :data="data" v-if="data" />
         </div>
     </div>
+</div>
 </div>
 </template>
 
@@ -100,4 +104,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.body {
+    background-color: #f8f9fa;
+}
 </style>

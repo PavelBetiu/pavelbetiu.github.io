@@ -258,7 +258,6 @@ export function convertToStackedLineChartInput(result: CsclResult): StackedLineC
     }
     // For each participant in the cscl result create a series for the stacked line chart
     for (const participant of result.graph.participants) {
-        console.log(participant)
         // Initialize the data array for the series and the series
         const series_data: number[][] = []
         const series = {
