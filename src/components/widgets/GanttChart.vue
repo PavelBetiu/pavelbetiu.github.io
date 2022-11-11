@@ -24,125 +24,23 @@ export default {
         colorSet.saturation = 0.4;
 
         chart.data = [{
-            "category": "A1. Gather relevant datasets",
-            "start": "2016-01-01",
-            "end": "2016-01-14",
+            "category": "A1.",
+            "start": "2020-09",
+            "end": "2020-12",
             "color": colorSet.getIndex(0).brighten(0),
-            "task": "Gathering requirements"
+            "task": "Gather relevant datasets"
         }, {
-            "category": "Module #1",
-            "start": "2016-01-16",
-            "end": "2016-01-27",
+            "category": "A2.",
+            "start": "2020-11",
+            "end": "2021-12",
             "color": colorSet.getIndex(0).brighten(0.4),
-            "task": "A3.3. Develop and deploy a dedicated service that takes as input a collection of documents and their scores and establishes the most predictive model"
+            "task": "Build multi-lingual automated AoA models"
         }, {
-            "category": "Module #1",
-            "start": "2016-02-05",
-            "end": "2016-04-18",
+            "category": "A2.1.",
+            "start": "2020-11",
+            "end": "2021-07",
             "color": colorSet.getIndex(0).brighten(0.8),
-            "task": "Development"
-        }, {
-            "category": "Module #1",
-            "start": "2016-04-18",
-            "end": "2016-04-30",
-            "color": colorSet.getIndex(0).brighten(1.2),
-            "task": "Testing and QA"
-        }, {
-            "category": "Module #2",
-            "start": "2016-01-08",
-            "end": "2016-01-10",
-            "color": colorSet.getIndex(2).brighten(0),
-            "task": "Gathering requirements"
-        }, {
-            "category": "Module #2",
-            "start": "2016-01-12",
-            "end": "2016-01-15",
-            "color": colorSet.getIndex(2).brighten(0.4),
-            "task": "Producing specifications"
-        }, {
-            "category": "Module #2",
-            "start": "2016-01-16",
-            "end": "2016-02-05",
-            "color": colorSet.getIndex(2).brighten(0.8),
-            "task": "Development"
-        }, {
-            "category": "Module #2",
-            "start": "2016-02-10",
-            "end": "2016-02-18",
-            "color": colorSet.getIndex(2).brighten(1.2),
-            "task": "Testing and QA"
-        }, {
-            "category": "Module #3",
-            "start": "2016-01-02",
-            "end": "2016-01-08",
-            "color": colorSet.getIndex(4).brighten(0),
-            "task": "Gathering requirements"
-        }, {
-            "category": "Module #3",
-            "start": "2016-01-08",
-            "end": "2016-01-16",
-            "color": colorSet.getIndex(4).brighten(0.4),
-            "task": "Producing specifications"
-        }, {
-            "category": "Module #3",
-            "start": "2016-01-19",
-            "end": "2016-03-01",
-            "color": colorSet.getIndex(4).brighten(0.8),
-            "task": "Development"
-        }, {
-            "category": "Module #3",
-            "start": "2016-03-12",
-            "end": "2016-04-05",
-            "color": colorSet.getIndex(4).brighten(1.2),
-            "task": "Testing and QA"
-        }, {
-            "category": "Module #4",
-            "start": "2016-01-01",
-            "end": "2016-01-19",
-            "color": colorSet.getIndex(6).brighten(0),
-            "task": "Gathering requirements"
-        }, {
-            "category": "Module #4",
-            "start": "2016-01-19",
-            "end": "2016-02-03",
-            "color": colorSet.getIndex(6).brighten(0.4),
-            "task": "Producing specifications"
-        }, {
-            "category": "Module #4",
-            "start": "2016-03-20",
-            "end": "2016-04-25",
-            "color": colorSet.getIndex(6).brighten(0.8),
-            "task": "Development"
-        }, {
-            "category": "Module #4",
-            "start": "2016-04-27",
-            "end": "2016-05-15",
-            "color": colorSet.getIndex(6).brighten(1.2),
-            "task": "Testing and QA"
-        }, {
-            "category": "Module #5",
-            "start": "2016-01-01",
-            "end": "2016-01-12",
-            "color": colorSet.getIndex(8).brighten(0),
-            "task": "Gathering requirements"
-        }, {
-            "category": "Module #5",
-            "start": "2016-01-12",
-            "end": "2016-01-19",
-            "color": colorSet.getIndex(8).brighten(0.4),
-            "task": "Producing specifications"
-        }, {
-            "category": "Module #5",
-            "start": "2016-01-19",
-            "end": "2016-03-01",
-            "color": colorSet.getIndex(8).brighten(0.8),
-            "task": "Development"
-        }, {
-            "category": "Module #5",
-            "start": "2016-03-08",
-            "end": "2016-03-30",
-            "color": colorSet.getIndex(8).brighten(1.2),
-            "task": "Testing and QA"
+            "task": "Create baseline English model"
         }];
 
         chart.dateFormatter.dateFormat = "yyyy-MM-dd";

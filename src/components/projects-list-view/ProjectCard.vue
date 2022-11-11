@@ -1,5 +1,5 @@
 <template>
-<div class="row p-3 my-6 shadow rounded-3">
+<div class="row p-3 my-6 shadow rounded-3 has-background-white">
     <div class="col d-flex justify-content-end pr-5">
 
         <div class="image">
