@@ -2,10 +2,10 @@
 <div class="row p-3 my-6 shadow rounded-3 has-background-white">
     <div class="col d-flex justify-content-end pr-5">
 
-        <div class="image">
-            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" class="rounded zoom" />
-            <div class="image-overlay rounded bg-gradient-primary">
-                <div class="image-description">{{data.imageDescription}}</div>
+        <div :class="$style['image']">
+            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" :class="['rounded', $style['zoom']]" />
+            <div :class="['rounded', 'bg-gradient-primary', $style['image-overlay']]">
+                <div :class="$style['image-description']">{{data.imageDescription}}</div>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="col ">
-        <div class="project-description">
+        <div :class="$style['project-description']">
             <p class="h6 text-center ">
                 {{data.description}}
             </p>
@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style module>
 .image {
     width: 450px;
     height: 300px;
@@ -65,8 +65,8 @@ export default {
 }
 
 .image-overlay {
-    position: absolute;
-    top: 0;
+    position: relative;
+    top: -300px;
     left: 0;
     width: 450px;
     height: 300px;

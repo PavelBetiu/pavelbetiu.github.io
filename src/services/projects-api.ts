@@ -142,78 +142,98 @@ export class ProjectsAPI {
                 description: 'Development of automatic essay scoring services (O1), automate writing evaluation (O2), text simplification (O3), and prediction of AoA scores at word level (O4) - final version'
             },
             ],
-            projectActivities: [{
-                status: 'COMPLETED (PHASE 1)',
-                description: 'A1. Gather relevant datasets'
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A2. Build multi-lingual automated AoA models'
-            },
-            {
-                status: 'COMPLETED (PHASE 1)',
-                description: 'A2.1. Create baseline English model'
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A2.2. Train AoA models for additional languages'
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A2.3. Bridge word learning rates modeled by automated AoA scores across languages',
-            },
-            {
-                status: 'ONGOING',
-                description: 'A3. Automated Essay Scoring',
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A3.1. Train models that combine ReaderBench textual complexity indices with word embeddings',
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A3.2. Assess multi-lingual AES models',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A3.3. Develop and deploy a dedicated service that takes as input a collection of documents and their scores and establishes the most predictive model',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A4. Automated Writing Evaluation',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A4.1. Run experiments on paragraph restructuring',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A4.2. Generate rules for a given domain based on textual complexity indices and PCA components to provide feedback',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A4.3. Detect out-of-place phrases',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A5. Text simplification',
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A5.1. Prepare datasets consisting of proper alignments',
-            },
-            {
-                status: 'COMPLETED (PHASE 2)',
-                description: 'A5.2. Train multiple sequence-to-sequence models',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A5.3. Analyze results and iteratively improve methods',
-            },
-            {
-                status: 'COMPLETED (PHASE 3)',
-                description: 'A6. Dissemination of results',
-            },
+            projectActivities: [
+                {
+                    activityNumber: "A1.",
+                    dateStart: "2020-09-21",
+                    dateEnd: "2020-12-12",
+                    activityName: "Gather relevant datasets"
+                }, {
+                    activityNumber: "A2.",
+                    dateStart: "2020-11",
+                    dateEnd: "2021-12",
+                    activityName: "Build multi-lingual automated AoA models"
+                }, {
+                    activityNumber: "A2.1.",
+                    dateStart: "2020-11",
+                    dateEnd: "2021-07",
+                    activityName: "Create baseline English model"
+                }, {
+                    activityNumber: "A2.2.",
+                    dateStart: "2021-03",
+                    dateEnd: "2021-09",
+                    activityName: "Train AoA models for additional languages"
+                }, {
+                    activityNumber: "A2.3.",
+                    dateStart: "2021-07",
+                    dateEnd: "2021-12",
+                    activityName: " Bridge word learning rates modeled by automated AoA scores across languages"
+                }, {
+                    activityNumber: "A3.",
+                    dateStart: "2021-01",
+                    dateEnd: "2022-08",
+                    activityName: "Automated Essay Scoring"
+                }, {
+                    activityNumber: "A3.1.",
+                    dateStart: "2021-01",
+                    dateEnd: "2021-09",
+                    activityName: "Train models that combine ReaderBench textual\n complexity indices with word embeddings"
+                }, {
+                    activityNumber: "A3.2.",
+                    dateStart: "2021-07",
+                    dateEnd: "2022-01",
+                    activityName: "Assess multi-lingual AES models"
+                }, {
+                    activityNumber: "A3.3.",
+                    dateStart: "2022-01",
+                    dateEnd: "2022-08",
+                    activityName: "Develop and deploy a dedicated service that takes as input a collection\n of documents and their scores and establishes the most predictive model"
+                }, {
+                    activityNumber: "A4.",
+                    dateStart: "2022-01",
+                    dateEnd: "2022-10",
+                    activityName: "Automated Writing Evaluation"
+                }, {
+                    activityNumber: "A4.1.",
+                    dateStart: "2022-01",
+                    dateEnd: "2022-04",
+                    activityName: "Run experiments on paragraph restructuring"
+                }, {
+                    activityNumber: "A4.2.",
+                    dateStart: "2022-04",
+                    dateEnd: "2022-06",
+                    activityName: "Generate rules for a given domain based on textual complexity\n indices and PCA components to provide feedback"
+                }, {
+                    activityNumber: "A4.3.",
+                    dateStart: "2022-06",
+                    dateEnd: "2022-10",
+                    activityName: "Detect out-of-place phrases"
+                }, {
+                    activityNumber: "A5.",
+                    dateStart: "2021-01",
+                    dateEnd: "2022-10",
+                    activityName: "Text simplification"
+                }, {
+                    activityNumber: "A5.1.",
+                    dateStart: "2021-01",
+                    dateEnd: "2021-06",
+                    activityName: "Prepare datasets consisting of proper alignments"
+                }, {
+                    activityNumber: "A5.2.",
+                    dateStart: "2021-06",
+                    dateEnd: "2022-01",
+                    activityName: "Train multiple sequence-to-sequence models"
+                }, {
+                    activityNumber: "A5.3.",
+                    dateStart: "2022-01",
+                    dateEnd: "2022-10",
+                    activityName: "Analyze results and iteratively improve methods"
+                }, {
+                    activityNumber: "A6.",
+                    dateStart: "2021-01",
+                    dateEnd: "2022-10",
+                    activityName: "Dissemination of results"
+                }
             ],
             notableResults: undefined,
             publications: {

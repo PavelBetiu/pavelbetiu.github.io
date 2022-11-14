@@ -27,7 +27,7 @@
         </div>
     </div>
 </header>
-<div class="body">
+<div :class="$style['body']">
 <!-- About and Funding Agency section -->
 <SideBySideSection :data="convertToSideBySideInput(project, ABOUT, FUNDING_AGENCY)" :parentColor="bg_color"/>
 
@@ -98,7 +98,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style module>
 .body {
     background-color: v-bind(bg_color);
 }

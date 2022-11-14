@@ -28,8 +28,10 @@ export interface ProjectPhaseDTO {
 }
 
 export interface ProjectActivityDTO {
-    status: string,
-    description: string
+    activityNumber: string,
+    activityName: string,
+    dateStart: string,
+    dateEnd: string
 }
 
 export interface PublicationDTO {

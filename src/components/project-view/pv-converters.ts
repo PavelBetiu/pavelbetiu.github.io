@@ -1,4 +1,4 @@
-import { ProjectDTOLong } from "@/data-objects/project-dto";
+import { ProjectActivityDTO, ProjectDTOLong } from "@/data-objects/project-dto";
 import { SideBySideInput } from "./side-by-side-input";
 import { WaveSectionInput } from "./wave-section-input";
 
@@ -12,6 +12,7 @@ import {
     DESCRIPTION,
     PUBLICATIONS
 } from './section-constants';
+import { GanttChartInput, GanttChartInputData } from "../widgets/gantt-chart-input";
 
 export function convertToSideBySideInput(project: ProjectDTOLong, leftType: number, rightType: number | undefined): SideBySideInput | undefined {
     if (leftType === ABOUT && rightType === FUNDING_AGENCY) {
@@ -109,4 +110,20 @@ export function convertToWaveSectionInput(project: ProjectDTOLong, type: number)
             }
         };
     }
+}
+
+export function convertToGanttChartInput(projectActivities: ProjectActivityDTO[]): GanttChartInput {
+    const data: GanttChartInputData[] = [];
+    projectActivities.forEach(activity => {
+        data.push({
+            category: activity.activityNumber,
+            start: activity.dateStart,
+            end: activity.dateEnd,
+            color: '#abdbe3',
+            task: activity.activityName
+        });
+    });
+    return {
+        data: data
+    };
 }

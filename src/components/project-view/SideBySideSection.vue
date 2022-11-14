@@ -6,12 +6,12 @@
         <!-- Title and icon -->
         <div class="row">
             <div class="col d-flex justify-content-end pt-1">
-                <div class="title-section-right">
+                <div :class="$style['title-section-right']">
                     <h3>{{data.leftSection.title}}</h3>
                 </div>
             </div>
             <div class="col">
-                <div class="overlap-icon-right">
+                <div :class="$style[overlap-icon-right]">
                     <img :src="require(`@/assets/images/${data.leftSection.image}`)" style="width: 50px; height: 50px">
                 </div>
             </div>
@@ -19,8 +19,8 @@
 
         <!--Content If About section -->
         <div v-if="data.leftSection.type === ABOUT" class="row p-4 d-flex justify-content-center">
-            <div class="row p-4 w-50 div-about shadow-lg">
-                <div class="col-7 ">
+            <div class="row p-4 w-50 shadow-lg" :class="$style['div-about']">
+                <div class="col-7">
                     <div class="row">
                         <p class="h5 text-primary">Project number: </p>
                         <p class="h5 d-flex justify-content-end">{{data.leftSection.content.projectNumber}}</p>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div v-if="data.rightSection.type === FUNDING_AGENCY" class="col-5 d-flex justify-content-center">
-                    <img :src="require(`@/assets/images/${data.rightSection.content.logo}`)" alt="ates" class="rounded logo" />
+                    <img :src="require(`@/assets/images/${data.rightSection.content.logo}`)" alt="ates" class="rounded" :class="$style['logo']"/>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                 <!-- A specific structure will be rendered based on the specified content inside data.leftSection variable-->
 
                 <!-- If Objectives section -->
-                <div v-if="data.leftSection.type === OBJECTIVES" class="content-section-left card w-80 p-4">
+                <div v-if="data.leftSection.type === OBJECTIVES" class="card w-80 p-4" :class="$style['content-section-left']">
                     <p v-for="(objective,i) in data.leftSection.content.objectives" :key="i" class="text-darker p-3 h6">{{objective}}</p>
                 </div>
             </div>
@@ -54,27 +54,27 @@
 
         <!-- Content If Project Activities section -->
         <div v-if="data.leftSection.type === PROJECT_ACTIVITIES" class="container p-5">
-            <GanttChart />
+            <GanttChart :data="getGanttData()"/>
         </div>
 
         <!-- Right side of the section -->
         <!-- Icon and title -->
-        <!-- Project activities doesn't have a right section -->
+        <!-- Project activities doesn't have a right section and Funding Agency is no longer a standalone section -->
         <div v-if="data.leftSection.type !== PROJECT_ACTIVITIES && data.rightSection.type != FUNDING_AGENCY" class="row">
             <div class="col  d-flex justify-content-end">
-                <div class="overlap-icon-left">
+                <div :class="$style['overlap-icon-left']">
                     <img :src="require(`@/assets/images/${data.rightSection.image}`)" style="width: 50px; height: 50px">
                 </div>
             </div>
             <div class="col  d-flex justify-content-start pt-1">
-                <div class="title-section-left">
+                <div :class="$style['title-section-left']">
                     <h3>{{data.rightSection.title}}</h3>
                 </div>
             </div>
         </div>
 
         <!-- Content -->
-        <div v-if="data.leftSection.type !== PROJECT_ACTIVITIES" class="row  d-flex justify-content-end">
+        <div v-if="data.leftSection.type !== PROJECT_ACTIVITIES" class="row d-flex justify-content-end">
             <div class="col-6 ">
                 <!-- A specific structure will be rendered based on the specified content inside data.rightSection.content variable-->
 
@@ -126,6 +126,8 @@ import {
 } from "./side-by-side-input";
 import GanttChart from "../widgets/GanttChart";
 
+import { convertToGanttChartInput } from "./pv-converters.ts";
+
 import {
     ABOUT,
     FUNDING_AGENCY,
@@ -154,12 +156,15 @@ export default {
     methods: {
         print(sth) {
             console.log(sth);
+        },
+        getGanttData() {
+            return convertToGanttChartInput(this.data.leftSection.content.activities)
         }
-    }
+    },
 }
 </script>
 
-<style scoped>
+<style module>
 .overlap-icon-right {
     position: relative;
     right: 35px;
@@ -200,13 +205,6 @@ export default {
     height: 200px;
     margin: 0 auto;
     object-position: center;
-}
-
-.highlight:hover {
-    background: linear-gradient(310deg, #141727 0%, #3A416F 100%);
-    ;
-    /* make this whatever you want */
-    -webkit-text-fill-color: rgb(255, 255, 255);
 }
 
 .div-about {

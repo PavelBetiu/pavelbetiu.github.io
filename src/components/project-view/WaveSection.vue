@@ -30,7 +30,7 @@
 
         <!-- If Project phases section -->
         <div v-if="data.type === PROJECT_PHASES" class="row pb-8">
-            <div v-for="(phase, i) in data.content.phases" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
+            <div v-for="(phase, i) in data.content.phases" :key="i" class="row pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
                 <div class="col">
                     <h5 class="text-light z-index-1 position-relative">{{phase.phase}}</h5>
                 </div>
@@ -47,7 +47,7 @@
             <!-- Render Journals -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Journals</h4>
-                <div v-for="(journal,i) in data.content.journals" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
+                <div v-for="(journal,i) in data.content.journals" :key="i" class="row pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
                     <p class="text-light">{{journal.title}}</p>
                 </div>
             </div>
@@ -55,12 +55,14 @@
             <!-- Render Conferences -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Conferences</h4>
-                <div v-for="(conference,i) in data.content.conferences" :key="i" class="row pt-2 highlight rounded-2 d-flex justify-data.content-start">
+                <div v-for="(conference,i) in data.content.conferences" :key="i" class="row pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
                     <p class="text-light">{{conference.title}}</p>
                 </div>
             </div>
         </div>
+
     </div>
+    
     <div class="position-absolute w-100 bottom-0 mn-n1 mt-3">
         <svg width="100%" viewBox="0 -1 1920 166" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <title>wave-up</title>
@@ -107,7 +109,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style module>
 .highlight:hover {
     background: rgb(255, 255, 255);
     /* make this whatever you want */
