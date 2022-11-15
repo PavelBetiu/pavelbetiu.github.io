@@ -9,12 +9,12 @@
                 <p class="mb-0">Enter your email and password to sign in</p>
               </div>
               <div class="card-body">
-                <form role="form">
+                <form role="form" @submit.prevent="submitForm">
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon" v-model="email">
                   </div>
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                    <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon" v-model="password">
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -51,11 +51,15 @@
 
 <script>
 import auth from "@/services/auth";
+import axios from "axios";
 
 export default {
   name: "Login",
   data() {
-    return {};
+    return {
+      email: '',
+      password: ''
+    };
   },
   methods: {
     login() {
@@ -65,6 +69,28 @@ export default {
       }
       auth.login({}, redirect);
     },
+    submitForm(e) {
+      const formData = {
+        username: this.username,
+        password: this.password
+      }
+
+      axios.post('/api/v2/oauth2/token/', formData)
+        .then(response => {
+          console.log(response)
+
+          const token = response.data.auth_token
+
+          this.$store.commit('setToken', token)
+
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+          localStorage.setItem('token', token)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   },
 };
 </script>
