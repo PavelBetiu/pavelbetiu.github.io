@@ -9,12 +9,12 @@
                 <p class="mb-0">Enter your email and password to sign in</p>
               </div>
               <div class="card-body">
-                <form role="form">
+                <form role="form" @submit.prevent="submitForm">
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon" v-model="username">
                   </div>
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                    <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon" v-model="password">
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -55,7 +55,10 @@ import auth from "@/services/auth";
 export default {
   name: "Login",
   data() {
-    return {};
+    return {
+      username: '',
+      password: ''
+    };
   },
   methods: {
     login() {
@@ -63,7 +66,7 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({}, redirect);
+      auth.login({username: this.username, password: this.password}, redirect);
     },
   },
 };
