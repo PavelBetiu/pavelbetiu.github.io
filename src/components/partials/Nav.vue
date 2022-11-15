@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
     <div class="container-fluid px-0">
       <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="ReaderBench" data-placement="bottom">
-        <img :src="require('@/assets/images/readerbench.png')" alt="" style="width: 35px; heght: 35px; " />
+        <img :src="require('@/assets/images/RB-name-only.svg')" alt="" style="width: 120px; height: 35px; " />
       </a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">

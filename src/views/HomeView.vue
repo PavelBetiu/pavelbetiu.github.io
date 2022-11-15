@@ -1,15 +1,6 @@
 <template>
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" v-bind:style="{ 'background-image': 'url(' + require('@/assets/img/curved-images/curved.jpg') + ')' }">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 text-center mx-auto">
-                    <!-- <h1 class="text-white pt-3 mt-n5">ReaderBench</h1> -->
-                    <HomePageTitle />
-                    <p class="lead text-white mt-3">An Open-Source Framework</p>
-                </div>
-            </div>
-        </div>
+    <div class="page-header min-vh-75 relative" v-bind:style="{ 'background-image': 'url(' + require('@/assets/images/home-page-background.png') + ')' }">
         <div class="position-absolute w-100 z-index-1 bottom-0">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
@@ -481,14 +472,8 @@
 </template>
 
 <script>
-import {
-    HomePageTitle
-} from '@/components/widgets/home-page-title'
 export default {
     name: 'home',
-    components: {
-        HomePageTitle
-    },
 };
 </script>
 
