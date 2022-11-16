@@ -35,7 +35,7 @@ export default {
     // })
 
     if (redirect) {
-      router.push(redirect)
+      router.push({ path: redirect, hash: '#logged_in' })
     }
     console.log('after axios');
   },
@@ -43,6 +43,6 @@ export default {
   // To log out
   logout: function () {
     localStorage.removeItem('user');
-    router.push('/');
+    router.push({ path: '/', hash: '#logged_out' })
   }
 }

@@ -72,19 +72,17 @@
 </template>
 <script>
 import auth from "@/services/auth";
+ 
 export default {
   name: "Nav",
   computed: {
     isAuthenticated: function () {
-      console.log('check if is authenticated')
       return auth.isAuthenticated();
     },
   },
   methods: {
     logout() {
-      console.log("sign out pressed")
       auth.logout();
-      //this.$forceUpdate();
     },
   },
 };
