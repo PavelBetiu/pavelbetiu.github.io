@@ -4,7 +4,9 @@
     <div class="container">
       <div class=" row">
         <div class="col-12">
+          
           <div class="text-center">
+            <img :src="require('@/assets/images/readerbench-small.svg')" alt="" style="width: 80px; height: 80px; " />
             <p class="my-4 text-sm">
               All rights reserved. Copyright © 2022 ReaderBench.
             </p>

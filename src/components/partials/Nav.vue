@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
     <div class="container-fluid px-0">
       <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="ReaderBench" data-placement="bottom">
-        <img :src="require('@/assets/images/readerbench.png')" alt="" style="width: 35px; heght: 35px; " />
+        <img :src="require('@/assets/images/RB-name-only.svg')" alt="" style="width: 120px; height: 35px; " />
       </a>
       <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon mt-2">
@@ -23,6 +23,12 @@
           <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="/projects">
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Projects">Projects</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/services">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Services">Services</p>
             </a>
           </li>
 
@@ -64,7 +70,7 @@
   </nav>
 </template>
 <script>
-import auth from "../../services/auth";
+import auth from "@/services/auth";
 export default {
   name: "Nav",
   computed: {
