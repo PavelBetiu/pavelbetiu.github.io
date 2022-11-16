@@ -16,8 +16,8 @@
                                     <label>Language</label>
                                     <div class="input-group mb-4">
                                         <select class="form-control" name="language-button" id="language-button" v-model="language">
-                                            <option value="fr">French</option>
-                                            <option value="en" selected>English</option>
+                                            <option value="fr" selected>French</option>
+                                            <option value="en">English</option>
                                             <option value="ro">Romanian</option>
                                         </select>
                                     </div>
@@ -47,7 +47,9 @@
                                     </button>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <button v-if="jsonReceived" type="button" class="btn bg-gradient-primary mt-3 mb-0" @click="exportFile()">Export JSON</button>
+                                    <a id="downloadAnchorElem" v-if="jsonReceived">
+                                        <button type="button" class="btn bg-gradient-primary mt-3 mb-0" @click="exportFile()">Export JSON</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +75,7 @@ import {
     CSCL_SERVICE
 } from '@/services/cscl-service.interface';
 import CsclResult from './CsclResult';
+import axios from 'axios';
 
 export default {
     name: 'Cscl',
@@ -81,7 +84,7 @@ export default {
     },
     data() {
         return {
-            language: "fr",
+            language: 'fr',
             data: undefined,
             isLoading: false,
             jsonReceived: false,
@@ -126,7 +129,11 @@ export default {
             this.jsonReceived = true;
         },
         exportFile() {
-            // TODO: Export JSON file
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
+            var dlAnchorElem = document.getElementById('downloadAnchorElem');
+            dlAnchorElem.setAttribute("href", dataStr);
+            dlAnchorElem.setAttribute("download", "cscl.json");
+            dlAnchorElem.click();
         }
     },
 };
