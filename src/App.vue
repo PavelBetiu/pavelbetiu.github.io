@@ -31,7 +31,7 @@ export default {
      * Services injected via DI.
      */
     provide(CSCL_SERVICE, new CsclService());
-    // provide(CSCL_SERVICE, new MockCsclService());
+    //provide(CSCL_SERVICE, new MockCsclService());
   },
 };
 </script>

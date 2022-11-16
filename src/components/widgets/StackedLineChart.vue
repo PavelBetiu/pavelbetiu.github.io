@@ -1,6 +1,5 @@
 <template>
 <v-chart class="chart" :option="option" />
-{{debugPrint(data)}}
 </template>
 
 <script>
