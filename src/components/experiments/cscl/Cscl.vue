@@ -109,10 +109,22 @@ export default {
             }
 
             this.isLoading = true;
-            this.data = await this.csclService.process({
-                file: this.file,
-                language: this.language
-            });
+
+            if (this.ftype === "json") {
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    this.data = JSON.parse(e.target.result);
+                }.bind(this);
+
+                reader.readAsText(this.file);
+            } else {
+                this.data = await this.csclService.process({
+                    file: this.file,
+                    language: this.language
+                });
+            }
+
             this.isLoading = false;
             this.jsonReceived = true;
         },
