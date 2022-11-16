@@ -256,17 +256,6 @@
         </div>
     </section>
 
-    <!-- <section class="my-5 py-5">
-    <div class="container">
-        <div class="row mb-6">
-            <div class="row justify-content-center text-center my-sm-5">
-                <div class="col-lg-6">
-                    <h2 class="text-dark mb-0">Research Projects(8+ Million Euro managed funds) </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
 
     <section class="d-flex justify-content-center mb-7 position-relative">
         <div class="container">
@@ -474,7 +463,7 @@
 <script>
 export default {
     name: 'home',
-};
+  };
 </script>
 
 <style lang="scss" scoped>
