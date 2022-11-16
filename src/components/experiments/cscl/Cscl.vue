@@ -12,7 +12,7 @@
                     <form autocomplete="off">
                         <div class="card-body pb-2">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                     <label>Language</label>
                                     <div class="input-group mb-4">
                                         <select class="form-control" name="language-button" id="language-button" v-model="language">
@@ -22,19 +22,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
                                     <label>File</label>
                                     <div class="input-group mb-4">
                                         <input type="file" class="form-control" @change="updateFile">
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>File type</label>
-                                    <div class="input-group mb-4">
-                                        <select class="form-control" name="ftype-button" id="ftype-button" v-model="ftype">
-                                            <option value="json">JSON</option>
-                                            <option value="xml" selected>XML</option>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -108,9 +99,19 @@ export default {
                 return;
             }
 
-            this.isLoading = true;
+            if (this.file.type === "text/xml") {
+                this.isLoading = true;
 
-            if (this.ftype === "json") {
+                this.data = await this.csclService.process({
+                    file: this.file,
+                    language: this.language
+                });
+
+                this.isLoading = false;
+                this.jsonReceived = true;
+            } else if (this.file.type === "application/json") {
+                this.isLoading = true;
+
                 let reader = new FileReader();
 
                 reader.onload = function (e) {
@@ -118,22 +119,20 @@ export default {
                 }.bind(this);
 
                 reader.readAsText(this.file);
-            } else {
-                this.data = await this.csclService.process({
-                    file: this.file,
-                    language: this.language
-                });
-            }
+                this.isLoading = false;
 
-            this.isLoading = false;
-            this.jsonReceived = true;
+                // Hide Export Json button if the file is already a json
+                this.jsonReceived = false;
+            } else {
+                alert("File format is not valid. Please select a valid file. (XML or JSON)");
+                return;
+            }
         },
         exportFile() {
             var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
             var dlAnchorElem = document.getElementById('downloadAnchorElem');
             dlAnchorElem.setAttribute("href", dataStr);
             dlAnchorElem.setAttribute("download", "cscl.json");
-            dlAnchorElem.click();
         }
     },
 };
