@@ -13,7 +13,7 @@
                 <form autocomplete="off">
                     <div class="card-body pb-2">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-2">
                                 <label>Language</label>
                                 <div class="input-group mb-4">
                                     <select class="form-control" name="language-button" id="language-button" v-model="language">
@@ -23,10 +23,19 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <label>File</label>
                                 <div class="input-group mb-4">
                                     <input type="file" class="form-control" @change="updateFile">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>File type</label>
+                                <div class="input-group mb-4">
+                                    <select class="form-control" name="ftype-button" id="ftype-button" v-model="ftype">
+                                        <option value="json">JSON</option>
+                                        <option value="xml" selected>XML</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -37,6 +46,9 @@
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                     Processing...
                                 </button>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button v-if="jsonReceived" type="button" class="btn bg-gradient-primary mt-3 mb-0" @click="exportFile()">Export JSON</button>
                             </div>
                         </div>
                     </div>
@@ -73,6 +85,8 @@ export default {
             language: "fr",
             data: undefined,
             isLoading: false,
+            jsonReceived: false,
+            ftype: "xml",
         };
     },
     setup() {
@@ -87,8 +101,8 @@ export default {
             }
         },
         async process() {
-            if (!this.file || !this.language) {
-                alert("Please select a file and a language.");
+            if (!this.file || !this.language || !this.ftype) {
+                alert("Please select a file, a file type and a language.");
                 return;
             }
 
@@ -98,7 +112,11 @@ export default {
                 language: this.language
             });
             this.isLoading = false;
+            this.jsonReceived = true;
         },
+        exportFile() {
+            // TODO: Export JSON file
+        }
     },
 };
 </script>
