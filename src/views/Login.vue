@@ -51,6 +51,7 @@
 
 <script>
 import auth from "@/services/auth";
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -68,6 +69,28 @@ export default {
       }
       auth.login({username: this.username, password: this.password}, redirect);
     },
+    submitForm(e) {
+      const formData = {
+        username: this.username,
+        password: this.password
+      }
+
+      axios.post('/api/v2/oauth2/token/', formData)
+        .then(response => {
+          console.log(response)
+
+          const token = response.data.auth_token
+
+          this.$store.commit('setToken', token)
+
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+          localStorage.setItem('token', token)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   },
 };
 </script>
