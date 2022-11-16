@@ -9,7 +9,6 @@ export default {
   },
 
   login(creds, redirect: string) {
-    // TODO: call token endpoint
     const user = {
       grant_type: "password",
       client_id: "8okRYORQww9VK0x3UTHAe8rl0dDvCUL6s3d6T43z",
@@ -19,25 +18,20 @@ export default {
     };
 
     localStorage.setItem('user', JSON.stringify(user));
-    console.log('login', user);
-    // axios
-    // .post('/oauth2/token/', user)
-    // .then(response => {
-    //   if (redirect) {
-    //     router.push(redirect)
-    //   }
-    //   localStorage.setItem('token', response.data.access_token);
-    //   localStorage.setItem('refresh_token', response.data.refresh_token);
-    //   console.log(response)
-    // })
-    // .catch(error => {
-    //   console.log(error)
-    // })
-
-    if (redirect) {
-      router.push({ path: redirect, hash: '#logged_in' })
-    }
-    console.log('after axios');
+    axios
+    .post('/oauth2/token/', user)
+    .then(response => {
+      if (redirect) {
+        router.push({ path: redirect, hash: '#logged_in' })
+      }
+      localStorage.setItem('token', response.data.access_token);
+      localStorage.setItem('refresh_token', response.data.refresh_token);
+      alert('Succesfully logged in');
+      console.log(response)
+    })
+    .catch(error => {
+      alert(error.response.data.error_description);
+    })
   },
 
   // To log out

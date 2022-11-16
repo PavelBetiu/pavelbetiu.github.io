@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'services',
     component: () => import('../views/ServicesView.vue'),
     meta: {
-      requiresAuth: false,  // TODO: switch back to true after authentication is done
+      requiresAuth: true,
     },
   },
   {
