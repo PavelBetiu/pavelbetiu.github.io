@@ -26,6 +26,9 @@
                     {{data.content.description}}
                 </p>
             </div>
+            <div class="col-lg-6">
+                <img src="@/assets/img/anastasia.jpg" class="img-fluid p-4" alt="Image">
+            </div>
         </div>
 
         <!-- If Project phases section -->

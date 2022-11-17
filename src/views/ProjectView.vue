@@ -4,9 +4,9 @@
         <span class="mask bg-gradient-info opacity-1" v-bind:style="{ 'background-image': 'url(' + require('@/assets/img/curved-images/curved14.jpg') + ')' }"></span>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8 text-center mx-auto my-auto shadow-xl rounded-3">
-                    <h1 class="display-1 text-white font-weight-bold">ATES</h1>
-                    <p class="h2 text-white font-weight-light">Automated Text Evaluation and Simplification</p>
+                <div class="col-lg-8 text-center mx-auto my-auto">
+                    <h1 class="display-1 font-weight-bold" :class="$style['project-acronym']">{{project.acronym}}</h1>
+                    <p class="h2 font-weight-light" :class="$style['project-title']">{{project.title}}</p>
                 </div>
             </div>
         </div>
@@ -28,31 +28,43 @@
     </div>
 </header>
 <div :class="$style['body']">
-<!-- About and Funding Agency section -->
-<SideBySideSection :data="convertToSideBySideInput(project, ABOUT, FUNDING_AGENCY)" :parentColor="bg_color"/>
+    <!-- About and Funding Agency section -->
+    <SideBySideSection :data="convertToSideBySideInput(project, ABOUT, FUNDING_AGENCY)" :parentColor="bg_color" />
 
-<!-- Description section -->
-<WaveSection :data="convertToWaveSectionInput(project, DESCRIPTION)" :parentColor="bg_color"/>
+    <!-- Description section -->
+    <WaveSection :data="convertToWaveSectionInput(project, DESCRIPTION)" :parentColor="bg_color" />
 
-<!-- Objective and Team section -->
-<SideBySideSection :data="convertToSideBySideInput(project, OBJECTIVES, TEAM)" :parentColor="bg_color"/>
+    <!-- Objective and Team section -->
+    <SideBySideSection :data="convertToSideBySideInput(project, OBJECTIVES, TEAM)" :parentColor="bg_color" />
 
-<!-- Project Phases section -->
-<WaveSection :data="convertToWaveSectionInput(project, PROJECT_PHASES)" :parentColor="bg_color"/>
-
-<!-- Project Activities section -->
-<SideBySideSection :data="convertToSideBySideInput(project, PROJECT_ACTIVITIES)" :parentColor="bg_color"/>
-
-<!-- Publications section (Journals and Conferences) -->
-<WaveSection :data="convertToWaveSectionInput(project, PUBLICATIONS)" :parentColor="bg_color"/>
+    <div class="col-lg-6" :class="$style['services-container']">
+    <section :class="[$style['parallax'], $style['img-responsive']]" style="background-image: url('@/assets/img/office-dark.jpg')">
+    </section>
 </div>
+
+    <!-- Project Phases section -->
+    <WaveSection :data="convertToWaveSectionInput(project, PROJECT_PHASES)" :parentColor="bg_color" />
+
+    <!-- Project Activities section -->
+    <SideBySideSection :data="convertToSideBySideInput(project, PROJECT_ACTIVITIES)" :parentColor="bg_color" />
+
+    <!-- Publications section (Journals and Conferences) -->
+    <WaveSection :data="convertToWaveSectionInput(project, PUBLICATIONS)" :parentColor="bg_color" />
+</div>
+
+
 </template>
 
 <script>
 import SideBySideSection from '@/components/project-view/SideBySideSection.vue'
 import WaveSection from '@/components/project-view/WaveSection.vue'
-import { convertToSideBySideInput, convertToWaveSectionInput } from "@/components/project-view/pv-converters"
-import { ProjectsAPI } from "@/services/projects-api"
+import {
+    convertToSideBySideInput,
+    convertToWaveSectionInput
+} from "@/components/project-view/pv-converters"
+import {
+    ProjectsAPI
+} from "@/services/projects-api"
 
 import {
     ABOUT,
@@ -101,5 +113,29 @@ export default {
 <style module>
 .body {
     background-color: v-bind(bg_color);
+}
+
+.project-title {
+    color: whitesmoke;
+    text-shadow: 3px 3px 4px black;
+}
+
+.project-acronym {
+    color: rgb(70, 209, 255);
+    text-shadow: 3px 3px 4px black;
+}
+
+.services-container {
+    border-bottom: 1px solid #ff0000;
+    height: 200px;
+}
+
+.parallax {
+    /* Set a specific height */
+    min-height: 300px;
+
+    background-size: 50%;
+background-position-x: right;
+background-position-y: center;
 }
 </style>
