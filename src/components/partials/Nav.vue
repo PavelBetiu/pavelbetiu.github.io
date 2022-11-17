@@ -46,7 +46,6 @@
 
           <li class="nav-item ms-lg-auto">
             <a class="nav-link nav-link-icon me-2" href="https://huggingface.co/readerbench" target="_blank" >
-              <!-- <i class="fa fa-github me-1"></i> -->
               <img src="../../assets/images/huggingface_logo-noborder.svg" style="width:20px;height:20px;">
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">Hugging Face</p>
             </a>
