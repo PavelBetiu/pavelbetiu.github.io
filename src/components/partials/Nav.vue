@@ -71,10 +71,11 @@
 </template>
 <script>
 import auth from "@/services/auth";
+ 
 export default {
   name: "Nav",
   computed: {
-    isAuthenticated() {
+    isAuthenticated: function () {
       return auth.isAuthenticated();
     },
   },

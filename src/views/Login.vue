@@ -11,10 +11,10 @@
               <div class="card-body">
                 <form role="form" @submit.prevent="submitForm">
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon" v-model="email">
+                    <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" aria-describedby="email-addon" v-model="username">
                   </div>
                   <div class="mb-3">
-                    <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon" v-model="password">
+                    <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="password-addon" v-model="password">
                   </div>
                   <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="rememberMe">
@@ -57,7 +57,7 @@ export default {
   name: "Login",
   data() {
     return {
-      email: '',
+      username: '',
       password: ''
     };
   },
@@ -67,7 +67,7 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({}, redirect);
+      auth.login({username: this.username, password: this.password}, redirect);
     },
     submitForm(e) {
       const formData = {

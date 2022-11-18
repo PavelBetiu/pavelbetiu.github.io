@@ -3,7 +3,7 @@
     <div class="container position-sticky z-index-sticky top-0">
       <div class="row">
         <div class="col-12">
-          <Nav />
+          <Nav :key="$route.fullPath"/> <!-- change key in Nav on logout -->
         </div>
       </div>
     </div>
