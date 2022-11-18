@@ -17,16 +17,16 @@ export default {
       password: creds.password
     };
 
-    localStorage.setItem('user', JSON.stringify(user));
     axios
     .post('/oauth2/token/', user)
     .then(response => {
       if (redirect) {
         router.push({ path: redirect, hash: '#logged_in' })
       }
+      localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-      alert('Succesfully logged in');
+      alert('Successfully logged in');
       console.log(response)
     })
     .catch(error => {
