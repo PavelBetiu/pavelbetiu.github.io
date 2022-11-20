@@ -19,22 +19,22 @@
 
         <!--Content If About section -->
         <div v-if="data.leftSection.type === ABOUT" class="row p-4 d-flex justify-content-center">
-            <div class="row p-4 w-50 shadow-lg" :class="$style['div-about']">
+            <div class="row p-4 w-45 shadow-lg" :class="$style['div-about']">
                 <div class="col-7">
                     <div class="row">
                         <p class="h5 text-primary">Project number: </p>
-                        <p class="h5 d-flex justify-content-end">{{data.leftSection.content.projectNumber}}</p>
+                        <p class="font-weight-bolder d-flex justify-content-end">{{data.leftSection.content.projectNumber}}</p>
                     </div>
                     <div class="row">
                         <p class="h5 text-primary">Contract number: </p>
-                        <p class="h5 d-flex justify-content-end">{{data.leftSection.content.contractNumber}}</p>
+                        <p class="font-weight-bolder d-flex justify-content-end">{{data.leftSection.content.contractNumber}}</p>
                     </div>
                     <div class="row">
                         <p class="h5 text-primary">Funding Agency: </p>
-                        <p class="h5 d-flex justify-content-end">{{data.rightSection.content.name}}</p>
+                        <p class="font-weight-bolder d-flex justify-content-end">{{data.rightSection.content.name}}</p>
                     </div>
                 </div>
-                <div v-if="data.rightSection.type === FUNDING_AGENCY" class="col-5 d-flex justify-content-center">
+                <div v-if="data.rightSection.type === FUNDING_AGENCY" class="col-auto d-flex justify-content-center">
                     <img :src="require(`@/assets/images/${data.rightSection.content.logo}`)" alt="ates" class="rounded" :class="$style['logo']"/>
                 </div>
             </div>

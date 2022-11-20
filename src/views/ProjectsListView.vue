@@ -5,8 +5,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mx-auto my-auto">
-                    <h1 class="text-white">Projects</h1>
-                    <p class="lead mb-4 text-white opacity-8">Check out our projects</p>
+                    <h1 :class="$style['title']">Projects</h1>
+                    <p :class="['lead mb-4', $style['sub-title']]">Check out our projects</p>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
         </div>
     </div>
 </header>
-<div class="body">
+<div :class="$style['body']">
 <section class="p-5 position-relative">
     <div class="container">
         <ProjectCard v-for="(project, i) in projects" :key="i" :data="project"/>
@@ -57,8 +57,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style module>
 .body {
     background-color: v-bind(bg_color);
+}
+
+.title {
+    color: whitesmoke;
+    text-shadow: 3px 3px 4px black;
+}
+
+.sub-title {
+    color: whitesmoke;
+    text-shadow: 4px 4px 5px black;
 }
 </style>
