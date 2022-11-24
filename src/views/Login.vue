@@ -21,7 +21,7 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login()">Sign in</button>
+                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login(), greet()">Sign in</button>
                   </div>
                 </form>
               </div>
@@ -67,7 +67,22 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({username: this.username, password: this.password}, redirect);
+      auth.login({username: this.username, password: this.password}, redirect, (response) => {
+        this.$toast.add({
+          severity: 'success',
+          summary: 'Login Successful',
+          detail: 'Welcome to ReaderBench',
+          life: 3000
+        });
+      }, (error) => {
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Login Failed',
+          detail: error,
+          life: 3000
+        });
+      });
+      // this.$toast.add({severity: 'success', summary: 'Success', detail: 'Login Successful', life: 3000});
     },
     submitForm(e) {
       const formData = {
@@ -90,7 +105,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
   },
 };
 </script>

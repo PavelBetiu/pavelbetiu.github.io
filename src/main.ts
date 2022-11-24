@@ -16,6 +16,9 @@ import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -33,7 +36,10 @@ createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
+  .component('Toast', Toast)
   .use(PrimeVue)
   .use(store)
   .use(router)
-  .mount('#app');
+  .use(ToastService)
+  .mount('#app')
+  
