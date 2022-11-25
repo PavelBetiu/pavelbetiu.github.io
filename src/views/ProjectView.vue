@@ -37,11 +37,6 @@
     <!-- Objective and Team section -->
     <SideBySideSection :data="convertToSideBySideInput(project, OBJECTIVES, TEAM)" :parentColor="bg_color" />
 
-    <div class="col-lg-6" :class="$style['services-container']">
-    <section :class="[$style['parallax'], $style['img-responsive']]" style="background-image: url('@/assets/img/office-dark.jpg')">
-    </section>
-</div>
-
     <!-- Project Phases section -->
     <WaveSection :data="convertToWaveSectionInput(project, PROJECT_PHASES)" :parentColor="bg_color" />
 
@@ -81,7 +76,7 @@ export default {
     name: 'ProjectView',
     components: {
         SideBySideSection,
-        WaveSection,
+        WaveSection
     },
     methods: {
         convertToSideBySideInput,
@@ -128,14 +123,5 @@ export default {
 .services-container {
     border-bottom: 1px solid #ff0000;
     height: 200px;
-}
-
-.parallax {
-    /* Set a specific height */
-    min-height: 300px;
-
-    background-size: 50%;
-background-position-x: right;
-background-position-y: center;
 }
 </style>

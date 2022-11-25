@@ -239,7 +239,7 @@ export class ProjectsAPI {
             publications: {
                 journals: [{
                     title: '1.Dascalu, M.-D., Ruseti, S., Dascalu, M., McNamara, D. S., Carabas, M., Rebedea, T., & Trausan-Matu, S. (2021). Before and during COVID-19: A Cohesion Network Analysis of Students’ Online Participation in Moodle Courses. Computers in Human Behavior, 121. (Q1 journal, WOS:000651382100007, IF: 6,829)',
-                    url: ''
+                    url: 'https://www.sciencedirect.com/science/article/pii/S0747563221001035'
                 },
                 {
                     title: '2.Nicula, B., Dascalu, M., Newton, N., Orcutt, E., & McNamara, D. S. (2021). Automated Paraphrase Quality Assessment using Language Models and Transfer Learning. Computers, 10(12).',

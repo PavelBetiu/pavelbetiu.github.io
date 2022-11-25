@@ -27,7 +27,7 @@
                 </p>
             </div>
             <div class="col-lg-6">
-                <img src="@/assets/img/anastasia.jpg" class="img-fluid p-4" alt="Image">
+                <img src="@/assets/images/nlp.jpg" class="img-fluid p-4 border-radius-bottom-start-circle border-radius-top-end-circle bg-gradient-light" alt="Image">
             </div>
         </div>
 
@@ -50,8 +50,10 @@
             <!-- Render Journals -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Journals</h4>
-                <div v-for="(journal,i) in data.content.journals" :key="i" class="row pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
-                    <p class="text-light">{{journal.title}}</p>
+                <div v-for="(journal,i) in data.content.journals" :key="i" class="row">
+                    <a :href="journal.url" class="pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
+                        <p class="text-light">{{journal.title}}</p>
+                    </a>
                 </div>
             </div>
 

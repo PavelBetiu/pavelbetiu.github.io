@@ -61,12 +61,12 @@
         <!-- Icon and title -->
         <!-- Project activities doesn't have a right section and Funding Agency is no longer a standalone section -->
         <div v-if="data.leftSection.type !== PROJECT_ACTIVITIES && data.rightSection.type != FUNDING_AGENCY" class="row">
-            <div class="col  d-flex justify-content-end">
+            <div class="col d-flex justify-content-end">
                 <div :class="$style['overlap-icon-left']">
                     <img :src="require(`@/assets/images/${data.rightSection.image}`)" style="width: 50px; height: 50px">
                 </div>
             </div>
-            <div class="col  d-flex justify-content-start pt-1">
+            <div class="col d-flex justify-content-start pt-1">
                 <div :class="$style['title-section-left']">
                     <h3>{{data.rightSection.title}}</h3>
                 </div>
