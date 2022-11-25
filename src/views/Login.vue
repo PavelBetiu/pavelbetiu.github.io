@@ -53,12 +53,17 @@
 import auth from "@/services/auth";
 import axios from "axios";
 
+import {
+    inject
+} from 'vue';
+
 export default {
   name: "Login",
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      toastService: inject('TOAST_SERVICE'),
     };
   },
   methods: {
@@ -67,22 +72,7 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({username: this.username, password: this.password}, redirect, (response) => {
-        this.$toast.add({
-          severity: 'success',
-          summary: 'Login Successful',
-          detail: 'Welcome to ReaderBench',
-          life: 3000
-        });
-      }, (error) => {
-        this.$toast.add({
-          severity: 'error',
-          summary: 'Login Failed',
-          detail: error,
-          life: 3000
-        });
-      });
-      // this.$toast.add({severity: 'success', summary: 'Success', detail: 'Login Successful', life: 3000});
+      auth.login({username: this.username, password: this.password}, redirect, this.toastService);
     },
     submitForm(e) {
       const formData = {

@@ -3,7 +3,7 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
-import PrimeVue from 'primevue/config';
+
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { httpInterceptor } from './services/http-interceptor';
@@ -16,9 +16,6 @@ import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
-import Toast from 'primevue/toast';
-import ToastService from 'primevue/toastservice';
-
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -30,16 +27,18 @@ library.add(faInstagram);
 library.add(faTwitter);
 library.add(faGithub);
 
+import PrimeVueToastService from './services/prime-vue-toast-service';
+
 httpInterceptor();
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
-  .component('Toast', Toast)
-  .use(PrimeVue)
+  /* PrimeVue Toast Service is a wrapper around PrimeVue Toast component.
+  It is a plugin that can be used in any component */
+  .use(PrimeVueToastService)
   .use(store)
   .use(router)
-  .use(ToastService)
   .mount('#app')
-  
+

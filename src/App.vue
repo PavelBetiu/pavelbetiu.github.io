@@ -5,7 +5,7 @@
             <div class="col-12">
                 <Nav :key="$route.fullPath" /> <!-- change key in Nav on logout -->
             </div>
-            <Toast position="top-right"/>
+            <Toast position="top-right"/> <!-- Global Toast -->
         </div>
     </div>
     <router-view style="padding-top: 40px" />
@@ -33,21 +33,15 @@ import {
 import {
     createApp
 } from 'vue';
-import ToastService from 'primevue/toastservice';
 import {
     defineComponent
 } from "vue";
-import {
-    useToast
-} from "primevue/usetoast";
-import Toast from "primevue/toast";
 
 export default {
     name: "app",
     components: {
         Nav,
-        Footer,
-        Toast
+        Footer
     },
     setup() {
         /**
