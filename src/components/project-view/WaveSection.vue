@@ -60,8 +60,10 @@
             <!-- Render Conferences -->
             <div class="col">
                 <h4 class="text-white z-index-1 position-relative">Conferences</h4>
-                <div v-for="(conference,i) in data.content.conferences" :key="i" class="row pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
-                    <p class="text-light">{{conference.title}}</p>
+                <div v-for="(conference,i) in data.content.conferences" :key="i" class="row">
+                    <a :href="conference.url" class="pt-2 rounded-2 d-flex justify-data.content-start" :class="$style['highlight']">
+                        <p class="text-light">{{conference.title}}</p>
+                    </a>
                 </div>
             </div>
         </div>
