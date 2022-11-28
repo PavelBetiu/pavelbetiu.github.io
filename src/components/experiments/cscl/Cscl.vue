@@ -136,10 +136,16 @@ export default {
                 this.data = await this.csclService.process({
                     file: this.file,
                     language: this.language
+                }).then(response => {
+                    this.isLoading = false;
+                    this.jsonReceived = true;
+
+                    return response;
+                }).catch(error => {
+                    this.isLoading = false;
+                    alert("Server error");
                 });
 
-                this.isLoading = false;
-                this.jsonReceived = true;
             } else if (this.file.type === "application/json") {
                 this.isLoading = true;
 
