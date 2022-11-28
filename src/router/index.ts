@@ -19,13 +19,23 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/people',
-    name: 'people',
+    name: 'people' ,
     component: () => import('../views/People.vue')
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('@/views/Login.vue')
+  },
+  {
+    path: '/projects',
+    name: 'projects',
+    component: () => import('../views/ProjectsListView.vue')
+  },
+  {
+    path: '/projects/:link',
+    name: 'projectView',
+    component: () => import('../views/ProjectView.vue')
   },
   {
     path: '/contact',
