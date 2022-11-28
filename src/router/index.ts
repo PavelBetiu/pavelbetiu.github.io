@@ -1,7 +1,7 @@
 import { isNil, first } from 'lodash';
 import { createRouter, createWebHistory, RouteLocationRaw, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import auth from '../services/auth';
+import HomeView from '@/views/HomeView.vue';
+import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,17 +10,22 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/services',
+    name: 'services',
+    component: () => import('../views/ServicesView.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/people',
+    name: 'people' ,
+    component: () => import('../views/People.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/Login.vue')
+    component: () => import('@/views/Login.vue')
   },
   {
     path: '/projects',
@@ -33,12 +38,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/ProjectView.vue')
   },
   {
-    path: '/experiment/:id',
-    name: 'experimentSingle',
-    component: () => import('../views/ExperimentSingle.vue'),
-    meta: {
-      requiresAuth: true,
-    },
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/Contact.vue')
+  },
+  {
+    path: '/services/cscl',
+    name: 'serviceCscl',
+    component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
 ]
 
