@@ -47,6 +47,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
+  {
+    path: '/datasets',
+    name: 'datasets',
+    component: () => import('@/views/DatasetsView.vue'),
+  }
 ]
 
 const router = createRouter({
