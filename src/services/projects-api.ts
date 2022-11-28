@@ -243,32 +243,32 @@ export class ProjectsAPI {
                 },
                 {
                     title: '2.Nicula, B., Dascalu, M., Newton, N., Orcutt, E., & McNamara, D. S. (2021). Automated Paraphrase Quality Assessment using Language Models and Transfer Learning. Computers, 10(12).',
-                    url: ''
+                    url: 'https://www.researchgate.net/publication/356851722_Automated_Paraphrase_Quality_Assessment_Using_Language_Models_and_Transfer_Learning'
                 },
                 {
                     title: '3.Botarleanu, R.-M., Dascalu, M., Watanabe, M., Crossley, S. A., & McNamara, D. S. (submitted). Age of Exposure 2.0: Estimating Word Complexity using Iterative Models of Word Embeddings. Behavior Research Methods. (Q1 journal, IF: 6,242)',
-                    url: ''
+                    url: 'https://www.researchgate.net/publication/358631762_Age_of_Exposure_20_Estimating_word_complexity_using_iterative_models_of_word_embeddings'
                 },
                 {
                     title: '4.Corlatescu, D., Ruseti, S., & Dascalu, M. (submitted). ReaderBench Learns Russian: Multilevel Analysis of Russian Text Characteristics. Russian Journal of Linguistics. (Q1 journal)',
-                    url: ''
+                    url: 'https://www.researchgate.net/publication/319474819_ReaderBench_A_Multi-lingual_Framework_for_Analyzing_Text_Complexity'
                 },
                 {
                     title: '5.Masala, M., Ruseti, S., Rebedea, T., Dascalu, M., Gutu-Robu, G., & Trausan-Matu, S. (submitted). Identifying the Structure of CSCL Conversations using String Kernels. Mathematics. (Q1 journal, IF: 2,258)',
-                    url: ''
+                    url: 'https://www.researchgate.net/publication/357213267_Identifying_the_Structure_of_CSCL_Conversations_Using_String_Kernels'
                 }],
                 conferences: [
                     {
                         title: '1.Zaharia, G.-E., Smadu, R.-A., Cercel, D.-C., & Dascalu, M. (2022). Domain Adaptation in Multilingual and Multi-Domain Monolingual Settings for Complex Word Identification. In 60th Annual Meeting of the Association for Computational Linguistics (ACL22) (pp. 70–80). Dublin, Ireland: ACL. (Conferinta Categoria A* conferm CORE Ranking)',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/360641871_Domain_Adaptation_in_Multilingual_and_Multi-Domain_Monolingual_Settings_for_Complex_Word_Identification'
                     },
                     {
                         title: '2.Botarleanu, R., Dascalu, M., Allen, L. K., Crossley, S. A., & McNamara, D. S. (2022). Multitask Summary Scoring with Longformers. In 23rd Int. Conf. on Artificial Intelligence in Education (AIED 2022) (pp. 756–761). Durham, UK (Online): Springer. (Conferinta Categoria A conferm CORE Ranking)',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/362272550_Multitask_Summary_Scoring_with_Longformers'
                     },
                     {
                         title: '3.Botarleanu, R.-M., Dascalu, M., Crossley, S. A., & McNamara, D. S. (2022). Automated Paragraph Detection using Cohesion Network Analysis and Clustering. In 7th Int. Conf. on Smart Learning Ecosystems and Regional Development (SLERD 2022). Bucharest, Romania: Springer.',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/363917016_Automated_Paragraph_Detection_Using_Cohesion_Network_Analysis'
                     },
                     {
                         title: '4.Dutulescu, A., Ruseti, S., & Dascalu, M. (2022). Unsupervised Extractive Summarization with BERT. In 24th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing (SYNASC 2022). Linz, Austria (Online): IEEE.',
@@ -276,27 +276,27 @@ export class ProjectsAPI {
                     },
                     {
                         title: '5.Botarleanu, R.-M., Dascalu, M., Watanabe, M., McNamara, D. S., & Crossley, S. A. (2021). Multilingual Age of Exposure. In 22nd Int. Conf. on Artificial Intelligence in Education (AIED 2021) (pp. 77–87). Utrech, Netherlands (Online): Springer. (Category A conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://link.springer.com/chapter/10.1007/978-3-030-78292-4_7'
                     },
                     {
                         title: '6.Masala, M., Ruseti, S., Dascalu, M., & Dobre, C. (2021). Extracting and Clustering Main Ideas from Student Feedback using Language Models. In 22nd Int. Conf. on Artificial Intelligence in Education (AIED 2021) (pp. 282–292). Utrech, Netherlands (Online): Springer. (Category A conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/352305827_Extracting_and_Clustering_Main_Ideas_from_Student_Feedback_Using_Language_Models'
                     },
                     {
                         title: '7.Ruseti, S., Dascalu, M.-D., Corlatescu, D.-G., Dascalu, M., Trausan-Matu, S., & McNamara, D. S. (2021). Exploring Dialogism using Language Models. In 22nd Int. Conf. on Artificial Intelligence in Education (AIED 2021) (pp. 296–301). Utrech, Netherlands (Online): Springer. (Category A conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://link.springer.com/chapter/10.1007/978-3-030-78270-2_53'
                     },
                     {
                         title: '8.Corlatescu, D.-G., Dascalu, M., & McNamara, D. S. (2021). Automated Model of Comprehension v2.0. In 22nd Int. Conf. on Artificial Intelligence in Education (AIED 2021) (pp. 119–123). Utrech, Netherlands (Online): Springer. (Category A conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://link.springer.com/chapter/10.1007/978-3-030-78270-2_21'
                     },
                     {
                         title: '9.Niculescu, M., Ruseti, S., & Dascalu, M. (2021). RoGPT2: Romanian GPT2 for Text Generation. In 33rd Int. Conf. on Tools with Artificial Intelligence (ICTAI 2021). Washington DC, USA (Online): IEEE. (Category B conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/357227566_RoGPT2_Romanian_GPT2_for_Text_Generation'
                     },
                     {
                         title: '10.Nicula, B., Dascalu, M., Newton, N., Orcutt, E., & McNamara, D. S. (2021). Automated Paraphrase Quality Assessment using Recurrent Neural Networks and Language Models. In 17th Int. Conf. on Intelligent Tutoring Systems (ITS 2021) (pp. 321–328). Athens, Greece (Online): Springer. (Category B conference in accordance to CORE Ranking)',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/353114417_Automated_Paraphrase_Quality_Assessment_Using_Recurrent_Neural_Networks_and_Language_Models'
                     },
                     {
                         title: '11.Botarleanu, R.-M., Dascalu, M., Allen, L. K., Crossley, S. A., & McNamara, D. S. (2021). Automated Summary Scoring with ReaderBench. In 17th Int. Conf. on Intelligent Tutoring Systems (ITS 2021) (pp. 310–320). Athens, Greece (Online): Springer. (Category B conference in accordance to CORE Ranking)',
@@ -304,15 +304,15 @@ export class ProjectsAPI {
                     },
                     {
                         title: '12.Ionita, R. F., Corlatescu, D.-G., Dascalu, M., & McNamara, D. S. (2021). Predicting the Global Impact of Authors from the Learning Analytics Community – A Case Study grounded in CNA. In 23rd Conference on Control Systems and Computer Science (pp. 439–446). Bucharest, Romania (Online): IEEE.',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/353488604_Predicting_the_Global_Impact_of_Authors_from_the_Learning_Analytics_Community_-_A_Case_Study_grounded_in_CNA'
                     },
                     {
                         title: '13.Dascalu, M.-D., Ruseti, S., Dascalu, M., McNamara, D. S., & Trausan-Matu, S. (2021). Dialogism Meets Language Models for Evaluating Involvement in CSCL Conversations. In 6th Int. Conf. on Smart Learning Ecosystems and Regional Development (SLERD 2021) (pp. 67–78). Bucharest, Romania (Online): Springer.',
-                        url: ''
+                        url: 'https://www.researchgate.net/publication/354251325_Dialogism_Meets_Language_Models_for_Evaluating_Involvement_in_CSCL_Conversations'
                     },
                     {
                         title: '14.Corlatescu, D.-G., Ruseti, S., & Dascalu, M. (2021). Romanian Syllabification using Deep Neural Networks. In 6th Int. Conf. on Smart Learning Ecosystems and Regional Development (SLERD 2021) (pp. 93–102). Bucharest, Romania (Online): Springer.',
-                        url: ''
+                        url: 'https://link.springer.com/chapter/10.1007/978-981-16-3930-2_8'
                     }
                 ]
             },
