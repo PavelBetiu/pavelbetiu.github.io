@@ -15,6 +15,7 @@ import './assets/css/soft-design-system.css?v=1.0.9';
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
+import TieredMenu from 'primevue/tieredmenu';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -33,6 +34,7 @@ createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
+  .component('p-tiered-menu', TieredMenu)
   .use(PrimeVue)
   .use(store)
   .use(router)
