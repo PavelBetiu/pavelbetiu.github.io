@@ -1,11 +1,36 @@
-<template>
+<!-- <template>
 <div>
-    <Button type="button" label="Toggle" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
+    <div>
+        <a @click="toggle">
+            <img src="@/assets/images/anonymous.jpg" class="avatar avatar-sm me-3">
+        </a>
+    </div>
     <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true" />
 </div>
-</template>
+</template> -->
 
-<script>
+<template>
+    <div class="profile-menu">
+      <div class="profile-picture">
+        <img src="@/assets/images/anonymous.jpg" class="avatar avatar-sm me-3" alt="Profile Picture">
+      </div>
+      <div class="profile-menu-items">
+        <ul>
+          <li v-for="item in menuItems" :key="item.id">
+            <a href="#" @click="handleClick(item.id)">{{ item.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </template>
+
+<!-- <script>
+import TieredMenu from 'primevue/tieredmenu';
+import Button from 'primevue/button';
+import {
+    ref
+} from 'vue';
+
 export default {
     data() {
         return {
@@ -130,9 +155,66 @@ export default {
     methods: {
         toggle(event) {
             this.$refs.menu.toggle(event);
+        }
     }
+}
+</script> -->
+
+<script>
+export default {
+  name: 'ProfileMenu',
+  data() {
+    return {
+      userName: 'John Doe',
+      menuItems: [
+        { id: 1, name: 'Profile' },
+        { id: 2, name: 'Settings' },
+        { id: 3, name: 'Logout' }
+      ]
+    }
+  },
+  methods: {
+    handleClick(id) {
+      // Handle click on menu item with id passed as argument
+    }
+  }
 }
 </script>
 
 <style>
+.profile-menu {
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture {
+  margin-right: 10px;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.profile-menu-items {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  padding: 10px 0;
+}
+
+.profile-menu-items ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-menu-items li {
+  padding: 10px 20px;
+}
+
+.profile-menu:hover .profile-menu-items {
+  display: flex;
+}
 </style>

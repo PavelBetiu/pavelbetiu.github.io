@@ -61,10 +61,13 @@
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
                     <a href="/login" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0">Log In</a>
                 </li>
+
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
-                  <!-- <button type="menu" label="menu" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0" @click="toggle">User profile</button> -->
-                    <Button type="button" label="Toggle" @click="toggle()" aria-haspopup="true" aria-controls="overlay_tmenu" />
-                    <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true" />
+                    <!-- <Button type="button" label="Toggle" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
+                    <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true" /> -->
+                    <a href="/userprofile">
+                        <ProfileMenu />
+                    </a>
                 </li>
             </ul>
         </div>
@@ -74,11 +77,16 @@
 
 <script>
 import auth from "@/services/auth";
-import TieredMenu from 'primevue/tieredmenu';
-import Button from 'primevue/button';
+import {
+    ref
+} from 'vue';
+import ProfileMenu from "@/components/partials/ProfileMenu";
 
 export default {
     name: "Nav",
+    components: {
+        ProfileMenu
+    },
     data() {
         return {
             items: [{

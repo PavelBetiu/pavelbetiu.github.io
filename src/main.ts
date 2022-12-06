@@ -16,6 +16,7 @@ import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import TieredMenu from 'primevue/tieredmenu';
+import Button from 'primevue/button';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -23,6 +24,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
 library.add(faFacebook);
 library.add(faInstagram);
 library.add(faTwitter);
@@ -34,7 +36,10 @@ createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
-  .component('p-tiered-menu', TieredMenu)
+  .component('Button', Button)
+  .component('TieredMenu', TieredMenu)
+  .component('DataTable', DataTable)
+  .component('Column', Column)
   .use(PrimeVue)
   .use(store)
   .use(router)
