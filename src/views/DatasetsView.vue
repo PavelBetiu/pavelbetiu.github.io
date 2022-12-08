@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
-                                                <select class="form-control" name="language-button" id="language-button" v-model="taskType">
+                                                <select class="form-control" name="task-button" id="task-button" v-model="taskType">
                                                     <option value="cscl" selected>CSCL</option>
                                                     <option value="tc">Text Classification</option>
                                                 </select>
@@ -63,9 +63,9 @@
 
                             <div class="row d-flex justify-content-center">
                                 <div class="col-8">
-                                    <div v-if="tasks[taskType]['input'] === 'file'" class="row">
+                                    <div v-if="tasks[taskType]['input'][0] === 'folder'" class="row">
                                         <div class="col-2">
-                                            <label>Upload file</label>
+                                            <label>Upload folder</label>
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
@@ -73,13 +73,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div v-else-if="tasks[taskType]['input'] === 'folder'" class="row">
+                                    <div v-else-if="tasks[taskType]['input'][0] === 'file'" class="row">
                                         <div class="col-2">
-                                            <label>Upload folder</label>
+                                            <label>Upload file</label>
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
-                                                <input type="file" class="form-control" :v-model="file">
+                                                <input type="file" class="form-control" :v-model="file" :accept="tasks[taskType]['input'][1]">
                                             </div>
                                         </div>
                                     </div>
@@ -100,29 +100,42 @@
             <div class="col-lg-2"></div>
         </div>
         <div class="row">
-            <div class="col-lg-12 d-flex justify-content-center flex-column">
-                <CsclResult :data="data" v-if="data" />
+            <p class="h4 text-gradient text-primary">My datasets</p>
+            <div class="col-lg-12 d-flex justify-content-center flex-column card p-4">
+                <!-- TODO: Add table with datasets -->
+                <Table :data="tableData" :isScrollable="false"></Table>
             </div>
         </div>
+    </div>
+    <div>
+        <Droparea/>
     </div>
 </div>
 </template>
 
 <script>
+import Table from '../components/widgets/Table.vue'
+import Droparea from '../components/Droparea.vue'
+
 export default {
     name: "DatasetsView",
+    components: {
+        Table,
+        Droparea,
+    },
     data() {
         return {
             datasetName: "Insert dataset name here",
-            taskType: "cscl",
+            taskType: "sa",
             language: "fr",
             file: null,
             folder: null,
+
+            // TODO: get this from the backend
             tasks: {
-                cscl: {
-                    input: "file",
-                    languages: [
-                        {
+                sa: {
+                    input: ["file", "text/xml"],
+                    languages: [{
                             name: "French",
                             value: "fr"
                         },
@@ -137,9 +150,8 @@ export default {
                     ]
                 },
                 tc: {
-                    input: "folder",
-                    languages: [
-                        {
+                    input: ["folder", null],
+                    languages: [{
                             name: "French",
                             value: "fr"
                         },
@@ -148,11 +160,102 @@ export default {
                             value: "en"
                         }
                     ]
-                }
+                },
+                sum: {
+                    input: ["file", "text/xml"],
+                    languages: [{
+                            name: "French",
+                            value: "fr"
+                        },
+                        {
+                            name: "English",
+                            value: "en"
+                        },
+                        {
+                            name: "Romanian",
+                            value: "ro"
+                        }
+                    ]
+                },
+            },
+            // TODO: get this from the backend
+            tableData: {
+                columns: [{
+                        displayName: 'Name',
+                        key: 'name',
+                    },
+                    {
+                        displayName: 'Task type',
+                        key: 'taskType',
+                    },
+                    {
+                        displayName: 'Language',
+                        key: 'language',
+                    },
+                    {
+                        displayName: 'Number of tasks',
+                        key: 'numberOfTasks',
+                    },
+                    {
+                        displayName: 'Number of entries',
+                        key: 'numberOfEntries',
+                    },
+                    {
+                        displayName: 'Actions',
+                        key: 'actions',
+                    },
+                ],
+                rows: [{
+                        name: 'Dataset 1',
+                        taskType: 'CSCL',
+                        language: 'French',
+                        numberOfTasks: 100,
+                        numberOfEntries: 1000,
+                        actions: [{
+                                name: 'Edit',
+                                icon: 'fas fa-edit',
+                                action: () => {
+                                    console.log('Edit')
+                                }
+                            },
+                            {
+                                name: 'Delete',
+                                icon: 'fas fa-trash',
+                                action: () => {
+                                    console.log('Delete')
+                                }
+                            },
+                        ]
+                    },
+                    {
+                        name: 'Dataset 2',
+                        taskType: 'Text Classification',
+                        language: 'English',
+                        numberOfTasks: 100,
+                        numberOfEntries: 1000,
+                        actions: [{
+                                name: 'Edit',
+                                icon: 'fas fa-edit',
+                                action: () => {
+                                    console.log('Edit')
+                                }
+                            },
+                            {
+                                name: 'Delete',
+                                icon: 'fas fa-trash',
+                                action: () => {
+                                    console.log('Delete')
+                                }
+                            },
+                        ]
+                    }
+                ]
             }
         }
-    },
+
+    }
 }
+
 </script>
 
 <style module>
