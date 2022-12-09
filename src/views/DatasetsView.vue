@@ -9,7 +9,7 @@
                         <p class="h4 text-gradient text-primary">Upload a dataset</p>
                     </div>
 
-                    <form autocomplete="off">
+                    <form autocomplete="off" @submit.prevent="">
                         <div class="card-body pb-2">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-8">
@@ -35,7 +35,8 @@
                                         <div class="col-10">
                                             <div class="input-group mb-4">
                                                 <select class="form-control" name="task-button" id="task-button" v-model="taskType">
-                                                    <option value="cscl" selected>CSCL</option>
+                                                    <option value="sa" selected>SA</option>
+                                                    <option value="sum" selected>SUM</option>
                                                     <option value="tc">Text Classification</option>
                                                 </select>
                                             </div>
@@ -62,26 +63,22 @@
                             </div>
 
                             <div class="row d-flex justify-content-center">
-                                <div class="col-8">
-                                    <div v-if="tasks[taskType]['input'][0] === 'folder'" class="row">
-                                        <div class="col-2">
-                                            <label>Upload folder</label>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="input-group mb-4">
-                                                <input type="file" class="form-control" :v-model="file" webkitdirectory mozdirectory>
-                                            </div>
-                                        </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label>Upload folder</label>
                                     </div>
-                                    <div v-else-if="tasks[taskType]['input'][0] === 'file'" class="row">
-                                        <div class="col-2">
-                                            <label>Upload file</label>
-                                        </div>
-                                        <div class="col-10">
-                                            <div class="input-group mb-4">
-                                                <input type="file" class="form-control" :v-model="file" :accept="tasks[taskType]['input'][1]">
-                                            </div>
-                                        </div>
+                                        
+                                    <div class="row">
+                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" />
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <label>Upload CSV file</label>
+                                    </div>
+                                        
+                                    <div class="row">
+                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" />
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +94,9 @@
 
                 </div>
             </div>
-            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                
+            </div>
         </div>
         <div class="row">
             <p class="h4 text-gradient text-primary">My datasets</p>
@@ -106,9 +105,6 @@
                 <Table :data="tableData" :isScrollable="false"></Table>
             </div>
         </div>
-    </div>
-    <div>
-        <Droparea/>
     </div>
 </div>
 </template>
@@ -253,9 +249,22 @@ export default {
             }
         }
 
+    },
+    methods: {
+        uploadFiles(files) {
+            console.log(files);
+        },
+        selectFiles(event) {
+            console.log(event);
+        },
+        clearFiles() {
+            console.log("cleared");
+        },
+        removeFile(event) {
+            console.log(event);
+        }
     }
 }
-
 </script>
 
 <style module>

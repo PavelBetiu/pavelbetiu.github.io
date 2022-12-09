@@ -1,89 +1,82 @@
 <template>
-<div class="container card p-4">
-    <h5>Advanced</h5>
-    <FileUpload name="demo[]" @uploader="customUploader(files)" :multiple="true" accept="image/*" :maxFileSize="1000000">
-        <!-- FileUpload component has a slot named content -->
-        <template #content="{uploadedFiles}">
-           
-            <ul v-if="uploadedFiles && uploadedFiles[0]">
-                    <li v-for="file of uploadedFiles[0]" :key="file">{{ file.name }} - {{ file.size }} bytes</li>
-                </ul>
+<FileUpload @select="emitSelectEvent" @clear="emitClearEvent" :multiple="multiple" :accept="accept">
+    <!-- FileUpload component has a slot named header -->
+    <template #header="{ chooseCallback, clearCallback, files }">
+        <div class="d-flex justify-content-start">
+            <!-- chooseCallback is a function that will open the file browser and will emit the select event which will be caught by the parent component -->
+            <button @click="chooseCallback()" class="btn bg-gradient-primary m-1">Choose files</Button>
+            <button @click="clearCallback()" class="btn btn-outline-danger m-1" :disabled="!files || files.length === 0">Clear</Button>
+        </div>
+    </template>
 
-        </template>
-        <!-- FileUpload component has a slot named empty -->
-        <template #empty>
-            <p>Drag and drop files to here to upload.</p>
-        </template>
-    </FileUpload>
-</div>
+    <!-- FileUpload component has a slot named content -->
+    <template #content="{ files, removeFileCallback }">
+        <!-- files points to the files array of the FileUpload component not the files array of the parent component -->
+        <div v-if="files.length > 0">
+            <div class="p-1">
+                <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="card m-1 p-1 border border-primary">
+                    <div class="p-1">
+                        <img role="presentation" :alt="file.type" :src="file.objectURL" class="shadow-2 h-10 w-10 border border-info" />
+                    </div>
+                    <span class="font-semibold p-1">name: {{ file.name }}</span>
+                    <div class="p-1">size: {{ formatSize(file.size) }}</div>
+
+                    <div class="d-flex justify-content-center">
+                        <Button icon="pi pi-times" @click="emitRemoveEvent(removeFileCallback, index)" class="p-button-outlined p-button-danger p-button-rounded" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- FileUpload component has a slot named empty -->
+    <template #empty>
+        <p>Drag and drop files to here to upload.</p>
+    </template>
+</FileUpload>
 </template>
 
 <script>
 import FileUpload from 'primevue/fileupload';
 import Button from 'primevue/button';
-import Badge from 'primevue/badge';
-import ProgressBar from 'primevue/progressbar';
 
 export default {
     name: 'Droparea',
+    props: {
+        multiple: {
+            type: Boolean,
+            default: true,
+            required: false,
+        },
+        accept: {
+            type: String,
+            default: '',
+            required: false,
+        },
+    },
     components: {
         FileUpload,
-    },
-    data() {
-        return {
-            uploadedFiles: [],
-            files: [],
-            totalSize: 0,
-            totalSizePercent: 0
-        };
+        Button
     },
     methods: {
-        onRemoveTemplatingFile(file, onFileRemove, index) {
-            onFileRemove(index);
-            this.totalSize -= parseInt(this.formatSize(file.size));
-            this.totalSizePercent = this.totalSize / 10;
+        // Called when the user clicks the Remove button
+        emitRemoveEvent(removeFileCallback, index) {
+            this.$emit('droparea:remove', index);
+            removeFileCallback(index);
         },
-        onClearTemplatingUpload(clear) {
-            clear();
-            this.totalSize = 0;
-            this.totalSizePercent = 0;
+
+        // Called when the user selects files
+        emitSelectEvent(event) {
+            this.$emit('droparea:select', event);
         },
-        onSelectedFiles(event) {
-            this.files = event.files;
-            this.files.forEach((file) => {
-                this.totalSize += parseInt(this.formatSize(file.size));
-            });
+
+        // Called when the user clicks the Clear button
+        emitClearEvent(event) {
+            this.$emit('droparea:clear');
         },
-        onAdvancedUpload() {
-            this.$toast.add({
-                severity: 'info',
-                summary: 'Success',
-                detail: 'File Uploaded',
-                life: 3000
-            });
-        },
-        uploadEvent(callback) {
-            this.totalSizePercent = this.totalSize / 10;
-            callback();
-        },
-        onTemplatedUpload() {
-            this.totalSize = 0;
-            this.totalSizePercent = 0;
-            this.$toast.add({
-                severity: 'info',
-                summary: 'Success',
-                detail: 'File Uploaded',
-                life: 3000
-            });
-        },
-        onUpload() {
-            this.$toast.add({
-                severity: 'info',
-                summary: 'Success',
-                detail: 'File Uploaded',
-                life: 3000
-            });
-        },
+
+        // Converts bytes to human readable format
         formatSize(bytes) {
             if (bytes === 0) {
                 return '0 B';
@@ -96,24 +89,6 @@ export default {
 
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         },
-        listFiles(files) {
-            let list = '';
-            for (let i = 0; i < files.length; i++) {
-                list += files[i].name + ', ';
-            }
-            console.log(list.substring(0, list.length - 2));
-        },
-        customUploader(files) {
-            console.log(files);
-        }
     },
 };
 </script>
-
-<style lang="scss" scoped>
-::v-deep(.custom-progress-bar) {
-    .p-progressbar-value {
-        background-color: #f44336;
-    }
-}
-</style>
