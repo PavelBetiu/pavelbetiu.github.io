@@ -62,30 +62,22 @@
                                 </div>
                             </div>
 
-                            <div class="row d-flex justify-content-center">
+                            <div class="row" :class="$style['upload_files_area']">
                                 <div class="col-6">
                                     <div class="row">
-                                        <label>Upload folder</label>
-                                    </div>
-                                        
-                                    <div class="row">
-                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" />
+                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" chooseMessage="Choose files" :multiple="true" infoMessage="Please upload here your dataset data."/>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="row">
-                                        <label>Upload CSV file</label>
-                                    </div>
-                                        
-                                    <div class="row">
-                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" />
+                                        <Droparea @droparea:select="selectCSV" @droparea:clear="clearCSV" @droparea:remove="removeCSV" chooseMessage="Choose CSV file" accept=".csv" infoMessage="Please upload here your CSV file."/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-12 text-center">
-                                    <button type="button" class="btn bg-gradient-info mt-3 mb-0">Import</button>
+                                    <button type="button" class="btn bg-gradient-info mt-3 mb-0" @click="importDataset">Import</button>
                                 </div>
                             </div>
 
@@ -104,6 +96,10 @@
                 <!-- TODO: Add table with datasets -->
                 <Table :data="tableData" :isScrollable="false"></Table>
             </div>
+        </div>
+
+        <div v-for="d in dataFiles" class="row" :key="d">
+            <p class="h4 text-gradient text-primary">Shared datasets</p>
         </div>
     </div>
 </div>
@@ -124,8 +120,8 @@ export default {
             datasetName: "Insert dataset name here",
             taskType: "sa",
             language: "fr",
-            file: null,
-            folder: null,
+            dataFiles: null,
+            csvFile: null,
 
             // TODO: get this from the backend
             tasks: {
@@ -250,18 +246,45 @@ export default {
         }
 
     },
-    methods: {
-        uploadFiles(files) {
-            console.log(files);
+    watch: {
+        dataFiles: function (newVal, oldVal) {
+            console.log("dataFiles changed");
+            console.log("newVal: ", newVal);
+            console.log("oldVal: ", oldVal);
         },
+    },
+    methods: {
         selectFiles(event) {
-            console.log(event);
+            console.log("selectFiles", event.files);
+            this.dataFiles = [...event.files];
         },
         clearFiles() {
-            console.log("cleared");
+            console.log("clearFiles");
+            this.dataFiles = null;
         },
         removeFile(event) {
-            console.log(event);
+            console.log("Before: ", this.dataFiles);
+            this.dataFiles = [...event.files];
+            console.log("After: ", this.dataFiles);
+        },
+        selectCSV(event) {
+            console.log("selectCSV");
+            this.csvFile = [...event.files][0];
+        },
+        clearCSV() {
+            console.log("clearCSV");
+            this.csvFile = null;
+        },
+        removeCSV(event) {
+            console.log("removeCSV");
+            this.csvFile = null;
+        },
+        importDataset() {
+            // console.log(this.datasetName);
+            // console.log(this.taskType);
+            // console.log(this.language);
+            console.log(this.dataFiles);
+            console.log(this.csvFile);
         }
     }
 }
@@ -270,5 +293,14 @@ export default {
 <style module>
 .body {
     background-color: #f8f9fa;
+}
+
+.upload_files_area {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    overflow-y: auto;
+    max-height: 70%;
 }
 </style>
