@@ -1,15 +1,15 @@
-<!-- <template>
-<div>
+<template>
+<div class="profilemenu">
     <div>
         <a @click="toggle">
             <img src="@/assets/images/anonymous.jpg" class="avatar avatar-sm me-3">
         </a>
     </div>
-    <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true" />
+    <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true"/>
 </div>
-</template> -->
+</template>
 
-<template>
+<!-- <template>
     <div class="profile-menu">
       <div class="profile-picture">
         <img src="@/assets/images/anonymous.jpg" class="avatar avatar-sm me-3" alt="Profile Picture">
@@ -22,9 +22,9 @@
         </ul>
       </div>
     </div>
-  </template>
+  </template> -->
 
-<!-- <script>
+<script>
 import TieredMenu from 'primevue/tieredmenu';
 import Button from 'primevue/button';
 import {
@@ -117,32 +117,6 @@ export default {
                     ]
                 },
                 {
-                    label: 'Events',
-                    icon: 'pi pi-fw pi-calendar',
-                    items: [{
-                            label: 'Edit',
-                            icon: 'pi pi-fw pi-pencil',
-                            items: [{
-                                    label: 'Save',
-                                    icon: 'pi pi-fw pi-calendar-plus'
-                                },
-                                {
-                                    label: 'Delete',
-                                    icon: 'pi pi-fw pi-calendar-minus'
-                                }
-                            ]
-                        },
-                        {
-                            label: 'Archieve',
-                            icon: 'pi pi-fw pi-calendar-times',
-                            items: [{
-                                label: 'Remove',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            }]
-                        }
-                    ]
-                },
-                {
                     separator: true
                 },
                 {
@@ -158,9 +132,9 @@ export default {
         }
     }
 }
-</script> -->
+</script>
 
-<script>
+<!-- <script>
 export default {
   name: 'ProfileMenu',
   data() {
@@ -179,10 +153,10 @@ export default {
     }
   }
 }
-</script>
+</script> -->
 
 <style>
-.profile-menu {
+/* .profile-menu {
   display: flex;
   align-items: center;
 }
@@ -216,5 +190,11 @@ export default {
 
 .profile-menu:hover .profile-menu-items {
   display: flex;
+} */
+
+.profilemenu {
+    z-index: 2;
+    position: relative;
 }
+
 </style>

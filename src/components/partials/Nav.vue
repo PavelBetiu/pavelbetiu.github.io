@@ -58,16 +58,14 @@
                     </a>
                 </li>
 
-                <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
+                <!-- <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
                     <a href="/login" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0">Log In</a>
-                </li>
+                </li> -->
 
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
-                    <!-- <Button type="button" label="Toggle" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
-                    <TieredMenu id="overlay_tmenu" ref="menu" :model="items" :popup="true" /> -->
-                    <a href="/userprofile">
+                    <!-- <a href="/userprofile"> -->
                         <ProfileMenu />
-                    </a>
+                    <!-- </a> -->
                 </li>
             </ul>
         </div>
@@ -87,126 +85,6 @@ export default {
     components: {
         ProfileMenu
     },
-    data() {
-        return {
-            items: [{
-                    label: 'File',
-                    icon: 'pi pi-fw pi-file',
-                    items: [{
-                            label: 'New',
-                            icon: 'pi pi-fw pi-plus',
-                            items: [{
-                                    label: 'Bookmark',
-                                    icon: 'pi pi-fw pi-bookmark'
-                                },
-                                {
-                                    label: 'Video',
-                                    icon: 'pi pi-fw pi-video'
-                                }
-                            ]
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-trash'
-                        },
-                        {
-                            separator: true
-                        },
-                        {
-                            label: 'Export',
-                            icon: 'pi pi-fw pi-external-link'
-                        }
-                    ]
-                },
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-fw pi-pencil',
-                    items: [{
-                            label: 'Left',
-                            icon: 'pi pi-fw pi-align-left'
-                        },
-                        {
-                            label: 'Right',
-                            icon: 'pi pi-fw pi-align-right'
-                        },
-                        {
-                            label: 'Center',
-                            icon: 'pi pi-fw pi-align-center'
-                        },
-                        {
-                            label: 'Justify',
-                            icon: 'pi pi-fw pi-align-justify'
-                        }
-                    ]
-                },
-                {
-                    label: 'Users',
-                    icon: 'pi pi-fw pi-user',
-                    items: [{
-                            label: 'New',
-                            icon: 'pi pi-fw pi-user-plus',
-
-                        },
-                        {
-                            label: 'Delete',
-                            icon: 'pi pi-fw pi-user-minus',
-
-                        },
-                        {
-                            label: 'Search',
-                            icon: 'pi pi-fw pi-users',
-                            items: [{
-                                    label: 'Filter',
-                                    icon: 'pi pi-fw pi-filter',
-                                    items: [{
-                                        label: 'Print',
-                                        icon: 'pi pi-fw pi-print'
-                                    }]
-                                },
-                                {
-                                    icon: 'pi pi-fw pi-bars',
-                                    label: 'List'
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    label: 'Events',
-                    icon: 'pi pi-fw pi-calendar',
-                    items: [{
-                            label: 'Edit',
-                            icon: 'pi pi-fw pi-pencil',
-                            items: [{
-                                    label: 'Save',
-                                    icon: 'pi pi-fw pi-calendar-plus'
-                                },
-                                {
-                                    label: 'Delete',
-                                    icon: 'pi pi-fw pi-calendar-minus'
-                                }
-                            ]
-                        },
-                        {
-                            label: 'Archieve',
-                            icon: 'pi pi-fw pi-calendar-times',
-                            items: [{
-                                label: 'Remove',
-                                icon: 'pi pi-fw pi-calendar-minus'
-                            }]
-                        }
-                    ]
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Quit',
-                    icon: 'pi pi-fw pi-power-off'
-                }
-            ]
-        }
-    },
     computed: {
         isAuthenticated: function () {
             return auth.isAuthenticated();
@@ -220,6 +98,7 @@ export default {
             this.$refs.menu.toggle(event);
         }
     },
+
 };
 </script>
 
@@ -236,5 +115,8 @@ nav {
             color: #d88d00;
         }
     }
+
+    z-index: 1;
 }
+
 </style>
