@@ -1,4 +1,5 @@
 <template>
+  {{debug()}}
   <p-datatable :value="data.rows" :responsiveLayout="isScrollable ? 'scroll' : ''" :scrollable="isScrollable" :scrollHeight="isScrollable ? '400px' : ''">
     <p-column
       v-for="col of data.columns"
@@ -6,7 +7,11 @@
       :header="col.displayName"
       :key="col.key"
       :sortable="true"
-    ></p-column>
+    >
+      <template v-if="col.key == 'status'" #body="{data}">
+        <span :class="getStatusClass(data.status)">{{ data.status }}</span>
+      </template>
+  </p-column>
   </p-datatable>
 </template>
 
@@ -25,5 +30,14 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    debug(){
+      console.debug(this.data);
+    },
+    getStatusClass(status){
+      if (status == 'completed') return 'badge bg-success';
+      if (status == 'pending') return 'badge bg-warning';
+    }
+  }
 };
 </script>

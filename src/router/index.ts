@@ -47,6 +47,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
+  {
+    path: '/processingqueue',
+    name: 'processingqueue',
+    component: () => import('@/views/ProcessingQueueView.vue'),
+  }
 ]
 
 const router = createRouter({

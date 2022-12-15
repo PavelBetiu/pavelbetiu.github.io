@@ -5,6 +5,7 @@ import { StackedLineChartInput } from "@/components/widgets/stacked-line-chart-i
 import { map } from 'lodash';
 import { TableInput } from '@/components/widgets/table-input';
 import { StackedLineGradientGraphInput } from '@/components/widgets/stacked-line-gradient-graph-input';
+import { ProcessingQueueData } from "@/data-objects/processing-queue-data";
 
 export function convertToCircularGraphInput(data: CsclResult): CircularGraphInput {
     const circularGraphInput: CircularGraphInput = {
@@ -251,6 +252,44 @@ export function convertToParticipantsTable(result: CsclResult): TableInput {
 
     return input;
 }
+
+export function convertToProcessingQueueTable(data: ProcessingQueueData): TableInput {
+    const input: TableInput = {
+        columns: [
+            {
+                key: 'dataset',
+                displayName: 'Dataset',
+            },
+            {
+                key: 'task_type',
+                displayName: 'Task type',
+            },
+            {
+                key: 'elapsed_time',
+                displayName: 'Elapsed time'
+            },
+            {
+                key: 'status',
+                displayName: 'Status',
+            }
+        ],
+        rows: [],
+    };
+    
+    for (const item of data.data) {
+        const dataset_row = {};
+        dataset_row["dataset"] = item.dataset;
+        dataset_row["task_type"] = item.task_type;
+        dataset_row["elapsed_time"] = item.elapsed_time;
+        dataset_row["status"] = item.status;
+
+        input.rows.push(dataset_row as Record<string, unknown>);
+    }
+
+    return input;
+}
+
+
 
 export function convertToStackedLineChartInput(result: CsclResult): StackedLineChartInput {
     const stackedLineChartInput: StackedLineChartInput = {
