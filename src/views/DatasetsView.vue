@@ -62,15 +62,31 @@
                                 </div>
                             </div>
 
-                            <div class="row" :class="$style['upload_files_area']">
-                                <div class="col-6">
+                            <div class="row">
+                                <div class="col-4">
                                     <div class="row">
-                                        <Droparea @droparea:select="selectFiles" @droparea:clear="clearFiles" @droparea:remove="removeFile" chooseMessage="Choose files" :multiple="true" infoMessage="Please upload here your dataset data."/>
+                                        <div class="col-4">
+                                            <label>CSV only?</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="input-group mb-4">
+                                                <Checkbox v-model="checked" :binary="true" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row" :class="$style['upload_files_area']">
+                                <div v-if="!checked" class="col-6">
+                                    <div class="row">
+                                        <Droparea @droparea:select="selectZIP" @droparea:clear="clearZIP" @droparea:remove="removeZIP" chooseMessage="Choose ZIP file" accept=".zip" infoMessage="Please upload here your dataset as zip file." />
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="row">
-                                        <Droparea @droparea:select="selectCSV" @droparea:clear="clearCSV" @droparea:remove="removeCSV" chooseMessage="Choose CSV file" accept=".csv" infoMessage="Please upload here your CSV file."/>
+                                        <Droparea @droparea:select="selectCSV" @droparea:clear="clearCSV" @droparea:remove="removeCSV" chooseMessage="Choose CSV file" accept=".csv" infoMessage="Please upload here your CSV file." />
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +103,7 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                
+
             </div>
         </div>
         <div class="row">
@@ -97,10 +113,6 @@
                 <Table :data="tableData" :isScrollable="false"></Table>
             </div>
         </div>
-
-        <div v-for="d in dataFiles" class="row" :key="d">
-            <p class="h4 text-gradient text-primary">Shared datasets</p>
-        </div>
     </div>
 </div>
 </template>
@@ -108,20 +120,23 @@
 <script>
 import Table from '../components/widgets/Table.vue'
 import Droparea from '../components/Droparea.vue'
+import Checkbox from 'primevue/checkbox'
 
 export default {
     name: "DatasetsView",
     components: {
         Table,
         Droparea,
+        Checkbox,
     },
     data() {
         return {
             datasetName: "Insert dataset name here",
             taskType: "sa",
             language: "fr",
-            dataFiles: null,
+            zipFile: null,
             csvFile: null,
+            checked: false,
 
             // TODO: get this from the backend
             tasks: {
@@ -246,26 +261,18 @@ export default {
         }
 
     },
-    watch: {
-        dataFiles: function (newVal, oldVal) {
-            console.log("dataFiles changed");
-            console.log("newVal: ", newVal);
-            console.log("oldVal: ", oldVal);
-        },
-    },
     methods: {
-        selectFiles(event) {
-            console.log("selectFiles", event.files);
-            this.dataFiles = [...event.files];
+        selectZIP(event) {
+            console.log("selectZIP");
+            this.zipFile = [...event.files][0];
         },
-        clearFiles() {
-            console.log("clearFiles");
-            this.dataFiles = null;
+        clearZIP() {
+            console.log("clearZIP");
+            this.zipFile = null;
         },
-        removeFile(event) {
-            console.log("Before: ", this.dataFiles);
-            this.dataFiles = [...event.files];
-            console.log("After: ", this.dataFiles);
+        removeZIP(event) {
+            console.log("removeZIP");
+            this.zipFile = null;
         },
         selectCSV(event) {
             console.log("selectCSV");
@@ -279,12 +286,24 @@ export default {
             console.log("removeCSV");
             this.csvFile = null;
         },
-        importDataset() {
-            // console.log(this.datasetName);
-            // console.log(this.taskType);
-            // console.log(this.language);
-            console.log(this.dataFiles);
-            console.log(this.csvFile);
+        async importDataset() {
+            const data = {
+                lang: this.language,
+                name: this.datasetName,
+                task: this.taskType,
+                zipfile: this.zipFile,
+                csvfile: this.csvFile,
+            };
+
+            // axios.post('/services/datasets/add', data)
+            //     .then(response => {
+            //         console.log(response);
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+                    
+            //     });
+            console.log(data);
         }
     }
 }
@@ -299,7 +318,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     overflow-y: auto;
     max-height: 70%;
 }
