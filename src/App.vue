@@ -20,6 +20,9 @@ import { CSCL_SERVICE } from "./services/cscl-service.interface";
 import { MockCsclService } from "./services/mock-cscl-service";
 import { CsclService } from "./services/cscl-service";
 
+import { DATASETS_SERVICE } from "./services/datasets-service.interface";
+import { DatasetsService } from "./services/datasets-service";
+
 export default {
   name: "app",
   components: {
@@ -32,6 +35,7 @@ export default {
      */
     provide(CSCL_SERVICE, new CsclService());
     //provide(CSCL_SERVICE, new MockCsclService());
+    provide(DATASETS_SERVICE, new DatasetsService());
   },
 };
 </script>

@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
-                                                <input type="text" class="form-control" v-model="datasetName">
+                                                <input type="text" class="form-control" v-model="datasetName" placeholder="Insert Dataset Name Here">
                                             </div>
                                         </div>
                                     </div>
@@ -34,10 +34,8 @@
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
-                                                <select class="form-control" name="task-button" id="task-button" v-model="taskType">
-                                                    <option value="sa" selected>SA</option>
-                                                    <option value="sum" selected>SUM</option>
-                                                    <option value="tc">Text Classification</option>
+                                                <select class="form-control" name="language-button" id="language-button" v-model="task">
+                                                    <option v-for="t of tasks" :key="t" :value="t">{{t}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -53,8 +51,8 @@
                                         </div>
                                         <div class="col-10">
                                             <div class="input-group mb-4">
-                                                <select class="form-control" name="language-button" id="language-button" v-model="language">
-                                                    <option v-for="{name, value} of tasks[taskType]['languages']" :key="value" :value="value">{{name}}</option>
+                                                <select class="form-control" name="language-button" id="language-button" v-model="langID">
+                                                    <option v-for="{id, label} of languages" :key="id" :value="id">{{label}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -118,9 +116,16 @@
 </template>
 
 <script>
+import {
+    inject
+} from 'vue';
 import Table from '../components/widgets/Table.vue'
 import Droparea from '../components/Droparea.vue'
 import Checkbox from 'primevue/checkbox'
+
+import {
+    DATASETS_SERVICE
+} from "../services/datasets-service.interface";
 
 export default {
     name: "DatasetsView",
@@ -131,60 +136,52 @@ export default {
     },
     data() {
         return {
-            datasetName: "Insert dataset name here",
-            taskType: "sa",
-            language: "fr",
+            datasetName: null,
+            task: "Text Classification",
+            langID: 2,
             zipFile: null,
             csvFile: null,
             checked: false,
+            datasetService: null,
 
             // TODO: get this from the backend
-            tasks: {
-                sa: {
-                    input: ["file", "text/xml"],
-                    languages: [{
-                            name: "French",
-                            value: "fr"
-                        },
-                        {
-                            name: "English",
-                            value: "en"
-                        },
-                        {
-                            name: "Romanian",
-                            value: "ro"
-                        }
-                    ]
+            tasks: ["Text Classification", "Summarization", "Sentiment Analysis"],
+
+            // TODO: get this from the backend
+            languages: [{
+                    "id": 1,
+                    "label": "EN"
                 },
-                tc: {
-                    input: ["folder", null],
-                    languages: [{
-                            name: "French",
-                            value: "fr"
-                        },
-                        {
-                            name: "English",
-                            value: "en"
-                        }
-                    ]
+                {
+                    "id": 2,
+                    "label": "FR"
                 },
-                sum: {
-                    input: ["file", "text/xml"],
-                    languages: [{
-                            name: "French",
-                            value: "fr"
-                        },
-                        {
-                            name: "English",
-                            value: "en"
-                        },
-                        {
-                            name: "Romanian",
-                            value: "ro"
-                        }
-                    ]
+                {
+                    "id": 3,
+                    "label": "RO"
                 },
-            },
+                {
+                    "id": 4,
+                    "label": "ES"
+                },
+                {
+                    "id": 5,
+                    "label": "DE"
+                },
+                {
+                    "id": 6,
+                    "label": "RU"
+                },
+                {
+                    "id": 7,
+                    "label": "IT"
+                },
+                {
+                    "id": 8,
+                    "label": "NL"
+                }
+            ],
+
             // TODO: get this from the backend
             tableData: {
                 columns: [{
@@ -261,49 +258,54 @@ export default {
         }
 
     },
+    created() {
+        this.datasetService = inject(DATASETS_SERVICE);
+    },
     methods: {
         selectZIP(event) {
-            console.log("selectZIP");
             this.zipFile = [...event.files][0];
         },
         clearZIP() {
-            console.log("clearZIP");
             this.zipFile = null;
         },
         removeZIP(event) {
-            console.log("removeZIP");
             this.zipFile = null;
         },
         selectCSV(event) {
-            console.log("selectCSV");
             this.csvFile = [...event.files][0];
         },
         clearCSV() {
-            console.log("clearCSV");
             this.csvFile = null;
         },
         removeCSV(event) {
-            console.log("removeCSV");
             this.csvFile = null;
         },
         async importDataset() {
+            if (!this.langID || !this.datasetName || !this.task || !this.zipFile || !this.csvFile) {
+                alert("Missing parameters");
+                return;
+            }
+
             const data = {
-                lang: this.language,
+                lang: this.langID,
                 name: this.datasetName,
-                task: this.taskType,
+                task: this.task,
                 zipfile: this.zipFile,
                 csvfile: this.csvFile,
             };
 
-            // axios.post('/services/datasets/add', data)
-            //     .then(response => {
-            //         console.log(response);
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-                    
-            //     });
             console.log(data);
+
+            await this.datasetService.importDataset(data)
+                .then((response) => {
+                    // TODO: change with toast
+                    alert("Server response: " + response);
+                })
+                .catch((error) => {
+                    // TODO: change with toast
+                    alert("Error: " + error);
+                    console.log(error);
+                });
         }
     }
 }
