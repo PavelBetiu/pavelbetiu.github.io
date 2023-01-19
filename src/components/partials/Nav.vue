@@ -44,12 +44,6 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon me-2" href="/processingqueue">
-              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Processing Queue">Processing Queue</p>
-            </a>
-          </li>
-
           <li class="nav-item ms-lg-auto">
             <a class="nav-link nav-link-icon me-2" href="https://huggingface.co/readerbench" target="_blank" >
               <img src="../../assets/images/huggingface_logo-noborder.svg" style="width:20px;height:20px;">
