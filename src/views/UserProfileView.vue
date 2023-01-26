@@ -23,6 +23,24 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
+                    <h5>Country</h5>
+                    <Dropdown v-model="selectedCountry" :options="countries" optionLabel="name" :filter="true" placeholder="Select a Country" :showClear="true">
+                        <template #value="slotProps">
+                            <div class="country-item country-item-value" v-if="slotProps.value">
+                                <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" />
+                                <div>{{slotProps.value.name}}</div>
+                            </div>
+                            <span v-else>
+                                {{slotProps.placeholder}}
+                            </span>
+                        </template>
+                        <template #option="slotProps">
+                            <div class="country-item">
+                                <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" />
+                                <div>{{slotProps.option.name}}</div>
+                            </div>
+                        </template>
+                    </Dropdown>
                     <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
                 </div>
                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
@@ -44,14 +62,35 @@ export default {
     name: "UserProfileView",
     data() {
         return {
-        };
+            selectedCity1: null,
+            selectedCity2: null,
+            selectedCountry: null,
+            selectedGroupedCity: null,
+            selectedItem1: null,
+            selectedItem2: null,
+            loading: false,
+            countries: [
+                {name: 'Australia', code: 'AU'},
+                {name: 'Brazil', code: 'BR'},
+                {name: 'China', code: 'CN'},
+                {name: 'Egypt', code: 'EG'},
+                {name: 'France', code: 'FR'},
+                {name: 'Germany', code: 'DE'},
+                {name: 'India', code: 'IN'},
+                {name: 'Japan', code: 'JP'},
+                {name: 'Spain', code: 'ES'},
+                {name: 'United States', code: 'US'}
+            ],
+            items: Array.from({ length: 100000 }, (_, i) => ({ label: `Item #${i}`, value: i })),
+            lazyItems: Array.from({ length: 100000 })
+        }
     }
 };
 </script>
 
 <style>
 body {
-    background: rgb(99, 39, 120)
+    background: #421137
 }
 
 .form-control:focus {

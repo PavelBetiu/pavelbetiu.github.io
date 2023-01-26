@@ -17,6 +17,7 @@ import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 import TieredMenu from 'primevue/tieredmenu';
 import Button from 'primevue/button';
+import Dropdown from 'primevue/dropdown';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -40,6 +41,7 @@ createApp(App)
   .component('TieredMenu', TieredMenu)
   .component('DataTable', DataTable)
   .component('Column', Column)
+  .component('Dropdown', Dropdown)
   .use(PrimeVue)
   .use(store)
   .use(router)
