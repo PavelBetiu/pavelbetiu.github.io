@@ -26,7 +26,7 @@ export default {
         Table,
     },
     created() {
-        this.tableContent = ProcessingQueueService.getProcessingQueueData();
+        this.tableContent = ProcessingQueueService.getJobsData();
     },
     computed: {
         tableData: {
