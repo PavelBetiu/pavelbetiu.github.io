@@ -2,7 +2,7 @@ import { InjectionKey } from 'vue';
 import { ImportDatasetResponse } from '@/data-objects/datasets-dtos';
 
 export interface ImportDatasetRequest {
-    lang: string;
+    lang: string; // TODO; Change to id of language
     name: string;
     task: string;
     zipfile: File;

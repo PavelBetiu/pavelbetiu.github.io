@@ -32,6 +32,7 @@
                                         <div class="col-2">
                                             <label>Task type</label>
                                         </div>
+                                        <!-- TODO: Use an AutoComplete textbox instead -->
                                         <div class="col-10">
                                             <div class="input-group mb-4">
                                                 <select class="form-control" name="language-button" id="language-button" v-model="task">
