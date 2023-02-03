@@ -34,10 +34,8 @@
                                         </div>
                                         <!-- TODO: Use an AutoComplete textbox instead -->
                                         <div class="col-10">
-                                            <div class="input-group mb-4">
-                                                <select class="form-control" name="language-button" id="language-button" v-model="task">
-                                                    <option v-for="t of tasks" :key="t" :value="t">{{t}}</option>
-                                                </select>
+                                            <div class="input-group mb-4" id="task_autocom" >
+                                                <AutoComplete v-model="task" :suggestions="filteredTasks" @complete="searchTask($event)"/>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +51,7 @@
                                         <div class="col-10">
                                             <div class="input-group mb-4">
                                                 <select class="form-control" name="language-button" id="language-button" v-model="langID">
-                                                    <option v-for="{id, label} of languages" :key="id" :value="id">{{label}}</option>
+                                                    <option class="language-select" v-for="{id, label} of languages" :key="id" :value="id">{{label}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -112,6 +110,7 @@
                 <Table :data="tableData" :isScrollable="false"></Table>
             </div>
         </div>
+
     </div>
 </div>
 </template>
@@ -123,10 +122,14 @@ import {
 import Table from '../components/widgets/Table.vue'
 import Droparea from '../components/Droparea.vue'
 import Checkbox from 'primevue/checkbox'
+import AutoComplete from 'primevue/autocomplete'
 
 import {
     DATASETS_SERVICE
 } from "../services/datasets-service.interface";
+import {
+    convertDatasetsToTableInput
+} from "@/utils/data-converters-utils"
 
 export default {
     name: "DatasetsView",
@@ -134,133 +137,49 @@ export default {
         Table,
         Droparea,
         Checkbox,
+        AutoComplete
     },
     data() {
         return {
+            datasetService: null,
+
             datasetName: null,
-            task: "Text Classification",
+            task: null,
             langID: 2,
             zipFile: null,
             csvFile: null,
             checked: false,
-            datasetService: null,
-
-            // TODO: get this from the backend
+            
             tasks: ["Text Classification", "Summarization", "Sentiment Analysis"],
+            languages: [],
+            tableData: [],
 
-            // TODO: get this from the backend
-            languages: [{
-                    "id": 1,
-                    "label": "EN"
-                },
-                {
-                    "id": 2,
-                    "label": "FR"
-                },
-                {
-                    "id": 3,
-                    "label": "RO"
-                },
-                {
-                    "id": 4,
-                    "label": "ES"
-                },
-                {
-                    "id": 5,
-                    "label": "DE"
-                },
-                {
-                    "id": 6,
-                    "label": "RU"
-                },
-                {
-                    "id": 7,
-                    "label": "IT"
-                },
-                {
-                    "id": 8,
-                    "label": "NL"
-                }
-            ],
-
-            // TODO: get this from the backend
-            tableData: {
-                columns: [{
-                        displayName: 'Name',
-                        key: 'name',
-                    },
-                    {
-                        displayName: 'Task type',
-                        key: 'taskType',
-                    },
-                    {
-                        displayName: 'Language',
-                        key: 'language',
-                    },
-                    {
-                        displayName: 'Number of tasks',
-                        key: 'numberOfTasks',
-                    },
-                    {
-                        displayName: 'Number of entries',
-                        key: 'numberOfEntries',
-                    },
-                    {
-                        displayName: 'Actions',
-                        key: 'actions',
-                    },
-                ],
-                rows: [{
-                        name: 'Dataset 1',
-                        taskType: 'CSCL',
-                        language: 'French',
-                        numberOfTasks: 100,
-                        numberOfEntries: 1000,
-                        actions: [{
-                                name: 'Edit',
-                                icon: 'fas fa-edit',
-                                action: () => {
-                                    console.log('Edit')
-                                }
-                            },
-                            {
-                                name: 'Delete',
-                                icon: 'fas fa-trash',
-                                action: () => {
-                                    console.log('Delete')
-                                }
-                            },
-                        ]
-                    },
-                    {
-                        name: 'Dataset 2',
-                        taskType: 'Text Classification',
-                        language: 'English',
-                        numberOfTasks: 100,
-                        numberOfEntries: 1000,
-                        actions: [{
-                                name: 'Edit',
-                                icon: 'fas fa-edit',
-                                action: () => {
-                                    console.log('Edit')
-                                }
-                            },
-                            {
-                                name: 'Delete',
-                                icon: 'fas fa-trash',
-                                action: () => {
-                                    console.log('Delete')
-                                }
-                            },
-                        ]
-                    }
-                ]
-            }
+            filteredTasks: []
         }
 
     },
     created() {
         this.datasetService = inject(DATASETS_SERVICE);
+
+        // Getting languages from the backend
+        this.datasetService.getLanguages().then((response) => {
+            this.languages = response['languages'];
+        }).catch((error) => alert("Error: " + error));
+
+        // Getting datasets from the backend
+        this.datasetService.getDatasets().then((response) => {
+            let datasetActions = [{
+                name: 'Process',
+                class: 'bg-gradient-primary',
+                action: this.processDataset
+            }, {
+                name: 'Delete',
+                class: 'btn-outline-danger',
+                action: this.deleteDataset
+            }, ]
+
+            this.tableData = convertDatasetsToTableInput(response['datasets'], this.languages, datasetActions);
+        }).catch((error) => alert("Error: " + error));
     },
     methods: {
         selectZIP(event) {
@@ -300,18 +219,36 @@ export default {
             await this.datasetService.importDataset(data)
                 .then((response) => {
                     // TODO: change with toast
-                    alert("Server response: " + response);
+                    alert("Server response ok");
                 })
                 .catch((error) => {
                     // TODO: change with toast
                     alert("Error: " + error);
-                    console.log(error);
                 });
+        },
+        async processDataset(id) {
+            // TODO: implement using the dataset service\
+            alert(`Process dataset with id ${id}`)
+        },
+        async deleteDataset(id) {
+            // TODO: implement using the dataset service
+            alert(`Delete dataset with id ${id}`)
+        },
+        searchTask(event) {
+            if (event.query.trim().length == 0) {
+                this.filteredTasks = [...this.tasks];
+            }
+            else {
+                this.filteredTasks = this.tasks.filter((task) => {
+                    return task.toLowerCase().startsWith(event.query.toLowerCase());
+                });
+            }
         }
     }
 }
 </script>
 
+<!-- Added "module" attribute to limit CSS to this component only -->
 <style module>
 .body {
     background-color: #f8f9fa;
@@ -325,4 +262,42 @@ export default {
     overflow-y: auto;
     max-height: 70%;
 }
+
+</style>
+
+<style>
+#task_autocom .p-component {
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+#task_autocom input:hover {
+    border: 1px solid #d2d6da;
+}
+
+#task_autocom input.p-inputtext {
+    padding: 0.5rem 0.75rem;
+    font-family: none;
+    font-size: 0.875rem;
+}
+
+#task_autocom input.p-inputtext:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #e293d3;
+  outline: 0;
+  box-shadow: 0 0 0 2px #e9aede;
+}
+
+.p-autocomplete-panel {
+    font-family: none;
+    font-size: 0.875rem;
+    border-radius: 0.5rem;
+}
+
+.language-select {
+    background: #e293d3;
+    border-color: aquamarine;
+}
+
 </style>

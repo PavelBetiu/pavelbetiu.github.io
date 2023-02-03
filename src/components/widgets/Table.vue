@@ -6,7 +6,14 @@
       :header="col.displayName"
       :key="col.key"
       :sortable="true"
-    ></p-column>
+    >
+      <template v-if="col.key == 'datasetActions'" #body="{data}">
+        <!-- For each row, we need to render a button for each action -->
+        <span v-for="action of data.datasetActions" :key="action.name">
+          <button :class="'btn '+ action.class + ' m-1'" @click="action.action(data.id)"> {{ action.name }} </button>
+        </span>
+      </template>
+  </p-column>
   </p-datatable>
 </template>
 

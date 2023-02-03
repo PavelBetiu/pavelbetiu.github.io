@@ -1,8 +1,17 @@
 import axios from 'axios';
-import { ImportDatasetResponse } from '@/data-objects/datasets-dtos';
-import { IDatasetsService, ImportDatasetRequest } from "./datasets-service.interface";
+import { GetDatasetLanguagesResponse, GetDatasetsResponse, ImportDatasetResponse, ProcessDatasetResponse } from '@/data-objects/datasets-dtos';
+import { IDatasetsService, ImportDatasetRequest, ProcessDatasetRequest } from "./datasets-service.interface";
 
 export class DatasetsService implements IDatasetsService {
+  public async getDatasets(): Promise<GetDatasetsResponse> {
+    const response = await axios.post('/services/datasets', {});
+    return response.data;
+  }
+
+  public async getLanguages(): Promise<GetDatasetLanguagesResponse> {
+    const response = await axios.post('/services/languages', {});
+    return response.data;
+  }
 
   public async importDataset(request: ImportDatasetRequest): Promise<ImportDatasetResponse> {
     const data = new FormData();
@@ -15,4 +24,9 @@ export class DatasetsService implements IDatasetsService {
     return response.data;
   }
 
+  public async processDataset(request: ProcessDatasetRequest): Promise<ProcessDatasetResponse> {
+    const data = new FormData();
+    // TODO: Add other parameters
+    return await axios.post('TODO: PUT URL HERE', request);
+  }
 }
