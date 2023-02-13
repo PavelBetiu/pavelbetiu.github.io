@@ -1,7 +1,7 @@
 <template>
-<div :class="$style['body']">
+<div :class="$style['body']" :key="refreshPage">
     <div class="container">
-        <div class="row">
+        <div id="dataset-import-form" class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8 d-flex justify-content-center flex-column">
                 <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
@@ -62,7 +62,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <div class="row">
-                                        <div class="col-4">
+                                        <div class="col-5">
                                             <label>CSV only?</label>
                                         </div>
                                         <div class="col-2">
@@ -154,7 +154,8 @@ export default {
             languages: [],
             tableData: [],
 
-            filteredTasks: []
+            filteredTasks: [],
+            refreshPage: 0,
         }
 
     },
@@ -220,7 +221,8 @@ export default {
             await this.datasetService.importDataset(data)
                 .then((response) => {
                     // TODO: change with toast
-                    alert("Server response ok");
+                    //alert("Server response ok");
+                    this.clear();
                 })
                 .catch((error) => {
                     // TODO: change with toast
@@ -244,7 +246,18 @@ export default {
                     return task.toLowerCase().startsWith(event.query.toLowerCase());
                 });
             }
-        }
+        },
+        clear() {
+            this.refreshPage = this.refreshPage + 1 % 2;
+
+            this.datasetName = null;
+            this.task = null;
+            this.langID = 2;
+            this.zipFile = null;
+            this.csvFile = null;
+            this.checked = false;
+
+        },
     }
 }
 </script>
@@ -278,7 +291,6 @@ export default {
 
 #task_autocom input.p-inputtext {
     padding: 0.5rem 0.75rem;
-    font-family: none;
     font-size: 0.875rem;
 }
 
@@ -291,14 +303,16 @@ export default {
 }
 
 .p-autocomplete-panel {
-    font-family: none;
     font-size: 0.875rem;
     border-radius: 0.5rem;
 }
 
 .language-select {
-    background: #e293d3;
-    border-color: aquamarine;
+    background: #fff;
+}
+
+#dataset-import-form input, select, p, span, label {
+    font-family: sans-serif;
 }
 
 </style>
