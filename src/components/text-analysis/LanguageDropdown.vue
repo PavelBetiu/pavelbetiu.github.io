@@ -1,6 +1,6 @@
 <template>
-<div class="card p-4">
-    <div class="input-group my-6">
+<div class="card p-3">
+    <div class="input-group mb-6">
         <div class="row w-100">
             <div class="col-12 ml-3">
                 <label>Select language:</label>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="list-group">
+    <div class="list-group p-3">
         <a v-for="{id, name, isActive} of getTasksByLanguage(langID)" :key="id" href="javascript:;" @click="selectTask(id)" :class="'list-group-item list-group-item-action ' + active(isActive)">
             {{ name }}
         </a>
@@ -36,6 +36,7 @@
 
 <script>
 import Dropdown from 'primevue/dropdown';
+
 export default {
     name: 'LanguageDropdown',
     props: {
@@ -109,8 +110,6 @@ export default {
     },
     methods: {
         selectTask(id) {
-            alert(id);
-
             this.tasks.forEach(task => {
                 if (task.id == id) {
                     task.isActive = true;
@@ -119,7 +118,6 @@ export default {
                 }
             });
 
-            //TODO: send task id to parent component by calling a method received from parent as prop
             this.selectedTask(id);
 
         },

@@ -52,16 +52,6 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/Register.vue')
-  },
-  {
-    path: '/textanalysis',
-    name: 'textanalysis',
-    component: () => import('@/components/text-analysis/LanguageDropdown.vue')
-  }
 ]
 
 const router = createRouter({

@@ -1,12 +1,15 @@
 <template>
-
-<!--a button -->
-<button @click="selectTask">Click me</button>
-
+	<div class="w-100 p-5 my-8 mx-6">
+		<div class="row w-100">
+			<LanguageDropdown class="w-25" :selectedTask="selectTask"></LanguageDropdown>
+		</div>
+	</div>
+	<!--de gasit o alta varianta in afara de br-->
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import LanguageDropdown from '@/components/text-analysis/LanguageDropdown.vue';
 
 export default {
 	name: "TextAnalysisView",
@@ -15,6 +18,7 @@ export default {
 	},
 	components: {
 		//TODO: add components here: language dropdown, task selector and text input
+		LanguageDropdown
 	},
 	methods: {
 		selectTask(id) {
