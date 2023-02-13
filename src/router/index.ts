@@ -5,6 +5,11 @@ import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/text-analysis',
+    name: 'text-analysis',
+    component: () => import('@/views/TextAnalysisView.vue')
+  },
+  {
     path: '/',
     name: 'home',
     component: HomeView

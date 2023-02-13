@@ -33,6 +33,12 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link nav-link-icon me-2" href="/text-analysis">
+              <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Text Analysis">Text Analysis</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link nav-link-icon me-2" href="/people">
               <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="People">People</p>
             </a>
