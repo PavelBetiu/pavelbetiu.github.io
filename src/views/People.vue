@@ -370,10 +370,21 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/razvanparoiu.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Razvan Paroiu</h4>
                                 <h5 class="mt-3">PhD Student</h5>
+                                <a href="https://www.linkedin.com/in/razvan-paroiu-aa9673100/?originalSubdomain=ro" class="mr-4">
+                                    <svg width="30" height="30" style="color: blue" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" fill="blue"></path>
+                                    </svg>
+                                </a>
+                                <a href="https://www.researchgate.net/profile/Razvan-Paroiu" class="mr-4">
+                                    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                        <path d="M0 32v448h448V32H0zm262.2 334.4c-6.6 3-33.2 6-50-14.2-9.2-10.6-25.3-33.3-42.2-63.6-8.9 0-14.7 0-21.4-.6v46.4c0 23.5 6 21.2 25.8 23.9v8.1c-6.9-.3-23.1-.8-35.6-.8-13.1 0-26.1.6-33.6.8v-8.1c15.5-2.9 22-1.3 22-23.9V225c0-22.6-6.4-21-22-23.9V193c25.8 1 53.1-.6 70.9-.6 31.7 0 55.9 14.4 55.9 45.6 0 21.1-16.7 42.2-39.2 47.5 13.6 24.2 30 45.6 42.2 58.9 7.2 7.8 17.2 14.7 27.2 14.7v7.3zm22.9-135c-23.3 0-32.2-15.7-32.2-32.2V167c0-12.2 8.8-30.4 34-30.4s30.4 17.9 30.4 17.9l-10.7 7.2s-5.5-12.5-19.7-12.5c-7.9 0-19.7 7.3-19.7 19.7v26.8c0 13.4 6.6 23.3 17.9 23.3 14.1 0 21.5-10.9 21.5-26.8h-17.9v-10.7h30.4c0 20.5 4.7 49.9-34 49.9zm-116.5 44.7c-9.4 0-13.6-.3-20-.8v-69.7c6.4-.6 15-.6 22.5-.6 23.3 0 37.2 12.2 37.2 34.5 0 21.9-15 36.6-39.7 36.6z" /></svg>
+                                </a>
                             </div>
+                            
                             <hr class="vertical dark">
                         </div>
 
@@ -447,7 +458,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/Teo.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Teodor Neacsu</h4>
                                 <h5 class="mt-3">MSc Student</h5>
                             </div>
