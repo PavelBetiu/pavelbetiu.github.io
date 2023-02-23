@@ -57,13 +57,17 @@ import {
     inject
 } from 'vue';
 
+import {
+  TOAST_SERVICE
+} from "@/services/toast-service.interface"
+
 export default {
   name: "Login",
   data() {
     return {
       username: '',
       password: '',
-      toastService: inject('TOAST_SERVICE'),
+      toastService: inject(TOAST_SERVICE),
     };
   },
   methods: {
@@ -72,7 +76,14 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({username: this.username, password: this.password}, redirect, this.toastService);
+      
+      auth.login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
+    },
+    onLoginSuccess(response) {
+      this.toastService && this.toastService.success('Welcome to ReaderBench!', response.data.user.username);
+    },
+    onLoginFail(error) {
+      this.toastService && this.toastService.error(error.response.data.error_description, 'Login failed');
     },
     submitForm(e) {
       const formData = {

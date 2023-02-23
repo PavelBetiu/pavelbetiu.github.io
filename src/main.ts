@@ -12,6 +12,11 @@ import './assets/css/nucleo-icons.css';
 import './assets/css/nucleo-svg.css';
 import './assets/css/soft-design-system.css?v=1.0.9';
 
+/* Required imports for PrimeVue Toast */
+import PrimeVue from 'primevue/config';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
@@ -27,18 +32,18 @@ library.add(faInstagram);
 library.add(faTwitter);
 library.add(faGithub);
 
-import PrimeVueToastService from './services/prime-vue-toast-service';
-
 httpInterceptor();
 
 createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
-  /* PrimeVue Toast Service is a wrapper around PrimeVue Toast component.
-  It is a plugin that can be used in any component */
-  .use(PrimeVueToastService)
+
+  // Required for PrimeVue Toast
+  .component('Toast', Toast)
+  .use(PrimeVue)
+  .use(ToastService)
+
   .use(store)
   .use(router)
   .mount('#app')
-

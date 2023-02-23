@@ -1,15 +1,20 @@
 import { isNil } from 'lodash';
 import router from '@/router';
 import axios from 'axios';
-import { IToastService } from './toast-service.interface';
+
+interface Callback {
+  (message: any): void;
+}
 
 export default {
+
   isAuthenticated() {
     const user = localStorage.getItem('user');
     return !isNil(user);
   },
 
-  login(creds, redirect: string, toastService?: IToastService) {
+  login(creds, redirect: string, onSuccess: Callback, onError: Callback) {
+
     const user = {
       grant_type: "password",
       client_id: "8okRYORQww9VK0x3UTHAe8rl0dDvCUL6s3d6T43z",
@@ -27,15 +32,11 @@ export default {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-
-      // If defined, use the toast service to display a success message
-      toastService && toastService.success('Welcome to ReaderBench!', 'Successfully logged in');
       
-      console.log(response);
+      onSuccess(response);
     })
     .catch(error => {
-      // If defined, use the toast service to display an error message
-      toastService && toastService.error(error.response.data.error_description, 'Login failed');
+      onError(error);
     })
   },
 

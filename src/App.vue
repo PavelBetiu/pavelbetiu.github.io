@@ -15,7 +15,8 @@
 
 <script>
 import {
-    provide
+    provide,
+    getCurrentInstance
 } from "vue";
 import Nav from "./components/partials/Nav.vue";
 import Footer from "./components/partials/Footer.vue";
@@ -31,6 +32,13 @@ import {
 } from "./services/cscl-service";
 
 import {
+    TOAST_SERVICE
+} from "./services/toast-service.interface";
+import {
+    PrimeVueToastService
+} from "./services/prime-vue-toast-service";
+
+import {
     createApp
 } from 'vue';
 import {
@@ -44,11 +52,13 @@ export default {
         Footer
     },
     setup() {
+        const app = getCurrentInstance().appContext.app;
         /**
          * Services injected via DI.
          */
         provide(CSCL_SERVICE, new CsclService());
-        //provide(CSCL_SERVICE, new MockCsclService());
+        //provide(CSCL_SERVICE, new MockCsclService()); 
+        provide(TOAST_SERVICE, new PrimeVueToastService(app));
     },
 };
 </script>

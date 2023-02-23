@@ -1,14 +1,6 @@
-import PrimeVue from 'primevue/config';
-import "primevue/resources/themes/saga-blue/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-
-import Toast from 'primevue/toast';
-import ToastService from 'primevue/toastservice';
-
 import { IToastService } from './toast-service.interface';
 
-class PrimeVueToastService implements IToastService {
+export class PrimeVueToastService implements IToastService {
     toast: any;
     
     constructor(app: any) {
@@ -27,12 +19,3 @@ class PrimeVueToastService implements IToastService {
         this.toast.add({ severity: 'info', summary: title, detail: message, life: 3000 });
     }
 }
-
-export default {
-    install: (app, options) => {
-        app.component('Toast', Toast)
-            .use(PrimeVue)
-            .use(ToastService)
-            .provide('TOAST_SERVICE', new PrimeVueToastService(app));
-    },
-};
