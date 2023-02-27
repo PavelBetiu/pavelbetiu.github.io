@@ -13,6 +13,15 @@
           <button :class="'btn '+ action.class + ' m-1'" @click="action.action(data.id)"> {{ action.name }} </button>
         </span>
       </template>
+
+      <template v-else-if="col.key == 'model_action'" #body="{data}">
+        <!-- For each row, we need to render a button for each action -->
+        <div>
+          <div class="row" v-for="action of data.model_action" :key="action.name">
+            <button :class="'btn btn-sm '+ action.styleClass + ' m-1'" @click="action.action(data.id)"> {{ action.name }} </button>
+          </div>
+        </div>
+      </template>
   </p-column>
   </p-datatable>
 </template>
