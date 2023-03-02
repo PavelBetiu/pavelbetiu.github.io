@@ -47,6 +47,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
+  {
+    path: '/generate-questions',
+    name: 'generateQuestions',
+    component: () => import('@/components/tutor/GenerateQuestions.vue'),
+  }
 ]
 
 const router = createRouter({
