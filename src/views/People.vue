@@ -47,7 +47,7 @@
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
                                 <Spinner name="ball-spin-fade-loader" color="#000" :scale="0.5" />
-                                <img src="../assets/images/mihaidascalu.jpg" class="img-fluid border-radius-lg" />
+                                <img src="../assets/images/MihaiDascalu.jpg" width="200" height="200" class="img-fluid border-radius-lg" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Mihai Dascalu</h4>
                                 <h5 class="mt-3">Professor</h5>
                                 <a href="https://www.linkedin.com/in/mihai-dascalu-8a57ab10a/" class="mr-4">
