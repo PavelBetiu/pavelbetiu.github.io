@@ -1,6 +1,7 @@
 <template>
 <div class="container p-9">
-    <div class="card shadow-lg">
+    <p class="h2 text-center">Processing Queue </p>
+    <div class="card shadow-lg mt-7">
         <Table :data="tableData" isScrollable="true" />
     </div>
 </div>
@@ -26,7 +27,9 @@ export default {
         Table,
     },
     created() {
-        this.tableContent = ProcessingQueueService.getJobsData();
+        ProcessingQueueService.getJobsData().then((data) => {
+            this.tableContent = data;
+        });
     },
     computed: {
         tableData: {

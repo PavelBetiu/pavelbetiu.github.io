@@ -279,18 +279,16 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
         ],
         rows: [],
     };
-    
-    for (const item of data.data) {
+    console.log(data);
+    for (const item of data['jobs']) {
         const dataset_row = {};
         dataset_row["params"] = item.params;
-        dataset_row["task_type"] = item.task_type;
+        dataset_row["task_type"] = item.type;
         dataset_row["time_submitted"] = item.time_submitted;
         dataset_row["processing_time"] = item.processing_time;
         dataset_row["status"] = item.status;
-
         input.rows.push(dataset_row as Record<string, unknown>);
     }
-
     return input;
 }
 

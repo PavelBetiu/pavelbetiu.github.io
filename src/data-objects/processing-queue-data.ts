@@ -1,13 +1,13 @@
 export interface ProcessingQueueItem {
   params: string,
-  task_type: string,
+  type: string,
   time_submitted: string,
   processing_time: string,
   status: string
 }
 
 export interface ProcessingQueueData {
-  data: ProcessingQueueItem[];
+  jobs: ProcessingQueueItem[];
 }
 
 export interface GetJobsDataResponseItem {
