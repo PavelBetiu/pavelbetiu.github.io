@@ -26,7 +26,7 @@ export class DatasetsService implements IDatasetsService {
 
   public async processDataset(request: ProcessDatasetRequest): Promise<ProcessDatasetResponse> {
     const data = new FormData();
-    // TODO: Add other parameters
-    return await axios.post('TODO: PUT URL HERE', request);
+    data.append('dataset_id', request.dataset_id.toString());
+    return await axios.post(`/services/datasets/${request.dataset_id}/process`, data);
   }
 }

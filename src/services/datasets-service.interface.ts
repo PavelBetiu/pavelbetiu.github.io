@@ -10,8 +10,7 @@ export interface ImportDatasetRequest {
 }
 
 export interface ProcessDatasetRequest {
-    datasetId: number;
-    // TODO: Add other parameters
+    dataset_id: number;
 }
 
 export interface IDatasetsService {

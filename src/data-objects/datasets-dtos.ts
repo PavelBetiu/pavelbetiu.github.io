@@ -3,8 +3,7 @@ export interface ImportDatasetResponse {
 }
 
 export interface ProcessDatasetResponse {
-    id: number;
-    // TODO: Add other parameters
+    id: number; // This is job id
 }
 
 export interface GetDatasetLanguagesResponse {

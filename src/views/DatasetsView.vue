@@ -203,7 +203,10 @@ export default {
         },
         // TODO: trigger page refresh after dataset import?
         async importDataset() {
-            if (!this.langID || !this.datasetName || !this.task || !this.zipFile || !this.csvFile) {
+            if (!this.checked && (!this.langID || !this.datasetName || !this.task || !this.zipFile || !this.csvFile)) {
+                alert("Missing parameters");
+                return;
+            } else if (this.checked && (!this.langID || !this.datasetName || !this.task || !this.csvFile)) {
                 alert("Missing parameters");
                 return;
             }
@@ -230,12 +233,21 @@ export default {
                 });
         },
         async processDataset(id) {
-            // TODO: implement using the dataset service\
-            alert(`Process dataset with id ${id}`)
+            const data = {
+                dataset_id: id
+            }
+
+            await this.datasetService.processDataset(data)
+                .then((response) => {
+                    alert("Server response ok: " + response.data.id);
+                })
+                .catch((error) => {
+                    alert("Error: " + error);
+                });
         },
         async deleteDataset(id) {
             // TODO: implement using the dataset service
-            alert(`Delete dataset with id ${id}`)
+            alert(`Delete dataset with id ${id}`);
         },
         searchTask(event) {
             if (event.query.trim().length == 0) {
