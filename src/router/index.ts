@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/people',
-    name: 'people' ,
+    name: 'people',
     component: () => import('../views/People.vue')
   },
   {
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
   {
-    path: '/processingqueue',
+    path: '/processing-queue',
     name: 'processingqueue',
     component: () => import('@/views/ProcessingQueueView.vue'),
   }
