@@ -1,9 +1,8 @@
 export interface ModelData {
     id: number,
-    dataset_label: string,
-    dataset_task_type: string,
-    model_type: string,
-    config: string,
+    params: string,
     metrics: string,
-    date: string,
+    dataset_id: number,
+    job_id: number,
+    type_id: number
 }

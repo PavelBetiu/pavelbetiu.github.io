@@ -30,7 +30,8 @@ export default {
       console.log(response)
     })
     .catch(error => {
-      alert(error.response.data.error_description);
+      console.log(error)
+      alert(error.message);
     })
   },
 
