@@ -22,7 +22,7 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login()">Sign in</button>
+                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login(), greet()">Sign in</button>
                   </div>
                 </form>
               </div>
@@ -62,12 +62,21 @@
 import auth from "@/services/auth";
 import axios from "axios";
 
+import {
+    inject
+} from 'vue';
+
+import {
+  TOAST_SERVICE
+} from "@/services/toast-service.interface"
+
 export default {
   name: "Login",
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      toastService: inject(TOAST_SERVICE),
     };
   },
   methods: {
@@ -76,7 +85,14 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({username: this.username, password: this.password}, redirect);
+      
+      auth.login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
+    },
+    onLoginSuccess(response) {
+      this.toastService && this.toastService.success('Welcome to ReaderBench!', response.data.user.username);
+    },
+    onLoginFail(error) {
+      this.toastService && this.toastService.error(error.response.data.error_description, 'Login failed');
     },
     submitForm(e) {
       const formData = {
@@ -99,7 +115,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
   },
 };
 </script>

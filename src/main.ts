@@ -3,7 +3,7 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
-import PrimeVue from 'primevue/config';
+
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { httpInterceptor } from './services/http-interceptor';
@@ -11,6 +11,11 @@ import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
 import './assets/css/nucleo-svg.css';
 import './assets/css/soft-design-system.css?v=1.0.9';
+
+/* Required imports for PrimeVue Toast */
+import PrimeVue from 'primevue/config';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
@@ -42,7 +47,12 @@ createApp(App)
   .component('DataTable', DataTable)
   .component('Column', Column)
   .component('Dropdown', Dropdown)
+
+  // Required for PrimeVue Toast
+  .component('Toast', Toast)
   .use(PrimeVue)
+  .use(ToastService)
+
   .use(store)
   .use(router)
-  .mount('#app');
+  .mount('#app')
