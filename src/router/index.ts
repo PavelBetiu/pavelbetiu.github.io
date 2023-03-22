@@ -28,6 +28,16 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Login.vue')
   },
   {
+    path: '/projects',
+    name: 'projects',
+    component: () => import('../views/ProjectsListView.vue')
+  },
+  {
+    path: '/projects/:link',
+    name: 'projectView',
+    component: () => import('../views/ProjectView.vue')
+  },
+  {
     path: '/contact',
     name: 'contact',
     component: () => import('../views/Contact.vue')
@@ -37,6 +47,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
+  {
+    path: '/processing-queue',
+    name: 'processingqueue',
+    component: () => import('@/views/ProcessingQueueView.vue'),
+  },
+  {
+    path: '/userprofile',
+    name: 'userprofileview',
+    component: () => import('@/views/UserProfileView.vue'),
+  }
 ]
 
 const router = createRouter({

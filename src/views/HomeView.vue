@@ -24,15 +24,22 @@
             <div class="row">
                 <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
                     <div class="row">
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-3 position-relative">
                             <div class="p-3 text-center">
                                 <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>40+</h1>
-                                <h5 class="mt-3">Years</h5>
-                                <p class="text-sm">Of combined experience in Artificial Intelligence and Natural Language Processing</p>
+                                <h5 class="mt-3">A & A* Conferences</h5>
+                                <p class="text-sm">(IJCAI, AAAI, ACL, EMNLP, CogSci, AIED, COLING)</p>
                             </div>
                             <hr class="vertical dark">
                         </div>
-                        <div class="col-md-4 position-relative">
+                        <div class="col-md-3 position-relative">
+                            <div class="p-3 text-center">
+                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>10+</h1>
+                                <h5 class="mt-3">Q1 Jounrals</h5>
+                            </div>
+                            <hr class="vertical dark">
+                        </div>
+                        <div class="col-md-3 position-relative">
                             <div class="p-3 text-center">
                                 <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">500</span>+</h1>
                                 <h5 class="mt-3">Publications</h5>
@@ -40,9 +47,9 @@
                             </div>
                             <hr class="vertical dark">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">50+</h1>
+                                <h1 class="text-gradient text-primary" id="state3" countTo="4">20+</h1>
                                 <h5 class="mt-3">Projects</h5>
                                 <p class="text-sm">Built using top edge tools and AI libraries</p>
                             </div>

@@ -1,0 +1,109 @@
+<template>
+<div class="row p-3 my-6 shadow rounded-3 has-background-white">
+    <div class="col d-flex justify-content-end pr-5">
+
+        <div :class="$style['image']">
+            <img :src="require(`@/assets/images/${data.image}`)" alt="ates" :class="['rounded', $style['zoom']]" />
+            <div :class="['rounded', 'bg-gradient-primary', $style['image-overlay']]">
+                <div :class="$style['image-description']">{{data.imageDescription}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-3">
+        <div class="row">
+            <div class="col">
+                <h6 class="card-title d-block text-darker pt-5 px-0">
+                    {{data.title}}
+                </h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <a :href="data.link">
+                    <button type="button" class="btn btn-outline-primary btn-lg m-3 shadow-pop">VIEW</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col ">
+        <div :class="$style['project-description']">
+            <p class="h6 text-center ">
+                {{data.description}}
+            </p>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+import { ProjectDTOShort } from "@/data-objects/project-dto";
+
+export default {
+    name: 'ProjectCard',
+    props: {
+        data: ProjectDTOShort,
+    }
+}
+</script>
+
+<style module>
+.image {
+    width: 450px;
+    height: 300px;
+    margin: 0 auto;
+    object-position: center;
+    transition: transform 0.15s;
+}
+
+.image:hover {
+    transform: scale(1.05);
+}
+
+.zoom {
+    width: 450px;
+    height: 300px;
+}
+
+.image-overlay {
+    position: relative;
+    top: -300px;
+    left: 0;
+    width: 450px;
+    height: 300px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.image-overlay>* {
+    transform: translateY(100px);
+    transition: transform 0.25s;
+    opacity: 1;
+}
+
+.image-overlay:hover {
+    opacity: 0.8;
+}
+
+.image-overlay:hover>* {
+    transform: translateY(0);
+}
+
+.image-description {
+    font-weight: bold;
+    padding: 0% 5% 5% 8%;
+}
+
+.project-description {
+    height: 300px;
+    overflow: auto;
+    display: block;
+    padding: 11% 6% 0% 0%;
+    margin: 0% 6% 0% 0%;
+    opacity: 0.6;
+}
+</style>
