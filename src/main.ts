@@ -4,8 +4,13 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 
+import PrimeVue from 'primevue/config';
+import Button from 'primevue/button';
+import TieredMenu from 'primevue/tieredmenu';
+
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
+import Avatar from 'primevue/avatar';
 import { httpInterceptor } from './services/http-interceptor';
 import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
@@ -13,15 +18,12 @@ import './assets/css/nucleo-svg.css';
 import './assets/css/soft-design-system.css?v=1.0.9';
 
 /* Required imports for PrimeVue Toast */
-import PrimeVue from 'primevue/config';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 
 import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
-import TieredMenu from 'primevue/tieredmenu';
-import Button from 'primevue/button';
 import Dropdown from 'primevue/dropdown';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -43,7 +45,10 @@ createApp(App)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
   .component('Button', Button)
+
   .component('TieredMenu', TieredMenu)
+  .component('Avatar', Avatar)
+
   .component('DataTable', DataTable)
   .component('Column', Column)
   .component('Dropdown', Dropdown)
@@ -55,4 +60,4 @@ createApp(App)
 
   .use(store)
   .use(router)
-  .mount('#app')
+  .mount('#app');
