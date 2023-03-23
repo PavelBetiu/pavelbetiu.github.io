@@ -47,7 +47,7 @@
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
                                 <Spinner name="ball-spin-fade-loader" color="#000" :scale="0.5" />
-                                <img src="../assets/images/mihaidascalu.jpg" class="img-fluid border-radius-lg" />
+                                <img src="../assets/images/MihaiDascalu.jpg" width="200" height="200" class="img-fluid border-radius-lg" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Mihai Dascalu</h4>
                                 <h5 class="mt-3">Professor</h5>
                                 <a href="https://www.linkedin.com/in/mihai-dascalu-8a57ab10a/" class="mr-4">
@@ -84,7 +84,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/stefanruseti2.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Stefan Ruseti</h4>
                                 <h5 class="mt-3">Lecturer</h5>
                                 <a href="https://www.linkedin.com/in/stefan-ruseti-97a011a1/" class="mr-4">
@@ -291,7 +291,7 @@
                             <div class="p-3 text-center">
                                 <img src="../assets/images/laurneagu.jpg" class="img-fluid border-radius-lg" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Laurentiu Neagu</h4>
-                                <h5 class="mt-3">PhD Student</h5>
+                                <h5 class="mt-3">PhD</h5>
                                 <a href="https://www.linkedin.com/in/laur-neagu-b338184b/" class="mr-4">
                                     <svg width="30" height="30" style="color: blue" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
                                         <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" fill="blue"></path>
@@ -363,17 +363,28 @@
                             <div class="p-3 text-center">
                                 <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Mihai Masala</h4>
-                                <h5 class="mt-3">PHD Student</h5>
+                                <h5 class="mt-3">PhD Student</h5>
                             </div>
                             <hr class="vertical dark">
                         </div>
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/razvanparoiu.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Razvan Paroiu</h4>
                                 <h5 class="mt-3">PhD Student</h5>
+                                <a href="https://www.linkedin.com/in/razvan-paroiu-aa9673100/?originalSubdomain=ro" class="mr-4">
+                                    <svg width="30" height="30" style="color: blue" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" fill="blue"></path>
+                                    </svg>
+                                </a>
+                                <a href="https://www.researchgate.net/profile/Razvan-Paroiu" class="mr-4">
+                                    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                        <path d="M0 32v448h448V32H0zm262.2 334.4c-6.6 3-33.2 6-50-14.2-9.2-10.6-25.3-33.3-42.2-63.6-8.9 0-14.7 0-21.4-.6v46.4c0 23.5 6 21.2 25.8 23.9v8.1c-6.9-.3-23.1-.8-35.6-.8-13.1 0-26.1.6-33.6.8v-8.1c15.5-2.9 22-1.3 22-23.9V225c0-22.6-6.4-21-22-23.9V193c25.8 1 53.1-.6 70.9-.6 31.7 0 55.9 14.4 55.9 45.6 0 21.1-16.7 42.2-39.2 47.5 13.6 24.2 30 45.6 42.2 58.9 7.2 7.8 17.2 14.7 27.2 14.7v7.3zm22.9-135c-23.3 0-32.2-15.7-32.2-32.2V167c0-12.2 8.8-30.4 34-30.4s30.4 17.9 30.4 17.9l-10.7 7.2s-5.5-12.5-19.7-12.5c-7.9 0-19.7 7.3-19.7 19.7v26.8c0 13.4 6.6 23.3 17.9 23.3 14.1 0 21.5-10.9 21.5-26.8h-17.9v-10.7h30.4c0 20.5 4.7 49.9-34 49.9zm-116.5 44.7c-9.4 0-13.6-.3-20-.8v-69.7c6.4-.6 15-.6 22.5-.6 23.3 0 37.2 12.2 37.2 34.5 0 21.9-15 36.6-39.7 36.6z" /></svg>
+                                </a>
                             </div>
+                            
                             <hr class="vertical dark">
                         </div>
 
@@ -388,7 +399,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/alexdima.jpg" class="img-fluid border-radius-lg" />
+                                <img src="../assets/images/AlexDima2.jpg" class="img-fluid border-radius-lg"  width="200" height="200"/>
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Alexandru Dima</h4>
                                 <h5 class="mt-3">MSc Student</h5>
                                 <a href="https://www.linkedin.com/in/dima-alexandru/" class="mr-4">
@@ -407,6 +418,11 @@
                                             <path fill="rgb(0%, 0%, 0%)" d="M 14.660156 3.25 L 3.386719 10.308594 L 11.125 10.308594 C 11.097656 10.417969 11.050781 10.515625 11.027344 10.625 C 10.960938 10.964844 10.910156 11.34375 10.910156 11.734375 C 10.910156 16.773438 16.054688 16.207031 16.054688 16.207031 L 16.054688 17.492188 C 16.054688 18.011719 16.734375 17.832031 16.816406 18.890625 C 16.476562 18.890625 9.691406 18.695312 9.691406 23.277344 C 9.691406 27.882812 15.679688 27.65625 15.679688 27.65625 C 15.679688 27.65625 22.59375 27.964844 22.59375 22.273438 C 22.597656 18.871094 18.636719 17.765625 18.636719 16.398438 C 18.636719 15.015625 21.621094 14.609375 21.621094 11.375 C 21.621094 9.960938 21.523438 8.953125 20.890625 8.238281 C 20.84375 8.1875 20.808594 8.152344 20.761719 8.121094 C 20.75 8.109375 20.738281 8.101562 20.726562 8.09375 L 20.898438 8.09375 L 23.816406 5.902344 L 23.816406 8.898438 C 23.816406 8.953125 23.820312 9.007812 23.832031 9.0625 C 23.609375 9.1875 23.429688 9.363281 23.300781 9.585938 C 23.171875 9.808594 23.109375 10.050781 23.113281 10.308594 L 23.113281 11.722656 C 23.109375 11.910156 23.144531 12.09375 23.214844 12.269531 C 23.285156 12.445312 23.386719 12.597656 23.515625 12.734375 C 23.648438 12.867188 23.804688 12.972656 23.976562 13.042969 C 24.152344 13.117188 24.332031 13.152344 24.519531 13.152344 C 24.710938 13.152344 24.890625 13.117188 25.066406 13.042969 C 25.238281 12.972656 25.390625 12.867188 25.523438 12.734375 C 25.65625 12.597656 25.757812 12.445312 25.828125 12.269531 C 25.898438 12.09375 25.933594 11.910156 25.929688 11.722656 L 25.929688 10.308594 C 25.933594 10.050781 25.871094 9.808594 25.742188 9.585938 C 25.613281 9.363281 25.433594 9.1875 25.207031 9.0625 C 25.21875 9.007812 25.226562 8.953125 25.226562 8.898438 L 25.226562 4.839844 L 27.339844 3.25 Z M 15.632812 7.5625 C 16.039062 7.542969 16.445312 7.640625 16.835938 7.863281 C 17.125 8.007812 17.402344 8.21875 17.644531 8.480469 C 18.148438 8.984375 18.570312 9.714844 18.796875 10.578125 C 19.332031 12.625 18.636719 14.597656 17.191406 14.96875 C 15.765625 15.375 14.171875 14.039062 13.621094 12.007812 C 13.378906 11.015625 13.410156 10.054688 13.6875 9.292969 C 13.691406 9.28125 13.695312 9.273438 13.699219 9.265625 C 13.703125 9.261719 13.710938 9.257812 13.714844 9.253906 C 13.792969 8.953125 13.921875 8.679688 14.082031 8.457031 C 14.371094 8.035156 14.753906 7.746094 15.226562 7.617188 C 15.363281 7.585938 15.496094 7.566406 15.632812 7.5625 Z M 16.183594 19.75 C 18.566406 19.570312 20.597656 20.886719 20.746094 22.675781 C 20.84375 24.449219 19.007812 26.027344 16.605469 26.1875 C 14.222656 26.351562 12.160156 25.050781 12.046875 23.277344 C 11.933594 21.492188 13.78125 19.929688 16.183594 19.75 Z M 16.183594 19.75 " fill-opacity="1" fill-rule="nonzero" />
                                         </g>
                                     </svg>
+                                </a>
+                                <a href="https://www.researchgate.net/profile/Alexandru-Dima" class="mr-4">
+                                    <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                        <path d="M0 32v448h448V32H0zm262.2 334.4c-6.6 3-33.2 6-50-14.2-9.2-10.6-25.3-33.3-42.2-63.6-8.9 0-14.7 0-21.4-.6v46.4c0 23.5 6 21.2 25.8 23.9v8.1c-6.9-.3-23.1-.8-35.6-.8-13.1 0-26.1.6-33.6.8v-8.1c15.5-2.9 22-1.3 22-23.9V225c0-22.6-6.4-21-22-23.9V193c25.8 1 53.1-.6 70.9-.6 31.7 0 55.9 14.4 55.9 45.6 0 21.1-16.7 42.2-39.2 47.5 13.6 24.2 30 45.6 42.2 58.9 7.2 7.8 17.2 14.7 27.2 14.7v7.3zm22.9-135c-23.3 0-32.2-15.7-32.2-32.2V167c0-12.2 8.8-30.4 34-30.4s30.4 17.9 30.4 17.9l-10.7 7.2s-5.5-12.5-19.7-12.5c-7.9 0-19.7 7.3-19.7 19.7v26.8c0 13.4 6.6 23.3 17.9 23.3 14.1 0 21.5-10.9 21.5-26.8h-17.9v-10.7h30.4c0 20.5 4.7 49.9-34 49.9zm-116.5 44.7c-9.4 0-13.6-.3-20-.8v-69.7c6.4-.6 15-.6 22.5-.6 23.3 0 37.2 12.2 37.2 34.5 0 21.9-15 36.6-39.7 36.6z" /></svg>
                                 </a>
                             </div>
                             <hr class="vertical dark">
@@ -442,7 +458,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/Teo.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Teodor Neacsu</h4>
                                 <h5 class="mt-3">MSc Student</h5>
                             </div>
@@ -481,7 +497,7 @@
                     <div class="row mt-6">
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/mcnamara.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Danielle S. McNamara</h4>
                                 <h5 class="mt-3">Arizona State University</h5>
                                 <a href="https://scholar.google.com/citations?user=NOxLJQUAAAAJ&hl=en" class="mr-4">
@@ -545,7 +561,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/PhilippeDessus.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Philippe Dessus</h4>
                                 <h5 class="mt-3">Université Grenoble Alpes</h5>
                                 <a href="https://scholar.google.com/citations?user=I-RoP1cAAAAJ&hl=en" class="mr-4">
@@ -576,7 +592,7 @@
                         </div>
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/NicolaeNistor.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Nicolae Nistor</h4>
                                 <h5 class="mt-3">Ludwig-Maximilians Universität</h5>
                                 <a href="https://scholar.google.com/citations?user=cNVq5HUAAAAJ&hl=en">
@@ -640,7 +656,7 @@
 
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <img src="../assets/images/anonymous.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
+                                <img src="../assets/images/SebastienTravadel.jpg" class="img-fluid border-radius-lg" width="200" height="200" />
                                 <h4 class="text-gradient text-primary"><span id="state1" countTo="70"></span>Sebastien Travadel</h4>
                                 <h5 class="mt-3">Mines Paristech</h5>
                                 <a href="https://www.linkedin.com/in/s%C3%A9bastien-travadel-4ba44943/?originalSubdomain=fr" class="mr-4">

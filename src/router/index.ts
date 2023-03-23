@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/people',
-    name: 'people' ,
+    name: 'people',
     component: () => import('../views/People.vue')
   },
   {
@@ -52,6 +52,16 @@ const routes: Array<RouteRecordRaw> = [
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
+  {
+    path: '/processing-queue',
+    name: 'processingqueue',
+    component: () => import('@/views/ProcessingQueueView.vue'),
+  },
+  {
+    path: '/userprofile',
+    name: 'userprofileview',
+    component: () => import('@/views/UserProfileView.vue'),
+  }
 ]
 
 const router = createRouter({

@@ -2,13 +2,19 @@ import { isNil } from 'lodash';
 import router from '@/router';
 import axios from 'axios';
 
+interface Callback {
+  (message: any): void;
+}
+
 export default {
+
   isAuthenticated() {
     const user = localStorage.getItem('user');
     return !isNil(user);
   },
 
-  login(creds, redirect: string) {
+  login(creds, redirect: string, onSuccess: Callback, onError: Callback) {
+
     const user = {
       grant_type: "password",
       client_id: "8okRYORQww9VK0x3UTHAe8rl0dDvCUL6s3d6T43z",
@@ -26,11 +32,11 @@ export default {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-      alert('Successfully logged in');
-      console.log(response)
+      
+      onSuccess(response);
     })
     .catch(error => {
-      alert(error.response.data.error_description);
+      onError(error);
     })
   },
 
