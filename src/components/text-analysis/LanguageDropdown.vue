@@ -1,6 +1,6 @@
 <template>
-<div class="card p-4">
-    <div class="input-group my-6">
+<div class="card p-3">
+    <div class="input-group mb-6">
         <div class="row w-100">
             <div class="col-12 ml-3">
                 <label>Select language:</label>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="list-group">
+    <div class="list-group p-3">
         <a v-for="{id, name, isActive} of getTasksByLanguage(langID)" :key="id" href="javascript:;" @click="selectTask(id)" :class="'list-group-item list-group-item-action ' + active(isActive)">
             {{ name }}
         </a>
@@ -36,82 +36,23 @@
 
 <script>
 import Dropdown from 'primevue/dropdown';
+
 export default {
     name: 'LanguageDropdown',
     props: {
-        //languages: Array,
-        //tasks: Array,
+        languages: Array,
+        tasks: Array,
         selectedTask: Function
     },
     data() {
         return {
             langID: 1,
-            tasks: [{
-                    id: 0,
-                    name: "Task1",
-                    isActive: false,
-                    languages: [1,2]
-                },
-                {
-                    id: 1,
-                    name: "Task2",
-                    isActive: false,
-                    languages: [3,4]
-                },
-                {
-                    id: 2,
-                    name: "Task3",
-                    isActive: false,
-                    languages: [1,3]
-                },
-                {
-                    id: 3,
-                    name: "Task4",
-                    isActive: false,
-                    languages: [1,4]
-                },
-            ],
-
-            languages: [{
-                    id: 1,
-                    label: "EN"
-                },
-                {
-                    id: 2,
-                    label: "FR"
-                },
-                {
-                    id: 3,
-                    label: "RO"
-                },
-                {
-                    id: 4,
-                    label: "ES"
-                },
-                {
-                    id: 5,
-                    label: "DE"
-                },
-                {
-                    id: 6,
-                    label: "RU"
-                },
-                {
-                    id: 7,
-                    label: "IT"
-                },
-                {
-                    id: 8,
-                    label: "NL"
-                }
-            ]
-        };
+            tasks_with_selected_status: this.getTasksWithSelectedStatus()
+        }
     },
     methods: {
         selectTask(id) {
-            alert(id);
-
-            this.tasks.forEach(task => {
+            this.tasks_with_selected_status.forEach(task => {
                 if (task.id == id) {
                     task.isActive = true;
                 } else {
@@ -119,7 +60,6 @@ export default {
                 }
             });
 
-            //TODO: send task id to parent component by calling a method received from parent as prop
             this.selectedTask(id);
 
         },
@@ -132,11 +72,26 @@ export default {
         },
         getTasksByLanguage(langID) {
             let tasks = [];
-            this.tasks.forEach(task => {
-                if (task.languages.includes(langID)) {
+            this.tasks_with_selected_status.forEach(task => {
+                if (task['languages'].includes(langID)) {
                     tasks.push(task);
                 }
             });
+            return tasks;
+        },
+        getTasksWithSelectedStatus() {
+            let tasks = [];
+            this.tasks.forEach(task => {
+                let taskWithSelectedStatus =
+                {
+                    id: task.id,
+                    name: task.name,
+                    isActive: false,
+                    languages: task.languages
+                }
+                tasks.push(taskWithSelectedStatus);
+            });
+
             return tasks;
         }
     }
