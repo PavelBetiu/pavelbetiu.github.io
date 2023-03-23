@@ -45,11 +45,14 @@ import {
     defineComponent
 } from "vue";
 
+import { DATASETS_SERVICE } from "./services/datasets-service.interface";
+import { DatasetsService } from "./services/datasets-service";
+
 export default {
     name: "app",
     components: {
         Nav,
-        Footer
+        Footer,
     },
     setup() {
         const app = getCurrentInstance().appContext.app;
@@ -57,7 +60,8 @@ export default {
          * Services injected via DI.
          */
         provide(CSCL_SERVICE, new CsclService());
-        //provide(CSCL_SERVICE, new MockCsclService()); 
+        //provide(CSCL_SERVICE, new MockCsclService());
+        provide(DATASETS_SERVICE, new DatasetsService());
         provide(TOAST_SERVICE, new PrimeVueToastService(app));
     },
 };
