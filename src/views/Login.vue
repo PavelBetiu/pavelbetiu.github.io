@@ -1,10 +1,8 @@
 <template>
-<section>
-  <div class="background-login">
-    <div class="page-header min-vh-100">
+  <div class="body page-header min-vh-100">
       <div class="container">
-        <div class="row">
-          <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto background-card">
+        <div class="row d-flex justify-content-around">
+          <div class="col-4 card">
             <div class="card card-plain">
               <div class="card-header" style="box-shadow: none">
                 <p class="mb-0">Enter your email and password to sign in</p>
@@ -22,7 +20,7 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login()">Sign in</button>
+                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login(), greet()">Sign in</button>
                   </div>
                 </form>
               </div>
@@ -34,40 +32,40 @@
               </div>
             </div>
           </div>
-          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-           <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
-              <!-- <img src="../assets/img/shapes/pattern-lines.svg" alt="pattern-lines" class="position-absolute opacity-4 start-0"> -->
-              <div class="position-relative">
-                <img class="max-width-500 w-80 h-80 position-relative z-index-2" src="../assets/images/readerbench-small.svg">
-              </div>
-              <!-- <h4 class="mt-5 text-white font-weight-bolder">"Something cool about ReaderBench"</h4>
-              <p class="text-white">Cool description of what we do.</p> -->
-            </div>
+          <div class="col-4 d-flex justify-content-center align-items-center">
+            <img class="w-80 h-80" src="../assets/images/readerbench-small.svg">
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </section>
 </template>
-<style>
-.background-login {
-  background-color: #f8f9fa
-}
-.background-card {
-  background-color: #fff;
+
+<style lang="scss" scoped>
+.body {
+    background-color: #f8f9fa;
 }
 </style>
+
+
 <script>
 import auth from "@/services/auth";
 import axios from "axios";
+
+import {
+    inject
+} from 'vue';
+
+import {
+  TOAST_SERVICE
+} from "@/services/toast-service.interface"
 
 export default {
   name: "Login",
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      toastService: inject(TOAST_SERVICE),
     };
   },
   methods: {
@@ -76,7 +74,14 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      auth.login({username: this.username, password: this.password}, redirect);
+      
+      auth.login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
+    },
+    onLoginSuccess(response) {
+      this.toastService && this.toastService.success('Welcome to ReaderBench!', response.data.user.username);
+    },
+    onLoginFail(error) {
+      this.toastService && this.toastService.error(error.response.data.error_description, 'Login failed');
     },
     submitForm(e) {
       const formData = {
@@ -99,7 +104,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    }
+    },
   },
 };
 </script>
