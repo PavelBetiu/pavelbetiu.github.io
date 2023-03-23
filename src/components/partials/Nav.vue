@@ -64,9 +64,9 @@
                     </a>
                 </li>
 
-                <!-- <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
+                <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
                     <a href="/login" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0">Log In</a>
-                </li> -->
+                </li>
 
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
                     <!-- <a href="/userprofile"> -->
