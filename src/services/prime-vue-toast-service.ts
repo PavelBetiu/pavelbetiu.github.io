@@ -8,14 +8,14 @@ export class PrimeVueToastService implements IToastService {
     }
 
     success(message: string, title?: string): void {
-        this.toast.add({ severity: 'success', summary: title, detail: message, life: 3000 });
+        this.toast.add({ severity: 'success', summary: title, detail: message, life: 6000 });
     }
 
     error(message: string, title?: string): void {
-        this.toast.add({ severity: 'error', summary: title, detail: message, life: 3000 });
+        this.toast.add({ severity: 'error', summary: title, detail: message, life: 6000 });
     }
 
     info(message: string, title?: string): void {
-        this.toast.add({ severity: 'info', summary: title, detail: message, life: 3000 });
+        this.toast.add({ severity: 'info', summary: title, detail: message, life: 6000 });
     }
 }

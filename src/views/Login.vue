@@ -78,7 +78,7 @@ export default {
       auth.login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
     },
     onLoginSuccess(response) {
-      this.toastService && this.toastService.success('Welcome to ReaderBench!', response.data.user.username);
+      this.toastService && this.toastService.success('Welcome to ReaderBench!', 'Hi, ' + response);
     },
     onLoginFail(error) {
       this.toastService && this.toastService.error(error.response.data.error_description, 'Login failed');

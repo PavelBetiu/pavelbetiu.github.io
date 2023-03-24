@@ -53,7 +53,7 @@ export default {
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
       
-      onSuccess(response);
+      onSuccess(user.username);
     })
     .catch(error => {
       onError(error);
@@ -61,8 +61,12 @@ export default {
   },
 
   // To log out
-  logout: function () {
+  logout: function (callback?: Callback) {
     localStorage.removeItem('user');
     router.push({ path: '/', hash: '#logged_out' })
+
+    if (callback) {
+      callback("You have been logged out");
+    }
   }
 }
