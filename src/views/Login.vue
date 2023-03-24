@@ -2,8 +2,8 @@
   <div class="body page-header min-vh-100">
       <div class="container">
         <div class="row d-flex justify-content-around">
-          <div class="col-4 card">
-            <div class="card card-plain">
+          <div class="col-4 card login-form">
+            <div class="card card-plain login-form-card">
               <div class="card-header" style="box-shadow: none">
                 <p class="mb-0">Enter your email and password to sign in</p>
               </div>
@@ -44,6 +44,42 @@
 .body {
     background-color: #f8f9fa;
 }
+
+.login-form {
+  background-color: #f8f9fa;
+  overflow: hidden;
+  box-shadow: none;
+  padding: 0.3rem;
+}
+
+.login-form-card {
+    position: relative;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.login-form::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, transparent, transparent, #4c00ff, #7300ff, #bf00ff);
+    animation: animate 5s linear infinite;
+    transform-origin: bottom right;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 </style>
 
 
