@@ -111,7 +111,7 @@ export default {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
       
-      auth.login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
+      auth.dummy_successful_login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
     },
     onLoginSuccess(response) {
       this.toastService && this.toastService.success('Welcome to ReaderBench!', 'Hi, ' + response);

@@ -68,7 +68,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/ProcessingQueueView.vue'),
   },
   {
-    path: '/userprofile',
+    path: '/profile',
     name: 'userprofileview',
     component: () => import('@/views/UserProfileView.vue'),
   }
