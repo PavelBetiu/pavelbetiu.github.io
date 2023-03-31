@@ -12,17 +12,39 @@
                     <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
                     <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
                     <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
-                    <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95" />
+                    <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(248,249,250,0.95)" />
                 </g>
             </svg>
         </div>
     </div>
 </header>
 <div class="background-home-view">
+    <section class="d-flex justify-content-center position-relative">
+        <div class="container">
+            <div class="row">
+                <div class="row justify-content-center text-center">
+                    <div class="page-header section-height-75 border-radius-xl">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 my-auto">
+                                    <h1>Under construction</h1>
+                                    <p class="lead ">We apologize for any inconvenience due to the construction on our website. Please check back later as we update our website! Thank you for your patience.</p>
+                                </div>
+                                <div class="col-lg-6 my-auto">
+                                    <img src="../assets/images/under_construction.png" class="w-80 h-80" alt="Under construction"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="pt-3 pb-4" id="count-stats">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
+                <div class="col-lg-9 z-index-2 border-radius-xl mt-7 mx-auto py-3 blur shadow-blur">
                     <div class="row">
                         <div class="col-md-3 position-relative">
                             <div class="p-3 text-center">
@@ -263,7 +285,6 @@
         </div>
     </section>
 
-
     <section class="d-flex justify-content-center mb-7 position-relative">
         <div class="container">
             <div class="row mb-6">
@@ -470,7 +491,7 @@
 <script>
 export default {
     name: 'home',
-  };
+};
 </script>
 
 <style lang="scss" scoped>
@@ -520,6 +541,6 @@ export default {
 }
 
 .background-home-view {
-  background-color: #f8f9fa
+    background-color: #f8f9fa
 }
 </style>
