@@ -1,49 +1,48 @@
 <template>
-  <div class="tab-pane fade"
-       role="tabpanel"
-       :id="tabId"
-       :aria-hidden="!active"
-       :aria-labelledby="`step-${tabId}`"
-       :class="{'active show': active}" v-show="active">
+<div class="tab-pane fade" role="tabpanel" :id="tabId" :aria-hidden="!active" :aria-labelledby="`step-${tabId}`" :class="{'active show': active}" v-show="active">
     <slot></slot>
-  </div>
+</div>
 </template>
+
 <script>
-  export default {
+export default {
     name: 'wizard-tab',
     props: {
-      label: {
-        type: String,
-        description: 'Wizard tab label (title)'
-      },
-      id: {
-        type: String,
-        description: 'wizard tab id'
-      },
-      beforeChange: {
-        type: Function,
-        description: 'Function to execute before switching to another tab. Can be Function<boolean> or Function<Promise<boolean>>'
-      }
+        label: {
+            type: String,
+            description: 'Wizard tab label (title)'
+        },
+        id: {
+            type: String,
+            description: 'wizard tab id'
+        },
+        beforeChange: {
+            type: Function,
+            description: 'Function to execute before switching to another tab. Can be Function<boolean> or Function<Promise<boolean>>'
+        }
     },
     inject: ['addTab', 'removeTab'],
-    data(){
-      return {
-        active: false,
-        checked: false,
-        hasError: false,
-        tabId: ''
-      }
+    data() {
+        return {
+            active: false,
+            checked: false,
+            hasError: false,
+            tabId: ''
+        }
     },
     mounted() {
-      this.addTab(this)
+		console.log("wizard tab mounted")
+        this.addTab(this)
     },
     unmounted() {
-      if (this.$el && this.$el.parentNode) {
-        this.$el.parentNode.removeChild(this.$el)
-      }
-      this.removeTab(this)
+		console.log("wizard tab unmounted")
+        if (this.$el && this.$el.parentNode) {
+            this.$el.parentNode.removeChild(this.$el)
+        }
+        this.removeTab(this)
     }
-  }
+}
 </script>
+
 <style>
 </style>

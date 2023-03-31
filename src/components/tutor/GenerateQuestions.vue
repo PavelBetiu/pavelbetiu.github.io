@@ -3,7 +3,8 @@
 
     <div class="main-panel">
 
-        <div class="content">
+        <div class="content mt-6">
+            <!-- TODO: Cool feature: add a progress bar -->
 
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 mr-auto ml-auto">
@@ -13,45 +14,52 @@
                             <h3 class="description">Insert your text here</h3>
                         </template>
 
-                        <wizard-tab :before-change="() => validateText()">
-                            <template #label>
-                                New Text
-                            </template>
-                            <div class="form-group">
-                                <textarea class="form-control" v-model="text" placeholder="Enter at least 10 characters" rows="16"></textarea>
-                            </div>
-                        </wizard-tab>
+                        <template #default>
+                            <wizard-tab :beforeChange="() => validateText()">
+                                <template #label>
+                                    New Text
+                                </template>
+                                <div class="form-group">
+                                    <textarea class="form-control" v-model="text" placeholder="Enter at least 10 characters" rows="16"></textarea>
+                                </div>
+                            </wizard-tab>
 
-                        <wizard-tab>
-                            <template #label>
-                                Text Annotation
-                            </template>
-                            <div>
-                                <div class="form-group row">
-                                    <div class="col-lg-3">
-                                        <p-checkbox v-model="keywordsCheckbox">Keyword (BERT Topic)</p-checkbox>
+                            <wizard-tab>
+                                <template #label>
+                                    Text Annotation
+                                </template>
+                                <div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-3 d-flex align-items-center">
+                                            <p-checkbox v-model="keywordsCheckbox" :binary="true" />
+                                            <label class="m-2"> Keyword (BERT Topic) </label>
+                                        </div>
+                                        <div class="col-lg-3 d-flex align-items-center">
+                                            <p-checkbox v-model="namedEntitiesCheckbox" :binary="true" />
+                                            <label class="m-2">Named entity (NER)</label>
+                                        </div>
+                                        <div class="col-lg-3 d-flex align-items-center">
+                                            <p-checkbox v-model="nounChuncksCheckbox" :binary="true" />
+                                            <label class="m-2">Oracle (Answer Selector)</label>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <p-checkbox v-model="namedEntitiesCheckbox">Named entity (NER)</p-checkbox>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <p-checkbox v-model="nounChuncksCheckbox">Oracle (Answer Selector)</p-checkbox>
+                                    <!-- <TextAnnotation v-model="textAnnotations" :text="annotatedText" annotation-bg-color="green" /> -->
+                                    <p class="text-justify" v-html="annotatedText"></p>
+                                </div>
+                            </wizard-tab>
+
+                            <wizard-tab>
+                                <template #label>
+                                    Parameters
+                                </template>
+                                <div>
+                                    <div class="form-group row">
+                                        todo
                                     </div>
                                 </div>
-                                <TextAnnotation v-model="textAnnotations" :text="annotatedText" annotation-bg-color="green" />
-                            </div>
-                        </wizard-tab>
+                            </wizard-tab>
+                        </template>
 
-                        <wizard-tab>
-                            <template #label>
-                                Parameters
-                            </template>
-                            <div>
-                                <div class="form-group row">
-                                    todo
-                                </div>
-                            </div>
-                        </wizard-tab>
                     </wizard>
                 </div>
             </div>
@@ -63,7 +71,7 @@
 </template>
 
 <script>
-import TextAnnotation from "vue2-text-annotation"
+// import TextAnnotation from "vue2-text-annotation"
 // import TextAnnotation from '../Tutor/TextAnnotationComponent/TextAnnotation.vue'
 // import Swal from 'sweetalert2'
 import WizardTab from '@/components/UIComponents/WizardTab.vue'
@@ -71,7 +79,7 @@ import Wizard from '@/components/UIComponents/Wizard.vue'
 
 export default {
     components: {
-        TextAnnotation,
+        // TextAnnotation,
         Wizard,
         WizardTab,
     },
@@ -105,8 +113,12 @@ export default {
             keywordsCheckbox: true,
             nounChuncksCheckbox: true,
             namedEntitiesCheckbox: true,
-            semanticLabelCheckbox: true
+            semanticLabelCheckbox: true,
         }
+    },
+
+    mounted() {
+        console.log("generate questions page has been mounted");
     },
 
     methods: {
@@ -140,6 +152,10 @@ export default {
             // console.log("validate Annotations");
             // this.$emit('on-validated', true, this.text)
             // return Promise.resolve(true)
+        },
+        logme(sth) {
+            console.log("logme:")
+            console.log(sth)
         }
     }
 }

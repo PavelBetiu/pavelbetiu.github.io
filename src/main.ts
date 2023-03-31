@@ -6,6 +6,7 @@ import store from './store';
 import PrimeVue from 'primevue/config';
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
+import Checkbox from "primevue/checkbox"
 import { httpInterceptor } from './services/http-interceptor';
 import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
@@ -33,6 +34,7 @@ createApp(App)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('p-datatable', DataTable)
   .component('p-column', Column)
+  .component('p-checkbox', Checkbox)
   .use(PrimeVue)
   .use(store)
   .use(router)
