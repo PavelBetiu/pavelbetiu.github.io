@@ -4,8 +4,6 @@
     <div class="main-panel">
 
         <div class="content mt-6">
-            <!-- TODO: Cool feature: add a progress bar -->
-
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 mr-auto ml-auto">
                     <wizard @complete="wizardComplete" finishButtonText="Generate Questions">
@@ -15,7 +13,7 @@
                         </template>
 
                         <template #default>
-                            <wizard-tab :beforeChange="() => validateText()">
+                            <wizard-tab :beforeChange="() => validateText()" id="new-text-tab">
                                 <template #label>
                                     New Text
                                 </template>
@@ -24,7 +22,7 @@
                                 </div>
                             </wizard-tab>
 
-                            <wizard-tab>
+                            <wizard-tab id="text-annotation-tab">
                                 <template #label>
                                     Text Annotation
                                 </template>
@@ -48,7 +46,7 @@
                                 </div>
                             </wizard-tab>
 
-                            <wizard-tab>
+                            <wizard-tab id="parameters-tab">
                                 <template #label>
                                     Parameters
                                 </template>

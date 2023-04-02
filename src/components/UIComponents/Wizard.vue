@@ -9,14 +9,14 @@
                     <h3 class="description">{{subTitle}}</h3>
                 </slot>
 
-                <div class="wizard-navigation">
-                    <ul class="nav nav-pills" role="tablist">
-                        <li v-for="(tab, index) in tabs" :key="tab.title" role="tab" :tabindex="tab.checked ? 0 : ''" :id="`step-${tab.tabId}`" :aria-controls="tab.tabId" :aria-disabled="tab.active" :aria-selected="tab.active" :ref="`tab-${index}`" class="nav-item wizard-tab-link" :style="linkWidth">
+                <div class="wizard-navigation w-100 h-100">
+                    <div class="row nav nav-pills">
+                        <div v-for="(tab, index) in tabs" :key="tab.title" :tabindex="tab.checked ? 0 : ''" :id="`step-${tab.tabId}`" :aria-controls="tab.tabId" :aria-disabled="tab.active" :aria-selected="tab.active" :ref="`tab-${index}`" class="col nav-item wizard-tab-link" :style="linkWidth">
                             <a class="nav-link" @click="navigateToTab(index)" :class="[{'disabled-wizard-link': !tab.checked}, {active: tab.active}, {checked: tab.checked}]" data-toggle="tab">
                                 <tab-item-content :tab="tab"></tab-item-content>
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                     <div class="moving-tab" :class="{'error-link': activeTab.hasError}" v-if="activeTab" style="transition: transform 0.5s cubic-bezier(0.29, 1.42, 0.79, 1); width: 100%;" :style="movingTabStyles">
                         <tab-item-content :tab="activeTab" :moving-tab="true"></tab-item-content>
                     </div>
@@ -127,11 +127,11 @@ export default {
         TabItemContent: {
             props: ['tab', 'movingTab'],
             render() {
-                console.log("tab slots label:")
-                console.log(this.tab.$slots.label())
-                console.log("tab label:")
-                console.log(this.tab)
-                return h('span', [this.tab.$slots.label() || this.tab.label()])
+                if (this.movingTab) {
+                    return h('span')
+                }
+
+                return h('span', [this.tab.$slots.label() || this.tab.label])
             }
         }
     },
@@ -167,11 +167,6 @@ export default {
             };
         },
         activeTab() {
-            console.log("Getting the active tab..")
-            console.log(this.tabs[this.activeTabIndex])
-            console.log("After getting the active tab..")
-
-            //TODO: WHY ACTIVE TAB IS UNDEFINED IN PARENT COMPONENT?
             return this.tabs[this.activeTabIndex]
         },
         movingTabStyles() {
@@ -182,27 +177,21 @@ export default {
                 translateXValue = 0;
             }
             let styles = {
-                transform: `translate3d(${translateXValue}px, ${translateYValue}px, 0px)`
+                transform: `translate3d(${translateXValue}px, ${translateYValue}px, 0px)`,
             };
             if (this.tabLinkWidth !== 0) {
                 styles.width = `${this.tabLinkWidth}px`;
             }
+            
             return styles;
         }
     },
     methods: {
         addTab(tab) {
             console.log("Adding tab...")
-            console.log(this.$slots.default())
-            console.log(tab)
+            // find index of tab in slots array based on wizard tab id
+            let index = this.$slots.default().findIndex(slot => slot.props.id === tab.id)
 
-            // TODO: FIND A WAY TO RETREIVE THE INDEX
-            const index = this.$slots.default().indexOf(tab);
-
-            console.log("INDEX: ")
-            console.log(index)
-
-            // TODO: INVESTIGATE TAB ID
             let tabTitle = tab.title || '';
             tab.tabId = `${tabTitle.replace(/ /g, '')}${index}`
             if (!this.activeTab && index === 0) {
@@ -217,13 +206,16 @@ export default {
             this.tabs.splice(index, 0, tab)
         },
         removeTab(tab) {
+            console.log("Removing tab...")
             const tabs = this.tabs;
             const index = tabs.indexOf(tab);
+
             if (index > -1) {
                 tabs.splice(index, 1)
             }
         },
         validate(tab) {
+            console.log("Validating tab...")
             let tabToValidate = tab || this.activeTab
             let beforeChange = tabToValidate.beforeChange
             if (beforeChange) {
@@ -238,8 +230,7 @@ export default {
             }
         },
         async nextTab() {
-            console.log('nextTab...');
-            console.log(this.tabs);
+            console.log("Next tab...")
 
             let isValid = await this.validate();
             if (isValid && this.activeTabIndex === this.tabCount - 1) {
@@ -251,10 +242,14 @@ export default {
             return isValid
         },
         prevTab() {
+            console.log("Previous tab...")
+
             this.activeTabIndex--;
         },
         async navigateToTab(index) {
-            if (this.tabs[index].checked) {
+            console.log("Navigating to tab...")
+
+            if (this.tabs[index].checked) { 
                 // recursively validate each tab
                 if (index > this.activeTabIndex) {
                     let valid = await this.nextTab();
@@ -267,6 +262,8 @@ export default {
             }
         },
         onResize() {
+            console.log("Resizing...")
+
             let tabLinks = document.querySelectorAll(`#${this.wizardId} .wizard-tab-link`);
             if (tabLinks.length > 0 && this.tabCount > 0) {
                 let {
@@ -277,12 +274,10 @@ export default {
                 this.tabLinkHeight = clientHeight;
             }
         },
-        logme(obj) {
-            console.log("Logging...");
-            console.log(obj);
-        }
     },
     mounted() {
+        console.log("Wizard Mounted...")
+
         this.activeTabIndex = this.startIndex;
         this.$nextTick(() => {
             this.tabs[this.activeTabIndex].active = true;
@@ -313,6 +308,16 @@ export default {
 </script>
 
 <style lang="scss">
+.moving-tab {
+    position: absolute;
+    top: 15px;
+    left: 12px;
+    height: 50px;
+    background-color: #fff;
+    border-bottom: 2px solid #b700ff;
+    z-index: 2;
+}
+
 /* Tab content animation */
 .tab-content {
     display: flex; // to avoid horizontal scroll when animating
