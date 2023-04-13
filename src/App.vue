@@ -19,6 +19,8 @@ import Footer from "./components/partials/Footer.vue";
 import { CSCL_SERVICE } from "./services/cscl-service.interface";
 import { MockCsclService } from "./services/mock-cscl-service";
 import { CsclService } from "./services/cscl-service";
+import { ANNOTATION_SERVICE } from "./services/annotation-service.interface";
+import { RecogitoAnnotationService } from "./services/recogito-annotation-service";
 
 export default {
   name: "app",
@@ -32,6 +34,7 @@ export default {
      */
     provide(CSCL_SERVICE, new CsclService());
     //provide(CSCL_SERVICE, new MockCsclService());
+    provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
   },
 };
 </script>

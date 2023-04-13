@@ -51,11 +51,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/generate-questions',
     name: 'generateQuestions',
     component: () => import('@/components/tutor/GenerateQuestions.vue'),
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: () => import('@/components/tutor/MyComponent.vue'),
   }
 ]
 

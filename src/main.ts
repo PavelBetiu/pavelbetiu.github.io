@@ -17,6 +17,8 @@ import "primevue/resources/themes/saga-blue/theme.css";
 import "primevue/resources/primevue.min.css";
 import "primeicons/primeicons.css";
 
+import '@recogito/recogito-js/dist/recogito.min.css';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';

@@ -42,7 +42,7 @@
                                         </div>
                                     </div>
                                     <!-- <TextAnnotation v-model="textAnnotations" :text="annotatedText" annotation-bg-color="green" /> -->
-                                    <p class="text-justify" v-html="annotatedText"></p>
+                                    <div id="annotated-text" class="text-justify" v-html="annotatedText"></div>
                                 </div>
                             </wizard-tab>
 
@@ -75,6 +75,13 @@
 import WizardTab from '@/components/UIComponents/WizardTab.vue'
 import Wizard from '@/components/UIComponents/Wizard.vue'
 
+import {
+    inject
+} from 'vue';
+import {
+    ANNOTATION_SERVICE
+} from '@/services/annotation-service.interface';
+
 export default {
     components: {
         // TextAnnotation,
@@ -83,6 +90,7 @@ export default {
     },
     data() {
         return {
+            annotationService: null,
             wizardModel: {},
             text: "Many of us have printers in our homes or at our schools. They print with ink on paper. This is a 2D printer. New technology has introduced us to a new kind of printer: a 3D printer.\n" +
                 "The term \"3D\" is short for three dimensional. When you print on a regular piece of paper, there are only two dimensions: length and width. The printer prints flat letters and pictures on a flat sheet of paper. When you print on a 3D printer, there are three dimensions: length, width, and height. That means that you can print almost any object with a 3D printer. You can print a ball, a bracelet, even an action figure!\n " +
@@ -115,8 +123,14 @@ export default {
         }
     },
 
+    created() {
+        console.log("generate questions page has been created");
+        this.annotationService = inject(ANNOTATION_SERVICE);
+    },
+
     mounted() {
         console.log("generate questions page has been mounted");
+        this.annotationService.init("annotated-text");
     },
 
     methods: {
@@ -130,16 +144,9 @@ export default {
             }
         },
         wizardComplete() {
-            // Swal.fire({
-            //     title: "Good job!",
-            //     text: "You clicked the finish button!",
-            //     type: "success",
-            //     confirmButtonClass: "btn btn-success",
-            //     buttonsStyling: false
-            // });
-            this.$router.push({
-                name: "TextsCollection"
-            })
+            // this.$router.push({
+            //     name: "TextsCollection"
+            // })
         },
         validateText() {
             console.log("validate Text");
@@ -150,10 +157,6 @@ export default {
             // console.log("validate Annotations");
             // this.$emit('on-validated', true, this.text)
             // return Promise.resolve(true)
-        },
-        logme(sth) {
-            console.log("logme:")
-            console.log(sth)
         }
     }
 }
@@ -166,5 +169,18 @@ export default {
 
 .annotated {
     font-weight: bold;
+}
+</style>
+
+<style>
+#annotated-text .r6o-annotation {
+    background-color: #9077ffa9 !important;
+    border-bottom: 2px solid #7556fd !important;
+    border-radius: 3px !important;
+}
+
+#annotated-text .r6o-selection {
+    background-color: #a18cffc0 !important;
+    border-radius: 3px !important;
 }
 </style>
