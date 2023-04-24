@@ -87,6 +87,11 @@ const routes: Array<RouteRecordRaw> = [
     name: 'text-analysis',
     component: () => import('@/views/TextAnalysisView.vue')
   },
+  {
+    path: '/model-prediction',
+    name: 'modelpredictionview',
+    component: () => import('@/views/ModelPredictionView.vue'),
+  }
 ]
 
 const router = createRouter({
