@@ -29,20 +29,24 @@
                                 <div>
                                     <div class="form-group row">
                                         <div class="col-lg-3 d-flex align-items-center">
-                                            <p-checkbox v-model="keywordsCheckbox" :binary="true" />
+                                            <p-checkbox v-model="bertIsSelected" :binary="true" />
                                             <label class="m-2"> Keyword (BERT Topic) </label>
                                         </div>
                                         <div class="col-lg-3 d-flex align-items-center">
-                                            <p-checkbox v-model="namedEntitiesCheckbox" :binary="true" />
+                                            <p-checkbox v-model="nerIsSelected" :binary="true" />
                                             <label class="m-2">Named entity (NER)</label>
                                         </div>
                                         <div class="col-lg-3 d-flex align-items-center">
-                                            <p-checkbox v-model="nounChuncksCheckbox" :binary="true" />
+                                            <p-checkbox v-model="oracleIsSelected" :binary="true" />
                                             <label class="m-2">Oracle (Answer Selector)</label>
+                                        </div>
+                                        <div class="col-lg-3 d-flex align-items-center">
+                                            <p-checkbox v-model="userAnnIsSelected" :binary="true" />
+                                            <label class="m-2">User annotated (Please enable to create)</label>
                                         </div>
                                     </div>
                                     <!-- <TextAnnotation v-model="textAnnotations" :text="annotatedText" annotation-bg-color="green" /> -->
-                                    <div id="annotated-text" class="text-justify" v-html="annotatedText"></div>
+                                    <div id="annotated-text" class="text-justify" v-html="annotatedText" :style="setUnselectableIfUserAnnNotChecked()" @mouseup="handleOnMouseUpEvent($event)"></div>
                                 </div>
                             </wizard-tab>
 
@@ -79,7 +83,8 @@ import {
     inject
 } from 'vue';
 import {
-    ANNOTATION_SERVICE
+    ANNOTATION_SERVICE,
+    UserSelectedAnnotationCallbacks
 } from '@/services/annotation-service.interface';
 
 export default {
@@ -116,10 +121,61 @@ export default {
                 //     end:35
                 // }
             ],
-            keywordsCheckbox: true,
-            nounChuncksCheckbox: true,
-            namedEntitiesCheckbox: true,
-            semanticLabelCheckbox: true,
+            bertIsSelected: false,
+            nerIsSelected: false,
+            oracleIsSelected: false,
+            userAnnIsSelected: false,
+            
+            annotations: [
+                {
+                    id: this.generateRandomId(),
+                    type: "bert",
+                    start: 0,
+                    end: 3,
+                    text: "Many",
+                    label: "bert"
+                },
+                {
+                    id: this.generateRandomId(),
+                    type: "bert",
+                    start: 5,
+                    end: 7,
+                    text: "of",
+                    label: "bert"
+                },
+                {
+                    id: this.generateRandomId(),
+                    type: "ner",
+                    start: 10,
+                    end: 15,
+                    text: "Many",
+                    label: "ner"
+                },
+                {
+                    id: this.generateRandomId(),
+                    type: "ner",
+                    start: 20,
+                    end: 25,
+                    text: "of",
+                    label: "ner"
+                },
+                {
+                    id: this.generateRandomId(),
+                    type: "oracle",
+                    start: 30,
+                    end: 50,
+                    text: "Many",
+                    label: "oracle"
+                },
+                {
+                    id: this.generateRandomId(),
+                    type: "oracle",
+                    start: 55,
+                    end: 75,
+                    text: "of",
+                    label: "oracle"
+                }
+            ]
         }
     },
 
@@ -130,10 +186,29 @@ export default {
 
     mounted() {
         console.log("generate questions page has been mounted");
-        this.annotationService.init("annotated-text");
+        this.annotationService.init("annotated-text", {
+            onUserAddedAnnotation: this.onUserAnnotationAdded,
+            onUserDeletedAnnotation: this.onUserAnnotationDeleted,
+            onUserUpdatedAnnotation: this.onUserAnnotationUpdated
+        });
     },
 
     methods: {
+        generateRandomId() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        },
+        setUnselectableIfUserAnnNotChecked() {
+            if (!this.userAnnIsSelected) {
+                return "user-select: none;"
+            } else {
+                return ""
+            }
+        },
+        handleOnMouseUpEvent(event) {
+            if (event.target.localName == "div" && !this.userAnnIsSelected) {
+                alert("Please select the User annotated checkbox first to create new annotations")
+            }
+        },
         validateStep(ref) {
             return this.$refs[ref].validate()
         },
@@ -157,6 +232,86 @@ export default {
             // console.log("validate Annotations");
             // this.$emit('on-validated', true, this.text)
             // return Promise.resolve(true)
+        },
+        checkIfSameAnnotations(ann1, ann2) {
+            return ann1.id == ann2.id;
+        },
+        onUserAnnotationAdded(annotation) {
+            console.log("onUserAnnotationAdded");
+            console.log(annotation);
+            this.annotations.push(annotation);
+        },
+        onUserAnnotationDeleted(annotation) {
+            console.log("onUserAnnotationDeleted");
+            console.log(annotation);
+
+            // find the annotation by id and delete it
+            this.annotations = this.annotations.filter((ann) => {
+                return ann.id != annotation.id;
+            });
+        },
+        onUserAnnotationUpdated(updatedAnnotation) {
+            // find the annotation by id and update it
+            this.annotations = this.annotations.map((ann) => {
+                if (ann.id == updatedAnnotation.id) {
+                    return updatedAnnotation;
+                } else {
+                    return ann;
+                }
+            });
+        },
+        showAnnotationsByType(type) {
+            console.log("showAnnotationsByType: ", type);
+
+            let annotations = this.annotations.filter((ann) => {    
+                return ann.type == type;
+            });
+
+            for (let i = 0; i < annotations.length; i++) {
+                this.annotationService.addAnnotation(annotations[i]);
+            }
+        },
+        hideAnnotationsByType(type) {
+            console.log("hideAnnotationsByType: ", type);
+
+            let annotations = this.annotations.filter((ann) => {
+                return ann.type == type;
+            });
+
+            for (let i = 0; i < annotations.length; i++) {
+                this.annotationService.deleteAnnotation(annotations[i]);
+            }
+        },
+    },
+
+    watch: {
+        bertIsSelected(newValue, oldValue) {
+            if (newValue == true) {
+                this.showAnnotationsByType("bert");
+            } else {
+                this.hideAnnotationsByType("bert");
+            }
+        },
+        nerIsSelected(newValue, oldValue) {
+            if (newValue == true) {
+                this.showAnnotationsByType("ner");
+            } else {
+                this.hideAnnotationsByType("ner");
+            }
+        },
+        oracleIsSelected(newValue, oldValue) {
+            if (newValue == true) {
+                this.showAnnotationsByType("oracle");
+            } else {
+                this.hideAnnotationsByType("oracle");
+            }
+        },
+        userAnnIsSelected(newValue, oldValue) {
+            if (newValue == true) {
+                this.showAnnotationsByType("user");
+            } else {
+                this.hideAnnotationsByType("user");
+            }
         }
     }
 }
@@ -180,7 +335,7 @@ export default {
 }
 
 #annotated-text .r6o-selection {
-    background-color: #a18cffc0 !important;
+    background-color: #ff74bec0 !important;
     border-radius: 3px !important;
 }
 </style>
