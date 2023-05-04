@@ -88,7 +88,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/TextAnalysisView.vue')
   },
   {
-    path: '/model-prediction',
+    path: '/models/:id/prediction',
     name: 'modelpredictionview',
     component: () => import('@/views/ModelPredictionView.vue'),
   }

@@ -1,10 +1,10 @@
 <template>
-<FileUpload @select="emitSelectEvent" @clear="emitClearEvent" @remove="emitRemoveEvent" :multiple="multiple" :accept="accept">
+<FileUpload @select="emitSelectEvent" @clear="emitClearEvent" @remove="emitRemoveEvent" :multiple="multiple" :accept="accept" :fileLimit="fileLimit" :key="reloadKey">
     <!-- FileUpload component has a slot named header -->
     <template #header="{ chooseCallback, clearCallback, files }">
         <div class="d-flex justify-content-start">
             <!-- chooseCallback is a function that will open the file browser and will emit the select event which will be caught by the parent component -->
-            <button @click="chooseCallback()" class="btn bg-gradient-primary m-1">{{chooseMessage}}</Button>
+            <button @click="selectFiles(chooseCallback, onFileLimitExceedsCallback, files.length)" class="btn bg-gradient-primary m-1">{{chooseMessage}}</Button>
             <button @click="clearCallback()" class="btn btn-outline-danger m-1" :disabled="!files || files.length === 0">Clear</Button>
         </div>
     </template>
@@ -42,6 +42,16 @@ import Button from 'primevue/button';
 export default {
     name: 'Droparea',
     props: {
+        reloadKey: {
+            type: Number,
+            default: 0,
+            required: false,
+        },
+        fileLimit: {
+            type: Number,
+            default: 1,
+            required: false,
+        },
         multiple: {
             type: Boolean,
             default: false,
@@ -61,13 +71,31 @@ export default {
             type: String,
             default: 'Drag and drop files to here to upload.',
             required: false,
-        }
+        },
+        onFileLimitExceedsCallback: {
+            type: Function,
+            default: () => {console.log('File limit exceeded')},
+            required: false,
+        },
+        isFileLengthZero: {
+            type: Function,
+            default: () => {console.log('File length is zero')},
+            required: false,
+        },
     },
     components: {
         FileUpload,
         Button
     },
     methods: {
+        selectFiles(chooseFilesCallback, onFileLimitExceedsCallback, filesLength) {
+            if (filesLength < this.fileLimit) {
+                chooseFilesCallback();
+            } else {
+                onFileLimitExceedsCallback();
+            }
+        },
+
         // Called when the user clicks the Remove button
         emitRemoveEvent(event) {
             this.$emit('droparea:remove', event);

@@ -84,6 +84,10 @@ import {
 } from "../services/datasets-service.interface";
 
 import {
+    ProjectsAPI
+} from "@/services/projects-api"
+
+import {
     convertToModelsTable
 } from "@/utils/converters-utils";
 import {
@@ -140,6 +144,7 @@ export default {
         Table,
     },
     created() {
+        this.project = ProjectsAPI.getProjectLong(this.$route.params.id);
         this.datasetService = inject(DATASETS_SERVICE);
         this.modelService = new ModelService()
 
