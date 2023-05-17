@@ -191,6 +191,94 @@ export default {
             onUserDeletedAnnotation: this.onUserAnnotationDeleted,
             onUserUpdatedAnnotation: this.onUserAnnotationUpdated
         });
+
+        const annotatedTextParent = document.getElementsByClassName("r6o-content-wrapper")[0];
+        const secondChild = annotatedTextParent.children[1];
+
+        console.log(annotatedTextParent);
+
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === "childList") {
+                    console.log("A child node has been added or removed.");
+                    const taggingSection = document.querySelectorAll("div.r6o-widget.r6o-tag")[0]
+                    console.log(secondChild);
+                    console.log(taggingSection);
+
+                    const innerEditor = document.getElementsByClassName("r6o-editor-inner")[0];
+                    innerEditor.classList.add("rounded-3");
+
+                    if (taggingSection != undefined) {
+                        taggingSection.remove();
+                    }
+
+                    const footer = document.getElementsByClassName("r6o-footer")[0];
+
+                    if (footer != undefined) {
+                        const buttons = footer.querySelectorAll("button");
+
+                        buttons.forEach((button) => {
+                            if (button.innerText == "Cancel") {
+                                for (const cssClass of button.classList) {
+                                    button.classList.remove(cssClass);
+                                }
+                                button.classList.add("btn");
+                                button.classList.add("btn-outline-danger");
+                                button.classList.add("m-2")
+                            } else if (button.innerText == "Ok") {
+                                for (const cssClass of button.classList) {
+                                    button.classList.remove(cssClass);
+                                }
+                                button.classList.add("btn");
+                                button.classList.add("btn-primary");
+                                button.classList.add("my-2");
+                                button.classList.add("mr-2");
+                            }
+                        });
+
+                        const commentTextarea = document.getElementsByClassName("r6o-editable-text")[0];
+                        // overwrite the placeholder
+                        commentTextarea.placeholder = "Add a label...";
+
+                        const innerEditor = document.getElementsByClassName("r6o-editor-inner")[0];
+                        const observer = new MutationObserver((mutations) => {
+                            mutations.forEach((mutation) => {
+                                if (mutation.type === "childList") {
+                                    const taggingSectionRestored = document.querySelectorAll("div.r6o-widget.r6o-tag")[0]
+                                    console.log("tagging section restored")
+                                    console.log(taggingSectionRestored)
+                                    
+                                    if (taggingSectionRestored != undefined) {
+                                        taggingSectionRestored.remove();
+                                    }
+                                }
+                            });
+                        });
+
+                        observer.observe(innerEditor, {childList: true});
+                    }
+            
+                }
+            });
+        });
+
+        observer.observe(secondChild, {childList: true});
+    },
+
+    beforeUpdate() {
+        console.log("before update");
+    },
+
+    updated() {
+        console.log("updated");
+    },
+
+    beforeUnmount() {
+        console.log("before unmount");
+    },
+
+    unmounted() {
+        console.log("unmounted");
     },
 
     methods: {
@@ -237,7 +325,7 @@ export default {
             return ann1.id == ann2.id;
         },
         onUserAnnotationAdded(annotation) {
-            console.log("onUserAnnotationAdded");
+            console.log("onUserAnnotationAdded callback:");
             console.log(annotation);
             this.annotations.push(annotation);
         },
@@ -337,5 +425,15 @@ export default {
 #annotated-text .r6o-selection {
     background-color: #ff74bec0 !important;
     border-radius: 3px !important;
+}
+
+div.r6o-editor-inner > .r6o-widget.comment+.r6o-widget.comment.editable {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+ul.r6o-comment-dropdown-menu > li+li {
+    visibility: hidden !important;
+    display: none !important;
 }
 </style>

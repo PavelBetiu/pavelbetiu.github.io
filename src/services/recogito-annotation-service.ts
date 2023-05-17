@@ -42,68 +42,24 @@ export class RecogitoAnnotationService implements IAnnotationService {
     }
 
     private setupUserSelectedAnnotationActionCallbacks(callbacks?: UserSelectedAnnotationCallbacks): void {
-        this.recogito.on('createAnnotation', (annotation: RecogitoAnnotation) => {
-            console.log("onUserAddedAnnotation body: ", annotation.body)
-
-            // filter all the tags added by the user
-            // annotation.body = annotation.body.filter((body: TextualBody) => {
-            //     return body.purpose !== "tagging";
-            // });
-
-
-            // todo some problem here, concurrency problem?s
-            console.log("after filtering: ", annotation.body)
-
+        this.recogito.on('createAnnotation', async (annotation: RecogitoAnnotation) => {
             // add the user tag
             annotation.body.push({
                 type: "TextualBody",
                 value: "user",
                 purpose: "tagging"
             });
-
-            console.log("after adding user tag: ", annotation.body)
             
             if (callbacks?.onUserAddedAnnotation) {
                 callbacks.onUserAddedAnnotation(this.recogitoAnnotationToGenericAnnotation(annotation));
             }
         });
-        this.recogito.on('deleteAnnotation', (annotation: RecogitoAnnotation) => {
-            console.log("onUserDeletedAnnotation: ", annotation)
-            
+        this.recogito.on('deleteAnnotation', (annotation: RecogitoAnnotation) => {            
             if (callbacks?.onUserDeletedAnnotation) {
                 callbacks.onUserDeletedAnnotation(this.recogitoAnnotationToGenericAnnotation(annotation));
             }
         });
         this.recogito.on('updateAnnotation', (annotation: RecogitoAnnotation, previous: RecogitoAnnotation) => {
-            console.log("onUserUpdatedAnnotation: ", annotation)
-
-            // get the new tags
-            const newTags: TextualBody[] = annotation.body.filter((body: TextualBody) => {
-                return body.purpose === "tagging";
-            });
-
-            console.log("newTags: ", newTags)
-
-            // get the previous tag (the one that stores the type of the annotation)
-            const previousTag: TextualBody = previous.body.find((body: TextualBody) => {
-                return body.purpose === "tagging";
-            })!;
-
-            console.log("previousTag: ", previousTag)
-
-            // if there are no new tags, then the previous tag was deleted
-            if (newTags.length === 0) {
-                annotation.body.push(previousTag);
-            } else { // if there is one new tag, then the previous tag was updated possibly
-                annotation.body = annotation.body.filter((body: TextualBody) => {
-                    return body.purpose !== "tagging";
-                });
-
-                annotation.body.push(previousTag);
-            }
-
-            console.log("annotation.body: ", annotation.body)
-
             if (callbacks?.onUserUpdatedAnnotation) {
                 callbacks.onUserUpdatedAnnotation(this.recogitoAnnotationToGenericAnnotation(annotation));
             }
@@ -115,25 +71,10 @@ export class RecogitoAnnotationService implements IAnnotationService {
     }
 
     public addAnnotation(annotation: Annotation): void {
-        console.log("addAnnotation: ", annotation)
-
-        // check if annotation overlaps with existing annotations
-        // commented due to rendering issues
-        // const recogitoAnnotations: RecogitoAnnotation[] = this.recogito.getAnnotations();
-        // const overlappingAnnotations: RecogitoAnnotation[] = recogitoAnnotations.filter((recogitoAnnotation: RecogitoAnnotation) => {
-        //     return recogitoAnnotation.target.selector[1].start <= annotation.end && recogitoAnnotation.target.selector[1].end >= annotation.start;
-        // });
-
-        // if (overlappingAnnotations.length > 0) {
-        //     throw new Error("Add: Annotation overlaps with existing annotations");
-        // }
-
         this.recogito.addAnnotation(this.genericAnnotationToRecogitoAnnotation(annotation));
     }
 
     public deleteAnnotation(annotation: Annotation): void {
-        console.log("deleteAnnotation: ", annotation)
-
         const recogitoAnnotation: RecogitoAnnotation | undefined = this.recogito.getAnnotations().find((recogitoAnnotation: RecogitoAnnotation) => {
             return this.checkIfSameGenericAnnotation(annotation, this.recogitoAnnotationToGenericAnnotation(recogitoAnnotation));
         });
@@ -146,16 +87,12 @@ export class RecogitoAnnotationService implements IAnnotationService {
     }
 
     public setAnnotations(annotations: Annotation[]): void {
-        console.log("setAnnotations: ", annotations)
-
         for (const annotation of annotations) {
             this.addAnnotation(annotation);
         }
     }
 
     public getAnnotations(): Annotation[] {
-        console.log("getAnnotations")
-
         const recogitoAnnotations: RecogitoAnnotation[] = this.recogito.getAnnotations();
         const annotations: Annotation[] = recogitoAnnotations.map((recogitoAnnotation: RecogitoAnnotation) => {
             return this.recogitoAnnotationToGenericAnnotation(recogitoAnnotation);
@@ -165,8 +102,6 @@ export class RecogitoAnnotationService implements IAnnotationService {
     }
 
     public clearAnnotations(): void {
-        console.log("clearAnnotations")
-
         this.recogito.clearAnnotations();
     }
 
