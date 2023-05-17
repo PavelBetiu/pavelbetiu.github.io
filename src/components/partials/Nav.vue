@@ -69,7 +69,7 @@
                                 <Avatar class="text-gradient text-primary" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
                             </div>
                             <div class="position-fixed">
-                                <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
+                                <TieredMenu baseZIndex=1 ref="menu" id="overlay_tmenu" :model="items" popup/>
                             </div>
                         </a>
                     </div>
