@@ -64,12 +64,12 @@
                 </li>
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
                     <div class="card flex justify-content-center">
-                        <a>
+                        <a class="user-options-menu">
                             <div class="flex-auto">
-                                <Avatar class="text-gradient text-primary" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
+                                <Avatar class="text-gradient text-primary" :icon="avatarIcon" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
                             </div>
                             <div class="position-fixed">
-                                <TieredMenu baseZIndex=1 ref="menu" id="overlay_tmenu" :model="items" popup/>
+                                <TieredMenu :baseZIndex="1" ref="menu" id="overlay_tmenu" appendTo="a.user-options-menu" :pt="tieredMenuPassThroughOptions" :model="items" popup />
                             </div>
                         </a>
                     </div>
@@ -136,8 +136,41 @@ export default {
                         this.logout()
                     }
                 }
-            ]
+            ],
+            avatarIcon: 'pi pi-user',
+            tieredMenuPassThroughOptions: {
+                root: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    style: 'background-color: #ffffffdf; top:4.2rem; left:-10rem',
+                }),
+                icon: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    class: 'text-gradient text-primary',
+                }),
+                label: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    class: 'text-sm font-weight-bold',
+                    style: 'color: var(--bs-nav-link-color); font-size: 1.5rem; '
+                }),
+            },
+            isMenuVisible: false
         };
+    },
+    mounted() {
+        this.isMenuVisible = this.$refs.menu.visible
+        
+        window.addEventListener('resize', (e) => {
+            this.isMenuVisible = this.$refs.menu.visible
+        });
     },
     computed: {
         isAuthenticated: function () {
@@ -147,6 +180,7 @@ export default {
     methods: {
         toggle(event) {
             this.$refs.menu.toggle(event);
+            this.isMenuVisible = this.$refs.menu.visible
         },
         logout() {
             auth.logout(this.onLogoutSuccess);
@@ -155,6 +189,15 @@ export default {
             this.toastService && this.toastService.info('See you later!', message);
         },
     },
+    watch: {
+        isMenuVisible: function (val) {
+            if (val) {
+                this.avatarIcon = 'pi pi-angle-double-down'
+            } else {
+                this.avatarIcon = 'pi pi-user'
+            }
+        }
+    }
 };
 </script>
 
@@ -171,5 +214,31 @@ nav {
             color: #d88d00;
         }
     }
+}
+
+.user-options-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+</style>
+
+<style>
+.p-tieredmenu:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-bottom: 1rem solid #ffffffdf;
+    position: absolute;
+    top: -1rem;
+    left: 80%;
+}
+
+.p-avatar {
+    transition: left 3s ease-in-out !important;
 }
 </style>
