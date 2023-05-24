@@ -69,7 +69,16 @@
                                 <Avatar class="text-gradient text-primary" :icon="avatarIcon" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
                             </div>
                             <div class="position-fixed">
-                                <TieredMenu :baseZIndex="1" ref="menu" id="overlay_tmenu" appendTo="a.user-options-menu" :pt="tieredMenuPassThroughOptions" :model="items" popup />
+                                <TieredMenu 
+                                    :baseZIndex="1" 
+                                    ref="menu" 
+                                    id="overlay_tmenu" 
+                                    appendTo="a.user-options-menu" 
+                                    :pt="tieredMenuPassThroughOptions" 
+                                    :model="items" 
+                                    @before-show="setAvatarIcon('pi pi-angle-double-down')" 
+                                    @before-hide="setAvatarIcon('pi pi-user')"
+                                    popup />
                             </div>
                         </a>
                     </div>
@@ -162,15 +171,7 @@ export default {
                     style: 'color: var(--bs-nav-link-color); font-size: 1.5rem; '
                 }),
             },
-            isMenuVisible: false
         };
-    },
-    mounted() {
-        this.isMenuVisible = this.$refs.menu.visible
-        
-        window.addEventListener('resize', (e) => {
-            this.isMenuVisible = this.$refs.menu.visible
-        });
     },
     computed: {
         isAuthenticated: function () {
@@ -180,7 +181,6 @@ export default {
     methods: {
         toggle(event) {
             this.$refs.menu.toggle(event);
-            this.isMenuVisible = this.$refs.menu.visible
         },
         logout() {
             auth.logout(this.onLogoutSuccess);
@@ -188,14 +188,8 @@ export default {
         onLogoutSuccess(message) {
             this.toastService && this.toastService.info('See you later!', message);
         },
-    },
-    watch: {
-        isMenuVisible: function (val) {
-            if (val) {
-                this.avatarIcon = 'pi pi-angle-double-down'
-            } else {
-                this.avatarIcon = 'pi pi-user'
-            }
+        setAvatarIcon(icon) {
+            this.avatarIcon = icon
         }
     }
 };
@@ -236,9 +230,5 @@ nav {
     position: absolute;
     top: -1rem;
     left: 80%;
-}
-
-.p-avatar {
-    transition: left 3s ease-in-out !important;
 }
 </style>
