@@ -33,9 +33,14 @@ export interface RecogitoAnnotation {
 export class RecogitoAnnotationService implements IAnnotationService {
     private recogito: Recogito;
     
-    public init(elementId: string, callbacks?: UserSelectedAnnotationCallbacks): void {
+    public init(elementId: string, callbacks?: UserSelectedAnnotationCallbacks, formatter?: (annotation: Annotation) => string): void {
         this.recogito = init({
             content: document.getElementById(elementId),
+            allowEmpty: true,
+            formatter: (recogitoAnnotation: RecogitoAnnotation) => {
+                const annotation: Annotation = this.recogitoAnnotationToGenericAnnotation(recogitoAnnotation);
+                return formatter ? formatter(annotation) : "";
+            },
         });
         
         this.setupUserSelectedAnnotationActionCallbacks(callbacks);
@@ -43,7 +48,15 @@ export class RecogitoAnnotationService implements IAnnotationService {
 
     private setupUserSelectedAnnotationActionCallbacks(callbacks?: UserSelectedAnnotationCallbacks): void {
         this.recogito.on('createAnnotation', async (annotation: RecogitoAnnotation) => {
-            // add the user tag
+            console.log("createAnnotation");
+            console.log(annotation);
+
+            annotation.body.push({
+                type: "TextualBody",
+                value: "USER PICKED",
+                purpose: "commenting"
+            });
+
             annotation.body.push({
                 type: "TextualBody",
                 value: "user",
@@ -134,13 +147,25 @@ export class RecogitoAnnotationService implements IAnnotationService {
     }
 
     private recogitoAnnotationToGenericAnnotation(recogitoAnnotation: RecogitoAnnotation): Annotation {
+        let type: string;
+        let label: string;
+
+        // body is empty when user creates an annotation
+        if (recogitoAnnotation.body.length === 0) {
+            type = "user";
+            label = "USER PICKED";
+        } else {
+            type = recogitoAnnotation.body[1].value;
+            label = recogitoAnnotation.body[0].value;
+        }
+
         const annotation: Annotation = {
             id: recogitoAnnotation.id,
-            type: recogitoAnnotation.body[1].value,
+            type: type,
             start: recogitoAnnotation.target.selector[1].start,
             end: recogitoAnnotation.target.selector[1].end,
             text: recogitoAnnotation.target.selector[0].exact,
-            label: recogitoAnnotation.body[0].value
+            label: label
         }
 
         return annotation;

@@ -32,7 +32,7 @@
             </div>
 
             <div class="card-footer">
-                <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab">
+                <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab" :activeTabIndex="activeTabIndex" :tabCount="tabCount">
                     <div class="w-100 d-flex justify-content-between align-items-center">
                         <div>
                             <button v-if="activeTabIndex > 0" @click="prevTab" class="btn btn-default m-2">
@@ -147,7 +147,9 @@ export default {
             activeTabIndex: 0,
             tabLinkWidth: 0,
             tabLinkHeight: 50,
-            wizardId: randomString()
+            wizardId: randomString(),
+            // onResize will be called on window resize event but only once every 40ms (25 times per second)
+            onResizeWithThrottle: throttle(this.onResize, 40)
         }
     },
     computed: {
@@ -189,18 +191,13 @@ export default {
     methods: {
         addTab(tab) {
             console.log("Adding tab...")
-            // find index of tab in slots array based on wizard tab id
+            // find index of tab in the default slot array based on wizard tab id
             let index = this.$slots.default().findIndex(slot => slot.props.id === tab.id)
 
-            let tabTitle = tab.title || '';
-            tab.tabId = `${tabTitle.replace(/ /g, '')}${index}`
+            tab.tabId = `${index}`
             if (!this.activeTab && index === 0) {
                 tab.active = true;
                 tab.checked = true
-            }
-            if (this.activeTab === tab.name) {
-                tab.active = true;
-                tab.checked = true;
             }
             this.onResize();
             this.tabs.splice(index, 0, tab)
@@ -249,7 +246,7 @@ export default {
         async navigateToTab(index) {
             console.log("Navigating to tab...")
 
-            if (this.tabs[index].checked) { 
+            if (this.tabs[index].checked) {
                 // recursively validate each tab
                 if (index > this.activeTabIndex) {
                     let valid = await this.nextTab();
@@ -263,7 +260,6 @@ export default {
         },
         onResize() {
             console.log("Resizing...")
-
             let tabLinks = document.querySelectorAll(`#${this.wizardId} .wizard-tab-link`);
             if (tabLinks.length > 0 && this.tabCount > 0) {
                 let {
@@ -285,7 +281,7 @@ export default {
             this.onResize();
         });
         window.addEventListener('resize', () => {
-            throttle(this.onResize, 40)
+            this.onResizeWithThrottle()
         }, false);
     },
     watch: {

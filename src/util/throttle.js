@@ -1,15 +1,20 @@
+import { set } from "lodash";
+
 /**
- * Simple throttle function that executes a passed function only once in the specified timeout
+ * Simple throttle function that returns a throttler function for the passed function
  * @param handlerFunc
  * @param [timeout] the throttle interval
  */
 export function throttle(handlerFunc, timeout = 66) {
-  let resizeTimeout;
-  if (!resizeTimeout) {
-    resizeTimeout = setTimeout(() => {
-      resizeTimeout = null;
-      handlerFunc();
-      // The actualResizeHandler will execute at a rate of 15fps
+  let resizeTimeout = false;
+
+  return function () {
+    if (resizeTimeout) return;
+
+    resizeTimeout = true;
+    handlerFunc();
+    setTimeout(function () {
+      resizeTimeout = false;
     }, timeout);
   }
 }

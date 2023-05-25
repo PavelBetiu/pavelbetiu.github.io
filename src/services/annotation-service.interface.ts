@@ -19,7 +19,8 @@ export interface UserSelectedAnnotationCallbacks {
 export interface IAnnotationService {
     // elementId: reference to the DOM element where the annotation layer will be rendered
     // callbacks: callbacks for user actions taken for user selected annotations
-    init: (elementId: string, callbacks?: UserSelectedAnnotationCallbacks) => void;
+    // formatter: annotation formater, used to format annotations for display (e.g. change the color of the annotation)
+    init: (elementId: string, callbacks?: UserSelectedAnnotationCallbacks, formatter?: (annotation: Annotation) => string) => void;
     addAnnotation: (annotation: Annotation) => void;
     deleteAnnotation: (annotation: Annotation) => void;
     setAnnotations: (annotations: Annotation[]) => void;
