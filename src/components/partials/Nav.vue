@@ -64,21 +64,9 @@
                 </li>
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
                     <div class="card flex justify-content-center">
-                        <a class="user-options-menu">
+                        <a style="overflow: auto;">
                             <div class="flex-auto">
                                 <Avatar class="text-gradient text-primary" :icon="avatarIcon" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
-                            </div>
-                            <div class="position-fixed">
-                                <TieredMenu 
-                                    :baseZIndex="1" 
-                                    ref="menu" 
-                                    id="overlay_tmenu" 
-                                    appendTo="a.user-options-menu" 
-                                    :pt="tieredMenuPassThroughOptions" 
-                                    :model="items" 
-                                    @before-show="setAvatarIcon('pi pi-angle-double-down')" 
-                                    @before-hide="setAvatarIcon('pi pi-user')"
-                                    popup />
                             </div>
                         </a>
                     </div>
@@ -87,6 +75,22 @@
         </div>
     </div>
 </nav>
+<div class="row" style="height: 0px;" v-if="isAuthenticated">
+    <div class="col-12">
+        <div id="userOptionsMenu">
+            <TieredMenu 
+                :baseZIndex="1" 
+                ref="menu" 
+                id="overlay_tmenu" 
+                appendTo="#userOptionsMenu" 
+                :pt="tieredMenuPassThroughOptions" 
+                :model="items" 
+                @before-show="setAvatarIcon('pi pi-angle-double-down')" 
+                @before-hide="setAvatarIcon('pi pi-user')" 
+                popup />
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -153,7 +157,7 @@ export default {
                     state,
                     context
                 }) => ({
-                    style: 'background-color: #ffffffdf; top:4.2rem; left:-10rem',
+                    style: 'background-color: #ffffffdf; position: sticky; margin-top: 6.3rem; left: 79.1%; backdrop-filter: blur(12px);',
                 }),
                 icon: ({
                     props,
@@ -208,14 +212,6 @@ nav {
             color: #d88d00;
         }
     }
-}
-
-.user-options-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
 }
 </style>
 
