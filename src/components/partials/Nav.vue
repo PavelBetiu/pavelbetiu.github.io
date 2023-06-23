@@ -64,12 +64,9 @@
                 </li>
                 <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
                     <div class="card flex justify-content-center">
-                        <a>
+                        <a style="overflow: auto;">
                             <div class="flex-auto">
-                                <Avatar class="text-gradient text-primary" icon="pi pi-user" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
-                            </div>
-                            <div class="position-fixed">
-                                <TieredMenu ref="menu" id="overlay_tmenu" :model="items" popup />
+                                <Avatar class="text-gradient text-primary" :icon="avatarIcon" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
                             </div>
                         </a>
                     </div>
@@ -78,6 +75,22 @@
         </div>
     </div>
 </nav>
+<div class="row" style="height: 0px;" v-if="isAuthenticated">
+    <div class="col-12">
+        <div id="userOptionsMenu">
+            <TieredMenu 
+                :baseZIndex="1" 
+                ref="menu" 
+                id="overlay_tmenu" 
+                appendTo="#userOptionsMenu" 
+                :pt="tieredMenuPassThroughOptions" 
+                :model="items" 
+                @before-show="setAvatarIcon('pi pi-angle-double-down')" 
+                @before-hide="setAvatarIcon('pi pi-user')" 
+                popup />
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
@@ -136,7 +149,32 @@ export default {
                         this.logout()
                     }
                 }
-            ]
+            ],
+            avatarIcon: 'pi pi-user',
+            tieredMenuPassThroughOptions: {
+                root: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    style: 'background-color: #ffffffdf; position: sticky; margin-top: 6.3rem; left: 79.1%; backdrop-filter: blur(12px);',
+                }),
+                icon: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    class: 'text-gradient text-primary',
+                }),
+                label: ({
+                    props,
+                    state,
+                    context
+                }) => ({
+                    class: 'text-sm font-weight-bold',
+                    style: 'color: var(--bs-nav-link-color); font-size: 1.5rem; '
+                }),
+            },
         };
     },
     computed: {
@@ -154,7 +192,10 @@ export default {
         onLogoutSuccess(message) {
             this.toastService && this.toastService.info('See you later!', message);
         },
-    },
+        setAvatarIcon(icon) {
+            this.avatarIcon = icon
+        }
+    }
 };
 </script>
 
@@ -171,5 +212,19 @@ nav {
             color: #d88d00;
         }
     }
+}
+</style>
+
+<style>
+.p-tieredmenu:before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 1rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-bottom: 1rem solid #ffffffdf;
+    position: absolute;
+    top: -1rem;
+    left: 80%;
 }
 </style>
