@@ -2,7 +2,6 @@
 <div class="wizard-container" :id="wizardId">
     <div class="card card-wizard active" :class="[wizardClasses, {'card-transparent': plain}]">
         <form @submit.prevent>
-            <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
             <div class="card-header text-center">
                 <slot name="header" v-if="showHeader && !$slots.header()">
                     <h3 class="card-title">{{title}}</h3>
@@ -25,7 +24,7 @@
 
             <div class="card-body">
                 <div class="tab-content">
-                    <slot :activeIndex="activeTabIndex" :activeTab="activeTab">
+                    <slot :activeIndex="activeTabIndex" :activeTab="activeTab" :uncheck-next-tabs="uncheckNextTabs">
 
                     </slot>
                 </div>
@@ -190,7 +189,6 @@ export default {
     },
     methods: {
         addTab(tab) {
-            console.log("Adding tab...")
             // find index of tab in the default slot array based on wizard tab id
             let index = this.$slots.default().findIndex(slot => slot.props.id === tab.id)
 
@@ -203,7 +201,6 @@ export default {
             this.tabs.splice(index, 0, tab)
         },
         removeTab(tab) {
-            console.log("Removing tab...")
             const tabs = this.tabs;
             const index = tabs.indexOf(tab);
 
@@ -212,7 +209,7 @@ export default {
             }
         },
         validate(tab) {
-            console.log("Validating tab...")
+            console.log('validating tab')
             let tabToValidate = tab || this.activeTab
             let beforeChange = tabToValidate.beforeChange
             if (beforeChange) {
@@ -227,39 +224,48 @@ export default {
             }
         },
         async nextTab() {
-            console.log("Next tab...")
-
             let isValid = await this.validate();
             if (isValid && this.activeTabIndex === this.tabCount - 1) {
                 this.$emit('complete');
             }
             if (isValid && this.activeTabIndex < this.tabCount - 1) {
                 this.activeTabIndex++
+                console.info("\nValidation succeeded: I will navigate to the next tab...\n")
             }
+
+            if (!isValid) {
+                console.error("\nValidation failed: I wont navigate to the next tab...\n")
+            }
+
             return isValid
         },
         prevTab() {
-            console.log("Previous tab...")
-
             this.activeTabIndex--;
         },
         async navigateToTab(index) {
-            console.log("Navigating to tab...")
-
+            console.log("\nI will navigate to the tab with index: " + index + "\n")
             if (this.tabs[index].checked) {
                 // recursively validate each tab
                 if (index > this.activeTabIndex) {
                     let valid = await this.nextTab();
                     if (valid) {
                         this.navigateToTab(index)
+                    } else {
+                        console.log("\nI wont navigate to the next tab...\n")
                     }
                 } else {
                     this.activeTabIndex = index
                 }
+            } else {
+                console.log("\nTab with index: " + index + " is disabled\n")
+            }
+        },
+        uncheckNextTabs() {
+            for (let i = this.activeTabIndex + 1; i < this.tabCount; i++) {
+                this.tabs[i].checked = false
             }
         },
         onResize() {
-            console.log("Resizing...")
             let tabLinks = document.querySelectorAll(`#${this.wizardId} .wizard-tab-link`);
             if (tabLinks.length > 0 && this.tabCount > 0) {
                 let {
@@ -272,8 +278,6 @@ export default {
         },
     },
     mounted() {
-        console.log("Wizard Mounted...")
-
         this.activeTabIndex = this.startIndex;
         this.$nextTick(() => {
             this.tabs[this.activeTabIndex].active = true;

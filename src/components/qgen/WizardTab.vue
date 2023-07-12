@@ -31,11 +31,9 @@ export default {
         }
     },
     mounted() {
-		console.log("Wizard tab mounted")
         this.addTab(this)
     },
     unmounted() {
-		console.log("Wizard tab unmounted")
         if (this.$el && this.$el.parentNode) {
             this.$el.parentNode.removeChild(this.$el)
         }

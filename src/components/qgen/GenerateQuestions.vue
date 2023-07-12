@@ -1,8 +1,6 @@
 <template>
 <div class="wrapper body">
-
     <div class="main-panel">
-
         <div class="content mt-6">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-10 mr-auto ml-auto">
@@ -12,8 +10,8 @@
                             <h3 class="description">Insert your text here</h3>
                         </template>
 
-                        <template #default>
-                            <wizard-tab :beforeChange="() => validateText()" id="new-text-tab">
+                        <template #default="slotProps">
+                            <wizard-tab :beforeChange="() => validateText(slotProps)" id="new-text-tab">
                                 <template #label>
                                     New Text
                                 </template>
@@ -25,19 +23,19 @@
 
                             </wizard-tab>
 
-                            <wizard-tab id="text-annotation-tab">
+                            <wizard-tab :beforeChange="() => validateAnnotations()" id="text-annotation-tab">
                                 <template #label>
                                     Text Annotation
                                 </template>
-                                <div class="wizard-tab-content">
+                                <div v-show="annotationsReceived" class="wizard-tab-content">
                                     <div class="form-group row">
-                                        <div class="col-lg-3 d-flex align-items-center">
-                                            <p-checkbox v-model="bertIsSelected" :binary="true" :pt="{
+                                        <div class="ml-5 col-lg-2 d-flex align-items-center">
+                                            <p-checkbox v-model="rlIsSelected" :binary="true" :pt="{
                                                         input: ({ props, state }) => ({
-                                                            class: state.focused ? 'bert-checkbox-focus' : 'bert-checkbox',
+                                                            class: state.focused ? 'rl-checkbox-focus' : 'rl-checkbox',
                                                         })
                                                     }" />
-                                            <label class="m-2"> Keyword (BERT Topic) </label>
+                                            <label class="m-2"> RL </label>
                                         </div>
                                         <div class="col-lg-3 d-flex align-items-center">
                                             <p-checkbox v-model="nerIsSelected" :binary="true" :pt="{
@@ -66,9 +64,12 @@
                                     </div>
                                     <div id="annotated-text" class="text-justify qgen-text-style" v-html="annotatedText" :style="setUnselectableIfUserAnnNotChecked()" @mouseup="handleOnMouseUpEvent($event)"></div>
                                 </div>
+                                <div v-if="!annotationsReceived" class="wizard-tab-content d-flex justify-content-center align-items-center">
+                                    <p-progress-spinner/>
+                                </div>
                             </wizard-tab>
 
-                            <wizard-tab id="parameters-tab">
+                            <wizard-tab :beforeChange="() => validateParameters()" id="parameters-tab">
                                 <template #label>
                                     Parameters
                                 </template>
@@ -90,9 +91,9 @@
                                 <template #label>
                                     Generated Questions
                                 </template>
-                                <div class="wizard-tab-content">
+                                <div v-show="questionsReceived" class="wizard-tab-content">
                                     <div class="form-group row">
-                                        <Table :data="dummyTableData" :isSortable="false" :withCustomBody="true" :isScrollable="true">
+                                        <Table :data="tableData" :isSortable="false" :withCustomBody="true" :isScrollable="true">
                                             <template #column="{rowData, currentColumnData}">
                                                 <div v-if="currentColumnData.key == 'relevant' || currentColumnData.key == 'grammar' || currentColumnData.key == 'coherence'" class="w-100 d-flex justify-content-start">
                                                     <p-checkbox v-model="rowData[currentColumnData.key]" :binary="true" />
@@ -103,6 +104,9 @@
                                             </template>
                                         </Table>
                                     </div>
+                                </div>
+                                <div v-if="!questionsReceived" class="wizard-tab-content d-flex justify-content-center align-items-center">
+                                    <p-progress-spinner/>
                                 </div>
                             </wizard-tab>
                         </template>
@@ -139,8 +143,8 @@
 </template>
 
 <script>
-import WizardTab from '@/components/UIComponents/WizardTab.vue'
-import Wizard from '@/components/UIComponents/Wizard.vue'
+import WizardTab from '@/components/qgen/WizardTab.vue'
+import Wizard from '@/components/qgen/Wizard.vue'
 import Table from '@/components/widgets/Table.vue'
 
 import {
@@ -150,224 +154,70 @@ import {
     ANNOTATION_SERVICE,
     UserSelectedAnnotationCallbacks
 } from '@/services/annotation-service.interface';
+import {
+    QGEN_SERVICE,
+    QGenAnswerRequest,
+    QGenTestRequest
+} from '@/services/qgen-service.interface';
+import {
+    convertQGenAnswerExtendedToAnnotation,
+    convertAnnotationToQGenAnswer,
+    convertQGenTestsToQuestionsTable
+} from '@/components/qgen/qgen-converters';
 
+
+// TODO: Disable tab navigation for the tabs following a tab that changed its state
 export default {
     components: {
-        // TextAnnotation,
         Wizard,
         WizardTab,
         Table
     },
     data() {
         return {
-            annotationService: null,
-            wizardModel: {},
+            /* New Text */
             text: "Alexander Graham Bell was born in Edinburgh, Scotland on March 3, 1847. When he was only eleven years old, he invented a machine that could clean wheat. Graham studied anatomy and physiology at the University of London, but moved with his family to Quebec, Canada in 1870. Bell soon moved to Boston, Massachusetts. In 1871, he began working with deaf people and published the system of Visible Hearing that was developed by his father. Visible hearing illustrated how the tongue, lips, and throat are used to produce vocal sounds. In 1872, Bell founded a school for the deaf which soon became part of Boston University. Alexander Graham Bell is best known for his invention of the telephone. While trying to discover the secret of transmitting multiple messages on a single wire, Bell heard the sound of a plucked string along some of the electrical wire. One of Bell's assistants, Thomas A. Watson, was trying to reactivate a telephone transmitter. After hearing the sound, Bell believed he could send the sound of a human voice over the wire. After receiving a patent on March 7, 1876 for transmitting sound along a single wire, he successfully transmitted human speech on March 10th. Bell's telephone patent was one of the most valuable patents ever issued. He started the Bell Telephone Company in 1877. Bell went on to invent a precursor to the modern day air conditioner, and a device, called a \"photophone\", that enabled sound to be transmitted on a beam of light. Today's fiber optic and laser communication systems are based on Bell's photophone research. In 1898, Alexander Graham Bell and his son-in-law took over the National Geographic Society and built it into one of the most recognized magazines in the world. Bell also helped found Science Magazine, one of the most respected research journals in the world.",
+            lastProcessedTextCleansed: "",
+
+            /* Text Annotation step */
+            annotationService: null,
             annotatedText: "",
-            bertIsSelected: false,
+            rlIsSelected: false,
             nerIsSelected: false,
             oracleIsSelected: false,
             userAnnIsSelected: false,
+            annotationsReceived: false,
+            annotations: [],
+            lastProcessedAnnotations: "",
 
-            annotations: [{
-                    id: this.generateRandomId(),
-                    type: "bert",
-                    start: 34,
-                    end: 53,
-                    text: "Edinburgh, Scotland",
-                    label: "BERT"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "ner",
-                    start: 249,
-                    end: 263,
-                    text: "Quebec, Canada",
-                    label: "NER"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "user",
-                    start: 452,
-                    end: 529,
-                    text: "illustrated how the tongue, lips, and throat are used to produce vocal sounds",
-                    label: "USER PICKED"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "bert",
-                    start: 620,
-                    end: 641,
-                    text: "Alexander Graham Bell",
-                    label: "BERT"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "user",
-                    start: 882,
-                    end: 898,
-                    text: "Thomas A. Watson",
-                    label: "USER PICKED"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "ner",
-                    start: 1276,
-                    end: 1298,
-                    text: "Bell Telephone Company",
-                    label: "NER"
-                },
-                {
-                    id: this.generateRandomId(),
-                    type: "bert",
-                    start: 1749,
-                    end: 1765,
-                    text: "Science Magazine",
-                    label: "BERT"
-                }
-            ],
+            /* Parameters step */
             numberOfQuestions: 1,
             numberOfOptions: 4,
-            dummyTableData: {
-                columns: [{
-                        key: 'question',
-                        displayName: 'Question',
-                    },
-                    {
-                        key: 'correct_answer',
-                        displayName: 'Correct Answer',
-                    },
-                    {
-                        key: 'option_2',
-                        displayName: 'Option 2',
-                    },
-                    {
-                        key: 'option_3',
-                        displayName: 'Option 3',
-                    },
-                    {
-                        key: 'option_4',
-                        displayName: 'Option 4',
-                    },
-                    {
-                        key: 'relevant',
-                        displayName: 'Relevant',
-                    },
-                    {
-                        key: 'grammar',
-                        displayName: 'Grammar',
-                    },
-                    {
-                        key: 'coherence',
-                        displayName: 'Coherence',
-                    },
-                ],
-                rows: [{
-                        question: "Where was Alexander Graham Bell born?",
-                        correct_answer: "Edinburgh, Scotland",
-                        option_1: "Edinburgh, Scotland",
-                        option_2: "London, United Kingdom",
-                        option_3: "Quebec, Canada",
-                        option_4: "Boston, Massachusetts",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
-                    {
-                        question: "Who invented the telephone?",
-                        correct_answer: "Alexander Graham Bell",
-                        option_1: "Alexander Graham Bell",
-                        option_2: "Steve Wozniak",
-                        option_3: "John Von Neumann",
-                        option_4: "Albert Einstein",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
-                    {
-                        question: "What Visible Hearing does?",
-                        correct_answer: "illustrated how the tongue, lips, and throat are used to produce vocal sounds",
-                        option_1: "illustrated how the tongue, lips, and throat are used to produce vocal sounds",
-                        option_2: "transmitting multiple messages on a single wire",
-                        option_3: "reactivate a telephone transmitter",
-                        option_4: "enabled sound to be transmitted on a beam of light",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
-                    {
-                        question: "What research journal did Bell found?",
-                        correct_answer: "Science Magazine",
-                        option_1: "Science Magazine",
-                        option_2: "Natural History",
-                        option_3: "National Geographic Society",
-                        option_4: "Nature Magazine",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
-                    {
-                        question: "Where did Bell moved in 1870?",
-                        correct_answer: "Quebec, Canada",
-                        option_1: "Quebec, Canada",
-                        option_2: "Ottawa, Canada",
-                        option_3: "Boston, Massachusetts",
-                        option_4: "London, United Kingdom",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
-                    {
-                        question: "What company did Bell founded in 1877?",
-                        correct_answer: "Bell Telephone Company",
-                        option_1: "Bell Telephone Company",
-                        option_2: "National Geographic Society",
-                        option_3: "BellSouth Telecommunications",
-                        option_4: "Cannon",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    },
+            tableData: {},
 
-                    {
-                        question: "Who was Bell’s assistant?",
-                        correct_answer: "Thomas A. Watson",
-                        option_1: "Thomas A. Watson",
-                        option_2: "Thomas Edison",
-                        option_3: "Nikola Tesla",
-                        option_4: "Samuel F. B. Morse",
-                        relevant: true,
-                        grammar: true,
-                        coherence: true
-                    }
-
-                ],
-            },
+            /* Generated Questions step */
+            questionsReceived: false
         }
     },
 
     created() {
-        console.log("generate questions page has been created");
         this.annotationService = inject(ANNOTATION_SERVICE);
+        this.qgenService = inject(QGEN_SERVICE);
     },
 
     mounted() {
-        console.log("generate questions page has been mounted");
         this.annotationService.init("annotated-text", {
             onUserAddedAnnotation: this.onUserAnnotationAdded,
             onUserDeletedAnnotation: this.onUserAnnotationDeleted,
             onUserUpdatedAnnotation: this.onUserAnnotationUpdated
-        }, this.annotationFormetter);
+        }, this.annotationFormatter);
 
         const annotatedTextParent = document.getElementsByClassName("r6o-content-wrapper")[0];
         const secondChild = annotatedTextParent.children[1];
 
-        console.log(annotatedTextParent);
-
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 if (mutation.type === "childList") {
-                    console.log("A child node has been added or removed.");
                     const taggingSection = document.querySelectorAll("div.r6o-widget.r6o-tag")[0]
 
                     if (taggingSection != undefined) {
@@ -419,8 +269,6 @@ export default {
                             mutations.forEach((mutation) => {
                                 if (mutation.type === "childList") {
                                     const taggingSectionRestored = document.querySelectorAll("div.r6o-widget.r6o-tag")[0]
-                                    console.log("tagging section restored")
-                                    console.log(taggingSectionRestored)
 
                                     if (taggingSectionRestored != undefined) {
                                         taggingSectionRestored.remove();
@@ -442,23 +290,6 @@ export default {
             childList: true
         });
     },
-
-    beforeUpdate() {
-        console.log("before update");
-    },
-
-    updated() {
-        console.log("updated");
-    },
-
-    beforeUnmount() {
-        console.log("before unmount");
-    },
-
-    unmounted() {
-        console.log("unmounted");
-    },
-
     methods: {
         generateRandomId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -479,40 +310,73 @@ export default {
         validateStep(ref) {
             return this.$refs[ref].validate()
         },
-        onStepValidated(validated, model) {
-            this.wizardModel = {
-                ...this.wizardModel,
-                ...model
-            }
-        },
         wizardComplete() {
             // this.$router.push({
             //     name: "TextsCollection"
             // })
         },
-        validateText() {
-            console.log("validate Text");
+        validateText(slotProps) {
+            // Keep only alphanumeric characters for comparison
+            let cleansedText = this.text.replace(/[^a-z0-9]/gi, '');
+
+            if (cleansedText == "") {
+                this.$emit('on-validated', false, this.text)
+                return Promise.resolve(false)
+            }
+
+            // If the text is the same as the last processed text, then we don't need to process it again
+            if (cleansedText == this.lastProcessedTextCleansed) {
+                this.$emit('on-validated', true, this.text)
+                return Promise.resolve(true)
+            } else {
+                this.annotationsReceived = false;
+
+                this.rlIsSelected = false;
+                this.nerIsSelected = false;
+                this.oracleIsSelected = false;
+                this.userAnnIsSelected = false;
+                this.annotationsReceived = false;
+                this.annotations = [];
+                this.lastProcessedAnnotations = "";
+
+                // Uncheck the next tabs (navigation is not allowed)
+                slotProps.uncheckNextTabs();
+            }
+
             this.$emit('on-validated', true, this.text)
-            this.annotatedText = this.text;
+            this.getAnnotations().then((response) => {
+                // Keep the state of the text for future comparison
+                this.lastProcessedTextCleansed = cleansedText;
+
+                this.annotatedText = this.text;
+                this.annotations = response.answers.map((ann) => {
+                    return convertQGenAnswerExtendedToAnnotation(ann)
+                })
+                this.annotationsReceived = true;
+
+                let annotationsTypes = this.annotations.map((ann) => {
+                    return ann.type;
+                });
+                console.log(annotationsTypes);
+            }).catch((error) => {
+                console.error(error);
+            });
+
             return Promise.resolve(true)
         },
+        getAnnotations() {
+            return this.qgenService.getAnswers(this.text)
+        },
         validateAnnotations() {
-            // console.log("validate Annotations");
-            // this.$emit('on-validated', true, this.text)
-            // return Promise.resolve(true)
+            return Promise.resolve(true)
         },
         checkIfSameAnnotations(ann1, ann2) {
             return ann1.id == ann2.id;
         },
         onUserAnnotationAdded(annotation) {
-            console.log("onUserAnnotationAdded callback:");
-            console.log(annotation);
             this.annotations.push(annotation);
         },
         onUserAnnotationDeleted(annotation) {
-            console.log("onUserAnnotationDeleted");
-            console.log(annotation);
-
             // find the annotation by id and delete it
             this.annotations = this.annotations.filter((ann) => {
                 return ann.id != annotation.id;
@@ -529,20 +393,15 @@ export default {
             });
         },
         showAnnotationsByType(type) {
-            console.log("showAnnotationsByType: ", type);
-
             let annotations = this.annotations.filter((ann) => {
                 return ann.type == type;
             });
 
             for (let i = 0; i < annotations.length; i++) {
-                console.log("adding annotation: ", annotations[i]);
                 this.annotationService.addAnnotation(annotations[i]);
             }
         },
         hideAnnotationsByType(type) {
-            console.log("hideAnnotationsByType: ", type);
-
             let annotations = this.annotations.filter((ann) => {
                 return ann.type == type;
             });
@@ -551,23 +410,55 @@ export default {
                 this.annotationService.deleteAnnotation(annotations[i]);
             }
         },
-        annotationFormetter(annotation) {
+        annotationFormatter(annotation) {
             const typeToCSSClass = {
-                "bert": "bert-annotation-format",
+                "rl": "rl-annotation-format",
                 "ner": "ner-annotation-format",
                 "oracle": "oracle-annotation-format",
                 "user": "user-annotation-format"
             }
             return typeToCSSClass[annotation.type];
+        },
+        validateParameters() {
+            // If the annotations are the same as the last processed annotations, then we don't need to process them again
+            if (JSON.stringify(this.annotations) == this.lastProcessedAnnotations) {
+                console.error("Same annotations")
+                this.$emit('on-validated', true, this.annotations)
+                return Promise.resolve(true)
+            } else {
+                this.questionsReceived = false;
+            }
+
+            this.getTest().then((response) => {
+                // Keep the state of the annotations for future comparison
+                this.lastProcessedAnnotations = JSON.stringify(this.annotations);
+
+                this.tableData = convertQGenTestsToQuestionsTable(response.tests)
+                this.questionsReceived = true;
+            }).catch((error) => {
+                console.error(error);
+            });
+
+            return Promise.resolve(true)
+        },
+        getTest() {
+            let answers = this.annotations.map((ann) => {
+                return convertAnnotationToQGenAnswer(ann)
+            });
+            let payload = {
+                text: this.text,
+                answers: answers
+            }
+            return this.qgenService.getTest(payload)
         }
     },
 
     watch: {
-        bertIsSelected(newValue, oldValue) {
+        rlIsSelected(newValue, oldValue) {
             if (newValue == true) {
-                this.showAnnotationsByType("bert");
+                this.showAnnotationsByType("rl");
             } else {
-                this.hideAnnotationsByType("bert");
+                this.hideAnnotationsByType("rl");
             }
         },
         nerIsSelected(newValue, oldValue) {
@@ -609,18 +500,18 @@ export default {
     border-radius: 3px !important;
 }
 
-.bert-annotation-format {
+.rl-annotation-format {
     background-color: #9077ffa9 !important;
     border-bottom: 2px solid #7556fd !important;
     border-radius: 3px !important;
 }
 
-.bert-checkbox {
+.rl-checkbox {
     background-color: #9077ffa9 !important;
     border-color: #7556fd !important;
 }
 
-.bert-checkbox-focus {
+.rl-checkbox-focus {
     background-color: #9077ffa9 !important;
     border-color: #7556fd !important;
     box-shadow: 0 0 0 0.2rem #9077ff44 !important;

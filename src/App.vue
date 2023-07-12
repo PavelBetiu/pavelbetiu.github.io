@@ -22,6 +22,9 @@ import { CsclService } from "./services/cscl-service";
 import { ANNOTATION_SERVICE } from "./services/annotation-service.interface";
 import { RecogitoAnnotationService } from "./services/recogito-annotation-service";
 
+import { QGEN_SERVICE } from "./services/qgen-service.interface";
+import { MockQGenService } from "./services/mock-qgen-service";
+
 export default {
   name: "app",
   components: {
@@ -35,6 +38,7 @@ export default {
     provide(CSCL_SERVICE, new CsclService());
     //provide(CSCL_SERVICE, new MockCsclService());
     provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
+    provide(QGEN_SERVICE, new MockQGenService());
   },
 };
 </script>
