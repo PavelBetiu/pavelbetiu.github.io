@@ -26,6 +26,7 @@ export class MockQGenService implements IQGenService {
     };
 
     private readonly answers: QGenAnswersResponse = {
+        text: "",
         answers: [
             {
                 type: "rl",

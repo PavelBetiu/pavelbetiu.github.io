@@ -344,11 +344,13 @@ export default {
             }
 
             this.$emit('on-validated', true, this.text)
+
+            console.log("Text validated")
             this.getAnnotations().then((response) => {
                 // Keep the state of the text for future comparison
                 this.lastProcessedTextCleansed = cleansedText;
 
-                this.annotatedText = this.text;
+                this.annotatedText = response.text;
                 this.annotations = response.answers.map((ann) => {
                     return convertQGenAnswerExtendedToAnnotation(ann)
                 })
@@ -357,7 +359,6 @@ export default {
                 let annotationsTypes = this.annotations.map((ann) => {
                     return ann.type;
                 });
-                console.log(annotationsTypes);
             }).catch((error) => {
                 console.error(error);
             });
@@ -365,7 +366,9 @@ export default {
             return Promise.resolve(true)
         },
         getAnnotations() {
-            return this.qgenService.getAnswers(this.text)
+            return this.qgenService.getAnswers({
+                'text': this.text
+            })
         },
         validateAnnotations() {
             return Promise.resolve(true)
@@ -430,13 +433,17 @@ export default {
             }
 
             this.getTest().then((response) => {
+                console.log(response);
                 // Keep the state of the annotations for future comparison
                 this.lastProcessedAnnotations = JSON.stringify(this.annotations);
 
                 this.tableData = convertQGenTestsToQuestionsTable(response.tests)
                 this.questionsReceived = true;
             }).catch((error) => {
-                console.error(error);
+                alert(error);
+                // TODO: handle error
+                // Maybe we should not allow the user to go to the next step
+                // Define the state flow of the wizard
             });
 
             return Promise.resolve(true)

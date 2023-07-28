@@ -9,6 +9,7 @@ export interface QGenAnswerExtended extends QGenAnswer {
 }
 
 export interface QGenAnswersResponse {
+    text: string;
     answers: QGenAnswerExtended[];
 }
 

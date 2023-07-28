@@ -24,6 +24,7 @@ import { RecogitoAnnotationService } from "./services/recogito-annotation-servic
 
 import { QGEN_SERVICE } from "./services/qgen-service.interface";
 import { MockQGenService } from "./services/mock-qgen-service";
+import { QGenService } from "./services/qgen-service";
 
 export default {
   name: "app",
@@ -38,7 +39,7 @@ export default {
     provide(CSCL_SERVICE, new CsclService());
     //provide(CSCL_SERVICE, new MockCsclService());
     provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
-    provide(QGEN_SERVICE, new MockQGenService());
+    provide(QGEN_SERVICE, new QGenService());
   },
 };
 </script>
