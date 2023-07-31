@@ -1,24 +1,23 @@
 <template>
-<p-datatable 
-  :value="data.rows" 
-  :responsiveLayout="isScrollable ? 'scroll' : ''" 
-  :scrollable="isScrollable" 
-  :scrollHeight="isScrollable ? '400px' : ''"
-  :stripedRows="true">
+  <p-datatable 
+    :value="data.rows" 
+    :responsiveLayout="isScrollable ? 'scroll' : ''" 
+    :scrollable="isScrollable" 
+    :scrollHeight="isScrollable ? '450px' : ''"
+    :stripedRows="true" >
     <p-column
       v-for="col of data.columns"
       :field="col.key"
       :header="col.displayName"
       :key="col.key"
-      :sortable="true"
+      :sortable="isSortable"
     >
-        <template v-if="withCustomBody" #body="{data}">
-          <slot :rowData="data" :currentColumnData="col" name="column">
-          </slot>
-        </template>
-
-    </p-column>
-</p-datatable>
+    <template v-if="withCustomBody" #body="{data}">
+      <slot :rowData="data" :currentColumnData="col" name="column">
+      </slot>
+    </template>
+  </p-column>
+  </p-datatable>
 </template>
 
 <script>
@@ -27,26 +26,16 @@ import {
 } from "./table-input";
 
 export default {
-    props: {
-        data: TableInput,
-        isScrollable: {
-            type: Boolean,
-            default: true,
-            required: false,
-        },
-        withCustomBody: {
-            type: Boolean,
-            default: false,
-            required: false,
-        }
+  props: {
+    data: TableInput,
+    isScrollable: {
+      type: Boolean,
+      default: true,
+      required: false,
     },
-    data() {
-        return {};
-    },
-    methods:{
-        debug(){
-            console.debug(this.data);
-        }
-    },
+  },
+  data() {
+    return {};
+  },
 };
 </script>

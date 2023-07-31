@@ -30,6 +30,12 @@ import {
 import {
     CsclService
 } from "./services/cscl-service";
+import { ANNOTATION_SERVICE } from "./services/annotation-service.interface";
+import { RecogitoAnnotationService } from "./services/recogito-annotation-service";
+
+import { QGEN_SERVICE } from "./services/qgen-service.interface";
+import { MockQGenService } from "./services/mock-qgen-service";
+import { QGenService } from "./services/qgen-service";
 
 import {
     TOAST_SERVICE
@@ -63,7 +69,9 @@ export default {
         //provide(CSCL_SERVICE, new MockCsclService());
         provide(DATASETS_SERVICE, new DatasetsService());
         provide(TOAST_SERVICE, new PrimeVueToastService(app));
-    },
+      provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
+    provide(QGEN_SERVICE, new QGenService());
+  },
 };
 </script>
 

@@ -58,6 +58,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
   {
+    path: '/services/question-generation',
+    name: 'generateQuestions',
+    component: () => import('@/components/qgen/GenerateQuestions.vue'),
+  },
+  {
     path: '/datasets',
     name: 'datasets',
     component: () => import('@/views/DatasetsView.vue'),
