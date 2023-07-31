@@ -65,6 +65,12 @@ export default {
                     link: '/services/cscl',
                     image: 'demo_cscl.png',
                 },
+                qgen: {
+                    title: "QUESTION GENERATION",
+                    languages: ['English'],
+                    link: '/services/question-generation',
+                    image: 'demo_qgen.png',
+                },
                 tcomp: {
 					title: "TEXTUAL COMPLEXITY",
                     languages: ['English', 'French'],

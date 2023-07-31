@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
   },
   {
-    path: '/generate-questions',
+    path: '/services/question-generation',
     name: 'generateQuestions',
     component: () => import('@/components/qgen/GenerateQuestions.vue'),
   }
