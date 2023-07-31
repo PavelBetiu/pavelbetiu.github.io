@@ -5,9 +5,19 @@ import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/text-analysis',
+    name: 'text-analysis',
+    component: () => import('@/views/TextAnalysisView.vue')
+  },
+  {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/models',
+    name: 'models',
+    component: () => import('../views/ModelsView.vue')
   },
   {
     path: '/services',
@@ -19,7 +29,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/people',
-    name: 'people' ,
+    name: 'people',
     component: () => import('../views/People.vue')
   },
   {
@@ -51,6 +61,21 @@ const routes: Array<RouteRecordRaw> = [
     path: '/services/question-generation',
     name: 'generateQuestions',
     component: () => import('@/components/qgen/GenerateQuestions.vue'),
+  },
+  {
+    path: '/datasets',
+    name: 'datasets',
+    component: () => import('@/views/DatasetsView.vue'),
+  },
+  {
+    path: '/processing-queue',
+    name: 'processingqueue',
+    component: () => import('@/views/ProcessingQueueView.vue'),
+  },
+  {
+    path: '/profile',
+    name: 'userprofileview',
+    component: () => import('@/views/UserProfileView.vue'),
   }
 ]
 

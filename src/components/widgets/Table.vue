@@ -21,7 +21,9 @@
 </template>
 
 <script>
-import { TableInput } from "./table-input";
+import {
+    TableInput
+} from "./table-input";
 
 export default {
   props: {
@@ -29,16 +31,6 @@ export default {
     isScrollable: {
       type: Boolean,
       default: true,
-      required: false,
-    },
-    isSortable: {
-      type: Boolean,
-      default: true,
-      required: false,
-    },
-    withCustomBody: {
-      type: Boolean,
-      default: false,
       required: false,
     },
   },
