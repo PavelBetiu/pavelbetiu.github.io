@@ -147,9 +147,15 @@ import WizardTab from '@/components/qgen/WizardTab.vue'
 import Wizard from '@/components/qgen/Wizard.vue'
 import Table from '@/components/widgets/Table.vue'
 
+
 import {
     inject
 } from 'vue';
+
+import {
+  TOAST_SERVICE
+} from "@/services/toast-service.interface"
+
 import {
     ANNOTATION_SERVICE,
     UserSelectedAnnotationCallbacks
@@ -175,6 +181,9 @@ export default {
     },
     data() {
         return {
+            /* Toast service */
+            toastService: null,
+
             /* New Text */
             text: "Alexander Graham Bell was born in Edinburgh, Scotland on March 3, 1847. When he was only eleven years old, he invented a machine that could clean wheat. Graham studied anatomy and physiology at the University of London, but moved with his family to Quebec, Canada in 1870. Bell soon moved to Boston, Massachusetts. In 1871, he began working with deaf people and published the system of Visible Hearing that was developed by his father. Visible hearing illustrated how the tongue, lips, and throat are used to produce vocal sounds. In 1872, Bell founded a school for the deaf which soon became part of Boston University. Alexander Graham Bell is best known for his invention of the telephone. While trying to discover the secret of transmitting multiple messages on a single wire, Bell heard the sound of a plucked string along some of the electrical wire. One of Bell's assistants, Thomas A. Watson, was trying to reactivate a telephone transmitter. After hearing the sound, Bell believed he could send the sound of a human voice over the wire. After receiving a patent on March 7, 1876 for transmitting sound along a single wire, he successfully transmitted human speech on March 10th. Bell's telephone patent was one of the most valuable patents ever issued. He started the Bell Telephone Company in 1877. Bell went on to invent a precursor to the modern day air conditioner, and a device, called a \"photophone\", that enabled sound to be transmitted on a beam of light. Today's fiber optic and laser communication systems are based on Bell's photophone research. In 1898, Alexander Graham Bell and his son-in-law took over the National Geographic Society and built it into one of the most recognized magazines in the world. Bell also helped found Science Magazine, one of the most respected research journals in the world.",
             lastProcessedTextCleansed: "",
@@ -203,6 +212,7 @@ export default {
     created() {
         this.annotationService = inject(ANNOTATION_SERVICE);
         this.qgenService = inject(QGEN_SERVICE);
+        this.toastService = inject(TOAST_SERVICE);
     },
 
     mounted() {
@@ -303,8 +313,7 @@ export default {
         },
         handleOnMouseUpEvent(event) {
             if (event.target.localName == "div" && !this.userAnnIsSelected) {
-                // TODO: use toast instead of alert
-                alert("Please select the User annotated checkbox first to create new annotations")
+                this.info("User annotated checkbox not selected", "Please select the User annotated checkbox first to create new annotations")
             }
         },
         validateStep(ref) {
@@ -440,10 +449,8 @@ export default {
                 this.tableData = convertQGenTestsToQuestionsTable(response.tests)
                 this.questionsReceived = true;
             }).catch((error) => {
-                alert(error);
+                this.error("Error", error)
                 // TODO: handle error
-                // Maybe we should not allow the user to go to the next step
-                // Define the state flow of the wizard
             });
 
             return Promise.resolve(true)
@@ -457,6 +464,15 @@ export default {
                 answers: answers
             }
             return this.qgenService.getTest(payload)
+        },
+        success(header, footer) {
+            this.toastService && this.toastService.success(footer, header)
+        },
+        info(header, footer) {
+            this.toastService && this.toastService.info(footer, header)
+        },
+        error(header, footer) {
+            this.toastService && this.toastService.error(footer, header)
         }
     },
 

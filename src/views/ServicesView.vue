@@ -71,23 +71,17 @@ export default {
                     link: '/services/question-generation',
                     image: 'demo_qgen.png',
                 },
-                tcomp: {
-					title: "TEXTUAL COMPLEXITY",
-                    languages: ['English', 'French'],
-                    link: '/services/textual-complexity',
-                    image: 'demo-complexity.png',
+                text_analysis: {
+                    title: "TEXT ANALYSIS",
+                    languages: ['English', 'Romanian'],
+                    link: '/services/text-analysis',
+                    image: 'ta_demo.png',
                 },
                 mdcna: {
 					title: "MULTI-DOCUMENT CNA",
                     languages: ['English', 'French'],
                     link: '/services/multi-document-cna',
                     image: 'demo-cna.png',
-                },
-                sent_an: {
-					title: "SENTIMENT ANALYSIS",
-                    languages: ['English', 'French'],
-                    link: '/services/sentiment-analysis',
-                    image: 'demo_sentiment_analysis.png',
                 },
                 keyw: {
 					title: "KEYWORDS",

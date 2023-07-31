@@ -5,11 +5,6 @@ import auth from '@/services/auth';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/text-analysis',
-    name: 'text-analysis',
-    component: () => import('@/views/TextAnalysisView.vue')
-  },
-  {
     path: '/',
     name: 'home',
     component: HomeView
@@ -76,7 +71,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/profile',
     name: 'userprofileview',
     component: () => import('@/views/UserProfileView.vue'),
-  }
+  },
+  {
+    path: '/services/text-analysis',
+    name: 'text-analysis',
+    component: () => import('@/views/TextAnalysisView.vue')
+  },
 ]
 
 const router = createRouter({
