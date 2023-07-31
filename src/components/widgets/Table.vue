@@ -33,6 +33,16 @@ export default {
       default: true,
       required: false,
     },
+    isSortable: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
+    withCustomBody: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
   },
   data() {
     return {};
