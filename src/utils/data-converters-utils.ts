@@ -44,7 +44,7 @@ export function convertDatasetsToTableInput(datasets: Dataset[], languages: Data
                 displayName: 'Number of entries'
             },
             {
-                key: 'datasetActions',
+                key: 'dataset_actions',
                 displayName: 'Actions'
             }
         ],
@@ -58,7 +58,7 @@ export function convertDatasetsToTableInput(datasets: Dataset[], languages: Data
         dataset_row['language'] = languages.find(language => language.id === dataset['language'])?.label ?? 'Unknown';
         dataset_row['number_of_tasks'] = dataset['number_of_tasks'];
         dataset_row['number_of_entries'] = dataset['number_of_entries'];
-        dataset_row['datasetActions'] = actions;
+        dataset_row['dataset_actions'] = actions;
 
         input.rows.push(dataset_row as Record<string, unknown>);
     }

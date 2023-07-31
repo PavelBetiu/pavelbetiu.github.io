@@ -106,8 +106,19 @@
         <div class="row">
             <p class="h4 text-gradient text-primary">My datasets</p>
             <div class="col-lg-12 d-flex justify-content-center flex-column card p-4">
-                <!-- TODO: Add table with datasets -->
-                <Table :data="tableData" :isScrollable="false"></Table>
+                <Table :data="tableData" :isScrollable="false" :withCustomBody="true">
+                    <template #column="{rowData, currentColumnData}">
+                        <!-- For each row, we need to render a button for each action -->
+                        <div v-if="currentColumnData.key == 'dataset_actions'">
+                            <span v-for="action of rowData[currentColumnData.key]" :key="action.name">
+                                <button :class="'btn '+ action.class + ' m-1'" @click="action.action(rowData.id)"> {{ action.name }} </button>
+                            </span>
+                        </div>
+                        <div v-else>
+                            {{ rowData[currentColumnData.key] }}
+                        </div>
+                    </template>
+                </Table>
             </div>
         </div>
 
@@ -130,6 +141,10 @@ import {
 import {
     convertDatasetsToTableInput
 } from "@/utils/data-converters-utils"
+
+import {
+  TOAST_SERVICE
+} from "@/services/toast-service.interface"
 
 export default {
     name: "DatasetsView",
@@ -156,6 +171,8 @@ export default {
 
             filteredTasks: [],
             refreshPage: 0,
+
+            toastService: inject(TOAST_SERVICE)
         }
 
     },
@@ -165,22 +182,25 @@ export default {
         // Getting languages from the backend
         this.datasetService.getLanguages().then((response) => {
             this.languages = response['languages'];
-        }).catch((error) => alert("Error: " + error));
 
-        // Getting datasets from the backend
-        this.datasetService.getDatasets().then((response) => {
-            let datasetActions = [{
-                name: 'Process',
-                class: 'bg-gradient-primary',
-                action: this.processDataset
-            }, {
-                name: 'Delete',
-                class: 'btn-outline-danger',
-                action: this.deleteDataset
-            }, ]
+            // Getting datasets from the backend
+            this.datasetService.getDatasets().then((response) => {
+                let datasetActions = [{
+                    name: 'Process',
+                    class: 'bg-gradient-primary',
+                    action: this.processDataset
+                }, {
+                    name: 'Delete',
+                    class: 'btn-outline-danger',
+                    action: this.deleteDataset
+                }, ]
 
-            this.tableData = convertDatasetsToTableInput(response['datasets'], this.languages, datasetActions);
-        }).catch((error) => alert("Error: " + error));
+                this.tableData = convertDatasetsToTableInput(response['datasets'], this.languages, datasetActions);
+            }).catch((error) => this.error("Error", error));
+
+        }).catch((error) => this.error("Error", error));
+
+        
     },
     methods: {
         selectZIP(event) {
@@ -201,13 +221,12 @@ export default {
         removeCSV(event) {
             this.csvFile = null;
         },
-        // TODO: trigger page refresh after dataset import?
         async importDataset() {
             if (!this.checked && (!this.langID || !this.datasetName || !this.task || !this.zipFile || !this.csvFile)) {
-                alert("Missing parameters");
+                this.info("Missing parameters", "Please fill all the fields");
                 return;
             } else if (this.checked && (!this.langID || !this.datasetName || !this.task || !this.csvFile)) {
-                alert("Missing parameters");
+                this.info("Missing parameters", "Please fill all the fields");
                 return;
             }
 
@@ -223,13 +242,12 @@ export default {
 
             await this.datasetService.importDataset(data)
                 .then((response) => {
-                    // TODO: change with toast
-                    //alert("Server response ok");
+                    this.success("Success", "Dataset imported successfully");
                     this.clear();
+                    console.log(response)
                 })
                 .catch((error) => {
-                    // TODO: change with toast
-                    alert("Error: " + error);
+                    this.error("Error", error);
                 });
         },
         async processDataset(id) {
@@ -239,15 +257,16 @@ export default {
 
             await this.datasetService.processDataset(data)
                 .then((response) => {
-                    alert("Server response ok: " + response.data.id);
+                    this.success("Success", "Dataset processing started");
+                    console.log(response)
                 })
                 .catch((error) => {
-                    alert("Error: " + error);
+                    this.error("Error", error);
                 });
         },
         async deleteDataset(id) {
             // TODO: implement using the dataset service
-            alert(`Delete dataset with id ${id}`);
+            this.success("Dataset deleted", `Dataset with id ${id} has been deleted`);
         },
         searchTask(event) {
             if (event.query.trim().length == 0) {
@@ -270,6 +289,15 @@ export default {
             this.checked = false;
 
         },
+        success(header, footer) {
+            this.toastService && this.toastService.success(footer, header)
+        },
+        info(header, footer) {
+            this.toastService && this.toastService.info(footer, header)
+        },
+        error(header, footer) {
+            this.toastService && this.toastService.error(footer, header)
+        }
     }
 }
 </script>

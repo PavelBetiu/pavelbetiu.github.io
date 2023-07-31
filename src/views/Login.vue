@@ -114,7 +114,7 @@ export default {
       auth.dummy_successful_login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
     },
     onLoginSuccess(response) {
-      this.toastService && this.toastService.success('Welcome to ReaderBench!', 'Hi, ' + response);
+      this.toastService && this.toastService.success('Welcome to ReaderBench!', 'Hi, ' + response.username);
     },
     onLoginFail(error) {
       this.toastService && this.toastService.error(error.response.data.error_description, 'Login failed');

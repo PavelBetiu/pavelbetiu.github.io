@@ -8,7 +8,16 @@
 </div>
 <div class="container p-9">
     <div class="card shadow-lg">
-        <Table :data="tableData" isScrollable="true" />
+        <Table :data="tableData" isScrollable="true" :withCustomBody="true">
+            <template #column="{rowData, currentColumnData}">
+                <span v-if="currentColumnData.key == 'status'" :class="getStatusClass(rowData.status)">
+                    {{ getStatusName(rowData.status) }}
+                </span>
+                <span v-else >
+                    {{ rowData[currentColumnData.key] }}
+                </span>
+            </template>
+        </Table>
     </div>
 </div>
 </template>
@@ -44,6 +53,20 @@ export default {
             },
         },
     },
+    methods: {
+        getStatusClass(status) {
+            if (status == 1) return 'badge bg-warning';
+            if (status == 2) return 'badge bg-info';
+            if (status == 3) return 'badge bg-success';
+            if (status == 4) return 'badge bg-danger';
+        },
+        getStatusName(status) {
+            if (status == 1) return 'Pending';
+            if (status == 2) return 'In progress';
+            if (status == 3) return 'Finished';
+            if (status == 4) return 'Error';
+        }
+    }
 }
 </script>
 
