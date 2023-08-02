@@ -8,7 +8,6 @@ async function getJobResults(id: number) {
     let results: any = null
 
     while (notDone) {
-        console.log('getting results')
         results = await axios.post(`/services/jobs/${id}`, {}).then((response) => {
             if (response.data.status === 3) {
                 notDone = false

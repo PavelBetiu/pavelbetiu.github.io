@@ -69,8 +69,8 @@ export default {
         //provide(CSCL_SERVICE, new MockCsclService());
         provide(DATASETS_SERVICE, new DatasetsService());
         provide(TOAST_SERVICE, new PrimeVueToastService(app));
-      provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
-    provide(QGEN_SERVICE, new QGenService());
+        provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
+        provide(QGEN_SERVICE, new QGenService());
   },
 };
 </script>

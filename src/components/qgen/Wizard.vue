@@ -24,7 +24,7 @@
 
             <div class="card-body">
                 <div class="tab-content">
-                    <slot :activeIndex="activeTabIndex" :activeTab="activeTab" :uncheck-next-tabs="uncheckNextTabs">
+                    <slot :activeIndex="activeTabIndex" :activeTab="activeTab" :uncheck-next-tabs="uncheckNextTabs" :prev-tab="prevTab">
 
                     </slot>
                 </div>
@@ -209,7 +209,6 @@ export default {
             }
         },
         validate(tab) {
-            console.log('validating tab')
             let tabToValidate = tab || this.activeTab
             let beforeChange = tabToValidate.beforeChange
             if (beforeChange) {
@@ -230,11 +229,6 @@ export default {
             }
             if (isValid && this.activeTabIndex < this.tabCount - 1) {
                 this.activeTabIndex++
-                console.info("\nValidation succeeded: I will navigate to the next tab...\n")
-            }
-
-            if (!isValid) {
-                console.error("\nValidation failed: I wont navigate to the next tab...\n")
             }
 
             return isValid
@@ -243,21 +237,16 @@ export default {
             this.activeTabIndex--;
         },
         async navigateToTab(index) {
-            console.log("\nI will navigate to the tab with index: " + index + "\n")
             if (this.tabs[index].checked) {
                 // recursively validate each tab
                 if (index > this.activeTabIndex) {
                     let valid = await this.nextTab();
                     if (valid) {
                         this.navigateToTab(index)
-                    } else {
-                        console.log("\nI wont navigate to the next tab...\n")
                     }
                 } else {
                     this.activeTabIndex = index
                 }
-            } else {
-                console.log("\nTab with index: " + index + " is disabled\n")
             }
         },
         uncheckNextTabs() {

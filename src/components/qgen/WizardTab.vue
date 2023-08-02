@@ -19,7 +19,12 @@ export default {
         beforeChange: {
             type: Function,
             description: 'Function to execute before switching to another tab. Can be Function<boolean> or Function<Promise<boolean>>'
-        }
+        },
+        afterRender: {
+            type: Function,
+            optional: true,
+            description: 'Function to execute after tab is rendered'
+        },
     },
     inject: ['addTab', 'removeTab'],
     data() {
@@ -38,6 +43,9 @@ export default {
             this.$el.parentNode.removeChild(this.$el)
         }
         this.removeTab(this)
+    },
+    updated() {
+        this.afterRender && this.afterRender()
     }
 }
 </script>

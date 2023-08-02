@@ -23,7 +23,7 @@
 
                             </wizard-tab>
 
-                            <wizard-tab :beforeChange="() => validateAnnotations()" id="text-annotation-tab">
+                            <wizard-tab :beforeChange="() => validateAnnotations(slotProps)" :afterRender="annotationsTabAfterRender" id="text-annotation-tab">
                                 <template #label>
                                     Text Annotation
                                 </template>
@@ -69,18 +69,19 @@
                                 </div>
                             </wizard-tab>
 
-                            <wizard-tab :beforeChange="() => validateParameters()" id="parameters-tab">
+                            <wizard-tab :beforeChange="() => validateParameters(slotProps)" id="parameters-tab">
                                 <template #label>
                                     Parameters
                                 </template>
                                 <div class="wizard-tab-content">
                                     <div class="form-group d-flex flex-column justify-content-center align-items-center h-100 qgen-text-style">
+                                        <label class="h6"><span class="badge rounded-pill bg-warning m-1">!</span>Parameters configuration is currently not supported</label>
                                         <div class="form-floating mb-3 w-50">
-                                            <input id="nbQuest" type="number" class="form-control" v-model="numberOfQuestions">
+                                            <input id="nbQuest" type="number" class="form-control" v-model="numberOfQuestions" disabled>
                                             <label class="h6" for="nbQuest">Select the number of questions (per answer)</label>
                                         </div>
                                         <div class="form-floating w-50">
-                                            <input id="nbOpt" type="number" class="form-control" v-model="numberOfOptions">
+                                            <input id="nbOpt" type="number" class="form-control" v-model="numberOfOptions" disabled>
                                             <label class="h6" for="nbOpt">Select the number of options (per question)</label>
                                         </div>
                                     </div>
@@ -171,8 +172,6 @@ import {
     convertQGenTestsToQuestionsTable
 } from '@/components/qgen/qgen-converters';
 
-
-// TODO: Disable tab navigation for the tabs following a tab that changed its state
 export default {
     components: {
         Wizard,
@@ -196,6 +195,7 @@ export default {
             oracleIsSelected: false,
             userAnnIsSelected: false,
             annotationsReceived: false,
+            annotationsRendered: false,
             annotations: [],
             lastProcessedAnnotations: "",
 
@@ -301,6 +301,12 @@ export default {
         });
     },
     methods: {
+        annotationsTabAfterRender() {
+            if (this.annotationsReceived && !this.annotationsRendered) {
+                this.showAllAnnotations();
+                this.annotationsRendered = true;
+            }
+        },
         generateRandomId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         },
@@ -328,33 +334,22 @@ export default {
             // Keep only alphanumeric characters for comparison
             let cleansedText = this.text.replace(/[^a-z0-9]/gi, '');
 
+            // If the text is empty, then we don't need to process it
             if (cleansedText == "") {
-                this.$emit('on-validated', false, this.text)
                 return Promise.resolve(false)
             }
 
             // If the text is the same as the last processed text, then we don't need to process it again
             if (cleansedText == this.lastProcessedTextCleansed) {
-                this.$emit('on-validated', true, this.text)
                 return Promise.resolve(true)
-            } else {
-                this.annotationsReceived = false;
-
-                this.rlIsSelected = false;
-                this.nerIsSelected = false;
-                this.oracleIsSelected = false;
-                this.userAnnIsSelected = false;
-                this.annotationsReceived = false;
-                this.annotations = [];
-                this.lastProcessedAnnotations = "";
-
-                // Uncheck the next tabs (navigation is not allowed)
-                slotProps.uncheckNextTabs();
             }
 
-            this.$emit('on-validated', true, this.text)
+            // Clear the annotations step if the text is different
+            this.clearAnnotationStep();
 
-            console.log("Text validated")
+            // Uncheck the next tabs (navigation is not allowed)
+            slotProps.uncheckNextTabs();
+
             this.getAnnotations().then((response) => {
                 // Keep the state of the text for future comparison
                 this.lastProcessedTextCleansed = cleansedText;
@@ -369,7 +364,13 @@ export default {
                     return ann.type;
                 });
             }).catch((error) => {
-                console.error(error);
+                this.error("Error", error)
+                
+                // Force the user to go back to the previous tab
+                slotProps.prevTab();
+
+                // Uncheck the next tabs (navigation is not allowed)
+                slotProps.uncheckNextTabs();
             });
 
             return Promise.resolve(true)
@@ -380,6 +381,11 @@ export default {
             })
         },
         validateAnnotations() {
+            if (this.getVisibleAnnotations().length == 0) {
+                this.info("No annotations selected", "Please annotate the text or toggle the checkboxes to select the annotations")
+                return Promise.resolve(false)
+            }
+
             return Promise.resolve(true)
         },
         checkIfSameAnnotations(ann1, ann2) {
@@ -404,6 +410,12 @@ export default {
                 }
             });
         },
+        showAllAnnotations() {
+            this.rlIsSelected = true;
+            this.nerIsSelected = true;
+            this.oracleIsSelected = true;
+            this.userAnnIsSelected = true;
+        },
         showAnnotationsByType(type) {
             let annotations = this.annotations.filter((ann) => {
                 return ann.type == type;
@@ -422,6 +434,35 @@ export default {
                 this.annotationService.deleteAnnotation(annotations[i]);
             }
         },
+        getVisibleAnnotations(){
+            let visibleAnnotations = [];
+
+            if (this.rlIsSelected) {
+                visibleAnnotations = visibleAnnotations.concat(this.annotations.filter((ann) => {
+                    return ann.type == "rl";
+                }));
+            }
+
+            if (this.nerIsSelected) {
+                visibleAnnotations = visibleAnnotations.concat(this.annotations.filter((ann) => {
+                    return ann.type == "ner";
+                }));
+            }
+
+            if (this.oracleIsSelected) {
+                visibleAnnotations = visibleAnnotations.concat(this.annotations.filter((ann) => {
+                    return ann.type == "oracle";
+                }));
+            }
+
+            if (this.userAnnIsSelected) {
+                visibleAnnotations = visibleAnnotations.concat(this.annotations.filter((ann) => {
+                    return ann.type == "user";
+                }));
+            }
+
+            return visibleAnnotations;
+        },
         annotationFormatter(annotation) {
             const typeToCSSClass = {
                 "rl": "rl-annotation-format",
@@ -431,32 +472,37 @@ export default {
             }
             return typeToCSSClass[annotation.type];
         },
-        validateParameters() {
+        validateParameters(slotProps) {
+            // Send only the visible annotations
+            let visibleAnnotations = this.getVisibleAnnotations();
+
             // If the annotations are the same as the last processed annotations, then we don't need to process them again
-            if (JSON.stringify(this.annotations) == this.lastProcessedAnnotations) {
-                console.error("Same annotations")
-                this.$emit('on-validated', true, this.annotations)
+            if (JSON.stringify(visibleAnnotations) == this.lastProcessedAnnotations) {
                 return Promise.resolve(true)
             } else {
                 this.questionsReceived = false;
             }
 
             this.getTest().then((response) => {
-                console.log(response);
                 // Keep the state of the annotations for future comparison
-                this.lastProcessedAnnotations = JSON.stringify(this.annotations);
+                this.lastProcessedAnnotations = JSON.stringify(visibleAnnotations);
 
                 this.tableData = convertQGenTestsToQuestionsTable(response.tests)
                 this.questionsReceived = true;
             }).catch((error) => {
                 this.error("Error", error)
-                // TODO: handle error
+
+                // Force the user to go back to the previous tab
+                slotProps.prevTab();
+
+                // Uncheck the next tabs (navigation is not allowed)
+                slotProps.uncheckNextTabs();
             });
 
             return Promise.resolve(true)
         },
         getTest() {
-            let answers = this.annotations.map((ann) => {
+            let answers = this.getVisibleAnnotations().map((ann) => {
                 return convertAnnotationToQGenAnswer(ann)
             });
             let payload = {
@@ -472,7 +518,18 @@ export default {
             this.toastService && this.toastService.info(footer, header)
         },
         error(header, footer) {
-            this.toastService && this.toastService.error(footer, header)
+            this.toastService && this.toastService.error(footer, header, -1)
+        },
+        clearAnnotationStep() {
+            this.rlIsSelected = false;
+            this.nerIsSelected = false;
+            this.oracleIsSelected = false;
+            this.userAnnIsSelected = false;
+            this.annotationsReceived = false;
+            this.annotationsRendered = false;
+            this.annotations = [];
+            this.lastProcessedAnnotations = "";
+            this.annotationService.clearAnnotations();
         }
     },
 
