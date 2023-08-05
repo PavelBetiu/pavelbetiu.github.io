@@ -24,3 +24,17 @@ export interface GetDatasetsResponse {
             number_of_entries: number;
         }[];
 }
+
+export interface DeleteDatasetResponse {
+    success: boolean;
+}
+
+export interface GetDatasetResponse {
+    id: number;
+    name: string;
+    language: number;
+    number_of_tasks: number;
+    number_of_entries: number;
+    processed: number;
+    indices: boolean;
+}

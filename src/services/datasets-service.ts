@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GetDatasetLanguagesResponse, GetDatasetsResponse, ImportDatasetResponse, ProcessDatasetResponse } from '@/data-objects/datasets-dtos';
+import { DeleteDatasetResponse, GetDatasetLanguagesResponse, GetDatasetsResponse, ImportDatasetResponse, ProcessDatasetResponse, GetDatasetResponse } from '@/data-objects/datasets-dtos';
 import { IDatasetsService, ImportDatasetRequest, ProcessDatasetRequest } from "./datasets-service.interface";
 
 export class DatasetsService implements IDatasetsService {
@@ -28,5 +28,14 @@ export class DatasetsService implements IDatasetsService {
     const data = new FormData();
     data.append('dataset_id', request.dataset_id.toString());
     return await axios.post(`/services/datasets/${request.dataset_id}/process`, data);
+  }
+
+  public async deleteDataset(dataset_id: number): Promise<DeleteDatasetResponse> {
+   return await axios.post(`/services/datasets/${dataset_id}/delete`, {});
+  }
+
+  public async getDataset(dataset_id: number): Promise<GetDatasetResponse> {
+    const response = await axios.post(`/services/datasets/${dataset_id}`, {});
+    return response.data;
   }
 }

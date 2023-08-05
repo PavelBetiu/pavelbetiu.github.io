@@ -63,6 +63,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/DatasetsView.vue'),
   },
   {
+    path: '/datasets/:dataset_id',
+    name: 'dataset',
+    component: () => import('@/views/DatasetView.vue')
+  },
+  {
     path: '/processing-queue',
     name: 'processingqueue',
     component: () => import('@/views/ProcessingQueueView.vue'),
