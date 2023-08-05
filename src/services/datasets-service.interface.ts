@@ -1,5 +1,5 @@
 import { InjectionKey } from 'vue';
-import { ImportDatasetResponse, ProcessDatasetResponse, GetDatasetLanguagesResponse, GetDatasetsResponse } from '@/data-objects/datasets-dtos';
+import { ImportDatasetResponse, ProcessDatasetResponse, GetDatasetLanguagesResponse, GetDatasetsResponse, DeleteDatasetResponse, GetDatasetResponse } from '@/data-objects/datasets-dtos';
 
 export interface ImportDatasetRequest {
     lang: string; // TODO; Change to id of language
@@ -16,6 +16,8 @@ export interface ProcessDatasetRequest {
 export interface IDatasetsService {
   importDataset(request: ImportDatasetRequest): Promise<ImportDatasetResponse>;
   processDataset(request: ProcessDatasetRequest): Promise<ProcessDatasetResponse>;
+  deleteDataset(dataset_id: number): Promise<DeleteDatasetResponse>;
+  getDataset(dataset_id: number): Promise<GetDatasetResponse>;
   getLanguages(): Promise<GetDatasetLanguagesResponse>;
   getDatasets(): Promise<GetDatasetsResponse>;
 }

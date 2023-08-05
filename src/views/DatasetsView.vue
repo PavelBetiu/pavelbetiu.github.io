@@ -1,5 +1,5 @@
 <template>
-<div :class="$style['body']" :key="refreshPage">
+<div :class="$style['body']">
     <div class="container">
         <div id="dataset-import-form" class="row">
             <div class="col-lg-2"></div>
@@ -9,7 +9,11 @@
                         <p class="h4 text-gradient text-primary">Upload a dataset</p>
                     </div>
 
-                    <form autocomplete="off" @submit.prevent="">
+                    <div class="card-body d-flex justify-content-center align-items-center dataset-import-form" v-if="waitingForDatasetImportResponse">
+                        <p-progress-spinner/>
+                    </div>
+
+                    <form v-else-if="!waitingForDatasetImportResponse" autocomplete="off" @submit.prevent="" class="dataset-import-form">
                         <div class="card-body pb-2">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-8">
@@ -32,7 +36,6 @@
                                         <div class="col-2">
                                             <label>Task type</label>
                                         </div>
-                                        <!-- TODO: Use an AutoComplete textbox instead -->
                                         <div class="col-10">
                                             <div class="input-group mb-4" id="task_autocom" >
                                                 <AutoComplete v-model="task" :suggestions="filteredTasks" @complete="searchTask($event)"/>
@@ -110,9 +113,14 @@
                     <template #column="{rowData, currentColumnData}">
                         <!-- For each row, we need to render a button for each action -->
                         <div v-if="currentColumnData.key == 'dataset_actions'">
-                            <span v-for="action of rowData[currentColumnData.key]" :key="action.name">
-                                <button :class="'btn '+ action.class + ' m-1'" @click="action.action(rowData.id)"> {{ action.name }} </button>
-                            </span>
+                            <div v-if="waitingForDatasetDeleteID == rowData.id">
+                                <p-progress-spinner style="width: 50px; height: 50px" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"/>
+                            </div>
+                            <div v-else>
+                                <span v-for="action of rowData[currentColumnData.key]" :key="action.name">
+                                    <button :class="'btn '+ action.class + ' m-1'" @click="action.action(rowData.id)"> {{ action.name }} </button>
+                                </span>
+                            </div>
                         </div>
                         <div v-else>
                             {{ rowData[currentColumnData.key] }}
@@ -164,13 +172,15 @@ export default {
             zipFile: null,
             csvFile: null,
             checked: false,
+            waitingForDatasetImportResponse: false,
+
+            waitingForDatasetDeleteID: null,
             
             tasks: ["Text Classification", "Summarization", "Sentiment Analysis"],
             languages: [],
             tableData: [],
 
             filteredTasks: [],
-            refreshPage: 0,
 
             toastService: inject(TOAST_SERVICE)
         }
@@ -178,31 +188,31 @@ export default {
     },
     created() {
         this.datasetService = inject(DATASETS_SERVICE);
-
-        // Getting languages from the backend
-        this.datasetService.getLanguages().then((response) => {
-            this.languages = response['languages'];
-
-            // Getting datasets from the backend
-            this.datasetService.getDatasets().then((response) => {
-                let datasetActions = [{
-                    name: 'Process',
-                    class: 'bg-gradient-primary',
-                    action: this.processDataset
-                }, {
-                    name: 'Delete',
-                    class: 'btn-outline-danger',
-                    action: this.deleteDataset
-                }, ]
-
-                this.tableData = convertDatasetsToTableInput(response['datasets'], this.languages, datasetActions);
-            }).catch((error) => this.error("Error", error));
-
-        }).catch((error) => this.error("Error", error));
-
-        
+        this.getDatasets();
     },
     methods: {
+        getDatasets() {
+            // Getting languages from the backend
+            this.datasetService.getLanguages().then((response) => {
+                this.languages = response['languages'];
+
+                // Getting datasets from the backend
+                this.datasetService.getDatasets().then((response) => {
+                    let datasetActions = [{
+                        name: 'View',
+                        class: 'bg-gradient-primary',
+                        action: this.viewDataset
+                    }, {
+                        name: 'Delete',
+                        class: 'btn-outline-danger',
+                        action: this.deleteDataset
+                    }, ]
+
+                    this.tableData = convertDatasetsToTableInput(response['datasets'], this.languages, datasetActions);
+                }).catch((error) => this.error("Error", error));
+
+            }).catch((error) => this.error("Error", error));
+        },
         selectZIP(event) {
             this.zipFile = [...event.files][0];
         },
@@ -238,17 +248,23 @@ export default {
                 csvfile: this.csvFile,
             };
 
-            console.log(data);
+            this.waitingForDatasetImportResponse = true;
 
             await this.datasetService.importDataset(data)
                 .then((response) => {
                     this.success("Success", "Dataset imported successfully");
-                    this.clear();
-                    console.log(response)
+                    this.waitingForDatasetImportResponse = false;
+                    this.reloadPage();
                 })
                 .catch((error) => {
+                    this.waitingForDatasetImportResponse = false;
                     this.error("Error", error);
                 });
+        },
+        viewDataset(id) {
+            this.$router.push({
+                path: `/datasets/${id}`
+            });
         },
         async processDataset(id) {
             const data = {
@@ -258,15 +274,24 @@ export default {
             await this.datasetService.processDataset(data)
                 .then((response) => {
                     this.success("Success", "Dataset processing started");
-                    console.log(response)
                 })
                 .catch((error) => {
                     this.error("Error", error);
                 });
         },
-        async deleteDataset(id) {
-            // TODO: implement using the dataset service
-            this.success("Dataset deleted", `Dataset with id ${id} has been deleted`);
+        deleteDataset(id) {
+            this.waitingForDatasetDeleteID = id;
+
+            this.datasetService.deleteDataset(id)
+                .then((response) => {     
+                    this.reloadPage();
+                    this.waitingForDatasetDeleteID = null;
+                    this.success("Dataset deleted", `Dataset with id ${id} has been deleted`);
+                })
+                .catch((error) => {
+                    this.waitingForDatasetDeleteID = null;
+                    this.error("Error", error);
+                });
         },
         searchTask(event) {
             if (event.query.trim().length == 0) {
@@ -278,9 +303,7 @@ export default {
                 });
             }
         },
-        clear() {
-            this.refreshPage = this.refreshPage + 1 % 2;
-
+        reloadPage() {
             this.datasetName = null;
             this.task = null;
             this.langID = 2;
@@ -288,6 +311,7 @@ export default {
             this.csvFile = null;
             this.checked = false;
 
+            this.getDatasets();
         },
         success(header, footer) {
             this.toastService && this.toastService.success(footer, header)
@@ -353,6 +377,10 @@ export default {
 
 #dataset-import-form input, select, p, span, label {
     font-family: sans-serif;
+}
+
+.dataset-import-form {
+    min-height: 70vh;
 }
 
 </style>
