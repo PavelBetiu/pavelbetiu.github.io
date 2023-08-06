@@ -1,8 +1,7 @@
 export interface ModelData {
     id: number,
-    params: string,
+    dataset: string,
     metrics: string,
-    dataset_id: number,
-    job_id: number,
-    type_id: number
+    params: string,
+    type: string
 }

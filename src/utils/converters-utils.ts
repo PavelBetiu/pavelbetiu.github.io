@@ -7,11 +7,6 @@ interface ModelAction {
     styleClass: string | null;
 }
 
-interface ModelTaskType {
-    id: number;
-    name: string;
-}
-
 function preprocessNumber(value: number): string {
     if (Number.isInteger(value))
         return value.toString();
@@ -23,7 +18,7 @@ function preprocessNumber(value: number): string {
     return value.toFixed(3);
 }
 
-export function convertToModelsTable(data: ModelData[], actions: ModelAction[], task_types: ModelTaskType[]): TableInput {
+export function convertToModelsTable(data: ModelData[], actions: ModelAction[]): TableInput {
     const input: TableInput = {
         columns: [
             {
@@ -47,10 +42,6 @@ export function convertToModelsTable(data: ModelData[], actions: ModelAction[], 
                 displayName: 'Metrics/Performance',
             },
             {
-                key: 'model_job_id',
-                displayName: 'Job ID',
-            },
-            {
                 key: 'model_action',
                 displayName: 'Actions',
             },
@@ -59,15 +50,11 @@ export function convertToModelsTable(data: ModelData[], actions: ModelAction[], 
     };
     
     for (const d of data) {
-        if (d['type_id'] === 1) {
+        if (d['type'] === 'TRANSFORMER') {
             for (const param of Object.keys(d['params'])) {
                 if(typeof d['params'][param] == 'number') {
                     d['params'][param] = preprocessNumber(d['params'][param]);
                 }
-
-                // if (param === 'features') {
-                //     d['params'][param] = d['params'][param][0];
-                // }
             }
 
             for (const metric of Object.keys(d['metrics'])) {
@@ -77,7 +64,7 @@ export function convertToModelsTable(data: ModelData[], actions: ModelAction[], 
             }
         }
 
-        if (d['type_id'] === 2) {
+        if (d['type'] === 'XGBOOST') {
             for (const params of d['params']) {
                 for (const param of Object.keys(params)) {
                     if(typeof params[param] == 'number'){
@@ -99,13 +86,8 @@ export function convertToModelsTable(data: ModelData[], actions: ModelAction[], 
         const dataset_row = {};
         dataset_row['model_id'] = d['id'];
         dataset_row['model_params'] = d['params'];
-        dataset_row['model_dataset'] = d['dataset_id'];
-        dataset_row['model_job_id'] = d['job_id'];
-        dataset_row['model_task_type'] = 
-        {
-            id: d['type_id'],
-            name: task_types.find((task_type) => task_type.id === d['type_id'])?.name,
-        };
+        dataset_row['model_dataset'] = d['dataset'];
+        dataset_row['model_task_type'] = d['type'];
         dataset_row['model_metrics'] = d['metrics'];
         dataset_row['model_action'] = actions;
 
