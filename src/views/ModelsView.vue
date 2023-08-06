@@ -2,7 +2,7 @@
 <div :class="$style['body']">
     <div class="container px-2 py-8">
         <div class="card shadow-lg p-2">
-            <Table :data="tableData" :isScrollable="false" :withCustomBody="true">
+            <Table v-if="tableContent !== null" :data="tableData" :isScrollable="false" :withCustomBody="true">
                 <template #column="{rowData, currentColumnData}">
                     <div v-if="currentColumnData.key == 'model_action'">
                         <!-- For each row, we need to render a button for each action -->
@@ -13,7 +13,7 @@
 
                     <div v-else-if="currentColumnData.key == 'model_params'">
                         <div id="model-params-list" class="overflow-auto">
-                            <ul v-if="rowData.model_task_type['id'] == 2" class="list-group">
+                            <ul v-if="rowData.model_task_type == 'XGBOOST'" class="list-group">
                                 <li v-for="[idx, params] of rowData.model_params.entries()" :key="idx" class="list-group-item d-flex flex-column justify-content-center align-items-center">
                                     <div v-for="param of Object.keys(params)" :key="param" class="d-flex w-100 justify-content-between align-items-center">
                                         <h6 id="param-key">{{ param }}</h6>
@@ -21,7 +21,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <ul v-else-if="rowData.model_task_type['id'] == 1" class="list-group">
+                            <ul v-else-if="rowData.model_task_type == 'TRANSFORMER'" class="list-group">
                                 <li v-for="param of Object.keys(rowData.model_params)" :key="param" class="list-group-item d-flex justify-content-between align-items-center">
                                     <h6 id="param-key">{{ param }}</h6>
                                     <span v-if="param === 'features' && JSON.parse(rowData.model_params[param].use === false)" id="param-value" class="badge rounded-pill bg-secondary">NO</span>
@@ -34,7 +34,7 @@
 
                     <div v-else-if="currentColumnData.key == 'model_metrics'">
                         <div id="model-metrics-list" class="overflow-auto">
-                            <ul v-if="rowData.model_task_type['id'] == 2" class="list-group">
+                            <ul v-if="rowData.model_task_type == 'XGBOOST'" class="list-group">
                                 <li v-for="[idx, metrics] of rowData.model_metrics.entries()" :key="idx" class="list-group-item d-flex flex-column justify-content-center align-items-center">
                                     <div v-for="metric of Object.keys(metrics)" :key="metric" class="d-flex w-100 justify-content-between align-items-center">
                                         <h6 id="metric-key">{{ metric }}</h6>
@@ -42,7 +42,7 @@
                                     </div>
                                 </li>
                             </ul>
-                            <ul v-else-if="rowData.model_task_type['id'] == 1" class="list-group">
+                            <ul v-else-if="rowData.model_task_type == 'TRANSFORMER'" class="list-group">
                                 <li v-for="metric of Object.keys(rowData.model_metrics)" :key="metric" class="list-group-item d-flex justify-content-between align-items-center">
                                     <h6 id="metric-key">{{ metric }}</h6>
                                     <span id="metric-value" class="badge rounded-pill bg-secondary">{{ rowData.model_metrics[metric] }}</span>
@@ -56,19 +56,19 @@
                     </div>
 
                     <div v-else-if="currentColumnData.key == 'model_task_type'">
-                        <h6 style="font-size: 0.9rem">{{ rowData.model_task_type['name'] }}</h6>
+                        <h6 style="font-size: 0.9rem">{{ rowData.model_task_type }}</h6>
                     </div>
 
                     <div v-else-if="currentColumnData.key == 'model_dataset'">
                         <h6 style="font-size: 0.9rem">{{ rowData.model_dataset }}</h6>
                     </div>
 
-                    <div v-else-if="currentColumnData.key == 'model_job_id'">
-                        <h6 style="font-size: 0.9rem">{{ rowData.model_job_id }}</h6>
-                    </div>
-
                 </template>
             </Table>
+
+            <div v-else class="d-flex justify-content-center align-items-center">
+                <p-progress-spinner/>
+            </div>
         </div>
     </div>
 </div>
@@ -100,14 +100,30 @@ export default {
         return {
             toastService: inject(TOAST_SERVICE),
             datasetService: null,
+            modelService: null,
             datasetsInfo: [],
 
-            tableContent: [],
+            tableContent: null,
             actions: [{
                     name: "Predict",
                     styleClass: "btn-primary",
                     action: (id) => {
-                        this.info("NOT IMPLEMENTED", `Predict action for id: ${id}`)
+                        let model = this.tableContent.filter((model) => {
+                            return model['id'] === id;
+                        })[0]
+
+                        let modelStr = JSON.stringify(model)
+                        let modelB64 = btoa(modelStr)
+
+                        console.log('here')
+                        console.log(this.$route.fullPath)
+
+                        this.$router.push({
+                            path: `/models/${id}/prediction`,
+                            query: {
+                                data: modelB64
+                            }
+                        })
                     },
                 },
                 {
@@ -118,15 +134,6 @@ export default {
                     },
                 },
             ],
-            task_types: [{
-                    id: 1,
-                    name: "Transformer"
-                },
-                {
-                    id: 2,
-                    name: "XGBoost"
-                }
-            ],
         };
     },
     components: {
@@ -134,6 +141,12 @@ export default {
     },
     created() {
         this.datasetService = inject(DATASETS_SERVICE);
+        this.modelService = new ModelService()
+
+        let datasetId = null
+        if (this.filteredByDataset) {
+            datasetId = Number(this.$route.query['datasetId'])
+        }
 
         this.datasetService.getDatasets().then((response) => {
             let datasets = response['datasets'];
@@ -146,24 +159,46 @@ export default {
             });
 
             this.datasetsInfo = datasets;
-            this.tableContent = JSON.parse(JSON.stringify(ModelService.getModels()));
 
-            for (let i = 0; i < this.tableContent.length; i++) {
-                let task_id = this.tableContent[i]['type_id']
-                this.tableContent[i]['metrics'] = JSON.parse(this.tableContent[i]['metrics'])
-                this.tableContent[i]['params'] = JSON.parse(this.tableContent[i]['params'])
-                this.tableContent[i]['dataset_id'] = this.datasetsInfo.find((dataset) => dataset['id'] == this.tableContent[i]['dataset_id'])['name']
-            }
+            this.modelService.getAllModels().then((response) => {
+                let models = response.data
 
-        }).catch((error) => alert("Error: " + error));
+                if (this.filteredByDataset == true) {
+                    const datasetName = this.datasetsInfo.filter((dataset) => {
+                        console.log(dataset['id'] === datasetId)
+                        return dataset['id'] === datasetId
+                    })[0]['name']
+
+                    models = models.filter((model) => model['dataset'] === datasetName)
+                }
+
+                this.tableContent = JSON.parse(JSON.stringify(models))
+
+                for (let i = 0; i < this.tableContent.length; i++) {
+                    this.tableContent[i]['metrics'] = JSON.parse(this.tableContent[i]['metrics'])
+                    this.tableContent[i]['params'] = JSON.parse(this.tableContent[i]['params'])
+                }
+            }).catch((error) => {
+                this.error("Error")
+            })
+        }).catch((error) => this.error("Error", error));
 
     },
     computed: {
         tableData: {
             get() {
-                return convertToModelsTable(this.tableContent, this.actions, this.task_types);
+                return convertToModelsTable(this.tableContent, this.actions);
             },
         },
+        filteredByDataset: {
+            get() {
+                if (this.$route.query['filterBy'] && this.$route.query['datasetId']) {
+                    return true
+                }
+
+                return false
+            }
+        }
     },
     methods: {
         success(header, footer) {
@@ -173,9 +208,15 @@ export default {
             this.toastService && this.toastService.info(footer, header)
         },
         error(header, footer) {
-            this.toastService && this.toastService.error(footer, header)
+            this.toastService && this.toastService.error(footer, header, -1)
         }
     },
+    watch: {
+        '$route.query': function(val, oldVal) {
+            // force reload of page
+            this.$router.go()
+        }
+    }
 }
 </script>
 
