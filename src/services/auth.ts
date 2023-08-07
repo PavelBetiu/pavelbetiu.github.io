@@ -29,7 +29,7 @@ export default {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', 'secret_token');
     localStorage.setItem('refresh_token', 'secret_refresh_token');
-      
+
     onSuccess(user);
   },
 
@@ -52,8 +52,27 @@ export default {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('refresh_token', response.data.refresh_token);
-      
+
       onSuccess(user.username);
+    })
+    .catch(error => {
+      onError(error);
+    })
+  },
+
+  signUp(details, onSuccess: Callback, onError: Callback) {
+
+    const user = {
+      email: details.email,
+      password: details.password,
+      first_name: details.firstName,
+      last_name: details.lastName,
+    };
+
+    axios
+    .post('/users/register', user)
+    .then(response => {
+      onSuccess(response);
     })
     .catch(error => {
       onError(error);

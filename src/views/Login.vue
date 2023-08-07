@@ -20,14 +20,16 @@
                     <label class="form-check-label" for="rememberMe">Remember me</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login(), greet()">Sign in</button>
+                    <button type="button" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" @click="login()">Sign in</button>
                   </div>
                 </form>
               </div>
               <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
                   <router-link to="/forgot-password">Forgot password ?</router-link>
-                  <!-- <a href="javascript:;" class="text-primary text-gradient font-weight-bold">Sign up</a> -->
+                </p>
+                <p class="mb-4 text-sm mx-auto">
+                  <router-link to="/sign-up" class="text-primary text-gradient font-weight-bold">Sign Up</router-link>
                 </p>
               </div>
             </div>
@@ -110,7 +112,7 @@ export default {
       if (this.$route.query.redirect) {
         redirect = decodeURIComponent(this.$route.query.redirect);
       }
-      
+
       auth.dummy_successful_login({username: this.username, password: this.password}, redirect, this.onLoginSuccess, this.onLoginFail);
     },
     onLoginSuccess(response) {
