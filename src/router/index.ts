@@ -79,7 +79,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/profile',
-    name: 'userprofileview',
+    name: 'userprofileView',
     component: () => import('@/views/UserProfileView.vue'),
   },
   {

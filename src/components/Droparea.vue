@@ -23,7 +23,6 @@
                         <!-- removeFileCallback is a function that will remove the file from the files array and will emit the remove event which will be caught by the parent component -->
                         <Button icon="pi pi-times" @click="removeFileCallback(index)" class="p-button-outlined p-button-danger p-button-rounded align-self-center" />
                     </div>
-
                 </div>
             </div>
         </div>

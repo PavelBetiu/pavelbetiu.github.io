@@ -1,4 +1,4 @@
-import { ProcessingQueueData, GetJobsDataResponse } from '../data-objects/processing-queue-data';
+import { ProcessingQueueData, GetJobsDataResponse, GetJobDataResponse } from '../data-objects/processing-queue-data';
 import axios from 'axios';
 export class ProcessingQueueService {
   // private static readonly data: ProcessingQueueData = {
@@ -44,7 +44,13 @@ export class ProcessingQueueService {
   // }
 
   public static async getJobsData(): Promise<GetJobsDataResponse> {
-    const result = await axios.post('/services/jobs', {});
+    const result = await axios.post('https://readerbench.com/api/v2/services/jobs', {});
+    console.log(result.data)
+    return result.data;
+  }
+
+  public static async getJobData(id): Promise<GetJobDataResponse> {
+    const result = await axios.post(`https://readerbench.com/api/v2/services/job/${id}`, {});
     console.log(result.data)
     return result.data;
   }

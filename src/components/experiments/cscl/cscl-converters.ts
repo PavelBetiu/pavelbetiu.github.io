@@ -257,6 +257,10 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
     const input: TableInput = {
         columns: [
             {
+                key: 'id',
+                displayName: 'ID',
+            },
+            {
                 key: 'task_type',
                 displayName: 'Task type',
             },
@@ -264,6 +268,12 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
                 key: 'params',
                 displayName: 'Params',
             },
+
+            {
+                key: 'dataset',
+                displayName: 'Dataset',
+            },
+            
             {
                 key: 'time_submitted',
                 displayName: 'Time submitted'
@@ -275,6 +285,10 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
             {
                 key: 'status',
                 displayName: 'Status',
+            },
+            {
+                key: 'actions',
+                displayName: 'Actions',
             }
         ],
         rows: [],
@@ -282,10 +296,12 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
     console.log(data);
     for (const item of data['jobs']) {
         const dataset_row = {};
+        dataset_row["id"] = item.id;
         dataset_row["params"] = item.params;
+        dataset_row["dataset"] = item.dataset;
         dataset_row["task_type"] = item.type;
-        dataset_row["time_submitted"] = item.time_submitted;
-        dataset_row["processing_time"] = item.processing_time;
+        dataset_row["time_submitted"] = item.submit_time;
+        dataset_row["processing_time"] = item.elapsed_time;
         dataset_row["status"] = item.status;
         input.rows.push(dataset_row as Record<string, unknown>);
     }
