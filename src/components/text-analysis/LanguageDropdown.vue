@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            langID: 1,
+            langID: 3,
             tasks_with_selected_status: this.getTasksWithSelectedStatus()
         }
     },

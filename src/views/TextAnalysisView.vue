@@ -1,4 +1,5 @@
 <template>
+	<div :class="$style['body']"> 
 	<div class="p-5 mt-8 mx-6 w-100">
 		<div class="row">
 			<div class="col-4">
@@ -12,6 +13,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -70,33 +72,15 @@ export default {
 				},
 				{
 					id: 3,
-					name: 'Task2',
+					name: 'Diacritics Restoration',
 					labels: ['low', 'medium', 'high'],
-					languages: [5,6]
+					languages: [3,6]
 				},
 				{
 					id: 4,
-					name: 'Task3',
+					name: 'Keyword Extraction',
 					labels: ['Other', 'Abuses', 'Profanity', 'Insult'],
-					languages: [7,8]
-				},
-				{
-					id: 5,
-					name: 'Task4',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,4,6]
-				},
-				{
-					id: 6,
-					name: 'Task5',
-					labels: ['Other', 'Abuses', 'Profanity', 'Insult'],
-					languages: [2,5,7,4]
-				},
-				{
-					id: 7,
-					name: 'Task6',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,6,8]
+					languages: [3,8]
 				}
 			],
 
@@ -140,6 +124,9 @@ export default {
 };
 </script>
 
-<style>
-
+<style module>
+    .body {
+        background-color: #f8f9fa;
+    }
+    
 </style>

@@ -28,6 +28,12 @@
 </template>
 
 <script>
+import {
+    inject
+} from 'vue';
+import {
+    TEXT_ANALYSIS_SERVICE
+} from '@/services/text-analysis-service.interface'
 
 export default {
     name: 'TaskInputForm',
@@ -38,6 +44,8 @@ export default {
             isLoading: false,
             doneProcessing: false,
             textLabelResponse: '',
+
+            taservice: inject(TEXT_ANALYSIS_SERVICE),
         };
     },
     methods: {
@@ -48,16 +56,13 @@ export default {
         },
         process() {
             this.isLoading = true;
-            setTimeout(() => {
+
+            this.taservice.restoreDiacritics({text: this.text}).then((response) => {
+                this.text = response.text;
                 this.isLoading = false;
                 this.doneProcessing = true;
-
-                console.log(this.task['labels']);
-
-                // randomize label from task['labels']
-                //this.textLabelResponse = this.task['labels'][Math.floor(Math.random() * this.task['labels'].length)];
-                this.textLabelResponse = 'Insult'
-            }, 1500);
+                this.textLabelResponse = "done"
+            });
         },
     },
 };
