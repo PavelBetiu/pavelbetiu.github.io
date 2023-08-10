@@ -59,4 +59,8 @@ export class ProcessingQueueService {
     return await axios.post(`https://readerbench.com/api/v2/services/jobs/${id}/delete`, {});
   }
 
+  public static async getResult(id): Promise<any> {
+    return await axios.post(`https://readerbench.com/api/v2/services/jobs/${id}/result`, {});
+  }
+
 }
