@@ -253,7 +253,7 @@ export function convertToParticipantsTable(result: CsclResult): TableInput {
     return input;
 }
 
-export function convertToProcessingQueueTable(data: ProcessingQueueData): TableInput {
+export function convertToProcessingQueueTable(data: ProcessingQueueData, actions: any[]): TableInput {
     const input: TableInput = {
         columns: [
             {
@@ -303,6 +303,7 @@ export function convertToProcessingQueueTable(data: ProcessingQueueData): TableI
         dataset_row["time_submitted"] = item.submit_time;
         dataset_row["processing_time"] = item.elapsed_time;
         dataset_row["status"] = item.status;
+        dataset_row["actions"] = actions;
         input.rows.push(dataset_row as Record<string, unknown>);
     }
     return input;
