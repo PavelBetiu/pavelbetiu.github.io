@@ -206,12 +206,13 @@ export default {
                 this.isSubmitting = true;
 
                 this.modelService.submitCSV(this.modelID, this.csvFile).then((response) => {
-                    this.success('Job queued', 'File submitted successfully');
+                    this.success('File submitted successfully', 'Check out the Processing Queue page for the status of the job');
                     this.csvFile = null;
                     this.childKey += 1;
                     this.isSubmitting = false;
 
                 }).catch((error) => {
+                    console.log(error)
                     this.error("Fail", error.message)
                     this.csvFile = null;
                     this.childKey += 1;
@@ -230,7 +231,6 @@ export default {
             this.modelService.textPredict(this.modelID, this.text).then((response) => {
                 this.success("Success", "Prediction successful")
                 this.predictionResults = response.data;
-                //this.predictionResults = response;
                 console.log(this.predictionResults)
                 this.isLoading = false;
                 this.doneProcessing = true;
@@ -244,7 +244,7 @@ export default {
             });
         },
         success(header, footer) {
-            this.toastService && this.toastService.success(footer, header)
+            this.toastService && this.toastService.success(footer, header, 10000)
         },
         info(header, footer) {
             this.toastService && this.toastService.info(footer, header)

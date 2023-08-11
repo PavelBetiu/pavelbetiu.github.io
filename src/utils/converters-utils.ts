@@ -121,7 +121,6 @@ export function convertToModelPredictionResultTable(data: TextPrediction[]) {
         if (Object.keys(parsedResult).length > 0) {
             let maxKey: any = null
             for (const key of Object.keys(JSON.parse(d['result']))) {
-                console.log(parsedResult[key])
                 if (maxKey == null) {
                     maxKey = key
                 } else if (result[maxKey] < parsedResult[key]) {
