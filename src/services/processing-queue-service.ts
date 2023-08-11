@@ -44,23 +44,23 @@ export class ProcessingQueueService {
   // }
 
   public static async getJobsData(): Promise<GetJobsDataResponse> {
-    const result = await axios.post('https://readerbench.com/api/v2/services/jobs', {});
+    const result = await axios.post('services/jobs', {});
     console.log(result.data)
     return result.data;
   }
 
   public static async getJobData(id): Promise<GetJobDataResponse> {
-    const result = await axios.post(`https://readerbench.com/api/v2/services/job/${id}`, {});
+    const result = await axios.post(`services/job/${id}`, {});
     console.log(result.data)
     return result.data;
   }
 
   public static async deleteJob(id): Promise<any> {
-    return await axios.post(`https://readerbench.com/api/v2/services/jobs/${id}/delete`, {});
+    return await axios.post(`services/jobs/${id}/delete`, {});
   }
 
   public static async getResult(id): Promise<any> {
-    return await axios.post(`https://readerbench.com/api/v2/services/jobs/${id}/result`, {});
+    return await axios.post(`services/jobs/${id}/result`, {});
   }
 
 }

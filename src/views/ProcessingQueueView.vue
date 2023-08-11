@@ -1,81 +1,93 @@
 <template>
-    <div class="container mt-10">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center mx-auto my-auto">
-                <h1>Processing Queue</h1>
-            </div>
+<div class="container mt-10">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1>Processing Queue</h1>
         </div>
     </div>
-    <div class="container p-9">
-        <div class="card shadow-lg">
-            <Table :data="tableInputData" :isScrollable="true" :withCustomBody="true">
-                <template #column="{ rowData, currentColumnData }">
-                    <div v-if="currentColumnData.key == 'id'">
-                        <a href="">
-                            <span>{{ rowData[currentColumnData.key] }}</span>
-                        </a>
-                    </div>
+</div>
+<div class="container p-9">
+    <div class="card shadow-lg">
+        <Table :data="tableInputData" :isScrollable="true" :withCustomBody="true">
+            <template #column="{ rowData, currentColumnData }">
+                <div v-if="currentColumnData.key == 'id'">
+                    <a href="">
+                        <span>{{ rowData[currentColumnData.key] }}</span>
+                    </a>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'status'">
-                        <span :class="getStatusClass(rowData[currentColumnData.key])">{{
+                <div v-else-if="currentColumnData.key == 'status'">
+                    <span :class="getStatusClass(rowData[currentColumnData.key])">{{
                             getStatusName(rowData[currentColumnData.key])
                         }}</span>
-                    </div>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'task_type'">
-                        <span>{{ getTaskTypeName(rowData[currentColumnData.key]) }}</span>
-                    </div>
+                <div v-else-if="currentColumnData.key == 'task_type'">
+                    <span>{{ getTaskTypeName(rowData[currentColumnData.key]) }}</span>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'dataset'">
-                        <span>{{
+                <div v-else-if="currentColumnData.key == 'dataset'">
+                    <span>{{
                             checkDatasetnullity(rowData[currentColumnData.key])
                         }}</span>
-                    </div>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'time_submitted'">
-                        <span>{{
+                <div v-else-if="currentColumnData.key == 'time_submitted'">
+                    <span>{{
                             convertTimestampToDateAndHour(rowData[currentColumnData.key])
                         }}</span>
-                    </div>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'processing_time'">
-                        <span>{{
+                <div v-else-if="currentColumnData.key == 'processing_time'">
+                    <span>{{
                             convertSecondsToHoursMinutesSeconds(
                                 rowData[currentColumnData.key]
                             )
                         }}</span>
-                    </div>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'params'">
-                        <span>{{ getParamsbyTaskType(rowData) }}</span>
-                    </div>
+                <div v-else-if="currentColumnData.key == 'params'">
+                    <span>{{ getParamsbyTaskType(rowData) }}</span>
+                </div>
 
-                    <div v-else-if="currentColumnData.key == 'actions'">
-                        <button v-if="rowData.status === 3" class="btn btn-primary btn-sm m-1 action-button" @click="
-                            rowData.actions[0].action(rowData.id), downloadCSV(rowData.id)
+                <div v-else-if="currentColumnData.key == 'actions'">
+                    <button v-if="rowData.status === 3 && rowData.task_type === 3" class="btn btn-primary btn-sm m-1 action-button" @click="
+                            downloadCSV(rowData.id)
                             ">
-                            {{ rowData.task_type === 3 ? "Download CSV" : "Perform Action" }}
-                        </button>
-                        <button v-if="rowData.status === 3 || rowData.status === 4"
-                            class="btn btn-outline-primary btn-sm m-1 action-button"
-                            @click="rowData.actions[1].action(rowData.id)">
-                            Remove Job
-                        </button>
-                    </div>
-                    <div v-else>
-                        {{ rowData[currentColumnData.key] }}
-                    </div>
-                </template>
-            </Table>
-        </div>
+                        Download CSV
+                    </button>
+                    <button v-else-if="rowData.status === 3 && rowData.task_type === 1" class="btn btn-primary btn-sm m-1 action-button" @click="
+                            checkModelResults(rowData.id)
+                            ">
+                        Check Result
+                    </button>
+                    <button v-else-if="rowData.status === 3 && rowData.task_type !== 1 && rowData.task_type !== 3" class="btn btn-primary btn-sm m-1 action-button" @click="
+                            rowData.actions[0].action(rowData.id)
+                            ">
+                        Perform Action
+                    </button>
+                    <button v-if="rowData.status === 3 || rowData.status === 4" class="btn btn-outline-primary btn-sm m-1 action-button" @click="rowData.actions[1].action(rowData.id)">
+                        Remove Job
+                    </button>
+                </div>
+                <div v-else>
+                    {{ rowData[currentColumnData.key] }}
+                </div>
+            </template>
+        </Table>
     </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import Table from "@/components/widgets/Table.vue";
-import { convertToProcessingQueueTable } from "@/components/experiments/cscl/cscl-converters";
-import { ProcessingQueueService } from "@/services/processing-queue-service";
+import {
+    convertToProcessingQueueTable
+} from "@/components/experiments/cscl/cscl-converters";
+import {
+    ProcessingQueueService
+} from "@/services/processing-queue-service";
 import {
     inject
 } from "vue";
@@ -87,8 +99,7 @@ export default {
     name: "ProcessingQueueView",
     data() {
         return {
-            actions: [
-                {
+            actions: [{
                     name: "Perform action",
                     styleClass: "btn-primary",
                     action: this.performAction,
@@ -122,6 +133,15 @@ export default {
                     console.log(error);
                 });
         },
+        checkModelResults(jobId) {
+            this.$router.push({
+                path: `/models`,
+                query: {
+                    filterBy: 'job_id',
+                    jobId: jobId,
+                }
+            });
+        },
         performAction(id) {
             // Perform your desired action here, e.g., show a dialog, open a modal, etc.
             // You can use the "id" parameter to identify the row or data related to the clicked action.
@@ -150,9 +170,8 @@ export default {
             try {
                 // Make a POST request to the Django endpoint that returns the CSV file
                 const response = await axios.post(
-                    `https://readerbench.com/api/v2/services/jobs/${jobId}/result`,
-                    null,
-                    {
+                    `services/jobs/${jobId}/result`,
+                    null, {
                         responseType: "blob", // Set the response type to blob
                     }
                 );

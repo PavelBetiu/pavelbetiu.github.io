@@ -3,7 +3,7 @@
       :value="data.rows" 
       :responsiveLayout="isScrollable ? 'scroll' : ''" 
       :scrollable="isScrollable" 
-      :scrollHeight="isScrollable ? '450px' : ''"
+      :scrollHeight="isScrollable ? '750px' : ''"
       :stripedRows="true" >
       <p-column
         v-for="col of data.columns"
