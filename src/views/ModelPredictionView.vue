@@ -207,6 +207,9 @@ export default {
         console.log(this.modelInfo)
         this.modelService = new ModelService()
     },
+    mounted() {
+        window.scrollTo(0, 0);
+    },
     methods: {
         clear() {
             this.text = '';

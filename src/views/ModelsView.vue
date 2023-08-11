@@ -144,58 +144,10 @@ export default {
         Table,
     },
     created() {
-        this.project = ProjectsAPI.getProjectLong(this.$route.params.id);
         this.datasetService = inject(DATASETS_SERVICE);
         this.modelService = new ModelService()
 
-        let datasetId = null
-        if (this.filteredByDataset) {
-            datasetId = Number(this.$route.query['datasetId'])
-        }
-
-        let jobId = null
-        if (this.filteredByJobId) {
-            jobId = Number(this.$route.query['jobId'])
-        }
-
-        this.datasetService.getDatasets().then((response) => {
-            let datasets = response['datasets'];
-
-            datasets = datasets.map((dataset) => {
-                return {
-                    id: dataset['id'],
-                    name: dataset['name']
-                }
-            });
-
-            this.datasetsInfo = datasets;
-
-            this.modelService.getAllModels().then((response) => {
-                let models = response.data
-
-                if (this.filteredByDataset == true) {
-                    const datasetName = this.datasetsInfo.filter((dataset) => {
-                        return dataset['id'] === datasetId
-                    })[0]['name']
-
-                    models = models.filter((model) => model['dataset'] === datasetName)
-                }
-
-                if (this.filteredByJobId == true) {
-                    models = models.filter((model) => model['job_id'] === jobId)
-                }
-
-                this.tableContent = JSON.parse(JSON.stringify(models))
-
-                for (let i = 0; i < this.tableContent.length; i++) {
-                    this.tableContent[i]['metrics'] = JSON.parse(this.tableContent[i]['metrics'])
-                    this.tableContent[i]['params'] = JSON.parse(this.tableContent[i]['params'])
-                }
-            }).catch((error) => {
-                this.error("Error")
-            })
-        }).catch((error) => this.error("Error", error));
-
+        this.initialize();
     },
     computed: {
         tableData: {
@@ -227,6 +179,55 @@ export default {
         },
     },
     methods: {
+        initialize() {
+            let datasetId = null
+            if (this.filteredByDataset) {
+                datasetId = Number(this.$route.query['datasetId'])
+            }
+
+            let jobId = null
+            if (this.filteredByJobId) {
+                jobId = Number(this.$route.query['jobId'])
+            }
+
+            this.datasetService.getDatasets().then((response) => {
+                let datasets = response['datasets'];
+
+                datasets = datasets.map((dataset) => {
+                    return {
+                        id: dataset['id'],
+                        name: dataset['name']
+                    }
+                });
+
+                this.datasetsInfo = datasets;
+
+                this.modelService.getAllModels().then((response) => {
+                    let models = response.data
+
+                    if (this.filteredByDataset == true) {
+                        const datasetName = this.datasetsInfo.filter((dataset) => {
+                            return dataset['id'] === datasetId
+                        })[0]['name']
+
+                        models = models.filter((model) => model['dataset'] === datasetName)
+                    }
+
+                    if (this.filteredByJobId == true) {
+                        models = models.filter((model) => model['job_id'] === jobId)
+                    }
+
+                    this.tableContent = JSON.parse(JSON.stringify(models))
+
+                    for (let i = 0; i < this.tableContent.length; i++) {
+                        this.tableContent[i]['metrics'] = JSON.parse(this.tableContent[i]['metrics'])
+                        this.tableContent[i]['params'] = JSON.parse(this.tableContent[i]['params'])
+                    }
+                }).catch((error) => {
+                    this.error("Error")
+                })
+            }).catch((error) => this.error("Error", error));
+        },
         downloadFeatures(id) {
             this.modelService.downloadFeatures(id).then((response) => {
                 console.log(response)
@@ -271,7 +272,7 @@ export default {
     watch: {
         '$route.query': function(val, oldVal) {
             // force reload of page
-            this.$router.go()
+            this.initialize()
         }
     }
 }
