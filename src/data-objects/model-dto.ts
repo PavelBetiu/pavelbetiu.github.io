@@ -3,5 +3,15 @@ export interface ModelData {
     dataset: string,
     metrics: string,
     params: string,
-    type: string
+    type: string,
+    job_id: number
+}
+
+export interface TextPrediction {
+    task: string,
+    result: string
+}
+
+export interface CSVSubmitResponse {
+    id: number,
 }

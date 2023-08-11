@@ -15,6 +15,8 @@ import Checkbox from "primevue/checkbox"
 import ProgressSpinner from 'primevue/progressspinner';
 
 import Avatar from 'primevue/avatar';
+import FileUpload from 'primevue/fileupload';
+import Textarea from 'primevue/textarea';
 import { httpInterceptor } from './services/http-interceptor';
 import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
@@ -53,9 +55,10 @@ createApp(App)
   .component('p-checkbox', Checkbox)
   .component('p-progress-spinner', ProgressSpinner)
   .component('Button', Button)
-
+  .component('FileUpload', FileUpload)
   .component('TieredMenu', TieredMenu)
   .component('Avatar', Avatar)
+  .component('Textarea', Textarea)
 
   .component('DataTable', DataTable)
   .component('Column', Column)

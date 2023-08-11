@@ -1,14 +1,18 @@
 <template>
 <div :class="$style['body']">
     <div class="container px-2 py-8">
+        <label v-if="filteredByDataset || filteredByJobId" class="badge rounded-pill bg-primary">{{ filteredBy() }}</label>
         <div class="card shadow-lg p-2">
             <Table v-if="tableContent !== null" :data="tableData" :isScrollable="false" :withCustomBody="true">
                 <template #column="{rowData, currentColumnData}">
-                    <div v-if="currentColumnData.key == 'model_action'">
+                    <div v-if="currentColumnData.key == 'model_action'" class="d-flex flex-column justify-content-between align-items-center">
                         <!-- For each row, we need to render a button for each action -->
-                        <div v-for="action of rowData.model_action" :key="action.name" class="d-flex w-100 flex-column justify-content-between align-items-center">
-                            <button id="model-action-button" :class="'btn btn-sm '+ action.styleClass" @click="action.action(rowData.model_id)"> {{ action.name }} </button>
+                        <div class="d-flex h-100 w-100 flex-row justify-content-between align-items-center">
+                            <div v-for="action of rowData.model_action" :key="action.name" >
+                                <button id="model-action-button" :style="action.name ? 'width: 120%' : ''" :class="'btn btn-sm '+ action.styleClass" @click="action.action(rowData.model_id)"> {{ action.name }} </button>
+                            </div>
                         </div>
+                        <button v-if="rowData.model_task_type == 'XGBOOST'" id="model-action-button" style="width: 100%" class="btn btn-sm btn-light" @click="downloadFeatures(rowData.model_id)">Download features</button>
                     </div>
 
                     <div v-else-if="currentColumnData.key == 'model_params'">
@@ -84,6 +88,10 @@ import {
 } from "../services/datasets-service.interface";
 
 import {
+    ProjectsAPI
+} from "@/services/projects-api"
+
+import {
     convertToModelsTable
 } from "@/utils/converters-utils";
 import {
@@ -115,9 +123,6 @@ export default {
                         let modelStr = JSON.stringify(model)
                         let modelB64 = btoa(modelStr)
 
-                        console.log('here')
-                        console.log(this.$route.fullPath)
-
                         this.$router.push({
                             path: `/models/${id}/prediction`,
                             query: {
@@ -127,12 +132,11 @@ export default {
                     },
                 },
                 {
-                    name: "Delete",
-                    styleClass: "btn-outline-danger",
+                    styleClass: "btn-outline-danger btn-circle pi pi-trash",
                     action: (id) => {
                         this.info("NOT IMPLEMENTED", `Delete action for id: ${id}`)
                     },
-                },
+                }
             ],
         };
     },
@@ -140,12 +144,18 @@ export default {
         Table,
     },
     created() {
+        this.project = ProjectsAPI.getProjectLong(this.$route.params.id);
         this.datasetService = inject(DATASETS_SERVICE);
         this.modelService = new ModelService()
 
         let datasetId = null
         if (this.filteredByDataset) {
             datasetId = Number(this.$route.query['datasetId'])
+        }
+
+        let jobId = null
+        if (this.filteredByJobId) {
+            jobId = Number(this.$route.query['jobId'])
         }
 
         this.datasetService.getDatasets().then((response) => {
@@ -165,11 +175,14 @@ export default {
 
                 if (this.filteredByDataset == true) {
                     const datasetName = this.datasetsInfo.filter((dataset) => {
-                        console.log(dataset['id'] === datasetId)
                         return dataset['id'] === datasetId
                     })[0]['name']
 
                     models = models.filter((model) => model['dataset'] === datasetName)
+                }
+
+                if (this.filteredByJobId == true) {
+                    models = models.filter((model) => model['job_id'] === jobId)
                 }
 
                 this.tableContent = JSON.parse(JSON.stringify(models))
@@ -193,14 +206,58 @@ export default {
         filteredByDataset: {
             get() {
                 if (this.$route.query['filterBy'] && this.$route.query['datasetId']) {
-                    return true
+                    if (this.$route.query['filterBy'] === 'dataset_id'){
+                        return true
+                    }
                 }
 
                 return false
             }
-        }
+        },
+        filteredByJobId: {
+            get() {
+                if (this.$route.query['filterBy'] && this.$route.query['jobId']) {
+                    if (this.$route.query['filterBy'] === 'job_id'){
+                        return true
+                    }
+                }
+
+                return false
+            }
+        },
     },
     methods: {
+        downloadFeatures(id) {
+            this.modelService.downloadFeatures(id).then((response) => {
+                console.log(response)
+                let blob = new Blob([response.data], {
+                    type: "application/vnd.ms-excel"
+                });
+                this.saveAs(blob, "Feature importance.xlsx");
+            });
+        },
+        saveAs(blob, filename) {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style.display = "none";
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        },
+        filteredBy() {
+            if (this.filteredByDataset) {
+                return `dataset_id = ${this.$route.query['datasetId']}`
+            }
+
+            if (this.filteredByJobId) {
+                return `job_id = ${this.$route.query['jobId']}`
+            }
+
+            return null
+        },
         success(header, footer) {
             this.toastService && this.toastService.success(footer, header)
         },
@@ -282,12 +339,6 @@ export default {
 #model-action-button {
     font-size: 0.7rem;
     padding: 0.4rem;
-    width: 70%;
 }
 
-#model-action-button {
-    font-size: 0.7rem;
-    padding: 0.4rem;
-    width: 70%;
-}
 </style>

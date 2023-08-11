@@ -1,6 +1,5 @@
 <template>
 <div class="body">
-
     <div class="container">
         <div class="row">
             <div class="col-lg-2"></div>
@@ -75,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-lg-2"></div>
