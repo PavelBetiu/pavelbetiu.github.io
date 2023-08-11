@@ -5,3 +5,8 @@ export interface ModelData {
     params: string,
     type: string
 }
+
+export interface TextPrediction {
+    task: string,
+    result: string
+}

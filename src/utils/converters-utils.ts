@@ -1,4 +1,4 @@
-import { ModelData } from "@/data-objects/model-dto";
+import { ModelData, TextPrediction } from "@/data-objects/model-dto";
 import { TableInput } from '@/components/widgets/table-input';
 
 interface ModelAction {
@@ -83,16 +83,61 @@ export function convertToModelsTable(data: ModelData[], actions: ModelAction[]):
             }
         }
 
-        const dataset_row = {};
-        dataset_row['model_id'] = d['id'];
-        dataset_row['model_params'] = d['params'];
-        dataset_row['model_dataset'] = d['dataset'];
-        dataset_row['model_task_type'] = d['type'];
-        dataset_row['model_metrics'] = d['metrics'];
-        dataset_row['model_action'] = actions;
+        const row = {};
+        row['model_id'] = d['id'];
+        row['model_params'] = d['params'];
+        row['model_dataset'] = d['dataset'];
+        row['model_task_type'] = d['type'];
+        row['model_metrics'] = d['metrics'];
+        row['model_action'] = actions;
 
-        input.rows.push(dataset_row as Record<string, unknown>);
+        input.rows.push(row as Record<string, unknown>);
     }
 
     return input;
+}
+
+export function convertToModelPredictionResultTable(data: TextPrediction[]) {
+    const input: TableInput = {
+        columns: [
+            {
+                key: 'task',
+                displayName: 'Task'
+            },
+            {
+                key: 'result',
+                displayName: 'Result'
+            }
+        ],
+        rows: []
+    }
+
+    for (const d of data) {
+        const row = {};
+        row['task'] = d['task'];
+
+        const parsedResult = JSON.parse(d['result']);
+        let result = {}
+        if (Object.keys(parsedResult).length > 0) {
+            let maxKey: any = null
+            for (const key of Object.keys(JSON.parse(d['result']))) {
+                console.log(parsedResult[key])
+                if (maxKey == null) {
+                    maxKey = key
+                } else if (result[maxKey] < parsedResult[key]) {
+                    maxKey = key
+                }
+                result[key] = parsedResult[key]
+            }
+            result['maxKey'] = maxKey
+        } else {
+            result = parsedResult
+        }
+
+        row['result'] = result;
+
+        input.rows.push(row as Record<string, unknown>);
+    }
+
+    return input
 }
