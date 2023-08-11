@@ -7,8 +7,24 @@
         <div class="row">
 
             <div class="col-6">
-                <label class="h6 text-primary" for="model-description">Model description</label>
-                <div class="model-description-box shadow">
+                <div class="d-flex flex-column justify-content-center">
+                    <label class="h6 text-primary">Model description</label>
+                    <label class="h7 text-dark" >General information</label>
+                </div>
+                
+                <ul class="list-group mb-4 shadow">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <h6 id="param-key">dataset</h6>
+                        <span id="model-value" class="badge rounded-pill bg-secondary">{{ modelInfo.dataset }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <h6 id="param-key">type</h6>
+                        <span id="model-value" class="badge rounded-pill bg-secondary">{{ modelInfo.type }}</span>
+                    </li>
+                </ul>
+
+                <label class="h7 text-dark">Parameters</label>
+                <div class="model-description-box shadow mb-4">
                     <ul v-if="modelInfo.type == 'XGBOOST'" class="list-group">
                         <li v-for="[idx, params] of modelInfo.params.entries()" :key="idx" class="list-group-item d-flex flex-column justify-content-center align-items-center">
                             <div v-for="param of Object.keys(params)" :key="param" class="d-flex w-100 justify-content-between align-items-center">
@@ -26,6 +42,27 @@
                         </li>
                     </ul>
                 </div>
+
+                <label class="h7 text-dark">Metrics</label>
+                <div class="model-description-box shadow">
+                    <ul v-if="modelInfo.type == 'XGBOOST'" class="list-group">
+                        <li v-for="[idx, metrics] of modelInfo.metrics.entries()" :key="idx" class="list-group-item d-flex flex-column justify-content-center align-items-center">
+                            <div v-for="metric of Object.keys(metrics)" :key="metric" class="d-flex w-100 justify-content-between align-items-center">
+                                <h6 id="param-key">{{ metric }}</h6>
+                                <span id="param-value" class="badge rounded-pill bg-secondary">{{ metrics[metric] }}</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul v-else-if="modelInfo.type == 'TRANSFORMER'" class="list-group">
+                        <li v-for="metric of Object.keys(modelInfo.metrics)" :key="metric" class="list-group-item d-flex justify-content-between align-items-center">
+                            <h6 id="param-key">{{ metric }}</h6>
+                            <span v-if="metric === 'features' && JSON.parse(modelInfo.metrics[metric].use === false)" id="param-value" class="badge rounded-pill bg-secondary">NO</span>
+                            <span v-else-if="metric === 'features' && JSON.parse(modelInfo.metrics[metric].use === true)" id="param-value" class="badge rounded-pill bg-secondary">{{Object.keys(modelInfo.metrics[metric])[1]}}: {{ modelInfo.metrics[metric][Object.keys(modelInfo.metrics[metric])[1]] }}</span>
+                            <span v-else id="param-value" class="badge rounded-pill bg-secondary">{{ modelInfo.metrics[metric] }}</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
             <div class="col-6">
@@ -167,6 +204,7 @@ export default {
         this.modelID = this.$route.params['id']
 
         this.modelInfo = JSON.parse(atob(modelInfoB64))
+        console.log(this.modelInfo)
         this.modelService = new ModelService()
     },
     methods: {
