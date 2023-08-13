@@ -18,9 +18,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/services',
     name: 'services',
     component: () => import('../views/ServicesView.vue'),
-    meta: {
-      requiresAuth: true,
-    },
   },
   {
     path: '/people',
@@ -56,11 +53,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/services/cscl',
     name: 'serviceCscl',
     component: () => import('@/components/experiments/cscl/Cscl.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/services/question-generation',
     name: 'generateQuestions',
     component: () => import('@/components/qgen/GenerateQuestions.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/datasets',
@@ -85,7 +88,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/services/text-analysis',
     name: 'text-analysis',
-    component: () => import('@/views/TextAnalysisView.vue')
+    component: () => import('@/views/TextAnalysisView.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/models/:id/prediction',
