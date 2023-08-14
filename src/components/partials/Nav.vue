@@ -66,6 +66,9 @@
                         <a href="/services/text-analysis" class="dropdown-item border-radius-md">
                           <span class="ps-3">Text Analysis</span>
                         </a>
+                        <a href="/datasets" class="dropdown-item border-radius-md">
+                          <span class="ps-3">Text Classification</span>
+                        </a>
                       </div>
                     </div>
                 </li>
