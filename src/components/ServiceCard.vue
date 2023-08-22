@@ -17,7 +17,8 @@
                 <span class="m-2" v-for="(language, i) in languages" :key="i">{{language}}</span>
             </div>
             <div class="align-items-center">
-                <a :href="link"><button type="button" class="btn btn-outline-primary btn-sm">VIEW</button></a>
+                <a v-if="active" :href="link"><button type="button" class="btn btn-outline-primary btn-sm">VIEW</button></a>
+                <button v-else type="button" class="btn btn-outline-primary btn-sm" disabled>NOT YET AVAILABLE</button>
             </div>
         </div>
     </div>
@@ -27,7 +28,7 @@
 <script>
 export default {
     name: 'ServiceCard',
-    props: ['image', 'title', 'languages', 'link'],
+    props: ['image', 'title', 'languages', 'link', 'active'],
 };
 </script>
 

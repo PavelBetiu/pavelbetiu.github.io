@@ -30,10 +30,10 @@
 <div class="body">
 <section class="p-5 position-relative">
     <div class="container">
-		<div v-for="i in Math.floor(servicesKeys.length / 3)" :set="idx1 = i - 1" :key="i - 1">
+		<div v-for="i in Math.ceil(servicesKeys.length / 3)" :set="idx1 = i - 1" :key="i - 1">
 			<div class="row">
 				<div v-for="j in 3" :set="idx2 = (j-1) + (i-1) * 3" :key="(j-1) + (i-1) * 3" class="col-md-4">
-					<ServiceCard v-if="idx2 < servicesKeys.length" :image="services[servicesKeys[idx2]].image" :title="services[servicesKeys[idx2]].title" :languages="services[servicesKeys[idx2]].languages" :link="services[servicesKeys[idx2]].link" />
+					<ServiceCard v-if="idx2 < servicesKeys.length" :image="services[servicesKeys[idx2]].image" :title="services[servicesKeys[idx2]].title" :languages="services[servicesKeys[idx2]].languages" :link="services[servicesKeys[idx2]].link" :active="services[servicesKeys[idx2]].active" />
 				</div>
 			</div>
 			<hr>
@@ -64,18 +64,28 @@ export default {
                     languages: ['English', 'French', 'Romanian'],
                     link: '/services/cscl',
                     image: 'demo_cscl.png',
+                    active: true
                 },
                 qgen: {
                     title: "QUESTION GENERATION",
                     languages: ['English'],
                     link: '/services/question-generation',
                     image: 'demo_qgen.png',
+                    active: true
                 },
                 text_analysis: {
                     title: "TEXT ANALYSIS",
                     languages: ['English', 'Romanian'],
                     link: '/services/text-analysis',
                     image: 'ta_demo.png',
+                    active: true
+                },
+                text_classification: {
+                    title: "TEXT CLASSIFICATION",
+                    languages: ['English', 'French', 'Romanian'],
+                    link: '/datasets',
+                    image: 'tc_demo.jpeg',
+                    active: true
                 },
                 mdcna: {
 					title: "MULTI-DOCUMENT CNA",
