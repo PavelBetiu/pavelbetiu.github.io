@@ -82,7 +82,7 @@ export default {
                 },
                 text_classification: {
                     title: "TEXT CLASSIFICATION",
-                    languages: ['English', 'French', 'Romanian'],
+                    languages: ['English', 'French', 'Romanian', 'Portuguese'],
                     link: '/datasets',
                     image: 'tc_demo.jpeg',
                     active: true
