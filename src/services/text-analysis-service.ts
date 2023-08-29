@@ -1,4 +1,12 @@
-import { ITextAnalysisService, RestoreDiacriticsRequest, RestoreDiacriticsResponse } from "./text-analysis-service.interface";
+import { 
+    ITextAnalysisService, 
+    RestoreDiacriticsRequest, 
+    RestoreDiacriticsResponse, 
+    SentimentAnalysisRequest,
+    SentimentAnalysisResponse,
+    OffensiveLanguageRequest,
+    OffensiveLanguageResponse
+} from "./text-analysis-service.interface";
 import axios from "axios";
 
 async function getJobResults(id: number) {
@@ -21,11 +29,15 @@ async function getJobResults(id: number) {
         await new Promise(resolve => setTimeout(resolve, 1500))
     }
 
+    console.log(results)
+
     return results
 }
 
 export class TextAnalysisService implements ITextAnalysisService {
     async restoreDiacritics(request: RestoreDiacriticsRequest): Promise<RestoreDiacriticsResponse> {
+        console.log(request)
+        
         const jobId = await axios.post('/services/diacritics', request).then((response) => {
            return response.data.id
         }).catch((error) => {
@@ -34,6 +46,34 @@ export class TextAnalysisService implements ITextAnalysisService {
 
         return {
             text: await getJobResults(jobId)
+        }
+    }
+
+    async sentimentAnalysis(request: SentimentAnalysisRequest): Promise<SentimentAnalysisResponse> {
+        console.log(request)
+        
+        const jobId = await axios.post('/services/sentiment', request).then((response) => {
+           return response.data.id
+        }).catch((error) => {
+           throw error
+        })
+
+        return {
+            labels: await getJobResults(jobId)
+        }
+    }
+
+    async offensiveLanguage(request: OffensiveLanguageRequest): Promise<OffensiveLanguageResponse> {
+        console.log(request)
+        
+        const jobId = await axios.post('/services/offensive', request).then((response) => {
+           return response.data.id
+        }).catch((error) => {
+           throw error
+        })
+
+        return {
+            labels: await getJobResults(jobId)
         }
     }
 }

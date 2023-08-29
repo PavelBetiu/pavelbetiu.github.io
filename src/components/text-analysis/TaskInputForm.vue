@@ -1,30 +1,43 @@
 <template>
-    <div id="textAnalysisForm" class="card">
-        <div class="card-header text-center pt-4 pb-3 d-flex justify-content-center">
-            <span class="badge rounded-pill bg-light text-dark">{{ task['name'] }}</span>
-        </div>
-        <div class="card-body text-lg-left text-center px-5 pb-2">
-            <div class="form-group">
-                <textarea v-if="!isLoading && !doneProcessing" class="form-control" id="textInputBox" rows="15"
-                    v-model="text" placeholder="Please insert your text here..."></textarea>
-                <textarea v-else-if="isLoading || doneProcessing" class="form-control" id="textInputBoxDisabled"
-                    rows="15" v-model="text" disabled></textarea>
-            </div>
-            <div v-if="doneProcessing" id="textLabelResponse"><p class="badge bg-gradient-secondary">{{textLabelResponse}}</p></div>
+<div id="textAnalysisForm" class="card">
 
-        </div>
-        <div class="card-footer text-center pt-3 pb-1 px-5 d-flex justify-content-center">
-            <button v-if="!isLoading && !doneProcessing" type="button" class="btn bg-gradient-primary w-100"
-                @click="process()">Process</button>
-            <button v-else-if="isLoading" type="button" class="btn bg-gradient-primary w-100" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Processing...
-            </button>
-            <button v-else-if="doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="clear()">
-                New Process
-            </button>
-        </div>
+    <div class="card-header">
+        <slot name="header">
+            <div class="text-center w-100 d-flex justify-content-center">
+                <span class="badge rounded-pill bg-light text-dark">{{ title }}</span>
+            </div>
+        </slot>
     </div>
+
+    <div class="card-body">
+        <slot name="body">
+            <div class="text-lg-left text-center px-2">
+                <div class="form-group">
+                    <textarea v-if="!isLoading && !doneProcessing" class="form-control" id="textInputBox" rows="15" v-model="text" placeholder="Please insert your text here..."></textarea>
+                    <textarea v-else-if="isLoading || doneProcessing" class="form-control" id="textInputBoxDisabled" rows="15" v-model="text" disabled></textarea>
+                </div>
+            </div>
+        </slot>
+    </div>
+
+    <div class="card-footer">
+        <slot name="footer">
+            <div class="w-100 d-flex justify-content-center">
+                <button v-if="!isLoading && !doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="process()">Process</button>
+
+                <button v-else-if="isLoading" type="button" class="btn bg-gradient-primary w-100" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Processing...
+                </button>
+
+                <button v-else-if="doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="clear()">
+                    New Process
+                </button>
+            </div>
+        </slot>
+    </div>
+
+</div>
 </template>
 
 <script>
@@ -37,32 +50,47 @@ import {
 
 export default {
     name: 'TaskInputForm',
-    props: ['task'],
+    props: {
+        title: {
+            type: String,
+            optional: false
+        },
+        processText: {
+            type: Function,
+            optional: false
+        },
+        clearForm: {
+            type: Function,
+            optional: true,
+            default: undefined
+        }
+    },
     data() {
         return {
             text: '',
             isLoading: false,
             doneProcessing: false,
-            textLabelResponse: '',
-
-            taservice: inject(TEXT_ANALYSIS_SERVICE),
         };
     },
     methods: {
         clear() {
             this.text = '';
             this.doneProcessing = false;
-            this.textLabelResponse = '';
+
+            if (this.clearForm !== undefined) {
+                this.clearForm();
+            }
         },
-        process() {
+        async process() {
             this.isLoading = true;
 
-            this.taservice.restoreDiacritics({text: this.text}).then((response) => {
-                this.text = response.text;
-                this.isLoading = false;
+            let valid = await this.processText(this.text);
+
+            this.isLoading = false;
+
+            if (valid) {
                 this.doneProcessing = true;
-                this.textLabelResponse = "done"
-            });
+            }
         },
     },
 };
@@ -83,12 +111,6 @@ export default {
 
 #textAnalysisForm>.card-body {
     background-color: #f8f9fa;
-}
-
-#textLabelResponse {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #6c757d;
 }
 
 * {
