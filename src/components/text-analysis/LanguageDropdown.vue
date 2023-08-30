@@ -9,7 +9,8 @@
         <div class="row w-100">
             <div class="col-12">
                 <select class="form-control" name="language-button" id="language-button" v-model="langID">
-                    <option v-for="{ id, label } of languages" :key="id" :value="id">{{ label }}</option>
+                    <option value="-1" disabled selected>Click to select</option>
+                    <option v-for="{ id, label } of languages" :key="id" :value="id" >{{ label }}</option>
                 </select>
             </div>
         </div>
@@ -23,7 +24,7 @@
     </div>
 
     <div class="list-group p-3">
-        <a v-for="{id, name, isActive} of getTasksByLanguage(langID)" :key="id" href="javascript:;" @click="selectTask(id)" :class="'list-group-item list-group-item-action ' + active(isActive)">
+        <a v-for="{id, name, isActive} of tasksByLanguage" :key="id" href="javascript:;" @click="selectTask(id)" :class="'list-group-item list-group-item-action ' + active(isActive)">
             {{ name }}
         </a>
     </div>
@@ -35,33 +36,25 @@
 </style>
 
 <script>
-import Dropdown from 'primevue/dropdown';
-
 export default {
     name: 'LanguageDropdown',
     props: {
         languages: Array,
         tasks: Array,
-        selectedTask: Function
+        onTaskSelect: Function,
+        onLanguageSelect: Function
     },
     data() {
         return {
-            langID: 3,
-            tasks_with_selected_status: this.getTasksWithSelectedStatus()
+            langID: -1,
+            selectedTaskId: -1
         }
     },
     methods: {
         selectTask(id) {
-            this.tasks_with_selected_status.forEach(task => {
-                if (task.id == id) {
-                    task.isActive = true;
-                } else {
-                    task.isActive = false;
-                }
-            });
+            this.selectedTaskId = id;
 
-            this.selectedTask(id);
-
+            this.onTaskSelect(id);
         },
         active(isActive) {
             if (isActive) {
@@ -70,23 +63,25 @@ export default {
                 return "";
             }
         },
-        getTasksByLanguage(langID) {
+    },
+    computed: {
+        tasksByLanguage() {
             let tasks = [];
-            this.tasks_with_selected_status.forEach(task => {
-                if (task['languages'].includes(langID)) {
+            this.tasksWithSelectedStatus.forEach(task => {
+                if (task['languages'].includes(this.langID)) {
                     tasks.push(task);
                 }
             });
             return tasks;
         },
-        getTasksWithSelectedStatus() {
+        tasksWithSelectedStatus() {
             let tasks = [];
             this.tasks.forEach(task => {
                 let taskWithSelectedStatus =
                 {
                     id: task.id,
                     name: task.name,
-                    isActive: false,
+                    isActive: task.id === this.selectedTaskId,
                     languages: task.languages
                 }
                 tasks.push(taskWithSelectedStatus);
@@ -94,6 +89,12 @@ export default {
 
             return tasks;
         }
-    }
+    },
+    watch: {
+        langID: function (newVal, oldVal) {
+            this.selectedTaskId = -1;
+            this.onLanguageSelect(newVal);
+        }
+    },
 };
 </script>
