@@ -35,9 +35,7 @@ async function getJobResults(id: number) {
 }
 
 export class TextAnalysisService implements ITextAnalysisService {
-    async restoreDiacritics(request: RestoreDiacriticsRequest): Promise<RestoreDiacriticsResponse> {
-        console.log(request)
-        
+    async restoreDiacritics(request: RestoreDiacriticsRequest): Promise<RestoreDiacriticsResponse> {        
         const jobId = await axios.post('/services/diacritics', request).then((response) => {
            return response.data.id
         }).catch((error) => {
@@ -49,9 +47,7 @@ export class TextAnalysisService implements ITextAnalysisService {
         }
     }
 
-    async sentimentAnalysis(request: SentimentAnalysisRequest): Promise<SentimentAnalysisResponse> {
-        console.log(request)
-        
+    async sentimentAnalysis(request: SentimentAnalysisRequest): Promise<SentimentAnalysisResponse> {        
         const jobId = await axios.post('/services/sentiment', request).then((response) => {
            return response.data.id
         }).catch((error) => {
@@ -64,8 +60,6 @@ export class TextAnalysisService implements ITextAnalysisService {
     }
 
     async offensiveLanguage(request: OffensiveLanguageRequest): Promise<OffensiveLanguageResponse> {
-        console.log(request)
-        
         const jobId = await axios.post('/services/offensive', request).then((response) => {
            return response.data.id
         }).catch((error) => {

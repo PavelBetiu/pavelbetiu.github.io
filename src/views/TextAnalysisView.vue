@@ -17,6 +17,16 @@
 						</template>
 					</TaskInputForm>
 
+					<TaskInputForm v-else-if="selectedTaskId === 2 || selectedTaskId === 0" :title="selectedTask.name" :processText="processText" :clearForm="clearForm">
+						<template v-if="result !== null" #sub-body>
+							<div class="d-flex flex-row justify-content-between align-items-center" :set="labelsAndScores = markHighestScoredLabel(result.labels)">
+								<div v-for="label of Object.keys(labelsAndScores)" :key="label" class="form-control m-1" :class="labelsAndScores[label].isHighest ? 'badge bg-success' : 'badge bg-secondary'">
+									{{ label }}: {{ labelsAndScores[label].score }}
+								</div>
+							</div>
+						</template>
+					</TaskInputForm>
+
 					<TaskInputForm v-else :title="selectedTask.name" :processText="processText"/>
 				</div>
 			</div>
@@ -75,12 +85,6 @@ export default {
 					payloadTemplate: {
 						text: null
 					} 
-				},
-				{
-					id: 1,
-					name: 'Textual Complexity',
-					languages: [1,2,3,4,5,6,7,8],
-					process: undefined
 				},
 				{
 					id: 2,
@@ -195,8 +199,6 @@ export default {
 				this.clearForm();
 			}
 
-			this.info("Result", JSON.stringify(this.result));
-
 			return true;
 		},
 		clearForm() {
@@ -228,10 +230,10 @@ export default {
 				} else {
 					if (startWordIdx == -1) {
 						startWordIdx = i;
-					} else {
-						if (before[i] != after[i]) {
-							isDiff = true;
-						}
+					}
+
+					if (before[i] != after[i]) {
+						isDiff = true;
 					}
 				}
 			}
@@ -269,6 +271,19 @@ export default {
 			}
 
 			return afterHtml;
+		},
+		markHighestScoredLabel(labelsAndScores) {
+			const maxScore = Math.max(...Object.values(labelsAndScores));
+			
+			let labelsAndScoresMarked = {};
+			for (const key of Object.keys(labelsAndScores)) {
+				labelsAndScoresMarked[key] = {
+					score: parseFloat(labelsAndScores[key]).toFixed(4),
+					isHighest: labelsAndScores[key] === maxScore
+				}
+			}
+
+			return labelsAndScoresMarked;
 		},
         success(header, footer) {
             this.toastService && this.toastService.success(footer, header)

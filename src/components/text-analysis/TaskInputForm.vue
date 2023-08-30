@@ -2,14 +2,22 @@
 <div id="textAnalysisForm" class="card">
 
     <div class="card-header">
+        <slot name="over-header">
+        </slot>
+
         <slot name="header">
             <div class="text-center w-100 d-flex justify-content-center">
                 <span class="badge rounded-pill bg-light text-dark">{{ title }}</span>
             </div>
         </slot>
+
+        <slot name="sub-header">
+        </slot>
     </div>
 
     <div class="card-body">
+        <slot name="over-body">
+        </slot>
         <slot name="body">
             <div class="text-lg-left text-center px-2">
                 <div class="form-group">
@@ -18,9 +26,13 @@
                 </div>
             </div>
         </slot>
+        <slot name="sub-body">
+        </slot>
     </div>
 
     <div class="card-footer">
+        <slot name="over-footer">
+        </slot>
         <slot name="footer">
             <div class="w-100 d-flex justify-content-center">
                 <button v-if="!isLoading && !doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="process()">Process</button>
@@ -34,6 +46,8 @@
                     New Process
                 </button>
             </div>
+        </slot>
+        <slot name="sub-footer">
         </slot>
     </div>
 
