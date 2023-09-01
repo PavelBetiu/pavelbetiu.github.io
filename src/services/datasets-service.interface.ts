@@ -1,8 +1,8 @@
 import { InjectionKey } from 'vue';
-import { ImportDatasetResponse, ProcessDatasetResponse, GetDatasetLanguagesResponse, GetDatasetsResponse, DeleteDatasetResponse, GetDatasetResponse } from '@/data-objects/datasets-dtos';
+import { ImportDatasetResponse, ProcessDatasetResponse, GetDatasetLanguagesResponse, GetDatasetsResponse, DeleteDatasetResponse, GetDatasetResponse, GetIndicesResponse } from '@/data-objects/datasets-dtos';
 
 export interface ImportDatasetRequest {
-    lang: string; // TODO; Change to id of language
+    lang: string;
     name: string;
     task: string;
     zipfile: File;
@@ -20,6 +20,8 @@ export interface IDatasetsService {
   getDataset(dataset_id: number): Promise<GetDatasetResponse>;
   getLanguages(): Promise<GetDatasetLanguagesResponse>;
   getDatasets(): Promise<GetDatasetsResponse>;
+  getIndices(dataset_id: number): Promise<GetIndicesResponse>;
+  downloadIndices(job_id: number): Promise<Blob>;
 }
 
 export const DATASETS_SERVICE: InjectionKey<IDatasetsService> = Symbol('IDatasetsService');
