@@ -6,6 +6,10 @@ export interface ProcessDatasetResponse {
     id: number; // This is job id
 }
 
+export interface GetIndicesResponse {
+    id: number; // This is job id
+}
+
 export interface GetDatasetLanguagesResponse {
     languages: 
         {

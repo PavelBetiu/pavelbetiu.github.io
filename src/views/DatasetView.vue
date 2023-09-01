@@ -38,13 +38,19 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <p class="h6 text-gradient text-primary">Indices</p>
-                                    <label class="badge rounded-pill bg-secondary">Not available</label>
+                                    <label :class="getClassByStatus(datasetInfo.indices)">{{ status[datasetInfo.indices] }}</label>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button v-if="datasetInfo.processed !== 1 && datasetInfo.processed !== 2" @click="processDataset" class="btn btn-primary btn-sm mx-4"> Process </button>
+                                <button v-if="datasetInfo.processed !== 1 && datasetInfo.processed !== 2" @click="processDataset" class="btn btn-primary btn-sm mx-4"> Process dataset </button>
                                 <button v-if="datasetInfo.processed === 3" @click="viewResults" class="btn btn-success btn-sm mx-4"> View results </button>
-                                <button class="btn btn-secondary btn-sm mx-4" disabled> Get indeces </button>
+                                
+                                <button v-if="datasetInfo.indices !== 1 && datasetInfo.indices !== 2" @click="getIndices" class="btn btn-primary btn-sm mx-4"> Process Indices </button>
+                                <button v-if="datasetInfo.indices === 3 && !isDownloadingIndices" @click="downloadIndices" class="btn btn-success btn-sm mx-4"> Download indices </button>
+                                <button v-if="datasetInfo.indices === 3 && isDownloadingIndices" class="btn btn-success btn-sm mx-4" disabled> 
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Downloading indices... 
+                                </button>
                             </div>
                         </div>
 
@@ -74,16 +80,6 @@
     
     export default {
         name: "DatasetView",
-        props: {
-            dataset_id: {
-                type: String,
-                required: true
-            },
-            gta: {
-                type: String,
-                required: true
-            }
-        },
         data() {
             return {
                 toastService: null,
@@ -97,7 +93,8 @@
                     2: "IN PROGRESS",
                     3: "COMPLETED",
                     4: "FAILED"
-                }
+                },
+                isDownloadingIndices: false
             }
         },
         created() {
@@ -142,6 +139,43 @@
                 }).catch((error) => {
                     this.error("Error", "Error while queuing dataset processing");
                 })
+            },
+            getIndices() {
+                this.datasetService.getIndices(this.datasetId).then((response) => {
+                    this.success("Success", "Indices processing has been queued");
+                    this.datasetInfo = null
+                    this.datasetService.getDataset(this.datasetId).then((response) => {
+                        this.datasetInfo = response;
+                    }).catch((error) => {
+                        this.error("Error", "Error reloading dataset");
+                    })
+                }).catch((error) => {
+                    this.error("Error", "Error while queuing indices processing");
+                })
+            },
+            downloadIndices() {
+                this.isDownloadingIndices = true;
+                this.datasetService.downloadIndices(this.datasetInfo.indices_job_id).then((response) => {
+                    let blob = new Blob([response.data], {
+                        type: "application/octet-stream"
+                    });
+                    this.saveAs(blob, `${this.datasetInfo.name}_indices.zip`);
+                }).catch((error) => {
+                    this.error("Error", "Error while downloading indices");
+                }).finally(() => {
+                    this.isDownloadingIndices = false;
+                })
+            },
+            saveAs(blob, filename) {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.style.display = "none";
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
             },
             getLanguageName(id) {
                 return this.languages.find((language) => language.id === id).label;
