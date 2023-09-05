@@ -4,12 +4,12 @@
 		<div class="row">
 			<div class="col-4">
 				<div class="w-75 mt-5 ml-4">
-					<LanguageDropdown :tasks="tasks" :languages="languages" :selectedTask="selectTask"/>
+					<LanguageDropdown :tasks="tasks" :languages="languages" :onLanguageSelect="onLanguageSelect" :onTaskSelect="onTaskSelect"/>
 				</div>
 			</div>
 			<div class="col-8 d-flex justify-content-center">
-				<div v-if="taskSelected" class="w-75">
-					<TaskInputForm :task="getTaskById(currentTask)"/>
+				<div v-if="isTaskSelected" class="w-75">
+					<TaskInputForm :task="getTaskById(selectedTaskId)" :langID="langID"/>
 				</div>
 			</div>
 		</div>
@@ -30,25 +30,36 @@ export default {
 	},
 	methods: {
 		selectTask(id) {
-			this.currentTask = id;
-			this.taskSelected = true;
+			this.selectedTaskId = id;
+			this.isTaskSelected = true;
 		},
 		async processText() {
 			// TODO: send text to backend
 			await axios.post('http://localhost:5000/api/text-analysis', {
 				text: this.text,
-				task: this.currentTask
+				task: this.selectedTaskId,
 			})
 		},
 		getTaskById(id) {
 			return this.tasks.find(task => task.id === id);
 		},
+		onLanguageSelect(id) {
+			this.langID = id;
+			this.selectedTaskId = -1;
+			this.isTaskSelected = false;
+		},
+		onTaskSelect(id) {
+			this.selectedTaskId = id;
+			this.isTaskSelected = true;
+
+		},
 	},
 	data() {
 		return {
-			currentTask: 0,
+			selectedTaskId : 0,
 			text: "",
-			taskSelected: false,
+			isTaskSelected : false,
+			langID: -1,
 
 			//TODO: get this from backend
 			tasks: [

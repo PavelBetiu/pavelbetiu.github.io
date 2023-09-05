@@ -1,4 +1,4 @@
-import { ITextAnalysisService, RestoreDiacriticsRequest, RestoreDiacriticsResponse } from "./text-analysis-service.interface";
+import { ITextAnalysisService, RestoreDiacriticsRequest, RestoreDiacriticsResponse, GetKeywordsRequest, GetKeywordsResponse } from "./text-analysis-service.interface";
 import axios from "axios";
 
 async function getJobResults(id: number) {
@@ -34,6 +34,18 @@ export class TextAnalysisService implements ITextAnalysisService {
 
         return {
             text: await getJobResults(jobId)
+        }
+    }
+
+    async getKeywords(request: GetKeywordsRequest): Promise<GetKeywordsResponse> {
+        const jobId = await axios.post('/services/keywords', request).then((response) => {
+           return response.data.id
+        }).catch((error) => {
+           throw error
+        })
+
+        return {
+            keywords: await getJobResults(jobId)
         }
     }
 }
