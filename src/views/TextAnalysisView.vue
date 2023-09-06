@@ -27,6 +27,22 @@
 						</template>
 					</TaskInputForm>
 
+					<TaskInputForm v-else-if="selectedTaskId === 4" :title="selectedTask.name" :processText="processText" :clearForm="clearForm">
+						<template v-if="result !== null" #body>
+							<div class="form-control keywords-result-container">
+								<div v-html="highlightKeywords(text, result.keywords)"></div>
+							</div>
+						</template>
+
+						<template v-if="result !== null" #sub-body>
+							<div class="d-flex flex-wrap keywords-list">
+								<div v-for="keyword of result.keywords" :key="keyword" class="badge bg-secondary m-2">
+									{{ keyword }}
+								</div>
+							</div>
+						</template>
+					</TaskInputForm>
+
 					<TaskInputForm v-else :title="selectedTask.name" :processText="processText"/>
 				</div>
 			</div>
@@ -108,7 +124,7 @@ export default {
 					id: 4,
 					name: 'Keyword Extraction',
 					languages: [3,8],
-					process: undefined,
+					process: this.taService.getKeywords,
 					payloadTemplate: {
 						text: null,
 						lang: null
@@ -285,6 +301,29 @@ export default {
 
 			return labelsAndScoresMarked;
 		},
+		highlightKeywords(text, keywords) {
+            let highlightedText = text;
+
+            // Loop through keywords and apply highlighting
+            keywords.forEach((keyword) => {
+                const keywordParts = keyword.split(' ');
+
+                // Create a regular expression pattern to match keyword parts with any words in between
+                const keywordPattern = new RegExp(
+                    `(${keywordParts
+                .map((part) => `\\b${part}\\b`)
+                .join('.*?')})`,
+                    'gi'
+                );
+
+                highlightedText = highlightedText.replace(
+                    keywordPattern,
+                    (match) => `<span class="keywords-highlight">${match}</span>`
+                );
+            });
+
+            return highlightedText;
+        },
         success(header, footer) {
             this.toastService && this.toastService.success(footer, header)
         },
@@ -320,7 +359,30 @@ export default {
 	margin-bottom: 0.5rem;
 }
 
+.keywords-highlight {
+	background-color: #a600ff;
+	color: #ffffff;
+	border-radius: 0.25rem;
+	padding: 0.1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
 .diacritics-result-container {
 	min-height: 23rem;
+	max-height: 23rem;
+	overflow-y: scroll;
+}
+
+.keywords-result-container {
+	min-height: 23rem;
+	max-height: 23rem;
+	overflow-y: scroll;
+}
+
+.keywords-list {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
 }
 </style>

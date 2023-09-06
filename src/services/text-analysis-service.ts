@@ -5,7 +5,9 @@ import {
     SentimentAnalysisRequest,
     SentimentAnalysisResponse,
     OffensiveLanguageRequest,
-    OffensiveLanguageResponse
+    OffensiveLanguageResponse,
+    GetKeywordsRequest, 
+    GetKeywordsResponse
 } from "./text-analysis-service.interface";
 import axios from "axios";
 
@@ -68,6 +70,18 @@ export class TextAnalysisService implements ITextAnalysisService {
 
         return {
             labels: await getJobResults(jobId)
+        }
+    }
+
+    async getKeywords(request: GetKeywordsRequest): Promise<GetKeywordsResponse> {
+        const jobId = await axios.post('/services/keywords', request).then((response) => {
+           return response.data.id
+        }).catch((error) => {
+           throw error
+        })
+
+        return {
+            keywords: await getJobResults(jobId)
         }
     }
 }
