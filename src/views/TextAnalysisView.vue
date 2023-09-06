@@ -1,17 +1,53 @@
 <template>
-	<div class="p-5 mt-8 mx-6 w-100">
+	<div :class="$style['body']"> 
+	<div class="p-5 mt-5 mx-6 w-100">
 		<div class="row">
 			<div class="col-4">
 				<div class="w-75 mt-5 ml-4">
-					<LanguageDropdown :tasks="tasks" :languages="languages" :selectedTask="selectTask"/>
+					<LanguageDropdown :tasks="tasks" :languages="languages" :onLanguageSelect="onLanguageSelect" :onTaskSelect="onTaskSelect"/>
 				</div>
 			</div>
 			<div class="col-8 d-flex justify-content-center">
-				<div v-if="taskSelected" class="w-75">
-					<TaskInputForm :task="getTaskById(currentTask)"/>
+				<div v-if="isTaskSelected" class="w-75" :key="refresh">
+					<TaskInputForm v-if="selectedTaskId === 3" :title="selectedTask.name" :processText="processText" :clearForm="clearForm">
+						<template v-if="result !== null" #body>
+							<div class="form-control diacritics-result-container">
+								<div v-html="highlightingDiacritics(text, result.text)"></div>
+							</div>
+						</template>
+					</TaskInputForm>
+
+					<TaskInputForm v-else-if="selectedTaskId === 2 || selectedTaskId === 0" :title="selectedTask.name" :processText="processText" :clearForm="clearForm">
+						<template v-if="result !== null" #sub-body>
+							<div class="d-flex flex-row justify-content-between align-items-center" :set="labelsAndScores = markHighestScoredLabel(result.labels)">
+								<div v-for="label of Object.keys(labelsAndScores)" :key="label" class="form-control m-1" :class="labelsAndScores[label].isHighest ? 'badge bg-success' : 'badge bg-secondary'">
+									{{ label }}: {{ labelsAndScores[label].score }}
+								</div>
+							</div>
+						</template>
+					</TaskInputForm>
+
+					<TaskInputForm v-else-if="selectedTaskId === 4" :title="selectedTask.name" :processText="processText" :clearForm="clearForm">
+						<template v-if="result !== null" #body>
+							<div class="form-control keywords-result-container">
+								<div v-html="highlightKeywords(text, result.keywords)"></div>
+							</div>
+						</template>
+
+						<template v-if="result !== null" #sub-body>
+							<div class="d-flex flex-wrap keywords-list">
+								<div v-for="keyword of result.keywords" :key="keyword" class="badge bg-secondary m-2">
+									{{ keyword }}
+								</div>
+							</div>
+						</template>
+					</TaskInputForm>
+
+					<TaskInputForm v-else :title="selectedTask.name" :processText="processText"/>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </template>
 
@@ -19,6 +55,16 @@
 import axios from 'axios';
 import LanguageDropdown from '@/components/text-analysis/LanguageDropdown.vue';
 import TaskInputForm from '@/components/text-analysis/TaskInputForm.vue';
+import {
+	TEXT_ANALYSIS_SERVICE
+} from '@/services/text-analysis-service.interface'
+import {
+	TOAST_SERVICE
+} from '@/services/toast-service.interface'
+
+import {
+	inject
+} from 'vue';
 
 export default {
 	name: "TextAnalysisView",
@@ -26,82 +72,67 @@ export default {
 		LanguageDropdown,
 		TaskInputForm
 	},
-	methods: {
-		selectTask(id) {
-			this.currentTask = id;
-			this.taskSelected = true;
-		},
-		async processText() {
-			// TODO: send text to backend
-			await axios.post('http://localhost:5000/api/text-analysis', {
-				text: this.text,
-				task: this.currentTask
-			})
-		},
-		getTaskById(id) {
-			return this.tasks.find(task => task.id === id);
-		},
-	},
 	data() {
 		return {
-			currentTask: 0,
 			text: "",
-			taskSelected: false,
+			langID: -1,
+			selectedTaskId: -1,
+			isTaskSelected: false,
+			result: null,
+			
+			taService: null,
+			tasks: null,
+			languages: null,
 
-			//TODO: get this from backend
-			tasks: [
+			toastService: null,
+
+			refresh: 0
+		};
+	},
+	created() {
+		this.taService = inject(TEXT_ANALYSIS_SERVICE)
+		this.toastService = inject(TOAST_SERVICE)
+		this.tasks = [
 				{
 					id: 0,
 					name: 'Sentiment Analysis',
-					labels: ['Positive', 'Negative', 'Neutral'],
-					languages: [3,2]
-				},
-				{
-					id: 1,
-					name: 'Textual Complexity',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,4]
+					languages: [3],
+					process: this.taService.sentimentAnalysis,
+					payloadTemplate: {
+						text: null
+					} 
 				},
 				{
 					id: 2,
 					name: 'Offensive Language',
-					labels: ['Other', 'Abuses', 'Profanity', 'Insult'],
-					languages: [3,2]
+					languages: [3],
+					process: this.taService.offensiveLanguage,
+					payloadTemplate: {
+						text: null
+					} 
 				},
 				{
 					id: 3,
-					name: 'Task2',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,6]
+					name: 'Diacritics Restoration',
+					languages: [3],
+					process: this.taService.restoreDiacritics,
+					payloadTemplate: {
+						text: null
+					}
 				},
 				{
 					id: 4,
-					name: 'Task3',
-					labels: ['Other', 'Abuses', 'Profanity', 'Insult'],
-					languages: [7,8]
-				},
-				{
-					id: 5,
-					name: 'Task4',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,4,6]
-				},
-				{
-					id: 6,
-					name: 'Task5',
-					labels: ['Other', 'Abuses', 'Profanity', 'Insult'],
-					languages: [2,5,7,4]
-				},
-				{
-					id: 7,
-					name: 'Task6',
-					labels: ['low', 'medium', 'high'],
-					languages: [5,6,8]
+					name: 'Keyword Extraction',
+					languages: [3,8],
+					process: this.taService.getKeywords,
+					payloadTemplate: {
+						text: null,
+						lang: null
+					}
 				}
-			],
+			]
 
-			//TODO: get this from backend
-			languages: [
+			this.languages = [
 				{
 					id: 1,
 					label: "EN"
@@ -135,11 +166,223 @@ export default {
 					label: "NL"
 				}
 			]
-		};
 	},
+	methods: {
+		onLanguageSelect(id) {
+			this.langID = id;
+			this.selectedTaskId = -1;
+			this.isTaskSelected = false;
+		},
+		onTaskSelect(id) {
+			this.selectedTaskId = id;
+			this.isTaskSelected = true;
+
+			this.clearForm();
+		},
+		async processText(text) {
+			if (this.selectedTask.process === undefined) {
+				this.error("Error", "This task is not available yet");
+
+				return false;
+			}
+
+			let trimmedText = text.trim();
+
+			if (trimmedText.length == 0) {
+				this.error("Error", "Please enter some text");
+
+				return false;
+			}
+
+			this.text = text;
+
+			let payloadTemplate = this.selectedTask.payloadTemplate;
+			
+			payloadTemplate.text = this.text;
+
+			if ('lang' in payloadTemplate) {
+				payloadTemplate.lang = this.langID;
+			}
+
+			try {
+				this.info("Sent for processing", "Please wait...")
+				this.result = await this.selectedTask.process(payloadTemplate);
+				this.success("Task completed", "Please check the results down below")
+			} catch (error) {
+				this.error("Error", error.message);
+
+				// reset the form
+				this.clearForm();
+			}
+
+			return true;
+		},
+		clearForm() {
+			this.result = null;
+			this.refresh = (this.refresh + 1) % 2;
+		},
+		highlightingDiacritics(before, after) {
+			let hidxs = []; 
+
+			let startWordIdx = -1;
+			let endWordIdx = -1;
+			let isDiff = false;
+			for (let i = 0; i < before.length; i++) {
+				if (' \t\n.,'.includes(before[i])) {
+					if (startWordIdx != -1) {
+						endWordIdx = i - 1;
+
+						if (isDiff) {
+							hidxs.push({
+								start: startWordIdx,
+								end: endWordIdx
+							});
+						}
+
+						startWordIdx = -1;
+						endWordIdx = -1;
+						isDiff = false;
+					}
+				} else {
+					if (startWordIdx == -1) {
+						startWordIdx = i;
+					}
+
+					if (before[i] != after[i]) {
+						isDiff = true;
+					}
+				}
+			}
+
+			// check if the last word is different
+			if (startWordIdx != -1) {
+				endWordIdx = before.length - 1;
+
+				if (isDiff) {
+					hidxs.push({
+						start: startWordIdx,
+						end: endWordIdx
+					});
+				}
+			}
+
+			let afterHtml = "";
+			let currentHidx = 0; // current highlighting index
+			for (let i = 0; i < after.length; i++) {
+				if (currentHidx >= hidxs.length) {
+					afterHtml += after[i];
+					continue;
+				}
+
+				if (i == hidxs[currentHidx].start) {
+					afterHtml += "<span class='diacritics-highlight'>";
+				} else if (i == hidxs[currentHidx].end) {
+					afterHtml += after[i];
+					afterHtml += "</span>";
+					currentHidx++;
+					continue;
+				}
+
+				afterHtml += after[i];
+			}
+
+			return afterHtml;
+		},
+		markHighestScoredLabel(labelsAndScores) {
+			const maxScore = Math.max(...Object.values(labelsAndScores));
+			
+			let labelsAndScoresMarked = {};
+			for (const key of Object.keys(labelsAndScores)) {
+				labelsAndScoresMarked[key] = {
+					score: parseFloat(labelsAndScores[key]).toFixed(4),
+					isHighest: labelsAndScores[key] === maxScore
+				}
+			}
+
+			return labelsAndScoresMarked;
+		},
+		highlightKeywords(text, keywords) {
+            let highlightedText = text;
+
+            // Loop through keywords and apply highlighting
+            keywords.forEach((keyword) => {
+                const keywordParts = keyword.split(' ');
+
+                // Create a regular expression pattern to match keyword parts with any words in between
+                const keywordPattern = new RegExp(
+                    `(${keywordParts
+                .map((part) => `\\b${part}\\b`)
+                .join('.*?')})`,
+                    'gi'
+                );
+
+                highlightedText = highlightedText.replace(
+                    keywordPattern,
+                    (match) => `<span class="keywords-highlight">${match}</span>`
+                );
+            });
+
+            return highlightedText;
+        },
+        success(header, footer) {
+            this.toastService && this.toastService.success(footer, header)
+        },
+        info(header, footer) {
+            this.toastService && this.toastService.info(footer, header)
+        },
+        error(header, footer) {
+            this.toastService && this.toastService.error(footer, header, -1)
+        },
+	},
+	computed: {
+		selectedTask() {
+			return this.tasks.find(task => task.id === this.selectedTaskId);
+		}
+	}
 };
 </script>
 
-<style>
+<style module>
+    .body {
+        background-color: #f8f9fa;
+    }
+    
+</style>
 
+<style>
+.diacritics-highlight {
+	background-color: #a600ff;
+	color: #ffffff;
+	border-radius: 0.25rem;
+	padding: 0.1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.keywords-highlight {
+	background-color: #a600ff;
+	color: #ffffff;
+	border-radius: 0.25rem;
+	padding: 0.1rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.diacritics-result-container {
+	min-height: 23rem;
+	max-height: 23rem;
+	overflow-y: scroll;
+}
+
+.keywords-result-container {
+	min-height: 23rem;
+	max-height: 23rem;
+	overflow-y: scroll;
+}
+
+.keywords-list {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
 </style>

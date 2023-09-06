@@ -37,6 +37,9 @@ import { QGEN_SERVICE } from "./services/qgen-service.interface";
 import { MockQGenService } from "./services/mock-qgen-service";
 import { QGenService } from "./services/qgen-service";
 
+import { TEXT_ANALYSIS_SERVICE } from "./services/text-analysis-service.interface";
+import { TextAnalysisService } from "./services/text-analysis-service";
+
 import {
     TOAST_SERVICE
 } from "./services/toast-service.interface";
@@ -71,6 +74,7 @@ export default {
         provide(TOAST_SERVICE, new PrimeVueToastService(app));
         provide(ANNOTATION_SERVICE, new RecogitoAnnotationService());
         provide(QGEN_SERVICE, new QGenService());
+        provide(TEXT_ANALYSIS_SERVICE, new TextAnalysisService());
   },
 };
 </script>
