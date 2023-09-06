@@ -1,5 +1,6 @@
 <template>
 <div id="textAnalysisForm" class="card">
+<<<<<<< HEAD
     <div class="card-header text-center pt-4 pb-3 d-flex justify-content-center">
         <span class="badge rounded-pill bg-light text-dark">{{ task['name'] }}</span>
     </div>
@@ -37,6 +38,59 @@
             New Process
         </button>
     </div>
+=======
+
+    <div class="card-header">
+        <slot name="over-header">
+        </slot>
+
+        <slot name="header">
+            <div class="text-center w-100 d-flex justify-content-center">
+                <span class="badge rounded-pill bg-light text-dark">{{ title }}</span>
+            </div>
+        </slot>
+
+        <slot name="sub-header">
+        </slot>
+    </div>
+
+    <div class="card-body">
+        <slot name="over-body">
+        </slot>
+        <slot name="body">
+            <div class="text-lg-left text-center px-2">
+                <div class="form-group">
+                    <textarea v-if="!isLoading && !doneProcessing" class="form-control" id="textInputBox" rows="15" v-model="text" placeholder="Please insert your text here..."></textarea>
+                    <textarea v-else-if="isLoading || doneProcessing" class="form-control" id="textInputBoxDisabled" rows="15" v-model="text" disabled></textarea>
+                </div>
+            </div>
+        </slot>
+        <slot name="sub-body">
+        </slot>
+    </div>
+
+    <div class="card-footer">
+        <slot name="over-footer">
+        </slot>
+        <slot name="footer">
+            <div class="w-100 d-flex justify-content-center">
+                <button v-if="!isLoading && !doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="process()">Process</button>
+
+                <button v-else-if="isLoading" type="button" class="btn bg-gradient-primary w-100" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Processing...
+                </button>
+
+                <button v-else-if="doneProcessing" type="button" class="btn bg-gradient-primary w-100" @click="clear()">
+                    New Process
+                </button>
+            </div>
+        </slot>
+        <slot name="sub-footer">
+        </slot>
+    </div>
+
+>>>>>>> 86-text-analysis-page-integrations-and-others
 </div>
 </template>
 
@@ -53,24 +107,44 @@ import {
 export default {
     name: 'TaskInputForm',
     props: {
+<<<<<<< HEAD
         task: Object,
         langID: Number
+=======
+        title: {
+            type: String,
+            optional: false
+        },
+        processText: {
+            type: Function,
+            optional: false
+        },
+        clearForm: {
+            type: Function,
+            optional: true,
+            default: undefined
+        }
+>>>>>>> 86-text-analysis-page-integrations-and-others
     },
     data() {
         return {
             text: '',
             isLoading: false,
             doneProcessing: false,
+<<<<<<< HEAD
             taservice: inject(TEXT_ANALYSIS_SERVICE),
             keywords: [],
             highlightedText: '', // Added to store the highlighted text
             keywordColors: {}, // Added to store colors for keywords
+=======
+>>>>>>> 86-text-analysis-page-integrations-and-others
         };
     },
     methods: {
         clear() {
             this.text = '';
             this.doneProcessing = false;
+<<<<<<< HEAD
         },
         highlightKeywords() {
             let highlightedText = this.text;
@@ -109,6 +183,23 @@ export default {
             this.isLoading = false;
             this.doneProcessing = true;
             this.highlightKeywords();
+=======
+
+            if (this.clearForm !== undefined) {
+                this.clearForm();
+            }
+        },
+        async process() {
+            this.isLoading = true;
+
+            let valid = await this.processText(this.text);
+
+            this.isLoading = false;
+
+            if (valid) {
+                this.doneProcessing = true;
+            }
+>>>>>>> 86-text-analysis-page-integrations-and-others
         },
     },
 };
@@ -131,6 +222,7 @@ export default {
     background-color: #f8f9fa;
 }
 
+<<<<<<< HEAD
 .keywords-list {
     display: flex;
     justify-content: center;
@@ -145,4 +237,9 @@ export default {
     background-color: yellow;
     /* Adjust the highlighting style as needed */
 }
+=======
+* {
+    font-family: 'Roboto', sans-serif;
+}
+>>>>>>> 86-text-analysis-page-integrations-and-others
 </style>
