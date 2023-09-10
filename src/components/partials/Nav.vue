@@ -63,6 +63,9 @@
                         <a href="/services/question-generation" class="dropdown-item border-radius-md">
                           <span class="ps-3">Question Generation</span>
                         </a>
+                        <a href="/services/stt" class="dropdown-item border-radius-md">
+                          <span class="ps-3">Speech-to-Text</span>
+                        </a>
                         <a href="/services/text-analysis" class="dropdown-item border-radius-md">
                           <span class="ps-3">Text Analysis</span>
                         </a>

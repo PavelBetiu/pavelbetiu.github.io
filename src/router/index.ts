@@ -86,6 +86,14 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/UserProfileView.vue'),
   },
   {
+    path: '/services/stt',
+    name: 'speech-to-text',
+    component: () => import('@/views/SpeechToText.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/services/text-analysis',
     name: 'text-analysis',
     component: () => import('@/views/TextAnalysisView.vue'),
