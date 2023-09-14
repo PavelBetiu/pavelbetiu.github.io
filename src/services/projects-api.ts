@@ -3,6 +3,13 @@ import { ProjectDTOLong, ProjectDTOShort } from "@/data-objects/project-dto";
 export class ProjectsAPI {
     private static readonly projectsShort: ProjectDTOShort[] = [
         {
+            title: 'CloudPrecis: Increasing UPB\'s research capacity in Cloud technologies and massive data processing',
+            link: 'projects/cloud',
+            image: 'cloud.jpg',
+            description: 'The project wants to increase the research capacity in Cloud technologies and the processing capabilities of massive data for the University Politehnica of Bucharest ',
+            imageDescription: 'Cloud technologies and great processing capabilities of massive data for the University Politehnica of Bucharest',
+        },
+        {
             title: 'AUTOMATED TEXT EVALUATION AND SIMPLIFICATION',
             link: 'projects/ates',
             image: 'ates.jpeg',
@@ -317,6 +324,108 @@ export class ProjectsAPI {
                 ]
             },
             link: 'ates'
+        },
+
+        {
+            title: 'Increasing UPB\'s research capacity in Cloud technologies and massive data processing ',
+            acronym: 'CloudPrecis',
+            mysims: '124812',
+            contractNumber: '344/390020/06.09.2021',
+            fundingAgency: {
+                name: 'Ministry of Research, Innovation and Digitalization',
+                logo: 'funding_agencies_logos/mcdi.jpg',
+            },
+            description: 'The general objective of the CloudPrecis project is to increase the research capacity in Cloud technologies and the processing capabilities of massive data for the University Politehnica of Bucharest (UPB), Faculty of Automation and Computers, by expanding and modernizing the cloud infrastructure and the storage capacity of the PRECIS Data Center - CNTI, along with the development of a powerful distributed infrastructure for collecting and processing large amounts of data obtained from pervasive or IoT systems and services.',
+            descriptionImage: 'cloud.jpg',
+            objectives: [
+                'Expansion and modernization of the Cloud infrastructure and storage capacity of the PRECIS -CNTI Data Center, together with the development of a strong distributed infrastructure for the collection and processing of large amounts of data through the purchase of processing, storage, and communication equipment.',
+                'The development of Cloud services to ensure the optimization and efficient management of the Cloud computing and storage resources from the PRECIS Cloud data center, as well as the interconnection to national and international networks.',
+                'The Development of IT platforms for intelligent data collection and processing for Cloud-Robotics and IoT systems. The ReaderBench platform has been rewritten entirely with new NLP processing services within the CloudPrecis project.',
+                'Dissemination, exploitation, and capitalization of the project results, as well as ensuring the sustainability of the Cloud PRECIS data center. Establishing the Cloud-PRECIS center as a landmark in international research and education networks.',
+            ],
+            team: [{
+                name: 'Mihai Dascalu',
+                links: {
+                    dblp: 'http://dblp1.uni-trier.de/pers/hd/d/Dascalu:Mihai',
+                    gscholar: 'https://scholar.google.com/citations?user=3L9yY8UAAAAJ&hl=en',
+                    linkedin: 'https://www.linkedin.com/in/mihai-dascalu-8a57ab10a',
+                    rgate: 'https://www.researchgate.net/profile/Mihai_Dascalu'
+                }
+            },
+            {
+                name: 'Stefan Ruseti',
+                links: {
+                    dblp: 'http://dblp.uni-trier.de/pers/hd/r/Ruseti:Stefan',
+                    gscholar: 'https://scholar.google.com/citations?user=aEyJTykAAAAJ&hl=en',
+                    linkedin: 'https://www.linkedin.com/in/stefan-ruseti-97a011a1',
+                    rgate: 'https://www.researchgate.net/profile/Stefan_Ruseti'
+                }
+            },
+            {
+                name: 'Ionuț Paraschiv',
+                links: {
+                    dblp: 'https://dblp1.uni-trier.de/pid/150/4863.html',
+                    linkedin: 'https://www.linkedin.com/in/ionutcristianparaschiv/',
+                    rgate: 'https://www.researchgate.net/profile/Ionut-Paraschiv'
+                }
+            },
+            {
+                name: 'Andrei Paraschiv',
+                links: {
+                    dblp: 'https://dblp.dagstuhl.de/pid/253/9218.html',
+                    rgate: 'https://www.researchgate.net/profile/Andrei-Paraschiv'
+                }
+            },
+            {
+                name: 'Dan Ungureanu',
+                links: {
+                    dblp: 'https://dblp.org/pid/33/2469.html',
+                    rgate: 'https://www.researchgate.net/scientific-contributions/Dan-Ungureanu-2205984498'
+                }
+            },
+            {
+                name: 'Emanuel Terteș',
+                links: {
+                    linkedin: 'https://www.linkedin.com/in/emanuel-tertes-ab14801b9/'
+                }
+            },
+            {
+                name: 'Dumitru-Pavel Bețiu',
+                links: {
+                    linkedin: 'https://www.linkedin.com/in/dumitru-pavel-betiu-015289208/'
+                }
+            }
+        ],
+            publications: {
+                journals: [{
+                    title: '1. Botarleanu, R.-M., Watanabe, M., Dascalu, M., Crossley, S. A., & McNamara, D. S. (under review). Multilingual Age of Exposure 2.0.',
+                    url: 'https://www.researchgate.net/publication/358631762_Age_of_Exposure_20_Estimating_word_complexity_using_iterative_models_of_word_embeddings'
+                },
+                {
+                    title: '2. Ruseti, S., Paraschiv, I., Dascalu, M., & McNamara, D. S. (under review). Automated Pipeline for Multi-lingual Automated Essay Scoring with ReaderBench.',
+                    url: ''
+                },
+                {
+                    title: '3. Paraschiv, A., Sandu, I., Cercel, D.-C., & Dascalu, M. (under review). Fighting Romanian Offensive Language with RO-Offense: A Dataset and Classification Models for Online Comments.',
+                    url: ''
+                }],
+                conferences: [
+                    {
+                        title: '1. Paraschiv, A., & Dascalu, M. (2023). UPB at ACTI: Detecting Conspiracies using fine-tuned Sentence Transformers. In EVALITA 2023: 8th Evaluation Campaign of Natural Language Processing and Speech Tools for Italian, Parma, IT.',
+                        url: ''
+                    },
+                    {
+                        title: '2. Nicula, B., Panaite, M., Arner, T., Balyan, R., Dascalu, M., & McNamara, D. S. (2023). Automated Assessment of Comprehension Strategies from Self-explanations Using Transformers and Multi-task Learning. In 24th Int. Conf. on Artificial Intelligence in Education (AIED 2023), Tokyo, Japan.',
+                        url: ''
+                    },
+                    {
+                        title: '3. Corlatescu, D., Watanabe, M., Ruseti, S., Dascalu, M., & McNamara, D. S. (2023). The Automated Model of Comprehension Version 3.0: Paying Attention to Context. In 24th Int. Conf. on Artificial Intelligence in Education (AIED 2023), Tokyo, Japan.',
+                        url: ''
+                    }
+                ]
+            },
+            link: 'cloud',
+            ue: true
         }
     ]
 

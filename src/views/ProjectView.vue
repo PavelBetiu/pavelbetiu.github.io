@@ -1,4 +1,12 @@
 <template>
+<div v-if="project.ue" class="container-navbar">
+    <div class="navbar-fonduri">
+        <img src="@/assets/images/sigle/ue_logo.jpg" alt="">
+        <img src="@/assets/images/sigle/guvern.jpg" alt="">
+        <img src="@/assets/images/sigle/instrumente_structurale.jpg" alt="">
+    </div>
+</div>
+
 <header class="bg-gradient-dark">
     <div class="page-header min-vh-75">
         <span class="mask bg-gradient-info opacity-1" v-bind:style="{ 'background-image': 'url(' + require('@/assets/img/curved-images/curved14.jpg') + ')' }"></span>
@@ -38,15 +46,31 @@
     <SideBySideSection :data="convertToSideBySideInput(project, OBJECTIVES, TEAM)" :parentColor="bg_color" />
 
     <!-- Project Phases section -->
-    <WaveSection :data="convertToWaveSectionInput(project, PROJECT_PHASES)" :parentColor="bg_color" />
+    <WaveSection v-if="project.projectPhases" :data="convertToWaveSectionInput(project, PROJECT_PHASES)" :parentColor="bg_color" />
 
     <!-- Project Activities section -->
-    <SideBySideSection :data="convertToSideBySideInput(project, PROJECT_ACTIVITIES)" :parentColor="bg_color" />
+    <SideBySideSection v-if="project.projectActivities" :data="convertToSideBySideInput(project, PROJECT_ACTIVITIES)" :parentColor="bg_color" />
 
     <!-- Publications section (Journals and Conferences) -->
     <WaveSection :data="convertToWaveSectionInput(project, PUBLICATIONS)" :parentColor="bg_color" />
 </div>
 
+<footer v-if="project.ue">
+    <div class="row ue-disclaimer">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3">
+            <h5 class="text-dark font-weight-light mx-4 p-4">
+                Pentru informații detaliate despre celelalte programe cofinanțate de Uniunea Europeană, vă invităm să vizitați www.fonduri-ue.ro
+            </h5>
+        </div>
+        <div class="col-lg-3">
+            <h5 class="text-dark  mb-0 font-weight-light mx-4 p-4">
+                Conținutul acestui material nu reprezintă în mod obligatoriu poziția oficială a Uniunii Europene sau a Guvernului României
+            </h5>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</footer>
 
 </template>
 
@@ -124,4 +148,31 @@ export default {
     border-bottom: 1px solid #ff0000;
     height: 200px;
 }
+
 </style>
+
+<style>
+
+.navbar-fonduri {
+    align-items: center;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    max-width: 1000px;
+    padding: 0.5rem 0;
+    margin-top: 6rem;
+    width: 100%;
+    gap: 22rem;
+}
+
+.container-navbar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ue-disclaimer {
+    background-color: v-bind(bg_color);
+}
+</style>
+

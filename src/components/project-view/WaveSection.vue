@@ -27,7 +27,8 @@
                 </p>
             </div>
             <div class="col-lg-6">
-                <img src="@/assets/images/nlp.jpg" class="img-fluid p-4 border-radius-bottom-start-circle border-radius-top-end-circle bg-gradient-light" alt="Image">
+                <img v-if="data.content.descriptionImage" :src="require(`@/assets/images/${data.content.descriptionImage}`)" class="img-fluid p-4 border-radius-bottom-start-circle border-radius-top-end-circle bg-gradient-light" alt="Image">
+                <img v-else src="@/assets/images/nlp.jpg" class="img-fluid p-4 border-radius-bottom-start-circle border-radius-top-end-circle bg-gradient-light" alt="Image">
             </div>
         </div>
 

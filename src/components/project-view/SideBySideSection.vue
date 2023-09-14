@@ -21,9 +21,13 @@
         <div v-if="data.leftSection.type === ABOUT" class="row p-4 d-flex justify-content-center">
             <div class="row p-4 w-45 shadow-lg" :class="$style['div-about']">
                 <div class="col-7">
-                    <div class="row">
+                    <div v-if="data.leftSection.content.projectNumber" class="row">
                         <p class="h5 text-primary">Project number: </p>
                         <p class="font-weight-bolder d-flex justify-content-end">{{data.leftSection.content.projectNumber}}</p>
+                    </div>
+                    <div v-if="data.leftSection.content.mysims" class="row">
+                        <p class="h5 text-primary">MySIMS code: </p>
+                        <p class="font-weight-bolder d-flex justify-content-end">{{data.leftSection.content.mysims}}</p>
                     </div>
                     <div class="row">
                         <p class="h5 text-primary">Contract number: </p>
@@ -34,7 +38,7 @@
                         <p class="font-weight-bolder d-flex justify-content-end">{{data.rightSection.content.name}}</p>
                     </div>
                 </div>
-                <div v-if="data.rightSection.type === FUNDING_AGENCY" class="col-auto d-flex justify-content-center">
+                <div v-if="data.rightSection.type === FUNDING_AGENCY" class="col-auto d-flex justify-content-center p-4">
                     <img :src="require(`@/assets/images/${data.rightSection.content.logo}`)" alt="ates" class="rounded" :class="$style['logo']"/>
                 </div>
             </div>
@@ -201,8 +205,8 @@ export default {
 }
 
 .logo {
-    width: 250px;
-    height: 200px;
+    max-width: 250px;
+    max-height: 200px;
     margin: 0 auto;
     object-position: center;
 }
@@ -210,5 +214,7 @@ export default {
 .div-about {
     background-color: white;
     border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 </style>

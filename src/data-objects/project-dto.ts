@@ -15,10 +15,10 @@ export interface ProjectDTOShort {
 export interface ProjectTeamMemberDTO {
     name: string,
     links: {
-        dblp: string,
-        gscholar: string,
-        linkedin: string,
-        rgate: string
+        dblp?: string,
+        gscholar?: string,
+        linkedin?: string,
+        rgate?: string
     }
 }
 
@@ -42,21 +42,24 @@ export interface PublicationDTO {
 export interface ProjectDTOLong {
     title: string,
     acronym: string,
-    projectNumber: string,
+    projectNumber?: string | undefined,
+    mysims?: string | undefined,
     contractNumber: string,
     fundingAgency: {
         name: string,
         logo: string,
     },
     description: string,
+    descriptionImage?: string,
     objectives: string[],
     team: ProjectTeamMemberDTO[],
-    projectPhases: ProjectPhaseDTO[],
-    projectActivities: ProjectActivityDTO[],
-    notableResults: undefined,
+    projectPhases?: ProjectPhaseDTO[],
+    projectActivities?: ProjectActivityDTO[],
+    notableResults?: undefined,
     publications: {
         journals: PublicationDTO[],
         conferences: PublicationDTO[],
     },
+    ue?: boolean,
     link: string // Used for fetching the project's detailed information
 }

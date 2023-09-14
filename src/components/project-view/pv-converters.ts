@@ -22,6 +22,7 @@ export function convertToSideBySideInput(project: ProjectDTOLong, leftType: numb
                 title: "About",
                 content: {
                     projectNumber: project.projectNumber,
+                    mysims: project.mysims,
                     contractNumber: project.contractNumber
                 },
                 image: "about-icon.svg",
@@ -85,7 +86,8 @@ export function convertToWaveSectionInput(project: ProjectDTOLong, type: number)
             type: DESCRIPTION,
             title: "Description",
             content: {
-                description: project.description
+                description: project.description,
+                descriptionImage: project.descriptionImage
             },
         };
     }
