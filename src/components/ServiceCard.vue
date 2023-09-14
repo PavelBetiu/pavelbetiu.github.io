@@ -1,5 +1,5 @@
 <template>
-    <div class="card mx-3 border-radius-20">
+    <div class="card mx-3 border-radius-20" style="height: 25rem;">
         <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
             <a href="javascript:;" class="d-block mx-auto">
                 <div class="bg-image hover-zoom">

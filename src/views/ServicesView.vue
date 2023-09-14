@@ -5,8 +5,8 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center mx-auto my-auto">
-                    <h1 class="text-white">Services</h1>
-                    <p class="lead mb-4 text-white opacity-8">Live demo of our projects</p>
+                    <h1 class="display-1 font-weight-bold services-title">Services</h1>
+                    <p class="h2 services-subtitle">Live demo of our projects</p>
                 </div>
             </div>
         </div>
@@ -87,6 +87,13 @@ export default {
                     image: 'tc_demo.jpeg',
                     active: true
                 },
+                speech_to_text: {
+                    title: "SPEECH TO TEXT",
+                    languages: ['Romanian'],
+                    link: '/services/stt',
+                    image: 'stt_demo.png',
+                    active: true
+                },
                 mdcna: {
 					title: "MULTI-DOCUMENT CNA",
                     languages: ['English', 'French'],
@@ -118,8 +125,21 @@ export default {
 }
 </script>
 
+
 <style>
 .body {
     background-color: #f8f9fa;
+}
+
+.services-title {
+    color: whitesmoke;
+    text-shadow: 4px 5px 5px rgba(174, 75, 255, 0.39);
+}
+
+.services-subtitle {
+    font-weight: lighter;
+    color: whitesmoke;
+    opacity: 0.85;
+    text-shadow: 3px 3px 4px black;
 }
 </style>
