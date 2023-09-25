@@ -19,28 +19,6 @@
     </div>
 </header>
 <div class="background-home-view">
-    <section class="d-flex justify-content-center position-relative">
-        <div class="container">
-            <div class="row">
-                <div class="row justify-content-center text-center">
-                    <div class="page-header section-height-75 border-radius-xl">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6 my-auto">
-                                    <h1>Under construction</h1>
-                                    <p class="lead ">We apologize for any inconvenience due to the construction on our website. Please check back later as we update our website! Thank you for your patience.</p>
-                                </div>
-                                <div class="col-lg-6 my-auto">
-                                    <img src="../assets/images/under_construction.png" class="w-80 h-80" alt="Under construction"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="pt-3 pb-4" id="count-stats">
         <div class="container">
             <div class="row">
