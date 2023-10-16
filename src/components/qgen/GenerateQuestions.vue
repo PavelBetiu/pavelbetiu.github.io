@@ -75,13 +75,13 @@
                                 </template>
                                 <div class="wizard-tab-content">
                                     <div class="form-group d-flex flex-column justify-content-center align-items-center h-100 qgen-text-style">
-                                        <label class="h6"><span class="badge rounded-pill bg-warning m-1">!</span>Parameters configuration is currently not supported</label>
+                                        <!-- <label class="h6"><span class="badge rounded-pill bg-warning m-1">!</span>Parameters configuration is currently not supported</label> -->
                                         <div class="form-floating mb-3 w-50">
-                                            <input id="nbQuest" type="number" class="form-control" v-model="numberOfQuestions" disabled>
+                                            <input id="nbQuest" type="number" class="form-control" v-model="numberOfQuestions" >
                                             <label class="h6" for="nbQuest">Select the number of questions (per answer)</label>
                                         </div>
                                         <div class="form-floating w-50">
-                                            <input id="nbOpt" type="number" class="form-control" v-model="numberOfOptions" disabled>
+                                            <input id="nbOpt" type="number" class="form-control" v-model="numberOfOptions" >
                                             <label class="h6" for="nbOpt">Select the number of options (per question)</label>
                                         </div>
                                     </div>
@@ -94,7 +94,7 @@
                                 </template>
                                 <div v-show="questionsReceived" class="wizard-tab-content">
                                     <div class="form-group row">
-                                        <Table :data="tableData" :isSortable="false" :withCustomBody="true" :isScrollable="true">
+                                        <Table :data="tableData" :isSortable="false" :withCustomBody="true" :isScrollable="true" setScrollHeight="500px">
                                             <template #column="{rowData, currentColumnData}">
                                                 <div v-if="currentColumnData.key == 'relevant' || currentColumnData.key == 'grammar' || currentColumnData.key == 'coherence'" class="w-100 d-flex justify-content-start">
                                                     <p-checkbox v-model="rowData[currentColumnData.key]" :binary="true" />
@@ -112,7 +112,7 @@
                             </wizard-tab>
                         </template>
 
-                        <template #footer="{nextTab, prevTab, activeTabIndex, tabCount}">
+                        <template #footer="{nextTab, prevTab, activeTabIndex, tabCount, navigateToTab, uncheckNextTabs}">
                             <div class="w-100 d-flex justify-content-between align-items-center">
                                 <div>
                                     <button v-if="activeTabIndex > 0" @click="prevTab" class="btn btn-default m-2">
@@ -126,9 +126,15 @@
                                     <button v-else-if="activeTabIndex == tabCount - 2" @click="nextTab" class="btn btn-primary m-2">
                                         Generate Questions
                                     </button>
-                                    <button v-else @click="nextTab" class="btn btn-primary m-2">
-                                        Finish
-                                    </button>
+                                    <div v-else class="d-flex justify-content-between align-items-center">
+                                        <button v-if="questionsReceived" @click="doExportJsonAsExcel" class="btn btn-success m-2">
+                                            Download Test
+                                        </button>
+                                        <button v-if="questionsReceived" @click="resetWizard(navigateToTab, uncheckNextTabs)" class="btn btn-primary m-2">
+                                            New Text
+                                        </button>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </template>
@@ -169,8 +175,13 @@ import {
 import {
     convertQGenAnswerExtendedToAnnotation,
     convertAnnotationToQGenAnswer,
-    convertQGenTestsToQuestionsTable
+    convertQGenTestsToQuestionsTable,
+    convertQGenTestsToExcelData
 } from '@/components/qgen/qgen-converters';
+
+import {
+    exportJsonAsExcel
+} from '@/util/excel-utils';
 
 export default {
     components: {
@@ -203,6 +214,7 @@ export default {
             numberOfQuestions: 1,
             numberOfOptions: 4,
             tableData: {},
+            qgenTests: null,
 
             /* Generated Questions step */
             questionsReceived: false
@@ -336,6 +348,7 @@ export default {
 
             // If the text is empty, then we don't need to process it
             if (cleansedText == "") {
+                this.info("Empty text", "Please insert a text")
                 return Promise.resolve(false)
             }
 
@@ -487,6 +500,7 @@ export default {
                 // Keep the state of the annotations for future comparison
                 this.lastProcessedAnnotations = JSON.stringify(visibleAnnotations);
 
+                this.qgenTests = response.tests;
                 this.tableData = convertQGenTestsToQuestionsTable(response.tests)
                 this.questionsReceived = true;
             }).catch((error) => {
@@ -530,6 +544,29 @@ export default {
             this.annotations = [];
             this.lastProcessedAnnotations = "";
             this.annotationService.clearAnnotations();
+        },
+        resetWizard(navigateToTab, uncheckNextTabs) {
+            this.text = "";
+            this.lastProcessedTextCleansed = "";
+            this.clearAnnotationStep();
+            this.numberOfQuestions = 1;
+            this.numberOfOptions = 4;
+            this.tableData = {};
+            this.qgenTests = null;
+            this.questionsReceived = false;
+            navigateToTab(0);
+            uncheckNextTabs();
+        },
+        doExportJsonAsExcel() {
+            if (this.questionsReceived) {
+                const settings = {
+                    fileName: "Questions and Answers",
+                    extraLength: 3,
+                    writeMode: "writeFile", 
+                    writeOptions: {},
+                }
+                exportJsonAsExcel(convertQGenTestsToExcelData(this.qgenTests), settings)
+            }
         }
     },
 

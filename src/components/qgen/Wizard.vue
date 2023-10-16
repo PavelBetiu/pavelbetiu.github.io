@@ -31,7 +31,7 @@
             </div>
 
             <div class="card-footer">
-                <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab" :activeTabIndex="activeTabIndex" :tabCount="tabCount">
+                <slot name="footer" :next-tab="nextTab" :prev-tab="prevTab" :activeTabIndex="activeTabIndex" :tabCount="tabCount" :navigateToTab="navigateToTab" :uncheck-next-tabs="uncheckNextTabs">
                     <div class="w-100 d-flex justify-content-between align-items-center">
                         <div>
                             <button v-if="activeTabIndex > 0" @click="prevTab" class="btn btn-default m-2">

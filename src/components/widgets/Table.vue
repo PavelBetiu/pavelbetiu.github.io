@@ -3,7 +3,7 @@
       :value="data.rows" 
       :responsiveLayout="isScrollable ? 'scroll' : ''" 
       :scrollable="isScrollable" 
-      :scrollHeight="isScrollable ? '750px' : ''"
+      :scrollHeight="setScrollHeight"
       :stripedRows="true" >
       <p-column
         v-for="col of data.columns"
@@ -41,6 +41,11 @@
       withCustomBody: {
         type: Boolean,
         default: false,
+        required: false,
+      },
+      setScrollHeight: {
+        type: String,
+        default: "750px",
         required: false,
       },
     },

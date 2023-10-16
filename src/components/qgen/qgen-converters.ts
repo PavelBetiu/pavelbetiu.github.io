@@ -1,6 +1,8 @@
 import { QGenAnswerExtended, QGenAnswer, QGenTest } from '@/data-objects/qgen-dtos';
 import { Annotation } from '@/services/annotation-service.interface';
 import { TableInput } from '@/components/widgets/table-input';
+import { ExcelData, ExcelSheet } from '@/util/excel-utils';
+import { assert } from 'chai';
 
 function generateRandomAnnotationId() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -76,4 +78,43 @@ export function convertQGenTestsToQuestionsTable(tests: QGenTest[]): TableInput 
     }
 
     return input;
+}
+
+export function convertQGenTestsToExcelData(tests: QGenTest[]): ExcelData {
+    const data: ExcelData = {
+        sheets: []
+    }
+
+    const sheet: ExcelSheet = {
+        sheet: 'Test',
+        columns: [
+            { label: 'Question', value: 'question' },
+            { label: 'Correct Answer', value: 'correct_answer' }
+        ],
+        content: []
+    }
+
+    assert (tests.length > 0, 'Tests array is empty');
+
+    const nbOptions = tests[0].distractors.length;
+    for (let i = 0; i < nbOptions; i++) {
+        sheet.columns.push({ label: `Option ${i + 2}`, value: `option_${i + 2}` });
+    }
+
+    for (const test of tests) {
+        const row: any = {
+            question: test.question,
+            correct_answer: test.answer
+        }
+
+        for (let i = 0; i < nbOptions; i++) {
+            row[`option_${i + 2}`] = test.distractors[i];
+        }
+
+        sheet.content.push(row);
+    }
+
+    data.sheets.push(sheet);
+
+    return data;
 }
