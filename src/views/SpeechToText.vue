@@ -76,7 +76,7 @@ export default {
             const data = new FormData();
             data.append('files[]', this.file);
 
-            const response = await axios.post('http://141.85.224.254/api/decode', data, {
+            const response = await axios.post('https://api.echo.readerbench.com/api/decode', data, {
                 transformRequest: (data, headers) => {
                     delete headers['Authorization'];
                     return data;
