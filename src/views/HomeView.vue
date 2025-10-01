@@ -22,36 +22,33 @@
     <section class="pt-3 pb-4" id="count-stats">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-7 mx-auto py-3 blur shadow-blur">
-                    <div class="row">
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>40+</h1>
-                                <h5 class="mt-3">A & A* Conferences</h5>
-                                <p class="text-sm">(IJCAI, AAAI, ACL, EMNLP, CogSci, AIED, COLING)</p>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>10+</h1>
-                                <h5 class="mt-3">Q1 Jounrals</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">500</span>+</h1>
-                                <h5 class="mt-3">Publications</h5>
-                                <p class="text-sm">In scientific panels all around the world</p>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">20+</h1>
-                                <h5 class="mt-3">Projects</h5>
-                                <p class="text-sm">Built using top edge tools and AI libraries</p>
+                <div class="col-lg-12 z-index-2 border-radius-xl mt-7 mx-auto py-5 blur shadow-blur">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 text-center">
+                            <img src="../assets/images/pavelbetiu.jpg" alt="Pavel Betiu" class="img-fluid border-radius-lg mb-4" style="width: 200px; height: 200px; object-fit: cover;" />
+                            <h1 class="text-gradient text-primary mb-3">Pavel Bețiu</h1>
+                            <h4 class="text-muted mb-4">Associate Cloud Application Systems Engineer</h4>
+                            <p class="lead text-dark mb-4">
+                                Cloud applications engineer at Finastra with a Master's degree in Computer Science specializing in Graphics, Multimedia, and Virtual Reality. 
+                                Experienced in complex web applications, machine learning technologies, and system architecture.
+                            </p>
+                            <div class="row mt-5">
+                                <div class="col-md-3">
+                                    <h3 class="text-gradient text-primary">3+</h3>
+                                    <h6 class="mt-2">Years Experience</h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <h3 class="text-gradient text-primary">4</h3>
+                                    <h6 class="mt-2">Professional Roles</h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <h3 class="text-gradient text-primary">6+</h3>
+                                    <h6 class="mt-2">Programming Languages</h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <h3 class="text-gradient text-primary">2</h3>
+                                    <h6 class="mt-2">Teaching Positions</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,84 +61,92 @@
         <div class="container">
             <div class="row mb-6">
                 <div class="row justify-content-center text-center my-sm-7">
-                    <div class="col-lg-6">
-                        <a href="/people">
-                            <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80');">
-                                <span class="mask bg-gradient-dark"></span>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-6 my-auto">
-                                            <h1 class="text-white fadeIn2 fadeInBottom">The team behind ReaderBench</h1>
-                                            <p class="lead text-white opacity-8 fadeIn3 fadeInBottom">Our team is made up of a diverse range of people who are passionate about Natural Language Processing.</p>
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <a href="/about">
+                                    <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                                        <span class="mask bg-gradient-dark"></span>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-10 my-auto mx-auto text-center">
+                                                    <h3 class="text-white fadeIn2 fadeInBottom">About Me</h3>
+                                                    <p class="lead text-white opacity-8 fadeIn3 fadeInBottom">Learn more about my journey, education, and passion for technology</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
+                            <div class="col-md-6 mb-4">
+                                <a href="/projects">
+                                    <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                                        <span class="mask bg-gradient-dark"></span>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-10 my-auto mx-auto text-center">
+                                                    <h3 class="text-white fadeIn2 fadeInBottom">My Projects</h3>
+                                                    <p class="lead text-white opacity-8 fadeIn3 fadeInBottom">Explore my portfolio of software development and AI research projects</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section>
+    <section class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
-                    <div class="row mt-6">
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>2</h1>
-                                <h5 class="mt-3">Profs</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">3</span></h1>
-                                <h5 class="mt-3">Assoc. Profs</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">3</h1>
-                                <h5 class="mt-3">Lecturers</h5>
-                                <hr class="vertical dark">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="text-gradient text-primary text-center mb-5">Technical Skills</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-lg">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
+                                        <i class="fas fa-code text-white"></i>
+                                    </div>
+                                    <h5 class="text-gradient text-primary">Full-Stack Development</h5>
+                                    <p class="text-sm">Vue.js, React, Node.js, Python, TypeScript, Java</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">3</h1>
-                                <h5 class="mt-3">Post-Docs</h5>
-                                <hr class="vertical dark">
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-lg">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
+                                        <i class="fas fa-brain text-white"></i>
+                                    </div>
+                                    <h5 class="text-gradient text-primary">Machine Learning & AI</h5>
+                                    <p class="text-sm">NLP, Deep Learning, TensorFlow, PyTorch, Transformers</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">3</h1>
-                                <h5 class="mt-3">TAs</h5>
-                                <hr class="vertical dark">
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-lg">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
+                                        <i class="fas fa-database text-white"></i>
+                                    </div>
+                                    <h5 class="text-gradient text-primary">Data Engineering</h5>
+                                    <p class="text-sm">SQL, MongoDB, Data Analysis, ETL Pipelines</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">5+</h1>
-                                <h5 class="mt-3">Research assistants</h5>
-                                <hr class="vertical dark">
-                            </div>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">5+</h1>
-                                <h5 class="mt-3">PhD students</h5>
-                                <hr class="vertical dark">
-                            </div>
-                        </div>
-                        <div class="col-md-3 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">5+</h1>
-                                <h5 class="mt-3">MSc & Undergrad studs</h5>
-                                <hr class="vertical dark">
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-lg">
+                                <div class="card-body text-center p-4">
+                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
+                                        <i class="fas fa-cloud text-white"></i>
+                                    </div>
+                                    <h5 class="text-gradient text-primary">Cloud & DevOps</h5>
+                                    <p class="text-sm">AWS, Docker, CI/CD, Git, Linux</p>
+                                </div>
                             </div>
                         </div>
                     </div>

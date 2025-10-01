@@ -31,10 +31,14 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="section-title">
-                    <h2 class="mb-6 mr-3">Contact Us
+                    <h2 class="mb-6 mr-3">Get In Touch
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                             <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" /> </svg>
                     </h2>
+                    <p class="text-lg mb-5">
+                        I'm always interested in discussing new opportunities, collaboration on exciting projects, or just having a chat about technology and AI. 
+                        Feel free to reach out!
+                    </p>
                 </div>
             </div>
         </div>
@@ -71,20 +75,143 @@
                         </g>
                     </svg>
                 </div>
-                <h5 class="mb-4">PRECIS Research Center</h5>
-                <h5 class="mb-4">Faculty of Automatic Control and Computers</h5>
-                <h5 class="mb-4">University Politehnica of Bucharest</h5>
-                <h5 class="mb-4">Address: Splaiul Independentei, no. 313, district 6, Bucharest, RO-060042, Romania</h5>
-                <div class="mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" /> </svg>
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    Email
+                                </h5>
+                                <p class="text-lg">
+                                    <a href="mailto:betiupavel@gmail.com" class="text-decoration-none">
+                                        betiupavel@gmail.com
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-phone me-2"></i>
+                                    Phone
+                                </h5>
+                                <p class="text-lg">
+                                    <a href="tel:+40720757127" class="text-decoration-none">
+                                        +40 720 757 127
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fab fa-linkedin me-2"></i>
+                                    LinkedIn
+                                </h5>
+                                <p class="text-lg">
+                                    <a href="https://www.linkedin.com/in/dumitru-pavel-betiu-015289208/" 
+                                       target="_blank" class="text-decoration-none">
+                                        Dumitru Pavel Betiu
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fab fa-github me-2"></i>
+                                    GitHub
+                                </h5>
+                                <p class="text-lg">
+                                    <a href="https://github.com/PavelBetiu" 
+                                       target="_blank" class="text-decoration-none">
+                                        @PavelBetiu
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-lg">
+                            <div class="card-body p-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    Location
+                                </h5>
+                                <p class="text-lg">Bucharest, Romania</p>
+                                <p class="text-sm text-muted">
+                                    Associate Cloud Application Systems Engineer at Finastra<br>
+                                    MSc Graduate from University Politehnica of Bucharest
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h5 class="mb-4">E-mail: mihai.dascalu@upb.ro</h5>
             </div>
 
             <div class="col-lg-5">
-                <div class="map">
-                    <iframe width="100%" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=PRECIS%20Center,%20Bucharest,%20Romania&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <div class="sticky-top">
+                    <div class="card shadow-lg">
+                        <div class="card-body p-4 text-center">
+                            <img src="../assets/images/pavelbetiu.jpg" alt="Pavel Betiu" 
+                                 class="img-fluid border-radius-lg mb-4" 
+                                 style="width: 200px; height: 200px; object-fit: cover;" />
+                            <h4 class="text-gradient text-primary mb-3">Let's Connect!</h4>
+                            <p class="text-md mb-4">
+                                I'm always open to discussing new projects, 
+                                creative ideas, or opportunities to be part of your vision.
+                            </p>
+                            <div class="d-flex justify-content-center gap-3">
+                                <a href="mailto:pavel.betiu@student.upb.ro" 
+                                   class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-envelope me-1"></i> Email
+                                </a>
+                                <a href="https://www.linkedin.com/in/dumitru-pavel-betiu-015289208/" 
+                                   target="_blank" class="btn btn-outline-primary btn-sm">
+                                    <i class="fab fa-linkedin me-1"></i> LinkedIn
+                                </a>
+                                <a href="https://github.com/pavelbetiu" 
+                                   target="_blank" class="btn btn-outline-dark btn-sm">
+                                    <i class="fab fa-github me-1"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-lg mt-4">
+                        <div class="card-body p-4">
+                            <h6 class="text-primary mb-3">Quick Facts</h6>
+                            <ul class="list-unstyled text-sm">
+                                <li class="mb-2">
+                                    <i class="fas fa-graduation-cap text-primary me-2"></i>
+                                    MSc in Computer Science (UPB)
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-code text-primary me-2"></i>
+                                    Full-Stack Developer
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-brain text-primary me-2"></i>
+                                    AI/NLP Researcher
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-clock text-primary me-2"></i>
+                                    Available for Opportunities
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

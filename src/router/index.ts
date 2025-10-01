@@ -20,9 +20,13 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/ServicesView.vue'),
   },
   {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/About.vue')
+  },
+  {
     path: '/people',
-    name: 'people',
-    component: () => import('../views/People.vue')
+    redirect: '/about'
   },
   {
     path: '/login',
