@@ -1,0 +1,25 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Main circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#grad)" filter="url(#shadow)"/>
+  
+  <!-- P letter -->
+  <path d="M20 18H28C32 18 35 21 35 25C35 29 32 32 28 32H23V44H20V18Z M23 21V29H28C30.5 29 32 27 32 25C32 23 30.5 21 28 21H23Z" fill="white"/>
+  
+  <!-- B letter -->
+  <path d="M36 18H43C46 18 48 20 48 22.5C48 24 47 25.5 45.5 26C47.5 26.5 49 28 49 30C49 33 46.5 35 43 35H36V18Z M39 21V25H43C44.5 25 46 24 46 22.5C46 21 44.5 20 43 20H39Z M39 28V32H43C45 32 46 31 46 30C46 28.5 45 28 43 28H39Z" fill="white"/>
+  
+  <!-- Decorative dots -->
+  <circle cx="18" cy="48" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="46" cy="48" r="1.5" fill="white" opacity="0.7"/>
+</svg>
