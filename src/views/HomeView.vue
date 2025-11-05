@@ -1,6 +1,10 @@
 <template>
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" v-bind:style="{ 'background-image': 'url(' + require('@/assets/images/home-page-background.png') + ')' }">
+    <div class="page-header min-vh-75 relative" :style="{ 'background': 'linear-gradient(135deg, rgba(30, 42, 71, 0.75) 0%, rgba(30, 42, 71, 0.75) 100%), url(' + require('@/assets/images/home-page-background.jpg') + ')', 'background-size': 'cover', 'background-position': 'center' }">
+        <!-- Background Logo Watermark -->
+        <div class="background-logo-watermark">
+            <img src="@/assets/images/pb-logo-new.svg" alt="PB Logo" class="logo-watermark">
+        </div>
         <div class="position-absolute w-100 z-index-1 bottom-0">
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
@@ -22,10 +26,10 @@
     <section class="pt-3 pb-4" id="count-stats">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 z-index-2 border-radius-xl mt-7 mx-auto py-5 blur shadow-blur">
+                <div class="col-12 z-index-2 border-radius-xl mt-7 mx-auto py-5 blur shadow-blur">
                     <div class="row justify-content-center">
-                        <div class="col-md-8 text-center">
-                            <img src="../assets/images/pavelbetiu.jpg" alt="Pavel Betiu" class="img-fluid border-radius-lg mb-4" style="width: 200px; height: 200px; object-fit: cover;" />
+                        <div class="col-12 col-md-10 col-lg-8 text-center px-3">
+                            <img src="../assets/images/pavelbetiu.jpg" alt="Pavel Betiu" class="img-fluid border-radius-lg mb-4" style="max-width: 200px; height: auto; object-fit: cover;" />
                             <h1 class="text-gradient text-primary mb-3">Pavel Bețiu</h1>
                             <h4 class="text-muted mb-4">Associate Cloud Application Systems Engineer</h4>
                             <p class="lead text-dark mb-4">
@@ -33,19 +37,19 @@
                                 Experienced in complex web applications, machine learning technologies, and system architecture.
                             </p>
                             <div class="row mt-5">
-                                <div class="col-md-3">
+                                <div class="col-6 col-md-3 mb-3">
                                     <h3 class="text-gradient text-primary">3+</h3>
                                     <h6 class="mt-2">Years Experience</h6>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-6 col-md-3 mb-3">
                                     <h3 class="text-gradient text-primary">4</h3>
                                     <h6 class="mt-2">Professional Roles</h6>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-6 col-md-3 mb-3">
                                     <h3 class="text-gradient text-primary">6+</h3>
                                     <h6 class="mt-2">Programming Languages</h6>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-6 col-md-3 mb-3">
                                     <h3 class="text-gradient text-primary">2</h3>
                                     <h6 class="mt-2">Teaching Positions</h6>
                                 </div>
@@ -61,9 +65,9 @@
         <div class="container">
             <div class="row mb-6">
                 <div class="row justify-content-center text-center my-sm-7">
-                    <div class="col-lg-8">
+                    <div class="col-12 col-lg-10">
                         <div class="row">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-12 col-md-6 mb-4">
                                 <a href="/about">
                                     <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
                                         <span class="mask bg-gradient-dark"></span>
@@ -78,7 +82,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-4">
+                            <div class="col-12 col-md-6 mb-4">
                                 <a href="/projects">
                                     <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
                                         <span class="mask bg-gradient-dark"></span>
@@ -102,50 +106,58 @@
     <section class="py-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
+                <div class="col-12 col-lg-10">
                     <h2 class="text-gradient text-primary text-center mb-5">Technical Skills</h2>
                     <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-lg">
-                                <div class="card-body text-center p-4">
-                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
-                                        <i class="fas fa-code text-white"></i>
+                        <div class="col-12 col-sm-6 col-lg-6 mb-4">
+                            <div class="skill-card card border-0 overflow-hidden position-relative">
+                                <div class="skill-card-gradient" style="background: linear-gradient(135deg, #7928CA 0%, #FF0080 100%);"></div>
+                                <div class="card-body text-center p-4 position-relative z-index-2">
+                                    <div class="skill-icon-wrapper mb-4">
+                                        <div class="skill-icon-bg" style="background: linear-gradient(135deg, #7928CA 0%, #FF0080 100%);"></div>
+                                        <i class="fas fa-code text-white skill-icon"></i>
                                     </div>
-                                    <h5 class="text-gradient text-primary">Full-Stack Development</h5>
-                                    <p class="text-sm">Vue.js, React, Node.js, Python, TypeScript, Java</p>
+                                    <h5 class="text-white mb-3 fw-bold">Full-Stack Development</h5>
+                                    <p class="text-white-50 mb-0">Vue.js, React, Node.js, Python, TypeScript, Java</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-lg">
-                                <div class="card-body text-center p-4">
-                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
-                                        <i class="fas fa-brain text-white"></i>
+                        <div class="col-12 col-sm-6 col-lg-6 mb-4">
+                            <div class="skill-card card border-0 overflow-hidden position-relative">
+                                <div class="skill-card-gradient" style="background: linear-gradient(135deg, #2152ff 0%, #21d4fd 100%);"></div>
+                                <div class="card-body text-center p-4 position-relative z-index-2">
+                                    <div class="skill-icon-wrapper mb-4">
+                                        <div class="skill-icon-bg" style="background: linear-gradient(135deg, #2152ff 0%, #21d4fd 100%);"></div>
+                                        <i class="fas fa-robot text-white skill-icon"></i>
                                     </div>
-                                    <h5 class="text-gradient text-primary">Machine Learning & AI</h5>
-                                    <p class="text-sm">NLP, Deep Learning, TensorFlow, PyTorch, Transformers</p>
+                                    <h5 class="text-white mb-3 fw-bold">Machine Learning & AI</h5>
+                                    <p class="text-white-50 mb-0">NLP, Deep Learning, TensorFlow, PyTorch, Transformers</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-lg">
-                                <div class="card-body text-center p-4">
-                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
-                                        <i class="fas fa-database text-white"></i>
+                        <div class="col-12 col-sm-6 col-lg-6 mb-4">
+                            <div class="skill-card card border-0 overflow-hidden position-relative">
+                                <div class="skill-card-gradient" style="background: linear-gradient(135deg, #f46b45 0%, #eea849 100%);"></div>
+                                <div class="card-body text-center p-4 position-relative z-index-2">
+                                    <div class="skill-icon-wrapper mb-4">
+                                        <div class="skill-icon-bg" style="background: linear-gradient(135deg, #f46b45 0%, #eea849 100%);"></div>
+                                        <i class="fas fa-database text-white skill-icon"></i>
                                     </div>
-                                    <h5 class="text-gradient text-primary">Data Engineering</h5>
-                                    <p class="text-sm">SQL, MongoDB, Data Analysis, ETL Pipelines</p>
+                                    <h5 class="text-white mb-3 fw-bold">Data Engineering</h5>
+                                    <p class="text-white-50 mb-0">SQL, MongoDB, Data Analysis, ETL Pipelines</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                            <div class="card shadow-lg">
-                                <div class="card-body text-center p-4">
-                                    <div class="icon icon-lg bg-gradient-primary border-radius-lg mb-3 mx-auto">
-                                        <i class="fas fa-cloud text-white"></i>
+                        <div class="col-12 col-sm-6 col-lg-6 mb-4">
+                            <div class="skill-card card border-0 overflow-hidden position-relative">
+                                <div class="skill-card-gradient" style="background: linear-gradient(135deg, #17ad37 0%, #98ec2d 100%);"></div>
+                                <div class="card-body text-center p-4 position-relative z-index-2">
+                                    <div class="skill-icon-wrapper mb-4">
+                                        <div class="skill-icon-bg" style="background: linear-gradient(135deg, #17ad37 0%, #98ec2d 100%);"></div>
+                                        <i class="fas fa-cloud text-white skill-icon"></i>
                                     </div>
-                                    <h5 class="text-gradient text-primary">Cloud & DevOps</h5>
-                                    <p class="text-sm">AWS, Docker, CI/CD, Git, Linux</p>
+                                    <h5 class="text-white mb-3 fw-bold">Cloud & DevOps</h5>
+                                    <p class="text-white-50 mb-0">AWS, Docker, CI/CD, Git, Linux</p>
                                 </div>
                             </div>
                         </div>
@@ -155,313 +167,42 @@
         </div>
     </section>
 
-    <!-- <section class="my-5 py-5">
-    <div class="container">
-        <div class="row mb-6">
-            <div class="row justify-content-center text-center my-sm-5">
-                <div class="col-lg-6">
-                    <h2 class="text-dark mb-0">Results – Top Research in AI</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-    <section class="d-flex justify-content-center mb-7 position-relative">
+    <!-- Professional Experience Section -->
+    <section class="py-5">
         <div class="container">
-            <div class="row mb-6">
-                <div class="row justify-content-center text-center my-sm-7">
-                    <div class="col-lg-6">
-                        <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/tasks.jpg');">
-                            <span class="mask bg-gradient-dark"></span>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6 my-auto">
-                                        <h1 class="text-white fadeIn2 fadeInBottom">Results – Top Research in AI</h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <h2 class="text-gradient text-primary text-center mb-5">Professional Journey</h2>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="experience-card card border-0 overflow-hidden position-relative">
+                                <div class="experience-card-bg" style="background: linear-gradient(135deg, #141e30 0%, #243b55 100%);"></div>
+                                <div class="card-body p-4 position-relative z-index-2">
+                                    <div class="experience-icon-wrapper mb-3">
+                                        <div class="experience-icon-circle" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                            <i class="fas fa-building text-white"></i>
+                                        </div>
                                     </div>
+                                    <h5 class="text-white mb-2 fw-bold">Finastra</h5>
+                                    <h6 class="text-white-50 mb-3" style="font-size: 0.875rem;">Associate Cloud Application Systems Engineer</h6>
+                                    <p class="text-white-50 mb-0" style="font-size: 0.875rem;">Developing and maintaining cloud-based applications, implementing modern architectures and CI/CD pipelines.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
-                    <div class="row mt-6">
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span>500+</h1>
-                                <h5 class="mt-3">Publications</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">8000+</span></h1>
-                                <h5 class="mt-3">Citations of top 3 members</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">40+</span></h1>
-                                <h5 class="mt-3">A & A+ conference papers
-                                </h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">10+</span></h1>
-                                <h5 class="mt-3">Q1 Journal
-                                </h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">20+</span></h1>
-                                <h5 class="mt-3">Books
-                                </h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">50+</span></h1>
-                                <h5>Book chapters</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary" id="state3" countTo="4">200+</h1>
-                                <h5 class="mt-3">ISI publications
-                                    <br>(Thomson Reuters Web of Knowledge)
-                                </h5>
-                                <hr class="vertical dark">
-                            </div>
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">5</span></h1>
-                                <h5 class="mt-3"> Patents & Applications
-                                </h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">2</span></h1>
-                                <h5 class="mt-3"> US Patents
-                                </h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="d-flex justify-content-center mb-7 position-relative">
-        <div class="container">
-            <div class="row mb-6">
-                <div class="row justify-content-center text-center my-sm-7">
-                    <div class="col-lg-6">
-                        <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/team-working.jpg');">
-                            <span class="mask bg-gradient-dark"></span>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6 my-auto">
-                                        <h1 class="text-white fadeIn2 fadeInBottom">Research Projects</h1>
-                                        <p class="text-white fadeIn2 fadeInBottom">8+ Million Euro managed funds</p>
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="experience-card card border-0 overflow-hidden position-relative">
+                                <div class="experience-card-bg" style="background: linear-gradient(135deg, #834d9b 0%, #d04ed6 100%);"></div>
+                                <div class="card-body p-4 position-relative z-index-2">
+                                    <div class="experience-icon-wrapper mb-3">
+                                        <div class="experience-icon-circle" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                            <i class="fas fa-chalkboard-teacher text-white"></i>
+                                        </div>
                                     </div>
+                                    <h5 class="text-white mb-2 fw-bold">Teaching Assistant</h5>
+                                    <h6 class="text-white-50 mb-3" style="font-size: 0.875rem;">University Politehnica of Bucharest</h6>
+                                    <p class="text-white-50 mb-0" style="font-size: 0.875rem;">Teaching courses in web development, databases, and computer science fundamentals.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
-                    <div class="row mt-6">
-                        <div class="col-md-12 position-relative">
-                            <div class="p-3 text-center">
-                                <h1 class="text-gradient text-primary"><span id="state1" countTo="70"></span></h1>
-                                <h5 class="mt-3">PTI OPTIMIZE</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">POC Cloud Precis</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">PN3 Odin112</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">PCE ARCAN</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">TE ATES, FAKEROM</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">PTE Yggdrasil</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">PC ROBIN, INTELLIT, Lib2Life</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">POD G NETIO (subsidiary contracts PIAM & Semantic)</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">POC D Hub-TECH, IAV-PLN</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">POC ReadME</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">PN III PTE Text2NeuralQL</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">H2020 RAGE</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h5 class="mt-3">ERASMUS+ ENeA-SEA</h5>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- <section class="my-5 py-5">
-    <div class="container">
-        <div class="row mb-6">
-            <div class="row justify-content-center text-center my-sm-5">
-                <div class="col-lg-6">
-                    <h2 class="text-dark mb-0">International Collaborations</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-    <section class="d-flex justify-content-center mb-7 position-relative">
-        <div class="container">
-            <div class="row mb-6">
-                <div class="row justify-content-center text-center my-sm-7">
-                    <div class="col-lg-6">
-                        <div class="page-header section-height-75 m-3 border-radius-xl move-on-hover" style="background-image: url('https://images.unsplash.com/photo-1552793494-111afe03d0ca?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80');">
-                            <span class="mask bg-gradient-dark"></span>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6 my-auto">
-                                        <h1 class="text-white fadeIn2 fadeInBottom">International Collaborations</h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
-                    <div class="row mt-6">
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h3 class="text-gradient text-primary"><span id="state1" countTo="70"></span>55+ joint papers</h3>
-                                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
-                                    <img src="../assets/images/ASU.png" class="img-fluid border-radius-lg">
-                                </div>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h3 class="text-gradient text-primary">50+ joint papers</h3>
-                                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
-                                    <img src="../assets/images/UGA.png" class="img-fluid border-radius-lg">
-                                </div>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-4 position-relative">
-                            <div class="p-3 text-center">
-                                <h3 class="text-gradient text-primary">40+ joint papers</h3>
-                                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
-                                    <img src="../assets/images/GSU.png" class="img-fluid border-radius-lg">
-                                </div>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <div class="p-3 text-center">
-                                <h3 class="text-gradient text-primary">30+ joint papers</h3>
-                                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
-                                    <img src="../assets/images/LMU.jpg" class="img-fluid border-radius-lg" width="256" height="256">
-                                </div>
-                            </div>
-                            <hr class="vertical dark">
-                        </div>
-                        <div class="col-md-6 position-relative">
-                            <div class="p-3 text-center">
-                                <h3 class="text-gradient text-primary">10+ joint papers</h3>
-                                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1 d-flex justify-content-center mb-3">
-                                    <img src="../assets/images/MPT.png" class="img-fluid border-radius-lg">
-                                </div>
-                            </div>
-                            <hr class="vertical dark">
                         </div>
                     </div>
                 </div>
@@ -524,6 +265,327 @@ export default {
 }
 
 .background-home-view {
-    background-color: #f8f9fa
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+.background-logo-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.logo-watermark {
+    width: 350px;
+    height: 350px;
+    filter: brightness(1.8) drop-shadow(0 0 100px rgba(102, 126, 234, 0.6));
+    animation: pulse-logo 4s ease-in-out infinite;
+}
+
+@keyframes pulse-logo {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.85;
+    }
+}
+
+/* Modern Skill Cards */
+.skill-card {
+    height: 100%;
+    border-radius: 20px !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.skill-card-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+.skill-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.skill-card:hover .skill-card-gradient {
+    opacity: 0.95;
+}
+
+.skill-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.skill-icon-bg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+.skill-card:hover .skill-icon-bg {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.skill-icon {
+    font-size: 48px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+    transform: translate(-50%, -50%) scale(1.1) rotate(-10deg);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Modern Experience Cards */
+.experience-card {
+    height: 100%;
+    border-radius: 20px !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.experience-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.experience-card:hover .experience-card-bg {
+    opacity: 0.9;
+}
+
+.experience-icon-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.experience-icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.experience-card:hover .experience-icon-circle {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.experience-icon-circle i {
+    font-size: 32px;
+}
+
+.z-index-2 {
+    z-index: 2;
+}
+
+/* Responsive improvements */
+@media (max-width: 991px) {
+    .navbar-brand span {
+        font-size: 0.9rem;
+    }
+    
+    .page-header {
+        min-height: 50vh !important;
+    }
+    
+    .logo-watermark {
+        width: 280px;
+        height: 280px;
+    }
+    
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    h4 {
+        font-size: 1.1rem !important;
+    }
+    
+    .lead {
+        font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        margin: 1rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .navbar-brand img {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 8px !important;
+    }
+    
+    .navbar-brand span {
+        font-size: 0.85rem !important;
+    }
+    
+    .page-header {
+        min-height: 40vh !important;
+    }
+    
+    .logo-watermark {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .mt-7 {
+        margin-top: 3rem !important;
+    }
+    
+    h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    h4 {
+        font-size: 1rem !important;
+    }
+    
+    h5 {
+        font-size: 0.95rem !important;
+    }
+    
+    h6 {
+        font-size: 0.8rem !important;
+    }
+    
+    .lead {
+        font-size: 0.95rem !important;
+    }
+    
+    .text-sm {
+        font-size: 0.75rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .icon-shape {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .icon-shape i {
+        font-size: 22px !important;
+    }
+    
+    .blur {
+        padding: 2rem 1rem !important;
+    }
+    
+    .container-fluid {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    .section-height-75 {
+        min-height: 200px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .navbar-brand span {
+        display: none;
+    }
+    
+    .logo-watermark {
+        width: 180px;
+        height: 180px;
+    }
+    
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    .col-6 h6 {
+        font-size: 0.7rem !important;
+    }
+    
+    .icon-shape {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .icon-shape i {
+        font-size: 20px !important;
+    }
+}
+
+/* Prevent horizontal scroll */
+body, html {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.container-fluid, .container {
+    overflow-x: hidden;
+}
+
+.row {
+    margin-left: 0;
+    margin-right: 0;
 }
 </style>

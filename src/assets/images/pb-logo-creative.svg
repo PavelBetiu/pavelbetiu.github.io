@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Hexagon background -->
+  <path d="M24 2L42 13V35L24 46L6 35V13L24 2Z" fill="url(#grad1)" opacity="0.9"/>
+  
+  <!-- P shape - creative geometric -->
+  <path d="M16 14H22C25 14 27 16 27 19C27 22 25 24 22 24H18V34H16V14Z M18 16V22H22C23.5 22 25 21 25 19C25 17 23.5 16 22 16H18Z" fill="white" opacity="0.95"/>
+  
+  <!-- B shape - creative geometric -->
+  <path d="M28 14H33C35.5 14 37 15.5 37 17.5C37 18.8 36.3 19.8 35 20.2C36.5 20.6 37.5 21.8 37.5 23.5C37.5 26 35.5 27.5 33 27.5H28V14Z M30 16V19.5H33C34.2 19.5 35 18.8 35 17.5C35 16.2 34.2 15.5 33 15.5H30Z M30 21V26H33C34.5 26 35.5 25 35.5 23.5C35.5 22 34.5 21 33 21H30Z" fill="white" opacity="0.95" transform="translate(0, 7)"/>
+  
+  <!-- Accent dots for modern look -->
+  <circle cx="14" cy="36" r="1.5" fill="#667eea"/>
+  <circle cx="34" cy="36" r="1.5" fill="#764ba2"/>
+</svg>

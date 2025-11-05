@@ -6,15 +6,15 @@
         <div class="col-12">
           
           <div class="text-center">
-            <img :src="require('@/assets/images/readerbench-small.svg')" alt="" style="width: 80px; height: 80px; " />
+            <img :src="require('@/assets/images/pb-logo-new.svg')" alt="Pavel Bețiu Logo" style="width: 70px; height: 70px; margin-bottom: 15px;" />
             <p class="my-4 text-sm">
-              All rights reserved. Copyright © 2023 ReaderBench.
+              All rights reserved. Copyright © 2025 Pavel Bețiu.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </footer>
+  </footer> 
 </template>
 <script>
 

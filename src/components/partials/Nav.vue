@@ -1,8 +1,8 @@
 <template>
 <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
     <div class="container-fluid px-0">
-        <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip" title="Pavel Betiu - Portfolio" data-placement="bottom">
-            <span class="text-gradient text-primary font-weight-bold">Pavel Betiu</span>
+        <a class="navbar-brand font-weight-bolder ms-sm-3 d-flex align-items-center" href="/" rel="tooltip" title="Pavel Betiu - Portfolio" data-placement="bottom">
+            <img src="../../assets/images/pb-logo-new.svg" alt="PB" style="width: 40px; height: 40px;">
         </a>
         <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon mt-2">
@@ -12,108 +12,20 @@
             </span>
         </button>
         <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-            <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
+            <ul class="navbar-nav navbar-nav-hover ms-auto w-100 justify-content-end">
 
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon me-2" href="/">
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Home">Home</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon me-2" href="/projects">
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Projects">Projects</p>
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                    <a class="font-weight-bold nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="javascript:;" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                      Services
-                      <img src="../../assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
-                      <div class="d-none d-lg-block">
-                        <div class="dropdown-header text-dark font-weight-bolder d-flex justify-content-cente align-items-center px-0">
-                          <a href="/services" class="dropdown-item border-radius-md">
-                            <div class="d-inline-block">
-                              <div class="icon icon-shape icon-xs border-radius-md bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
-                                <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                  <title>shop </title>
-                                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                      <g transform="translate(1716.000000, 291.000000)">
-                                        <g transform="translate(0.000000, 148.000000)">
-                                          <path
-                                            d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z" opacity="0.598981585"></path>
-                                          <path
-                                            d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
-                                        </g>
-                                      </g>
-                                    </g>
-                                  </g>
-                                </svg>
-                              </div>
-                            </div>
-                            <span>All Services</span>
-                          </a>
-                        </div>
-                        <a href="/services/cscl" class="dropdown-item border-radius-md">
-                          <span class="ps-3">CSCL</span>
-                        </a>
-                        <a href="/services/question-generation" class="dropdown-item border-radius-md">
-                          <span class="ps-3">Question Generation</span>
-                        </a>
-                        <a href="/services/stt" class="dropdown-item border-radius-md">
-                          <span class="ps-3">Speech-to-Text</span>
-                        </a>
-                        <a href="/services/text-analysis" class="dropdown-item border-radius-md">
-                          <span class="ps-3">Text Analysis</span>
-                        </a>
-                        <a href="/datasets" class="dropdown-item border-radius-md">
-                          <span class="ps-3">Text Classification</span>
-                        </a>
-                      </div>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon me-2" href="/about">
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="About">About</p>
+                    <a class="nav-link nav-link-icon me-2" href="https://github.com/PavelBetiu" target="_blank">
+                        <font-awesome-icon icon="fa-brands fa-github" class="me-1" />
+                        <span class="d-none d-sm-inline text-sm z-index-1 font-weight-bold">GitHub</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link nav-link-icon me-2" href="/contact">
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contact">Contact</p>
+                    <a class="nav-link nav-link-icon me-2" href="https://www.linkedin.com/in/pavel-betiu-015289208/" target="_blank">
+                        <font-awesome-icon icon="fa-brands fa-linkedin" class="me-1" />
+                        <span class="d-none d-sm-inline text-sm z-index-1 font-weight-bold">LinkedIn</span>
                     </a>
-                </li>
-
-                <li class="nav-item ms-lg-auto">
-                    <a class="nav-link nav-link-icon me-2" href="https://huggingface.co/readerbench" target="_blank">
-                        <!-- <i class="fa fa-github me-1"></i> -->
-                        <img src="../../assets/images/huggingface_logo-noborder.svg" style="width:20px;height:20px;">
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">Hugging Face</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link nav-link-icon me-2" href="https://github.com/readerbench" target="_blank">
-                        <font-awesome-icon icon="fa-brands fa-github" />&nbsp;
-                        <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Star us on Github">Github</p>
-                    </a>
-                </li>
-
-                <li class="nav-item my-auto ms-3 ms-lg-0" v-if="!isAuthenticated">
-                    <a href="/login" class="btn btn-sm btn-outline-primary btn-round mb-0 me-1 mt-2 mt-md-0">Log In</a>
-                </li>
-                <li class="nav-item my-auto ms-3 ms-lg-0" v-if="isAuthenticated">
-                    <div class="card flex justify-content-center">
-                        <a style="overflow: auto;">
-                            <div class="flex-auto">
-                                <Avatar class="text-gradient text-primary" :icon="avatarIcon" @click="toggle" aria-haspopup="true" aria-controls="overlay_tmenu" />
-                            </div>
-                        </a>
-                    </div>
                 </li>
             </ul>
         </div>
@@ -255,6 +167,59 @@ nav {
         &.router-link-exact-active {
             color: #d88d00;
         }
+    }
+}
+
+/* Enhanced Mobile Responsive */
+@media (max-width: 991px) {
+    nav {
+        margin: 1rem !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .navbar-brand img {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .navbar-nav {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .nav-item {
+        padding: 0.25rem 0;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0.75rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    nav {
+        margin: 0.5rem !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    .navbar-brand img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+    
+    .container-fluid {
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .navbar-brand img {
+        width: 28px !important;
+        height: 28px !important;
+    }
+    
+    .nav-link p {
+        font-size: 0.875rem !important;
     }
 }
 </style>
