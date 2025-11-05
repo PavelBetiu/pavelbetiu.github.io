@@ -1,0 +1,6 @@
+<svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Logo with Full Name -->
+  <circle cx="20" cy="20" r="18" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <text x="20" y="20" dominant-baseline="middle" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#1a1a1a">PB</text>
+  <text x="50" y="22" dominant-baseline="middle" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#1a1a1a">Pavel Bețiu</text>
+</svg>

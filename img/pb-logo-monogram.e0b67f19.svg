@@ -1,0 +1,10 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Professional Monogram Logo -->
+  <rect width="40" height="40" rx="6" fill="#1a1a1a"/>
+  <g>
+    <!-- P -->
+    <path d="M13 12 L13 28 M13 12 L18 12 Q21 12 21 15 Q21 18 18 18 L13 18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- B -->
+    <path d="M23 12 L23 28 M23 12 L27 12 Q29 12 29 14.5 Q29 17 27 17 L23 17 M23 17 L27.5 17 Q30 17 30 19.5 Q30 22 27.5 22 L23 22" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+</svg>
