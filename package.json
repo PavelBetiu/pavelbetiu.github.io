@@ -8,7 +8,7 @@
     "test:unit": "NODE_OPTIONS='--no-deprecation --localstorage-file=/tmp/.localstorage' vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "deploy": "npm run build && git add dist && git commit -m 'Deploy to GitHub Pages' && git subtree push --prefix dist origin gh-pages"
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.29",
