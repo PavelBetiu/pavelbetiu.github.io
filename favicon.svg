@@ -1,25 +1,74 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Pavel Bețiu - Modern Logo</title>
+  <desc id="desc">Modern geometric logo with interlocking P and B letters in a hexagonal frame</desc>
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="50%" stop-color="#764ba2"/>
+      <stop offset="100%" stop-color="#f093fb"/>
     </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    <linearGradient id="accentGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
   
-  <!-- Main circle -->
-  <circle cx="32" cy="32" r="30" fill="url(#grad)" filter="url(#shadow)"/>
+  <!-- Background hexagon -->
+  <path d="M128 8 L220 64 L220 176 L128 232 L36 176 L36 64 Z" 
+        fill="#0a0e27" 
+        stroke="url(#primaryGrad)" 
+        stroke-width="3"/>
   
-  <!-- P letter -->
-  <path d="M20 18H28C32 18 35 21 35 25C35 29 32 32 28 32H23V44H20V18Z M23 21V29H28C30.5 29 32 27 32 25C32 23 30.5 21 28 21H23Z" fill="white"/>
+  <!-- Inner hexagon accent -->
+  <path d="M128 28 L200 74 L200 166 L128 212 L56 166 L56 74 Z" 
+        fill="none" 
+        stroke="url(#accentGrad)" 
+        stroke-width="1.5" 
+        opacity="0.3"/>
   
-  <!-- B letter -->
-  <path d="M36 18H43C46 18 48 20 48 22.5C48 24 47 25.5 45.5 26C47.5 26.5 49 28 49 30C49 33 46.5 35 43 35H36V18Z M39 21V25H43C44.5 25 46 24 46 22.5C46 21 44.5 20 43 20H39Z M39 28V32H43C45 32 46 31 46 30C46 28.5 45 28 43 28H39Z" fill="white"/>
+  <!-- Letter P (left side) -->
+  <g filter="url(#glow)">
+    <path d="M 70 80 L 70 176" 
+          stroke="url(#primaryGrad)" 
+          stroke-width="16" 
+          stroke-linecap="round"/>
+    <path d="M 70 80 L 120 80 C 145 80 145 128 120 128 L 70 128" 
+          stroke="url(#primaryGrad)" 
+          stroke-width="16" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none"/>
+  </g>
   
-  <!-- Decorative dots -->
-  <circle cx="18" cy="48" r="1.5" fill="white" opacity="0.7"/>
-  <circle cx="46" cy="48" r="1.5" fill="white" opacity="0.7"/>
+  <!-- Letter B (right side) -->
+  <g filter="url(#glow)">
+    <path d="M 140 80 L 140 176" 
+          stroke="url(#accentGrad)" 
+          stroke-width="16" 
+          stroke-linecap="round"/>
+    <path d="M 140 80 L 175 80 C 195 80 195 104 175 104 L 140 104" 
+          stroke="url(#accentGrad)" 
+          stroke-width="16" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none"/>
+    <path d="M 140 104 L 180 104 C 200 104 200 152 180 152 L 140 152" 
+          stroke="url(#accentGrad)" 
+          stroke-width="16" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none"/>
+  </g>
+  
+  <!-- Accent dots for modern touch -->
+  <circle cx="128" cy="50" r="3" fill="url(#primaryGrad)" opacity="0.8"/>
+  <circle cx="90" cy="65" r="2" fill="url(#accentGrad)" opacity="0.6"/>
+  <circle cx="166" cy="65" r="2" fill="url(#accentGrad)" opacity="0.6"/>
 </svg>

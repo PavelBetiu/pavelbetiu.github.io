@@ -1,0 +1,41 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">BDP Constellation</title>
+  <desc id="desc">Constellation-style nodes and lines forming letters B, D, and P with glowing stars.</desc>
+  <defs>
+    <radialGradient id="star" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.4" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="link" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#69F"/>
+      <stop offset="1" stop-color="#F6C"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="256" height="256" rx="28" fill="#070B16"/>
+  <!-- Stars -->
+  <g fill="url(#star)">
+    <circle cx="44" cy="64" r="4"/>
+    <circle cx="44" cy="128" r="4"/>
+    <circle cx="44" cy="192" r="4"/>
+    <circle cx="92" cy="96" r="4"/>
+    <circle cx="92" cy="160" r="4"/>
+    <circle cx="140" cy="64" r="4"/>
+    <circle cx="140" cy="128" r="4"/>
+    <circle cx="140" cy="192" r="4"/>
+    <circle cx="188" cy="96" r="4"/>
+    <circle cx="188" cy="64" r="4"/>
+  </g>
+  <!-- Links drawing B (left), D (center), P (right) -->
+  <g stroke="url(#link)" stroke-width="3" stroke-linecap="round">
+    <!-- B -->
+    <path d="M44 64L44 192"/>
+    <path d="M44 64L92 96L44 128L92 160L44 192"/>
+    <!-- D -->
+    <path d="M140 64L140 192" opacity="0.9"/>
+    <path d="M140 64L188 96L140 128L188 160L140 192" opacity="0.9"/>
+    <!-- P top bowl -->
+    <path d="M188 64L140 64" opacity="0.9"/>
+    <path d="M188 64L188 96" opacity="0.9"/>
+  </g>
+</svg>

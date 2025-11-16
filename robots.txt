@@ -1,2 +1,7 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://pavelbetiu.github.io/sitemap.xml
+
+# Sitemap for better indexing
+Sitemap: https://pavelbetiu.github.io/sitemap.xml

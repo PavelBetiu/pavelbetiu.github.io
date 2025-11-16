@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pavelbetiu.github.io/</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/about</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/projects</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/models</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/services</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/datasets</loc>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://pavelbetiu.github.io/contact</loc>
+    <changefreq>yearly</changefreq>
+  </url>
+</urlset>
