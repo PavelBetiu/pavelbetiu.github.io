@@ -1,0 +1,35 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">BDP Interlock Monogram</title>
+  <desc id="desc">Interlocking letters B, D, and P drawn with a single gradient stroke and rounded ends.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="256" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6B5BFF"/>
+      <stop offset="0.5" stop-color="#8A5EFF"/>
+      <stop offset="1" stop-color="#FF6BCB"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect x="12" y="12" width="232" height="232" rx="36" fill="#0D0F1A"/>
+  <g stroke="url(#g)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)">
+    <!-- B: left column + two bowls -->
+    <path d="M76 56v144"/>
+    <path d="M76 88h48c22 0 32 28 0 28H76"/>
+    <path d="M76 140h52c26 0 36 32 0 32H76"/>
+    <!-- D: shared spine with curved bowl -->
+    <path d="M136 56v144" opacity="0.95"/>
+    <path d="M136 56h34c46 0 54 64 0 64h-34"/>
+    <path d="M136 136h36c54 0 58 64 0 64h-36" opacity="0.9"/>
+    <!-- P: top bowl interlocked into D -->
+    <path d="M196 56v84" opacity="0.9"/>
+    <path d="M196 88h-34c-30 0-30-32 0-32h34" opacity="0.95"/>
+  </g>
+  <!-- subtle highlights -->
+  <circle cx="196" cy="88" r="4" fill="#FFFFFF" fill-opacity="0.9"/>
+  <circle cx="110" cy="116" r="3" fill="#FFFFFF" fill-opacity="0.5"/>
+</svg>

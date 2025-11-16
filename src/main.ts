@@ -22,6 +22,7 @@ import 'bulma/css/bulma.css';
 import './assets/css/nucleo-icons.css';
 import './assets/css/nucleo-svg.css';
 import './assets/css/soft-design-system.css?v=1.0.9';
+import './assets/css/custom.css';
 
 /* Required imports for PrimeVue Toast */
 import Toast from 'primevue/toast';

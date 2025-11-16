@@ -1,0 +1,2 @@
+# Ignore vendor/minified scripts and generated assets
+src/assets/js/font-awesome.js

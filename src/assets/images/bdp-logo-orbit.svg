@@ -1,0 +1,46 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BDP Orbit Monogram">
+  <defs>
+    <linearGradient id="grad-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="grad-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(0,0,0,0.35)"/>
+    </filter>
+  </defs>
+
+  <!-- Orbit ring with satellites -->
+  <g filter="url(#soft-shadow)">
+    <circle cx="256" cy="256" r="208" fill="none" stroke="url(#grad-stroke)" stroke-width="18"/>
+    <!-- decorative arc -->
+    <path d="M84 212a180 180 0 0 1 344 0" fill="none" stroke="url(#grad-stroke)" stroke-width="6" opacity="0.65"/>
+    <!-- satellites -->
+    <circle cx="96" cy="220" r="8" fill="#06B6D4"/>
+    <circle cx="416" cy="220" r="8" fill="#8B5CF6"/>
+  </g>
+
+  <!-- Monogram container -->
+  <g transform="translate(96,128)">
+    <!-- Backplate for readability at small sizes -->
+    <rect x="12" y="8" width="296" height="240" rx="28" fill="url(#grad-fill)" opacity="0.9"/>
+    <!-- B -->
+    <g transform="translate(36,28)">
+      <path d="M0 0h64c30 0 50 14 50 38c0 16-8 28-22 34c18 6 28 18 28 36c0 28-22 46-60 46H0V0zm32 24v32h30c12 0 20-6 20-16s-8-16-20-16H32zm0 56v36h34c14 0 24-6 24-18s-10-18-24-18H32z" fill="#FFFFFF"/>
+      <path d="M0 0h64c30 0 50 14 50 38c0 16-8 28-22 34c18 6 28 18 28 36c0 28-22 46-60 46H0V0z" fill="none" stroke="url(#grad-stroke)" stroke-width="2" opacity="0.9"/>
+    </g>
+    <!-- D -->
+    <g transform="translate(136,28)">
+      <path d="M0 0h62c58 0 94 30 94 78s-36 78-94 78H0V0zm32 24v108h26c40 0 62-20 62-54s-22-54-62-54H32z" fill="#FFFFFF"/>
+      <path d="M0 0h62c58 0 94 30 94 78s-36 78-94 78H0V0z" fill="none" stroke="url(#grad-stroke)" stroke-width="2" opacity="0.9"/>
+    </g>
+    <!-- P -->
+    <g transform="translate(264,28)">
+      <path d="M0 0h34c6 0 10 4 10 10v64c0 6-4 10-10 10H32v60H0V0zm32 24v36h-16c-14 0-22-8-22-18s8-18 22-18h16z" fill="#FFFFFF"/>
+      <path d="M0 0h34c6 0 10 4 10 10v64c0 6-4 10-10 10H32v60H0V0z" fill="none" stroke="url(#grad-stroke)" stroke-width="2" opacity="0.9"/>
+    </g>
+  </g>
+</svg>

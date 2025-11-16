@@ -1,7 +1,7 @@
 export interface ProcessingQueueItem {
   id: number,
   params: string,
-  dataset: Object,
+  dataset: Record<string, unknown>,
   type: string,
   time_submitted: string,
   processing_time: string,
@@ -16,7 +16,7 @@ export interface ProcessingQueueData {
 
 export interface GetJobsDataResponseItem {
   id: number;
-  dataset: Object
+  dataset: Record<string, unknown>
   status: number; // corelare id status (hardcodat in frontend sau get din backend)
   type: number; // corelare id tip task (hardcodat in frontend sau get din backend)
   params: string; // parametrii task-ului

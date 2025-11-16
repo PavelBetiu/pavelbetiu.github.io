@@ -25,16 +25,12 @@ import {
     CSCL_SERVICE
 } from "./services/cscl-service.interface";
 import {
-    MockCsclService
-} from "./services/mock-cscl-service";
-import {
     CsclService
 } from "./services/cscl-service";
 import { ANNOTATION_SERVICE } from "./services/annotation-service.interface";
 import { RecogitoAnnotationService } from "./services/recogito-annotation-service";
 
 import { QGEN_SERVICE } from "./services/qgen-service.interface";
-import { MockQGenService } from "./services/mock-qgen-service";
 import { QGenService } from "./services/qgen-service";
 
 import { TEXT_ANALYSIS_SERVICE } from "./services/text-analysis-service.interface";
@@ -46,13 +42,6 @@ import {
 import {
     PrimeVueToastService
 } from "./services/prime-vue-toast-service";
-
-import {
-    createApp
-} from 'vue';
-import {
-    defineComponent
-} from "vue";
 
 import { DATASETS_SERVICE } from "./services/datasets-service.interface";
 import { DatasetsService } from "./services/datasets-service";
@@ -88,5 +77,23 @@ export default {
 }
 html, body {
     overscroll-behavior: none;
+}
+
+/* Subtle, non-white background tone for the entire site */
+body {
+    background: linear-gradient(180deg, #f7f8fb 0%, #eef1f6 100%);
+}
+
+/* Global section spacing tuning */
+section {
+    scroll-margin-top: 100px; /* nicer anchor jumps */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.2px;
+}
+
+.container, .container-fluid {
+    max-width: 1200px;
 }
 </style>

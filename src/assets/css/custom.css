@@ -1,0 +1,90 @@
+/* Custom UI tweaks + theme variables */
+
+/* Subtle global background refinement (keeps App.vue gradient if present) */
+body {
+    background-color: #f7f8fb;
+    background-image: linear-gradient(180deg, #f8f9fb 0%, #eef1f6 100%);
+}
+
+/* Tighter spacing inside HomeView only */
+.background-home-view .my-sm-7 {
+    margin-top: 2.25rem !important;
+    margin-bottom: 2.25rem !important;
+}
+
+.background-home-view .mb-7 {
+    margin-bottom: 2.25rem !important;
+}
+
+.background-home-view .mb-6 {
+    margin-bottom: 1.75rem !important;
+}
+
+.background-home-view .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Global compact spacing so other pages inherit the same rhythm */
+.my-sm-7 {
+    margin-top: 2.25rem !important;
+    margin-bottom: 2.25rem !important;
+}
+
+.mb-7 {
+    margin-bottom: 2.25rem !important;
+}
+
+.mb-6 {
+    margin-bottom: 1.75rem !important;
+}
+
+.py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Ensure page-header visuals are consistent */
+.page-header {
+    background-size: cover;
+    background-position: center;
+}
+
+.page-header .mask.bg-gradient-dark {
+    /* slightly stronger overlay for legibility */
+    background-image: linear-gradient(180deg, rgba(15, 18, 25, 0.6), rgba(15, 18, 25, 0.85));
+}
+
+/* Equalize Professional Journey card heights using flex */
+.professional-journey-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.professional-journey-row>[class*='col-'] {
+    display: flex;
+}
+
+.professional-journey-row .page-header {
+    min-height: 220px;
+    /* balanced, modern card height */
+    height: auto;
+    display: flex;
+    width: 100%;
+}
+
+/* Headings refinement */
+h1,
+h2 {
+    letter-spacing: 0.2px;
+}
+
+h3 {
+    letter-spacing: 0.15px;
+}
+
+/* Container max width for better readability */
+.container,
+.container-fluid {
+    max-width: 1180px;
+}

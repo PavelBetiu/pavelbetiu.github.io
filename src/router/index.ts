@@ -109,12 +109,26 @@ const routes: Array<RouteRecordRaw> = [
     path: '/models/:id/prediction',
     name: 'modelpredictionview',
     component: () => import('@/views/ModelPredictionView.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/NotFound.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else if (to.hash) {
+      return { el: to.hash, behavior: 'smooth' };
+    } else {
+      return { top: 0, behavior: 'smooth' };
+    }
+  }
 });
 
 router.beforeEach((to, from, next) => {
